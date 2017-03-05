@@ -1,0 +1,96 @@
+﻿@using System.Security.Claims
+@{
+    var userRoles = new List<Claim>();
+    if (Request.IsAuthenticated)
+    {
+        var claimIdentity = User.Identity as ClaimsIdentity;
+        if (claimIdentity != null)
+        {
+            userRoles = claimIdentity.FindAll(ClaimTypes.Role).ToList();
+        }
+    }
+}
+
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - OF</title>
+    <link href="~/Content/CSS/Site.css" rel="stylesheet" type="text/css" />
+    <link href="~/Content/CSS/CssExterne.css" rel="stylesheet" type="text/css" />
+    @Scripts.Render("~/bundles/jquery")
+</head>
+<body>
+
+    <nav class="main-menu">
+        <div class="logo_menu"></div>
+        <div class="bar-blue-2px"></div>
+        <div class="scrollbar" id="style-1">
+            @if (Request.IsAuthenticated)
+            {
+
+                var role = userRoles.First();
+                if (role.Value == "Admin")
+                {
+                    <ul>
+                        <li>
+                            <a id="parent" href="@Url.Action("HomeAdmin","Admin")">
+                                <i class="fa fa-home fa-lg" id="icon-home"></i>
+                                <span class="nav-text">Home</span>
+                            </a>
+                        </li>
+                        <li class="darkerlishadow">
+                            <a id="parent" href="@Url.Action("Logout", "Authentification")">
+                                <i class="fa fa-clock-o fa-lg" id="icon-logout"></i>
+                                <span class="nav-text">Deconnexion</span>
+                            </a>
+                        </li>
+                    </ul>
+                }
+                else if (role.Value == "Responsable")
+                {
+                    <ul>
+                        <li>
+                            <a id="parent" href="@Url.Action("HomeResponsable","Responsable")">
+                                <i class="fa fa-home fa-lg" id="icon-home"></i>
+                                <span class="nav-text">Home</span>
+                            </a>
+                        </li>
+                        <li class="darkerlishadow">
+                            <a id="parent" href="@Url.Action("Logout", "Authentification")">
+                                <i class="fa fa-clock-o fa-lg" id="icon-logout"></i>
+                                <span class="nav-text">Deconnexion</span>
+                            </a>
+                        </li>
+                    </ul>
+
+                }
+            }
+            else
+            {
+                <ul>
+                    <li>
+                        <a id="parent" href="@Url.Action("Index","Home")">
+                            <i class="fa fa-home fa-lg" id="icon-home"></i>
+                            <span class="nav-text">Accueil</span>
+                        </a>
+                    </li>
+                    <li class="darkerlishadow">
+                        <a id="parent" href="@Url.Action("Login", "Authentification")">
+                            <i class="fa fa-clock-o fa-lg" id="icon-login"></i>
+                            <span class="nav-text">Connexion</span>
+                        </a>
+                    </li>
+                </ul>
+            }
+
+        </div>
+    </nav>
+    <div style="margin-left:55px">
+        @RenderBody()
+    </div>
+</body>
+</html>
