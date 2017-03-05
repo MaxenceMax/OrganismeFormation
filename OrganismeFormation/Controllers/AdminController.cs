@@ -24,6 +24,29 @@ namespace OrganismeFormation.Controllers
 
 
 
+        //Route pour afficher les responsables
+        public ActionResult ListeResponsable()
+        {
+            OrganismeDataContext bd = new OrganismeDataContext();
+            var all = bd.Responsable;
+            ResponsableViewModel vm = new ResponsableViewModel
+            {
+                ListeDesResponsables = all.ToList(),
+            };
+            return View(vm);
+        }
+
+
+
+        //Route pour ajouter un responsable
+        [Authorize(Roles = "Admin")]
+        public ActionResult AjoutResponsable()
+        {
+
+
+            return View();
+        }
+
 
         //Ajout Responsable
         [HttpPost]
@@ -34,6 +57,7 @@ namespace OrganismeFormation.Controllers
             OrganismeDataContext bd = new OrganismeDataContext();
 
             Models.Responsable resp = new Models.Responsable();
+            Models.Organismes org = new Models.Organismes();
 
             resp.Nom = model.Nom;
             resp.Prenom = model.Prenom;
@@ -42,10 +66,63 @@ namespace OrganismeFormation.Controllers
             resp.Email = model.AdresseEmail;
             resp.Telephone = model.Telephone;
 
-
             bd.Responsable.InsertOnSubmit(resp);
             bd.SubmitChanges();
 
+            org.Ligue = model.Ligue;
+            var req = from i in bd.Responsable
+                      orderby i.Id ascending
+                      select i.Id;
+
+            foreach (var detail in req)
+            {
+                org.ResponsableId = detail;
+            }
+
+            try
+            {
+                bd.Organismes.InsertOnSubmit(org);
+                bd.SubmitChanges();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                // Provide for exceptions.
+            }
+
+
+
+            return RedirectToAction("ListeResponsable", "Admin");
+
+        }
+
+
+        [AllowAnonymous]
+        public ActionResult SuppressionResponsable(decimal id)
+        {
+
+
+            OrganismeDataContext bd = new OrganismeDataContext();
+
+            var req = from i in bd.Responsable
+                      where i.Id == id
+                      select i;
+
+
+            foreach (var detail in req)
+            {
+                bd.Responsable.DeleteOnSubmit(detail);
+            }
+
+            try
+            {
+                bd.SubmitChanges();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                // Provide for exceptions.
+            }
 
             return RedirectToAction("ListeResponsable", "Admin");
 

@@ -1,5 +1,26 @@
 ﻿<?xml version="1.0" encoding="utf-8"?><Database Name="GestionOF" Class="OrganismeDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
   <Connection Mode="WebSettings" ConnectionString="Data Source=ALEXCOMPUTER;Initial Catalog=GestionOF;Persist Security Info=True;User ID=sa" SettingsObjectName="System.Configuration.ConfigurationManager.ConnectionStrings" SettingsPropertyName="GestionOFConnectionString1" Provider="System.Data.SqlClient" />
+  <Table Name="dbo.Admin" Member="Admin">
+    <Type Name="Admin">
+      <Column Name="id" Type="System.Decimal" DbType="Decimal(18,0) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Nom" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="Prenom" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="login" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="password" Type="System.String" DbType="VarChar(150)" CanBeNull="true" />
+      <Association Name="Admin_Admin" Member="Admin2" ThisKey="id" OtherKey="id" Type="Admin" Cardinality="One" />
+      <Association Name="Admin_Admin" Member="Admin1" ThisKey="id" OtherKey="id" Type="Admin" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.UtilisateursLiguesDroits" Member="UtilisateursLiguesDroits">
+    <Type Name="UtilisateursLiguesDroits">
+      <Column Name="Id" Type="System.Decimal" DbType="Decimal(18,0) NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="IdUtilisateur" Type="System.Decimal" DbType="Decimal(18,0) NOT NULL" CanBeNull="false" />
+      <Column Name="IdLigue" Type="System.Decimal" DbType="Decimal(18,0) NOT NULL" CanBeNull="false" />
+      <Column Name="Niveau" Type="System.String" DbType="VarChar(1) NOT NULL" CanBeNull="false" />
+      <Association Name="Ligues_UtilisateursLiguesDroits" Member="Ligues" ThisKey="IdLigue" OtherKey="Id" Type="Ligues" IsForeignKey="true" />
+      <Association Name="Utilisateurs_UtilisateursLiguesDroits" Member="Utilisateurs" ThisKey="IdUtilisateur" OtherKey="Id" Type="Utilisateurs" IsForeignKey="true" />
+    </Type>
+  </Table>
   <Table Name="dbo.Candidats" Member="Candidats">
     <Type Name="Candidats">
       <Column Name="Id" Type="System.Decimal" DbType="Decimal(18,0) NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
@@ -11,16 +32,6 @@
       <Column Name="SexeId" Type="System.Decimal" DbType="Decimal(18,0)" CanBeNull="true" />
       <Association Name="Candidats_CandidatsFormations" Member="CandidatsFormations" ThisKey="Id" OtherKey="CandidatsId" Type="CandidatsFormations" />
       <Association Name="Sexes_Candidats" Member="Sexes" ThisKey="SexeId" OtherKey="Id" Type="Sexes" IsForeignKey="true" />
-    </Type>
-  </Table>
-  <Table Name="dbo.UtilisateursLiguesDroits" Member="UtilisateursLiguesDroits">
-    <Type Name="UtilisateursLiguesDroits">
-      <Column Name="Id" Type="System.Decimal" DbType="Decimal(18,0) NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="IdUtilisateur" Type="System.Decimal" DbType="Decimal(18,0) NOT NULL" CanBeNull="false" />
-      <Column Name="IdLigue" Type="System.Decimal" DbType="Decimal(18,0) NOT NULL" CanBeNull="false" />
-      <Column Name="Niveau" Type="System.String" DbType="VarChar(1) NOT NULL" CanBeNull="false" />
-      <Association Name="Ligues_UtilisateursLiguesDroits" Member="Ligues" ThisKey="IdLigue" OtherKey="Id" Type="Ligues" IsForeignKey="true" />
-      <Association Name="Utilisateurs_UtilisateursLiguesDroits" Member="Utilisateurs" ThisKey="IdUtilisateur" OtherKey="Id" Type="Utilisateurs" IsForeignKey="true" />
     </Type>
   </Table>
   <Table Name="dbo.CandidatsFormations" Member="CandidatsFormations">
@@ -66,7 +77,6 @@
       <Column Name="TypeHeureContenu" Type="System.String" DbType="Text" CanBeNull="true" UpdateCheck="Never" />
       <Column Name="CoutComplet" Type="System.Decimal" DbType="Decimal(18,0)" CanBeNull="true" />
       <Column Name="InfoComplementaires" Type="System.String" DbType="Text" CanBeNull="true" UpdateCheck="Never" />
-      <Column Name="OrganismesId" Type="System.Decimal" DbType="Decimal(18,0)" CanBeNull="true" />
       <Column Name="HabilitationsId" Type="System.Decimal" DbType="Decimal(18,0)" CanBeNull="true" />
       <Column Name="PorteursId" Type="System.Decimal" DbType="Decimal(18,0)" CanBeNull="true" />
       <Column Name="PrestatairesId" Type="System.Decimal" DbType="Decimal(18,0)" CanBeNull="true" />
@@ -74,10 +84,12 @@
       <Column Name="NumeroSession" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
       <Column Name="IdOrganisateurpeda" Type="System.Decimal" DbType="Decimal(18,0)" CanBeNull="true" />
       <Column Name="NbreHeureAutreEspace" Type="System.Decimal" DbType="Decimal(18,0)" CanBeNull="true" />
+      <Column Name="OrganismeId" Type="System.Decimal" DbType="Decimal(18,0)" CanBeNull="true" />
       <Association Name="Formations_CandidatsFormations" Member="CandidatsFormations" ThisKey="Id" OtherKey="FormationId" Type="CandidatsFormations" />
       <Association Name="Formations_FormationsLieux" Member="FormationsLieux" ThisKey="Id" OtherKey="IdFormation" Type="FormationsLieux" />
       <Association Name="Formations_Lieux" Member="Lieux" ThisKey="Id" OtherKey="LieuFormationId" Type="Lieux" />
       <Association Name="Habilitations_Formations" Member="Habilitations" ThisKey="HabilitationsId" OtherKey="Id" Type="Habilitations" IsForeignKey="true" />
+      <Association Name="Organismes_Formations" Member="Organismes" ThisKey="OrganismeId" OtherKey="Id" Type="Organismes" IsForeignKey="true" />
       <Association Name="Personnel_Formations" Member="Personnel" ThisKey="IdOrganisateurpeda" OtherKey="Id" Type="Personnel" IsForeignKey="true" />
       <Association Name="Porteurs_Formations" Member="Porteurs" ThisKey="PorteursId" OtherKey="Id" Type="Porteurs" IsForeignKey="true" />
       <Association Name="Prestataires_Formations" Member="Prestataires" ThisKey="PrestatairesId" OtherKey="Id" Type="Prestataires" IsForeignKey="true" />
@@ -145,7 +157,6 @@
     <Type Name="Organisations">
       <Column Name="Id" Type="System.Decimal" DbType="Decimal(18,0) NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="IdOrganisme" Type="System.Decimal" DbType="Decimal(18,0)" CanBeNull="true" />
-      <Association Name="Organismes_Organisations" Member="Organismes" ThisKey="IdOrganisme" OtherKey="Id" Type="Organismes" IsForeignKey="true" />
     </Type>
   </Table>
   <Table Name="dbo.Organismes" Member="Organismes">
@@ -160,7 +171,7 @@
       <Column Name="CoordinateurId" Type="System.Decimal" DbType="Decimal(18,0)" CanBeNull="true" />
       <Column Name="DirecteurId" Type="System.Decimal" DbType="Decimal(18,0)" CanBeNull="true" />
       <Column Name="ResponsableId" Type="System.Decimal" DbType="Decimal(18,0)" CanBeNull="true" />
-      <Association Name="Organismes_Organisations" Member="Organisations" ThisKey="Id" OtherKey="IdOrganisme" Type="Organisations" />
+      <Association Name="Organismes_Formations" Member="Formations" ThisKey="Id" OtherKey="OrganismeId" Type="Formations" />
       <Association Name="Lieux_Organismes" Member="Lieux" ThisKey="LieuxId" OtherKey="Id" Type="Lieux" IsForeignKey="true" />
       <Association Name="Personnel_Organismes" Member="Personnel" ThisKey="CoordinateurId" OtherKey="Id" Type="Personnel" IsForeignKey="true" />
       <Association Name="Personnel_Organismes1" Member="Personnel1" ThisKey="DirecteurId" OtherKey="Id" Type="Personnel" IsForeignKey="true" />
@@ -177,7 +188,7 @@
   </Table>
   <Table Name="dbo.Personnel" Member="Personnel">
     <Type Name="Personnel">
-      <Column Name="Id" Type="System.Decimal" DbType="Decimal(18,0) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Id" Type="System.Decimal" DbType="Decimal(18,0) NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="Nom" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
       <Column Name="Prenom" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
       <Column Name="Telephone" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
@@ -198,7 +209,7 @@
   </Table>
   <Table Name="dbo.PresidentOrganisme" Member="PresidentOrganisme">
     <Type Name="PresidentOrganisme">
-      <Column Name="Id" Type="System.Decimal" DbType="Decimal(18,0) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Id" Type="System.Decimal" DbType="Decimal(18,0) NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="Nom" Type="System.Data.Linq.Binary" DbType="VarBinary(50)" CanBeNull="true" UpdateCheck="Never" />
       <Column Name="Prenom" Type="System.Data.Linq.Binary" DbType="VarBinary(50)" CanBeNull="true" UpdateCheck="Never" />
       <Column Name="Telephone" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
@@ -223,7 +234,7 @@
   </Table>
   <Table Name="dbo.Responsable" Member="Responsable">
     <Type Name="Responsable">
-      <Column Name="Id" Type="System.Decimal" DbType="Decimal(18,0) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Id" Type="System.Decimal" DbType="Decimal(18,0) NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="Nom" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
       <Column Name="Prenom" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
       <Column Name="Licence" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
@@ -235,7 +246,7 @@
   </Table>
   <Table Name="dbo.Resultats" Member="Resultats">
     <Type Name="Resultats">
-      <Column Name="Id" Type="System.Decimal" DbType="Decimal(18,0) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Id" Type="System.Decimal" DbType="Decimal(18,0) NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="CandidatFormationId" Type="System.Decimal" DbType="Decimal(18,0) NOT NULL" CanBeNull="false" />
       <Column Name="FormationValidee" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
       <Column Name="NumeroDiplome" Type="System.String" DbType="Char(60)" CanBeNull="true" />
@@ -249,9 +260,19 @@
       <Association Name="Passages_Resultats" Member="Passages" ThisKey="PassagesId" OtherKey="Id" Type="Passages" IsForeignKey="true" />
     </Type>
   </Table>
+  <Table Name="dbo.ResultatsUC" Member="ResultatsUC">
+    <Type Name="ResultatsUC">
+      <Column Name="Id" Type="System.Decimal" DbType="Decimal(18,0) NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Libelle" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="Resultat" Type="System.Decimal" DbType="Decimal(18,0)" CanBeNull="true" />
+      <Column Name="ResultatsId" Type="System.Decimal" DbType="Decimal(18,0)" CanBeNull="true" />
+      <Column Name="ResultatMax" Type="System.Decimal" DbType="Decimal(18,0)" CanBeNull="true" />
+      <Association Name="Resultats_ResultatsUC" Member="Resultats" ThisKey="ResultatsId" OtherKey="Id" Type="Resultats" IsForeignKey="true" />
+    </Type>
+  </Table>
   <Table Name="dbo.Sexes" Member="Sexes">
     <Type Name="Sexes">
-      <Column Name="Id" Type="System.Decimal" DbType="Decimal(18,0) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Id" Type="System.Decimal" DbType="Decimal(18,0) NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="Code" Type="System.Char" DbType="Char(1)" CanBeNull="true" />
       <Column Name="Libelle" Type="System.String" DbType="Char(10)" CanBeNull="true" />
       <Association Name="Sexes_Candidats" Member="Candidats" ThisKey="Id" OtherKey="SexeId" Type="Candidats" />
@@ -296,25 +317,6 @@
       <Column Name="UserLogin" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
       <Column Name="MotdePasse" Type="System.String" DbType="NVarChar(8) NOT NULL" CanBeNull="false" />
       <Association Name="Utilisateurs_UtilisateursLiguesDroits" Member="UtilisateursLiguesDroits" ThisKey="Id" OtherKey="IdUtilisateur" Type="UtilisateursLiguesDroits" />
-    </Type>
-  </Table>
-  <Table Name="dbo.Admin" Member="Admin">
-    <Type Name="Admin">
-      <Column Name="id" Type="System.Decimal" DbType="Decimal(18,0) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
-      <Column Name="Nom" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
-      <Column Name="Prenom" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
-      <Column Name="login" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
-      <Column Name="password" Type="System.String" DbType="VarChar(150)" CanBeNull="true" />
-    </Type>
-  </Table>
-  <Table Name="dbo.ResultatsUC" Member="ResultatsUC">
-    <Type Name="ResultatsUC">
-      <Column Name="Id" Type="System.Decimal" DbType="Decimal(18,0) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
-      <Column Name="Libelle" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
-      <Column Name="Resultat" Type="System.Decimal" DbType="Decimal(18,0)" CanBeNull="true" />
-      <Column Name="ResultatsId" Type="System.Decimal" DbType="Decimal(18,0)" CanBeNull="true" />
-      <Column Name="ResultatMax" Type="System.Decimal" DbType="Decimal(18,0)" CanBeNull="true" />
-      <Association Name="Resultats_ResultatsUC" Member="Resultats" ThisKey="ResultatsId" OtherKey="Id" Type="Resultats" IsForeignKey="true" />
     </Type>
   </Table>
 </Database>
