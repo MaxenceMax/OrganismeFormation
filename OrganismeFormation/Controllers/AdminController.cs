@@ -24,6 +24,29 @@ namespace OrganismeFormation.Controllers
 
 
 
+        //Route pour afficher les responsables
+        public ActionResult ListeResponsable()
+        {
+            OrganismeDataContext bd = new OrganismeDataContext();
+            var all = bd.Responsable;
+            ResponsableViewModel vm = new ResponsableViewModel
+            {
+                ListeDesResponsables = all.ToList(),
+            };
+            return View(vm);
+        }
+
+
+
+        //Route pour ajouter un responsable
+        [Authorize(Roles = "Admin")]
+        public ActionResult AjoutResponsable()
+        {
+
+
+            return View();
+        }
+
 
         //Ajout Responsable
         [HttpPost]

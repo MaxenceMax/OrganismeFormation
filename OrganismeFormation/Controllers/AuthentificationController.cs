@@ -97,13 +97,13 @@ namespace OrganismeFormation.Controllers
             if (login == "admin")
             {
                 statut.Connected = (from i in bd.Admin
-                                    where i.login == login && i.password == password
+                                    where i.login == login && i.password == encrypt(password)
                                     select i).Count() != 0;
             }
             else
             {
                 statut.Connected = (from i in bd.Responsable
-                                    where i.Licence == login && i.Password == password
+                                    where i.Licence == login && i.Password == encrypt(password)
                                     select i).Count() != 0;
             }
             return statut;
@@ -121,6 +121,14 @@ namespace OrganismeFormation.Controllers
             return RedirectToAction("Index", "Home");
         }
 
+        public String encrypt(string mdp)
+        {
+            Byte[] clearBytes = new UnicodeEncoding().GetBytes(mdp);
+            Byte[] hashedBytes = ((HashAlgorithm)CryptoConfig.CreateFromName("MD5")).ComputeHash(clearBytes);
+            string hashedText = BitConverter.ToString(hashedBytes);
+            return hashedText;
+
+        }
 
 
     }

@@ -1,0 +1,48 @@
+﻿@model OrganismeFormation.Models.AjoutResponsableModel
+
+@{
+    ViewBag.Title = "AjoutResponsable";
+}
+
+<div class="contenu">
+
+    @using (Html.BeginForm(new { @autocomplete = "off" }))
+    {
+        <div id="form-div">
+
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+            @Html.ValidationMessageFor(model => model.Nom, "", new { @class = "text-danger" })
+            @Html.EditorFor(model => model.Nom, new { htmlAttributes = new { @autocomplete = "off", @class = "feedback-input", @placeholder = "Nom", @id = "icon-tete" } })
+
+            @Html.ValidationMessageFor(model => model.Prenom, "", new { @class = "text-danger" })
+            @Html.EditorFor(model => model.Prenom, new { htmlAttributes = new { @autocomplete = "off", @class = "feedback-input", @placeholder = "Prenom", @id = "icon-tete" } })
+
+            @Html.ValidationMessageFor(model => model.AdresseEmail, "", new { @class = "text-danger" })
+            @Html.EditorFor(model => model.AdresseEmail, new { htmlAttributes = new { @autocomplete = "off", @class = "feedback-input", @placeholder = "Mail", @id = "icon-email" } })
+
+            @Html.ValidationMessageFor(model => model.Telephone, "", new { @class = "text-danger" })
+            @Html.EditorFor(model => model.Telephone, new { htmlAttributes = new { @autocomplete = "off", @class = "feedback-input", @placeholder = "Telephone", @id = "icon-email" } })
+
+            @Html.ValidationMessageFor(model => model.Licence, "", new { @class = "text-danger" })
+            @Html.EditorFor(model => model.Licence, new { htmlAttributes = new { @autocomplete = "off", @class = "feedback-input", @placeholder = "Identifiant", @id = "icon-tete" } })
+
+            @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
+            @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @autocomplete = "off", @class = "feedback-input", @placeholder = "Mot de passe", @id = "icon-password" } })
+
+            <div class="form-group-align">
+                <div class="submit">
+                    <input type="submit" value="Créer un responsable" id="button-blue" />
+                    <div class="ease"></div>
+                </div>
+            </div>
+
+
+        </div>
+    }
+</div>
+
+
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
