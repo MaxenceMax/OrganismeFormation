@@ -4,5 +4,61 @@
     ViewBag.Title = "ListeResponsable";
 }
 
-<h2>ListeResponsable</h2>
 
+
+<div class="contenu">
+
+    <div id="form-div-big">
+
+
+        <table class="tableau">
+            <tr>
+                <th>Nom</th>
+                <th>Prenom</th>
+                <th>Mail</th>
+                <th>Telephone</th>
+                <th>Identifiant</th>
+                <th style="text-align:center;">Supprimer</th>
+
+            </tr>
+            @{
+                foreach (var resp in Model.ListeDesResponsables)
+                {
+                    <tr>
+                        <td>@resp.Nom</td>
+                        <td>@resp.Prenom</td>
+                        <td>@resp.Email</td>
+                        <td>@resp.Telephone</td>
+                    <td>@resp.Licence</td>
+
+
+
+                    <td style="text-align:center;">
+                        <a href='@Url.Action("SuppressionResponsable", "Admin",  new {id=@resp.Id})'>
+                            <img style="width:20px; height:20px; " src='@Url.Content("~/Content/Images/Icons/icon-logout.png")' />
+                        </a>
+                    </td>
+                </tr>
+                }
+            }
+        </table>
+
+
+        <div style="width:450px; margin-top:20px; margin-left:25px;">
+
+            <div class="form-group-align">
+                <div class="submit"  style="margin-right:2.5px; text-align:center;">
+                    <a href='@Url.Action("AjoutResponsable", "Admin")' id="button-blue">Ajouter un responsable</a>
+                    <div class="ease"></div>
+                </div>
+            </div>
+
+        </div>
+
+
+    </div>
+</div>
+
+    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>

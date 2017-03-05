@@ -38,6 +38,10 @@ namespace OrganismeFormation.Models
         [Display(Name = "Telephone")]
         public string Telephone { get; set; }
 
+        [Required]
+        [Display(Name = "Ligue")]
+        public string Ligue { get; set; }
+
 
 
 

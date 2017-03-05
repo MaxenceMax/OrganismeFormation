@@ -30,12 +30,15 @@ namespace OrganismeFormation.Models
 		
     #region Définitions de méthodes d'extensibilité
     partial void OnCreated();
-    partial void InsertCandidats(Candidats instance);
-    partial void UpdateCandidats(Candidats instance);
-    partial void DeleteCandidats(Candidats instance);
+    partial void InsertAdmin(Admin instance);
+    partial void UpdateAdmin(Admin instance);
+    partial void DeleteAdmin(Admin instance);
     partial void InsertUtilisateursLiguesDroits(UtilisateursLiguesDroits instance);
     partial void UpdateUtilisateursLiguesDroits(UtilisateursLiguesDroits instance);
     partial void DeleteUtilisateursLiguesDroits(UtilisateursLiguesDroits instance);
+    partial void InsertCandidats(Candidats instance);
+    partial void UpdateCandidats(Candidats instance);
+    partial void DeleteCandidats(Candidats instance);
     partial void InsertCandidatsFormations(CandidatsFormations instance);
     partial void UpdateCandidatsFormations(CandidatsFormations instance);
     partial void DeleteCandidatsFormations(CandidatsFormations instance);
@@ -105,9 +108,6 @@ namespace OrganismeFormation.Models
     partial void InsertUtilisateurs(Utilisateurs instance);
     partial void UpdateUtilisateurs(Utilisateurs instance);
     partial void DeleteUtilisateurs(Utilisateurs instance);
-    partial void InsertAdmin(Admin instance);
-    partial void UpdateAdmin(Admin instance);
-    partial void DeleteAdmin(Admin instance);
     #endregion
 		
 		public OrganismeDataContext() : 
@@ -140,11 +140,11 @@ namespace OrganismeFormation.Models
 			OnCreated();
 		}
 		
-		public System.Data.Linq.Table<Candidats> Candidats
+		public System.Data.Linq.Table<Admin> Admin
 		{
 			get
 			{
-				return this.GetTable<Candidats>();
+				return this.GetTable<Admin>();
 			}
 		}
 		
@@ -153,6 +153,14 @@ namespace OrganismeFormation.Models
 			get
 			{
 				return this.GetTable<UtilisateursLiguesDroits>();
+			}
+		}
+		
+		public System.Data.Linq.Table<Candidats> Candidats
+		{
+			get
+			{
+				return this.GetTable<Candidats>();
 			}
 		}
 		
@@ -339,12 +347,451 @@ namespace OrganismeFormation.Models
 				return this.GetTable<Utilisateurs>();
 			}
 		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Admin")]
+	public partial class Admin : INotifyPropertyChanging, INotifyPropertyChanged
+	{
 		
-		public System.Data.Linq.Table<Admin> Admin
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private decimal _id;
+		
+		private string _Nom;
+		
+		private string _Prenom;
+		
+		private string _login;
+		
+		private string _password;
+		
+		private EntityRef<Admin> _Admin2;
+		
+		private EntityRef<Admin> _Admin1;
+		
+    #region Définitions de méthodes d'extensibilité
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnidChanging(decimal value);
+    partial void OnidChanged();
+    partial void OnNomChanging(string value);
+    partial void OnNomChanged();
+    partial void OnPrenomChanging(string value);
+    partial void OnPrenomChanged();
+    partial void OnloginChanging(string value);
+    partial void OnloginChanged();
+    partial void OnpasswordChanging(string value);
+    partial void OnpasswordChanged();
+    #endregion
+		
+		public Admin()
+		{
+			this._Admin2 = default(EntityRef<Admin>);
+			this._Admin1 = default(EntityRef<Admin>);
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id", DbType="Decimal(18,0) NOT NULL", IsPrimaryKey=true)]
+		public decimal id
 		{
 			get
 			{
-				return this.GetTable<Admin>();
+				return this._id;
+			}
+			set
+			{
+				if ((this._id != value))
+				{
+					if (this._Admin1.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnidChanging(value);
+					this.SendPropertyChanging();
+					this._id = value;
+					this.SendPropertyChanged("id");
+					this.OnidChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Nom", DbType="VarChar(50)")]
+		public string Nom
+		{
+			get
+			{
+				return this._Nom;
+			}
+			set
+			{
+				if ((this._Nom != value))
+				{
+					this.OnNomChanging(value);
+					this.SendPropertyChanging();
+					this._Nom = value;
+					this.SendPropertyChanged("Nom");
+					this.OnNomChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Prenom", DbType="VarChar(50)")]
+		public string Prenom
+		{
+			get
+			{
+				return this._Prenom;
+			}
+			set
+			{
+				if ((this._Prenom != value))
+				{
+					this.OnPrenomChanging(value);
+					this.SendPropertyChanging();
+					this._Prenom = value;
+					this.SendPropertyChanged("Prenom");
+					this.OnPrenomChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_login", DbType="VarChar(50)")]
+		public string login
+		{
+			get
+			{
+				return this._login;
+			}
+			set
+			{
+				if ((this._login != value))
+				{
+					this.OnloginChanging(value);
+					this.SendPropertyChanging();
+					this._login = value;
+					this.SendPropertyChanged("login");
+					this.OnloginChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_password", DbType="VarChar(150)")]
+		public string password
+		{
+			get
+			{
+				return this._password;
+			}
+			set
+			{
+				if ((this._password != value))
+				{
+					this.OnpasswordChanging(value);
+					this.SendPropertyChanging();
+					this._password = value;
+					this.SendPropertyChanged("password");
+					this.OnpasswordChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Admin_Admin", Storage="_Admin2", ThisKey="id", OtherKey="id", IsUnique=true, IsForeignKey=false)]
+		public Admin Admin2
+		{
+			get
+			{
+				return this._Admin2.Entity;
+			}
+			set
+			{
+				Admin previousValue = this._Admin2.Entity;
+				if (((previousValue != value) 
+							|| (this._Admin2.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Admin2.Entity = null;
+						previousValue.Admin1 = null;
+					}
+					this._Admin2.Entity = value;
+					if ((value != null))
+					{
+						value.Admin1 = this;
+					}
+					this.SendPropertyChanged("Admin2");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Admin_Admin", Storage="_Admin1", ThisKey="id", OtherKey="id", IsForeignKey=true)]
+		public Admin Admin1
+		{
+			get
+			{
+				return this._Admin1.Entity;
+			}
+			set
+			{
+				Admin previousValue = this._Admin1.Entity;
+				if (((previousValue != value) 
+							|| (this._Admin1.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Admin1.Entity = null;
+						previousValue.Admin2 = null;
+					}
+					this._Admin1.Entity = value;
+					if ((value != null))
+					{
+						value.Admin2 = this;
+						this._id = value.id;
+					}
+					else
+					{
+						this._id = default(decimal);
+					}
+					this.SendPropertyChanged("Admin1");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.UtilisateursLiguesDroits")]
+	public partial class UtilisateursLiguesDroits : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private decimal _Id;
+		
+		private decimal _IdUtilisateur;
+		
+		private decimal _IdLigue;
+		
+		private string _Niveau;
+		
+		private EntityRef<Ligues> _Ligues;
+		
+		private EntityRef<Utilisateurs> _Utilisateurs;
+		
+    #region Définitions de méthodes d'extensibilité
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnIdChanging(decimal value);
+    partial void OnIdChanged();
+    partial void OnIdUtilisateurChanging(decimal value);
+    partial void OnIdUtilisateurChanged();
+    partial void OnIdLigueChanging(decimal value);
+    partial void OnIdLigueChanged();
+    partial void OnNiveauChanging(string value);
+    partial void OnNiveauChanged();
+    #endregion
+		
+		public UtilisateursLiguesDroits()
+		{
+			this._Ligues = default(EntityRef<Ligues>);
+			this._Utilisateurs = default(EntityRef<Utilisateurs>);
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Id", AutoSync=AutoSync.OnInsert, DbType="Decimal(18,0) NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public decimal Id
+		{
+			get
+			{
+				return this._Id;
+			}
+			set
+			{
+				if ((this._Id != value))
+				{
+					this.OnIdChanging(value);
+					this.SendPropertyChanging();
+					this._Id = value;
+					this.SendPropertyChanged("Id");
+					this.OnIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IdUtilisateur", DbType="Decimal(18,0) NOT NULL")]
+		public decimal IdUtilisateur
+		{
+			get
+			{
+				return this._IdUtilisateur;
+			}
+			set
+			{
+				if ((this._IdUtilisateur != value))
+				{
+					if (this._Utilisateurs.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnIdUtilisateurChanging(value);
+					this.SendPropertyChanging();
+					this._IdUtilisateur = value;
+					this.SendPropertyChanged("IdUtilisateur");
+					this.OnIdUtilisateurChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IdLigue", DbType="Decimal(18,0) NOT NULL")]
+		public decimal IdLigue
+		{
+			get
+			{
+				return this._IdLigue;
+			}
+			set
+			{
+				if ((this._IdLigue != value))
+				{
+					if (this._Ligues.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnIdLigueChanging(value);
+					this.SendPropertyChanging();
+					this._IdLigue = value;
+					this.SendPropertyChanged("IdLigue");
+					this.OnIdLigueChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Niveau", DbType="VarChar(1) NOT NULL", CanBeNull=false)]
+		public string Niveau
+		{
+			get
+			{
+				return this._Niveau;
+			}
+			set
+			{
+				if ((this._Niveau != value))
+				{
+					this.OnNiveauChanging(value);
+					this.SendPropertyChanging();
+					this._Niveau = value;
+					this.SendPropertyChanged("Niveau");
+					this.OnNiveauChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Ligues_UtilisateursLiguesDroits", Storage="_Ligues", ThisKey="IdLigue", OtherKey="Id", IsForeignKey=true)]
+		public Ligues Ligues
+		{
+			get
+			{
+				return this._Ligues.Entity;
+			}
+			set
+			{
+				Ligues previousValue = this._Ligues.Entity;
+				if (((previousValue != value) 
+							|| (this._Ligues.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Ligues.Entity = null;
+						previousValue.UtilisateursLiguesDroits.Remove(this);
+					}
+					this._Ligues.Entity = value;
+					if ((value != null))
+					{
+						value.UtilisateursLiguesDroits.Add(this);
+						this._IdLigue = value.Id;
+					}
+					else
+					{
+						this._IdLigue = default(decimal);
+					}
+					this.SendPropertyChanged("Ligues");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Utilisateurs_UtilisateursLiguesDroits", Storage="_Utilisateurs", ThisKey="IdUtilisateur", OtherKey="Id", IsForeignKey=true)]
+		public Utilisateurs Utilisateurs
+		{
+			get
+			{
+				return this._Utilisateurs.Entity;
+			}
+			set
+			{
+				Utilisateurs previousValue = this._Utilisateurs.Entity;
+				if (((previousValue != value) 
+							|| (this._Utilisateurs.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Utilisateurs.Entity = null;
+						previousValue.UtilisateursLiguesDroits.Remove(this);
+					}
+					this._Utilisateurs.Entity = value;
+					if ((value != null))
+					{
+						value.UtilisateursLiguesDroits.Add(this);
+						this._IdUtilisateur = value.Id;
+					}
+					else
+					{
+						this._IdUtilisateur = default(decimal);
+					}
+					this.SendPropertyChanged("Utilisateurs");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
 			}
 		}
 	}
@@ -621,222 +1068,6 @@ namespace OrganismeFormation.Models
 		{
 			this.SendPropertyChanging();
 			entity.Candidats = null;
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.UtilisateursLiguesDroits")]
-	public partial class UtilisateursLiguesDroits : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private decimal _Id;
-		
-		private decimal _IdUtilisateur;
-		
-		private decimal _IdLigue;
-		
-		private string _Niveau;
-		
-		private EntityRef<Ligues> _Ligues;
-		
-		private EntityRef<Utilisateurs> _Utilisateurs;
-		
-    #region Définitions de méthodes d'extensibilité
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnIdChanging(decimal value);
-    partial void OnIdChanged();
-    partial void OnIdUtilisateurChanging(decimal value);
-    partial void OnIdUtilisateurChanged();
-    partial void OnIdLigueChanging(decimal value);
-    partial void OnIdLigueChanged();
-    partial void OnNiveauChanging(string value);
-    partial void OnNiveauChanged();
-    #endregion
-		
-		public UtilisateursLiguesDroits()
-		{
-			this._Ligues = default(EntityRef<Ligues>);
-			this._Utilisateurs = default(EntityRef<Utilisateurs>);
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Id", AutoSync=AutoSync.OnInsert, DbType="Decimal(18,0) NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
-		public decimal Id
-		{
-			get
-			{
-				return this._Id;
-			}
-			set
-			{
-				if ((this._Id != value))
-				{
-					this.OnIdChanging(value);
-					this.SendPropertyChanging();
-					this._Id = value;
-					this.SendPropertyChanged("Id");
-					this.OnIdChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IdUtilisateur", DbType="Decimal(18,0) NOT NULL")]
-		public decimal IdUtilisateur
-		{
-			get
-			{
-				return this._IdUtilisateur;
-			}
-			set
-			{
-				if ((this._IdUtilisateur != value))
-				{
-					if (this._Utilisateurs.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.OnIdUtilisateurChanging(value);
-					this.SendPropertyChanging();
-					this._IdUtilisateur = value;
-					this.SendPropertyChanged("IdUtilisateur");
-					this.OnIdUtilisateurChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IdLigue", DbType="Decimal(18,0) NOT NULL")]
-		public decimal IdLigue
-		{
-			get
-			{
-				return this._IdLigue;
-			}
-			set
-			{
-				if ((this._IdLigue != value))
-				{
-					if (this._Ligues.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.OnIdLigueChanging(value);
-					this.SendPropertyChanging();
-					this._IdLigue = value;
-					this.SendPropertyChanged("IdLigue");
-					this.OnIdLigueChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Niveau", DbType="VarChar(1) NOT NULL", CanBeNull=false)]
-		public string Niveau
-		{
-			get
-			{
-				return this._Niveau;
-			}
-			set
-			{
-				if ((this._Niveau != value))
-				{
-					this.OnNiveauChanging(value);
-					this.SendPropertyChanging();
-					this._Niveau = value;
-					this.SendPropertyChanged("Niveau");
-					this.OnNiveauChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Ligues_UtilisateursLiguesDroits", Storage="_Ligues", ThisKey="IdLigue", OtherKey="Id", IsForeignKey=true)]
-		public Ligues Ligues
-		{
-			get
-			{
-				return this._Ligues.Entity;
-			}
-			set
-			{
-				Ligues previousValue = this._Ligues.Entity;
-				if (((previousValue != value) 
-							|| (this._Ligues.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._Ligues.Entity = null;
-						previousValue.UtilisateursLiguesDroits.Remove(this);
-					}
-					this._Ligues.Entity = value;
-					if ((value != null))
-					{
-						value.UtilisateursLiguesDroits.Add(this);
-						this._IdLigue = value.Id;
-					}
-					else
-					{
-						this._IdLigue = default(decimal);
-					}
-					this.SendPropertyChanged("Ligues");
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Utilisateurs_UtilisateursLiguesDroits", Storage="_Utilisateurs", ThisKey="IdUtilisateur", OtherKey="Id", IsForeignKey=true)]
-		public Utilisateurs Utilisateurs
-		{
-			get
-			{
-				return this._Utilisateurs.Entity;
-			}
-			set
-			{
-				Utilisateurs previousValue = this._Utilisateurs.Entity;
-				if (((previousValue != value) 
-							|| (this._Utilisateurs.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._Utilisateurs.Entity = null;
-						previousValue.UtilisateursLiguesDroits.Remove(this);
-					}
-					this._Utilisateurs.Entity = value;
-					if ((value != null))
-					{
-						value.UtilisateursLiguesDroits.Add(this);
-						this._IdUtilisateur = value.Id;
-					}
-					else
-					{
-						this._IdUtilisateur = default(decimal);
-					}
-					this.SendPropertyChanged("Utilisateurs");
-				}
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
 		}
 	}
 	
@@ -1509,8 +1740,6 @@ namespace OrganismeFormation.Models
 		
 		private string _InfoComplementaires;
 		
-		private System.Nullable<decimal> _OrganismesId;
-		
 		private System.Nullable<decimal> _HabilitationsId;
 		
 		private System.Nullable<decimal> _PorteursId;
@@ -1525,6 +1754,8 @@ namespace OrganismeFormation.Models
 		
 		private System.Nullable<decimal> _NbreHeureAutreEspace;
 		
+		private System.Nullable<decimal> _OrganismeId;
+		
 		private EntitySet<CandidatsFormations> _CandidatsFormations;
 		
 		private EntitySet<FormationsLieux> _FormationsLieux;
@@ -1532,6 +1763,8 @@ namespace OrganismeFormation.Models
 		private EntitySet<Lieux> _Lieux;
 		
 		private EntityRef<Habilitations> _Habilitations;
+		
+		private EntityRef<Organismes> _Organismes;
 		
 		private EntityRef<Personnel> _Personnel;
 		
@@ -1577,8 +1810,6 @@ namespace OrganismeFormation.Models
     partial void OnCoutCompletChanged();
     partial void OnInfoComplementairesChanging(string value);
     partial void OnInfoComplementairesChanged();
-    partial void OnOrganismesIdChanging(System.Nullable<decimal> value);
-    partial void OnOrganismesIdChanged();
     partial void OnHabilitationsIdChanging(System.Nullable<decimal> value);
     partial void OnHabilitationsIdChanged();
     partial void OnPorteursIdChanging(System.Nullable<decimal> value);
@@ -1593,6 +1824,8 @@ namespace OrganismeFormation.Models
     partial void OnIdOrganisateurpedaChanged();
     partial void OnNbreHeureAutreEspaceChanging(System.Nullable<decimal> value);
     partial void OnNbreHeureAutreEspaceChanged();
+    partial void OnOrganismeIdChanging(System.Nullable<decimal> value);
+    partial void OnOrganismeIdChanged();
     #endregion
 		
 		public Formations()
@@ -1601,6 +1834,7 @@ namespace OrganismeFormation.Models
 			this._FormationsLieux = new EntitySet<FormationsLieux>(new Action<FormationsLieux>(this.attach_FormationsLieux), new Action<FormationsLieux>(this.detach_FormationsLieux));
 			this._Lieux = new EntitySet<Lieux>(new Action<Lieux>(this.attach_Lieux), new Action<Lieux>(this.detach_Lieux));
 			this._Habilitations = default(EntityRef<Habilitations>);
+			this._Organismes = default(EntityRef<Organismes>);
 			this._Personnel = default(EntityRef<Personnel>);
 			this._Porteurs = default(EntityRef<Porteurs>);
 			this._Prestataires = default(EntityRef<Prestataires>);
@@ -1928,26 +2162,6 @@ namespace OrganismeFormation.Models
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_OrganismesId", DbType="Decimal(18,0)")]
-		public System.Nullable<decimal> OrganismesId
-		{
-			get
-			{
-				return this._OrganismesId;
-			}
-			set
-			{
-				if ((this._OrganismesId != value))
-				{
-					this.OnOrganismesIdChanging(value);
-					this.SendPropertyChanging();
-					this._OrganismesId = value;
-					this.SendPropertyChanged("OrganismesId");
-					this.OnOrganismesIdChanged();
-				}
-			}
-		}
-		
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_HabilitationsId", DbType="Decimal(18,0)")]
 		public System.Nullable<decimal> HabilitationsId
 		{
@@ -2108,6 +2322,30 @@ namespace OrganismeFormation.Models
 			}
 		}
 		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_OrganismeId", DbType="Decimal(18,0)")]
+		public System.Nullable<decimal> OrganismeId
+		{
+			get
+			{
+				return this._OrganismeId;
+			}
+			set
+			{
+				if ((this._OrganismeId != value))
+				{
+					if (this._Organismes.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnOrganismeIdChanging(value);
+					this.SendPropertyChanging();
+					this._OrganismeId = value;
+					this.SendPropertyChanged("OrganismeId");
+					this.OnOrganismeIdChanged();
+				}
+			}
+		}
+		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Formations_CandidatsFormations", Storage="_CandidatsFormations", ThisKey="Id", OtherKey="FormationId")]
 		public EntitySet<CandidatsFormations> CandidatsFormations
 		{
@@ -2177,6 +2415,40 @@ namespace OrganismeFormation.Models
 						this._HabilitationsId = default(Nullable<decimal>);
 					}
 					this.SendPropertyChanged("Habilitations");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Organismes_Formations", Storage="_Organismes", ThisKey="OrganismeId", OtherKey="Id", IsForeignKey=true)]
+		public Organismes Organismes
+		{
+			get
+			{
+				return this._Organismes.Entity;
+			}
+			set
+			{
+				Organismes previousValue = this._Organismes.Entity;
+				if (((previousValue != value) 
+							|| (this._Organismes.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Organismes.Entity = null;
+						previousValue.Formations.Remove(this);
+					}
+					this._Organismes.Entity = value;
+					if ((value != null))
+					{
+						value.Formations.Add(this);
+						this._OrganismeId = value.Id;
+					}
+					else
+					{
+						this._OrganismeId = default(Nullable<decimal>);
+					}
+					this.SendPropertyChanged("Organismes");
 				}
 			}
 		}
@@ -3537,8 +3809,6 @@ namespace OrganismeFormation.Models
 		
 		private System.Nullable<decimal> _IdOrganisme;
 		
-		private EntityRef<Organismes> _Organismes;
-		
     #region Définitions de méthodes d'extensibilité
     partial void OnLoaded();
     partial void OnValidate(System.Data.Linq.ChangeAction action);
@@ -3551,7 +3821,6 @@ namespace OrganismeFormation.Models
 		
 		public Organisations()
 		{
-			this._Organismes = default(EntityRef<Organismes>);
 			OnCreated();
 		}
 		
@@ -3586,49 +3855,11 @@ namespace OrganismeFormation.Models
 			{
 				if ((this._IdOrganisme != value))
 				{
-					if (this._Organismes.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
 					this.OnIdOrganismeChanging(value);
 					this.SendPropertyChanging();
 					this._IdOrganisme = value;
 					this.SendPropertyChanged("IdOrganisme");
 					this.OnIdOrganismeChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Organismes_Organisations", Storage="_Organismes", ThisKey="IdOrganisme", OtherKey="Id", IsForeignKey=true)]
-		public Organismes Organismes
-		{
-			get
-			{
-				return this._Organismes.Entity;
-			}
-			set
-			{
-				Organismes previousValue = this._Organismes.Entity;
-				if (((previousValue != value) 
-							|| (this._Organismes.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._Organismes.Entity = null;
-						previousValue.Organisations.Remove(this);
-					}
-					this._Organismes.Entity = value;
-					if ((value != null))
-					{
-						value.Organisations.Add(this);
-						this._IdOrganisme = value.Id;
-					}
-					else
-					{
-						this._IdOrganisme = default(Nullable<decimal>);
-					}
-					this.SendPropertyChanged("Organismes");
 				}
 			}
 		}
@@ -3680,7 +3911,7 @@ namespace OrganismeFormation.Models
 		
 		private System.Nullable<decimal> _ResponsableId;
 		
-		private EntitySet<Organisations> _Organisations;
+		private EntitySet<Formations> _Formations;
 		
 		private EntityRef<Lieux> _Lieux;
 		
@@ -3720,7 +3951,7 @@ namespace OrganismeFormation.Models
 		
 		public Organismes()
 		{
-			this._Organisations = new EntitySet<Organisations>(new Action<Organisations>(this.attach_Organisations), new Action<Organisations>(this.detach_Organisations));
+			this._Formations = new EntitySet<Formations>(new Action<Formations>(this.attach_Formations), new Action<Formations>(this.detach_Formations));
 			this._Lieux = default(EntityRef<Lieux>);
 			this._Personnel = default(EntityRef<Personnel>);
 			this._Personnel1 = default(EntityRef<Personnel>);
@@ -3949,16 +4180,16 @@ namespace OrganismeFormation.Models
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Organismes_Organisations", Storage="_Organisations", ThisKey="Id", OtherKey="IdOrganisme")]
-		public EntitySet<Organisations> Organisations
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Organismes_Formations", Storage="_Formations", ThisKey="Id", OtherKey="OrganismeId")]
+		public EntitySet<Formations> Formations
 		{
 			get
 			{
-				return this._Organisations;
+				return this._Formations;
 			}
 			set
 			{
-				this._Organisations.Assign(value);
+				this._Formations.Assign(value);
 			}
 		}
 		
@@ -4152,13 +4383,13 @@ namespace OrganismeFormation.Models
 			}
 		}
 		
-		private void attach_Organisations(Organisations entity)
+		private void attach_Formations(Formations entity)
 		{
 			this.SendPropertyChanging();
 			entity.Organismes = this;
 		}
 		
-		private void detach_Organisations(Organisations entity)
+		private void detach_Formations(Formations entity)
 		{
 			this.SendPropertyChanging();
 			entity.Organismes = null;
@@ -4325,7 +4556,7 @@ namespace OrganismeFormation.Models
 			OnCreated();
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Id", DbType="Decimal(18,0) NOT NULL", IsPrimaryKey=true)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Id", AutoSync=AutoSync.OnInsert, DbType="Decimal(18,0) NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
 		public decimal Id
 		{
 			get
@@ -4744,7 +4975,7 @@ namespace OrganismeFormation.Models
 			OnCreated();
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Id", DbType="Decimal(18,0) NOT NULL", IsPrimaryKey=true)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Id", AutoSync=AutoSync.OnInsert, DbType="Decimal(18,0) NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
 		public decimal Id
 		{
 			get
@@ -5257,7 +5488,7 @@ namespace OrganismeFormation.Models
 			OnCreated();
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Id", DbType="Decimal(18,0) NOT NULL", IsPrimaryKey=true)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Id", AutoSync=AutoSync.OnInsert, DbType="Decimal(18,0) NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
 		public decimal Id
 		{
 			get
@@ -5505,7 +5736,7 @@ namespace OrganismeFormation.Models
 			OnCreated();
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Id", DbType="Decimal(18,0) NOT NULL", IsPrimaryKey=true)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Id", AutoSync=AutoSync.OnInsert, DbType="Decimal(18,0) NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
 		public decimal Id
 		{
 			get
@@ -5821,6 +6052,8 @@ namespace OrganismeFormation.Models
 		
 		private System.Nullable<decimal> _ResultatsId;
 		
+		private System.Nullable<decimal> _ResultatMax;
+		
 		private EntityRef<Resultats> _Resultats;
 		
     #region Définitions de méthodes d'extensibilité
@@ -5835,6 +6068,8 @@ namespace OrganismeFormation.Models
     partial void OnResultatChanged();
     partial void OnResultatsIdChanging(System.Nullable<decimal> value);
     partial void OnResultatsIdChanged();
+    partial void OnResultatMaxChanging(System.Nullable<decimal> value);
+    partial void OnResultatMaxChanged();
     #endregion
 		
 		public ResultatsUC()
@@ -5843,7 +6078,7 @@ namespace OrganismeFormation.Models
 			OnCreated();
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Id", DbType="Decimal(18,0) NOT NULL", IsPrimaryKey=true)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Id", AutoSync=AutoSync.OnInsert, DbType="Decimal(18,0) NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
 		public decimal Id
 		{
 			get
@@ -5923,6 +6158,26 @@ namespace OrganismeFormation.Models
 					this._ResultatsId = value;
 					this.SendPropertyChanged("ResultatsId");
 					this.OnResultatsIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ResultatMax", DbType="Decimal(18,0)")]
+		public System.Nullable<decimal> ResultatMax
+		{
+			get
+			{
+				return this._ResultatMax;
+			}
+			set
+			{
+				if ((this._ResultatMax != value))
+				{
+					this.OnResultatMaxChanging(value);
+					this.SendPropertyChanging();
+					this._ResultatMax = value;
+					this.SendPropertyChanged("ResultatMax");
+					this.OnResultatMaxChanged();
 				}
 			}
 		}
@@ -6017,7 +6272,7 @@ namespace OrganismeFormation.Models
 			OnCreated();
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Id", DbType="Decimal(18,0) NOT NULL", IsPrimaryKey=true)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Id", AutoSync=AutoSync.OnInsert, DbType="Decimal(18,0) NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
 		public decimal Id
 		{
 			get
@@ -6831,164 +7086,6 @@ namespace OrganismeFormation.Models
 		{
 			this.SendPropertyChanging();
 			entity.Utilisateurs = null;
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Admin")]
-	public partial class Admin : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private decimal _id;
-		
-		private string _Nom;
-		
-		private string _Prenom;
-		
-		private string _login;
-		
-		private string _password;
-		
-    #region Définitions de méthodes d'extensibilité
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnidChanging(decimal value);
-    partial void OnidChanged();
-    partial void OnNomChanging(string value);
-    partial void OnNomChanged();
-    partial void OnPrenomChanging(string value);
-    partial void OnPrenomChanged();
-    partial void OnloginChanging(string value);
-    partial void OnloginChanged();
-    partial void OnpasswordChanging(string value);
-    partial void OnpasswordChanged();
-    #endregion
-		
-		public Admin()
-		{
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id", DbType="Decimal(18,0) NOT NULL", IsPrimaryKey=true)]
-		public decimal id
-		{
-			get
-			{
-				return this._id;
-			}
-			set
-			{
-				if ((this._id != value))
-				{
-					this.OnidChanging(value);
-					this.SendPropertyChanging();
-					this._id = value;
-					this.SendPropertyChanged("id");
-					this.OnidChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Nom", DbType="VarChar(50)")]
-		public string Nom
-		{
-			get
-			{
-				return this._Nom;
-			}
-			set
-			{
-				if ((this._Nom != value))
-				{
-					this.OnNomChanging(value);
-					this.SendPropertyChanging();
-					this._Nom = value;
-					this.SendPropertyChanged("Nom");
-					this.OnNomChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Prenom", DbType="VarChar(50)")]
-		public string Prenom
-		{
-			get
-			{
-				return this._Prenom;
-			}
-			set
-			{
-				if ((this._Prenom != value))
-				{
-					this.OnPrenomChanging(value);
-					this.SendPropertyChanging();
-					this._Prenom = value;
-					this.SendPropertyChanged("Prenom");
-					this.OnPrenomChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_login", DbType="VarChar(50)")]
-		public string login
-		{
-			get
-			{
-				return this._login;
-			}
-			set
-			{
-				if ((this._login != value))
-				{
-					this.OnloginChanging(value);
-					this.SendPropertyChanging();
-					this._login = value;
-					this.SendPropertyChanged("login");
-					this.OnloginChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_password", DbType="VarChar(150)")]
-		public string password
-		{
-			get
-			{
-				return this._password;
-			}
-			set
-			{
-				if ((this._password != value))
-				{
-					this.OnpasswordChanging(value);
-					this.SendPropertyChanging();
-					this._password = value;
-					this.SendPropertyChanged("password");
-					this.OnpasswordChanged();
-				}
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
 		}
 	}
 }
