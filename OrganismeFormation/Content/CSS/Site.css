@@ -15,7 +15,87 @@ html{
   height:100%;
 }
 
+/************ Content **************/
+.content{
+    width:960px;
+    margin-left:auto;
+    margin-right:auto;
+    background-color:rgba(72,72,72,0.4);
+    height:100vh;
+    font-family:Oswald;
+}
+
+.container-inline{
+    width:inherit;
+    padding:30px;
+    text-align:center;
+}
+
+.accueil-card-conteneur{
+    width:150px;
+    margin:10px;
+    background-color:white;
+    display:inline-block;
+    padding:5px;
+}
+
+.card-image{
+    margin:20px;
+    width:100px;
+    height:100px;
+    height:100px;
+    margin-left:auto;
+    margin-right:auto;
+}
+
+.card-image img
+{
+    height:100px;
+    width:100px;
+}
+
+/********** Footer **************/
+.footer1{
+    font-size:12px;
+    margin: 5px;
+}
+
+.footer2{
+    font-size:9px;
+    margin:2px;
+}
+
 /* Titles */
+
+.title-content-main{
+    font-size: 50px;
+    padding-top: 10px;
+    font-family: 'Bebas Neue';
+}
+.title-content-second{
+    font-size: 35px;
+    font-family: 'Bebas Neue';
+}
+
+.title-content
+{
+    text-align:center;
+    background-color:#004A73;
+    height:150px;
+    color:white;
+    z-index:10;
+    position:relative;
+    box-shadow: 0 5px 10px 0 rgba(0,74,115,0.45);
+}
+
+.footer {
+  position: absolute;
+  bottom: 0;
+  width: inherit;
+  background-color: #efefef;
+  text-align: center;
+}
+
 .title-login-for{
     background-color:#004A73;
     height:80px;
