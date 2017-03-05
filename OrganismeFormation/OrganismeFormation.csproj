@@ -210,7 +210,6 @@
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
-    <Compile Include="ViewModels\ResponsableViewModel.cs" />
     <Compile Include="ViewModels\StatutConnection.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -226,6 +225,10 @@
     <Content Include="Content\Images\Icons\icon-tete.svg" />
     <Content Include="Content\Images\Icons\icon-login.png" />
     <Content Include="Content\Images\menu\titre-menu.PNG" />
+    <Content Include="Content\Images\vignettes\download.png" />
+    <Content Include="Content\Images\vignettes\loupe.png" />
+    <Content Include="Content\Images\vignettes\registrations.png" />
+    <Content Include="Content\Images\vignettes\resp.png" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -286,12 +289,7 @@
     <Content Include="Views\Authentification\Login.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Admin\HomeAdmin.cshtml" />
-<<<<<<< HEAD
     <Content Include="Views\Shared\_Footer.cshtml" />
-=======
-    <Content Include="Views\Admin\AjoutResponsable.cshtml" />
-    <Content Include="Views\Admin\ListeResponsable.cshtml" />
->>>>>>> origin/master
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
