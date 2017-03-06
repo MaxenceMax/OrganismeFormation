@@ -27,28 +27,52 @@ html{
 
 .container-inline{
     width:inherit;
-    padding:30px;
+    padding-top:30px;
     text-align:center;
 }
 
 .accueil-card-conteneur{
-    width:150px;
+    width:200px;
     margin:10px;
     background-color:white;
     display:inline-block;
-    padding:5px;
 }
 
 .card-image{
-    margin:20px;
+    padding:20px;
     width:100px;
-    height:100px;
     height:100px;
     margin-left:auto;
     margin-right:auto;
 }
 
-.card   -image img
+.card-container-image{
+    position:relative;
+    width:inherit;
+    box-shadow: 0 5px 10px 0 grey;
+}
+
+.card-desc-title{
+    padding-top:10px;
+    padding-bottom:10px;
+    font-size:22px;
+    width:inherit;
+    font-family:'Bebas Neue';
+    color:#004A73;
+    background-color: #ECEDEE;
+}
+
+.card-desc{
+    text-align:justify;
+    font-family:Oswald;
+    padding-left:7px;
+    padding-right:7px;
+    color:#004A73;
+    font-size:10px;
+    background-color: #ECEDEE;
+}
+
+.card-image img
 {
     height:100px;
     width:100px;
