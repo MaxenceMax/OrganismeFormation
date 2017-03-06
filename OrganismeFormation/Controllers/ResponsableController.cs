@@ -21,12 +21,23 @@ namespace OrganismeFormation.Controllers
         }
 
 
-        //Route pour ajouter un responsable
-        [Authorize(Roles = "Responsable")]
+
+        [AllowAnonymous]
         public ActionResult Organisme()
         {
 
-            return View();
+            OrganismeDataContext bd = new OrganismeDataContext();
+
+            var claimIdentity = User.Identity as ClaimsIdentity;
+
+            var nomResponsable = claimIdentity.FindFirst(ClaimTypes.NameIdentifier).Value;
+
+            var resp = bd.Responsable.First(a => a.Licence == nomResponsable);
+
+            OrganismeModel organismeModel = new OrganismeModel();
+            organismeModel.Responsable = resp;
+
+            return View(organismeModel);
         }
 
     }

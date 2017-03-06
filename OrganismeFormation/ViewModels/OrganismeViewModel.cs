@@ -9,6 +9,8 @@ namespace OrganismeFormation.Models
     public class OrganismeModel
     {
 
+        public Responsable Responsable { get; set; }
+
         public Organismes Organismes { get; set; }
 
         public PresidentOrganisme PresidentOF { get; set; }
