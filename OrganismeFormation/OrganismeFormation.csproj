@@ -211,6 +211,7 @@
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
+    <Compile Include="ViewModels\FormationViewModel.cs" />
     <Compile Include="ViewModels\OrganismeViewModel.cs" />
     <Compile Include="ViewModels\ResponsableViewModel.cs" />
     <Compile Include="ViewModels\StatutConnection.cs" />
