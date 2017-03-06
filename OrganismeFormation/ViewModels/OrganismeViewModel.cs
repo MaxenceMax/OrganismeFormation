@@ -9,8 +9,6 @@ namespace OrganismeFormation.Models
     public class OrganismeModel
     {
 
-        public Responsable Responsable { get; set; }
-
         public Organismes Organismes { get; set; }
 
         public PresidentOrganisme PresidentOF { get; set; }
@@ -20,6 +18,8 @@ namespace OrganismeFormation.Models
         public Personnel DirecteurOF { get; set; }
 
         public Lieux LieuOF { get; set; }
+
+        public Decimal OrganismeId { get; set; }
 
 
     }

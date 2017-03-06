@@ -79,12 +79,12 @@
       <Column Name="InfoComplementaires" Type="System.String" DbType="Text" CanBeNull="true" UpdateCheck="Never" />
       <Column Name="HabilitationsId" Type="System.Decimal" DbType="Decimal(18,0)" CanBeNull="true" />
       <Column Name="PorteursId" Type="System.Decimal" DbType="Decimal(18,0)" CanBeNull="true" />
-      <Column Name="PrestatairesId" Type="System.Decimal" DbType="Decimal(18,0)" CanBeNull="true" />
       <Column Name="TypedeFormationsId" Type="System.Decimal" DbType="Decimal(18,0)" CanBeNull="true" />
       <Column Name="NumeroSession" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
       <Column Name="IdOrganisateurpeda" Type="System.Decimal" DbType="Decimal(18,0)" CanBeNull="true" />
       <Column Name="NbreHeureAutreEspace" Type="System.Decimal" DbType="Decimal(18,0)" CanBeNull="true" />
       <Column Name="OrganismeId" Type="System.Decimal" DbType="Decimal(18,0)" CanBeNull="true" />
+      <Column Name="Prestataire" Type="System.String" DbType="Text" CanBeNull="true" UpdateCheck="Never" />
       <Association Name="Formations_CandidatsFormations" Member="CandidatsFormations" ThisKey="Id" OtherKey="FormationId" Type="CandidatsFormations" />
       <Association Name="Formations_FormationsLieux" Member="FormationsLieux" ThisKey="Id" OtherKey="IdFormation" Type="FormationsLieux" />
       <Association Name="Formations_Lieux" Member="Lieux" ThisKey="Id" OtherKey="LieuFormationId" Type="Lieux" />
@@ -92,7 +92,6 @@
       <Association Name="Organismes_Formations" Member="Organismes" ThisKey="OrganismeId" OtherKey="Id" Type="Organismes" IsForeignKey="true" />
       <Association Name="Personnel_Formations" Member="Personnel" ThisKey="IdOrganisateurpeda" OtherKey="Id" Type="Personnel" IsForeignKey="true" />
       <Association Name="Porteurs_Formations" Member="Porteurs" ThisKey="PorteursId" OtherKey="Id" Type="Porteurs" IsForeignKey="true" />
-      <Association Name="Prestataires_Formations" Member="Prestataires" ThisKey="PrestatairesId" OtherKey="Id" Type="Prestataires" IsForeignKey="true" />
       <Association Name="TypedeFormations_Formations" Member="TypedeFormations" ThisKey="TypedeFormationsId" OtherKey="Id" Type="TypedeFormations" IsForeignKey="true" />
     </Type>
   </Table>
@@ -130,7 +129,6 @@
       <Association Name="Lieux_FormationsLieux" Member="FormationsLieux" ThisKey="Id" OtherKey="IdLieu" Type="FormationsLieux" />
       <Association Name="Lieux_Organismes" Member="Organismes" ThisKey="Id" OtherKey="LieuxId" Type="Organismes" />
       <Association Name="Lieux_Porteurs" Member="Porteurs" ThisKey="Id" OtherKey="LieuxId" Type="Porteurs" />
-      <Association Name="Lieux_Prestataires" Member="Prestataires" ThisKey="Id" OtherKey="LieuxId" Type="Prestataires" />
       <Association Name="Formations_Lieux" Member="Formations" ThisKey="LieuFormationId" OtherKey="Id" Type="Formations" IsForeignKey="true" />
     </Type>
   </Table>
@@ -216,20 +214,6 @@
       <Column Name="Email" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
       <Column Name="Fonction" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
       <Association Name="PresidentOrganisme_Organismes" Member="Organismes" ThisKey="Id" OtherKey="PresidentId" Type="Organismes" />
-    </Type>
-  </Table>
-  <Table Name="dbo.Prestataires" Member="Prestataires">
-    <Type Name="Prestataires">
-      <Column Name="Id" Type="System.Decimal" DbType="Decimal(18,0) NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="Nom" Type="System.String" DbType="Char(250)" CanBeNull="true" />
-      <Column Name="MiseADispoInstallation" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
-      <Column Name="GestionPaieFormateurs" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
-      <Column Name="CoPortage" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
-      <Column Name="GestionAdministrative" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
-      <Column Name="Autre" Type="System.String" DbType="Text" CanBeNull="true" UpdateCheck="Never" />
-      <Column Name="LieuxId" Type="System.Decimal" DbType="Decimal(18,0)" CanBeNull="true" />
-      <Association Name="Prestataires_Formations" Member="Formations" ThisKey="Id" OtherKey="PrestatairesId" Type="Formations" />
-      <Association Name="Lieux_Prestataires" Member="Lieux" ThisKey="LieuxId" OtherKey="Id" Type="Lieux" IsForeignKey="true" />
     </Type>
   </Table>
   <Table Name="dbo.Responsable" Member="Responsable">
