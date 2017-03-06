@@ -1,0 +1,58 @@
+﻿@model OrganismeFormation.Models.OrganismeModel
+
+@{
+    ViewBag.Title = "Organisme";
+}
+
+
+<div class="contenu">
+
+    @using (Html.BeginForm(new { @autocomplete = "off" }))
+    {
+        <div id="form-div">
+
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+         
+            @Html.ValidationMessageFor(model => model.Organismes.NumeroDeclaration, "", new { @class = "text-danger" })
+            @Html.EditorFor(model => model.Organismes.NumeroDeclaration, new { htmlAttributes = new { @autocomplete = "off", @class = "feedback-input", @placeholder = "Numéro de déclaration", @id = "icon-tete" } })
+
+            @Html.ValidationMessageFor(model => model.Organismes.AnneeDeclaration, "", new { @class = "text-danger" })
+            @Html.EditorFor(model => model.Organismes.AnneeDeclaration, new { htmlAttributes = new { @autocomplete = "off", @class = "feedback-input", @placeholder = "Année de déclaration", @id = "icon-tete" } })
+
+            @Html.ValidationMessageFor(model => model.LieuOF.Adresse, "", new { @class = "text-danger" })
+            @Html.EditorFor(model => model.LieuOF.Adresse, new { htmlAttributes = new { @autocomplete = "off", @class = "feedback-input", @placeholder = "Adresse du siège de l'organisme", @id = "icon-tete" } })
+           
+            @Html.ValidationMessageFor(model => model.LieuOF.CodePostal, "", new { @class = "text-danger" })
+            @Html.EditorFor(model => model.LieuOF.CodePostal, new { htmlAttributes = new { @autocomplete = "off", @class = "feedback-input", @placeholder = "Code Postal", @id = "icon-tete" } })
+            
+
+            @Html.ValidationMessageFor(model => model.LieuOF.Ville, "", new { @class = "text-danger" })
+            @Html.EditorFor(model => model.LieuOF.Ville, new { htmlAttributes = new { @autocomplete = "off", @class = "feedback-input", @placeholder = "Ville", @id = "icon-tete" } })
+
+            @Html.ValidationMessageFor(model => model.LieuOF.Telephone, "", new { @class = "text-danger" })
+            @Html.EditorFor(model => model.LieuOF.Telephone, new { htmlAttributes = new { @autocomplete = "off", @class = "feedback-input", @placeholder = "Téléphone", @id = "icon-tete" } })
+
+
+            @Html.ValidationMessageFor(model => model.LieuOF.Email, "", new { @class = "text-danger" })
+            @Html.EditorFor(model => model.LieuOF.Email, new { htmlAttributes = new { @autocomplete = "off", @class = "feedback-input", @placeholder = "Email", @id = "icon-tete" } })
+
+
+
+            <div class="form-group-align">
+                <div class="submit">
+                    <input type="submit" value="Valider mon organisme" id="button-blue" />
+                    <div class="ease"></div>
+                </div>
+            </div>
+
+
+        </div>
+    }
+</div>
+
+
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+

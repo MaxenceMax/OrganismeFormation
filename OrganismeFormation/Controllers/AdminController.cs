@@ -42,8 +42,6 @@ namespace OrganismeFormation.Controllers
         [Authorize(Roles = "Admin")]
         public ActionResult AjoutResponsable()
         {
-
-
             return View();
         }
 
