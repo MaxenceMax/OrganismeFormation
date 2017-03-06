@@ -230,6 +230,7 @@
     <Content Include="Content\Images\vignettes\loupe.png" />
     <Content Include="Content\Images\vignettes\registrations.png" />
     <Content Include="Content\Images\vignettes\resp.png" />
+    <Content Include="Content\Images\vignettes\statistics.png" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
