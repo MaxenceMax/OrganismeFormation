@@ -15,6 +15,8 @@ namespace OrganismeFormation.Controllers
 {
     public class ResponsableController : Controller
     {
+        //Route pour ajouter un responsable
+        [Authorize(Roles = "Responsable")]
         public ActionResult HomeResponsable()
         {
             return View();
@@ -22,18 +24,16 @@ namespace OrganismeFormation.Controllers
 
 
 
-        [AllowAnonymous]
+        //Route pour ajouter un responsable
+        [Authorize(Roles = "Responsable")]
         public ActionResult Organisme()
         {
 
             OrganismeDataContext bd = new OrganismeDataContext();
 
             var claimIdentity = User.Identity as ClaimsIdentity;
-
             var nomResponsable = claimIdentity.FindFirst(ClaimTypes.NameIdentifier).Value;
-
             var resp = bd.Responsable.First(a => a.Licence == nomResponsable);
-
             var org = bd.Organismes.First(a => a.ResponsableId == resp.Id);
             OrganismeModel organismeModel = new OrganismeModel();
             
@@ -46,28 +46,24 @@ namespace OrganismeFormation.Controllers
 
 
         [HttpPost]
-        [AllowAnonymous]
+        [Authorize(Roles = "Responsable")]
         public ActionResult Organisme(OrganismeModel model)
         {
 
             OrganismeDataContext bd = new OrganismeDataContext();
+            var org = bd.Organismes.First(a => a.Id == model.OrganismeId);
 
-
-            //On reprend l'objet Organismes et on met les infos pour l'update
-            var claimIdentity = User.Identity as ClaimsIdentity;
-            var nomResponsable = claimIdentity.FindFirst(ClaimTypes.NameIdentifier).Value;
-            var resp = bd.Responsable.First(a => a.Licence == nomResponsable);
-            var org = bd.Organismes.First(a => a.ResponsableId == resp.Id);
+            if(org.Lieux == null)
+            {
+                org.Lieux = new Lieux();
+            }
 
             org.NumeroDeclaration = model.Organismes.NumeroDeclaration;
             org.AnneeDeclaration = model.Organismes.AnneeDeclaration;
-
             org.Lieux.Adresse = model.Organismes.Lieux.Adresse;
             org.Lieux.CodePostal = model.Organismes.Lieux.CodePostal;
-         
 
             bd.SubmitChanges();
-
 
             return RedirectToAction("HomeResponsable", "Responsable");
         }

@@ -298,6 +298,7 @@
     <Content Include="Views\Admin\AjoutResponsable.cshtml" />
     <Content Include="Views\Admin\ListeResponsable.cshtml" />
     <Content Include="Views\Responsable\Organisme.cshtml" />
+    <Content Include="Views\Admin\ModificationResponsable.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

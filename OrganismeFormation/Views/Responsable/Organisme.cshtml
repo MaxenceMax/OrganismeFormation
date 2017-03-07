@@ -7,8 +7,6 @@
 
 <div class="contenu">
 
-    @Model.Organismes.Id;
-
     @using (Html.BeginForm(new { @autocomplete = "off" }))
     {
         <div id="form-div">
@@ -41,6 +39,7 @@
             @Html.ValidationMessageFor(model => model.Organismes.Lieux.Email, "", new { @class = "text-danger" })
             @Html.EditorFor(model => model.Organismes.Lieux.Email, new { htmlAttributes = new { @autocomplete = "off", @class = "feedback-input", @placeholder = "Email", @id = "icon-tete" } })
 
+            @Html.HiddenFor(model => model.OrganismeId);
 
 
             <div class="form-group-align">

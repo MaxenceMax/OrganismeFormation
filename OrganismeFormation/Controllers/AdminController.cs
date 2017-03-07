@@ -25,6 +25,7 @@ namespace OrganismeFormation.Controllers
 
 
         //Route pour afficher les responsables
+        [Authorize(Roles = "Admin")]
         public ActionResult ListeResponsable()
         {
             OrganismeDataContext bd = new OrganismeDataContext();
@@ -45,18 +46,58 @@ namespace OrganismeFormation.Controllers
             return View();
         }
 
+        [Authorize(Roles ="Admin")]
+        public ActionResult ModificationResponsable(Decimal id)
+        {
+            OrganismeDataContext bd = new OrganismeDataContext();
+            var temp = bd.Responsable.First(a => a.Id == id);
+            AjoutResponsableModel resp = new AjoutResponsableModel();
+            resp.Licence = temp.Licence;
+            resp.Nom = temp.Nom;
+            resp.Prenom = temp.Prenom;
+            resp.Telephone = temp.Telephone;
+            resp.AdresseEmail = temp.Email;
+            resp.Ligue = temp.Organismes.First().Ligue;
+            resp.id = temp.Id;
+
+            return View(resp);
+        }
 
         //Ajout Responsable
         [HttpPost]
-        [AllowAnonymous]
+        [Authorize(Roles = "Admin")]
+        public ActionResult ModificationResponsable(AjoutResponsableModel model)
+        {
+
+            OrganismeDataContext bd = new OrganismeDataContext();
+            var resp = bd.Responsable.First(a => a.Id == model.id);
+            resp.Licence = model.Licence;
+            resp.Nom = model.Nom;
+            resp.Prenom = model.Prenom;
+            resp.Telephone = model.Telephone;
+            resp.Email = model.AdresseEmail;
+            resp.Organismes.First().Ligue = model.Ligue;
+
+            
+            bd.SubmitChanges();
+
+            return RedirectToAction("ListeResponsable", "Admin");
+        }
+
+
+
+        //Ajout Responsable
+        [HttpPost]
+        [Authorize(Roles = "Admin")]
         public ActionResult AjoutResponsable(Models.AjoutResponsableModel model)
         {
 
             OrganismeDataContext bd = new OrganismeDataContext();
 
-            Models.Responsable resp = new Models.Responsable();
-            Models.Organismes org = new Models.Organismes();
+            Responsable resp = new Responsable();
+            Organismes org = new Organismes();
 
+            // Mise à jour des données d'un responsable
             resp.Nom = model.Nom;
             resp.Prenom = model.Prenom;
             resp.Licence = model.Licence;
@@ -64,64 +105,29 @@ namespace OrganismeFormation.Controllers
             resp.Email = model.AdresseEmail;
             resp.Telephone = model.Telephone;
 
-            bd.Responsable.InsertOnSubmit(resp);
-            bd.SubmitChanges();
 
             org.Ligue = model.Ligue;
-            var req = from i in bd.Responsable
-                      orderby i.Id ascending
-                      select i.Id;
-
-            foreach (var detail in req)
-            {
-                org.ResponsableId = detail;
-            }
-
-            try
-            {
-                bd.Organismes.InsertOnSubmit(org);
-                bd.SubmitChanges();
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e);
-                // Provide for exceptions.
-            }
-
-
+            org.Responsable = resp;
+            bd.Organismes.InsertOnSubmit(org);
+            bd.Responsable.InsertOnSubmit(resp);
+            bd.SubmitChanges();
 
             return RedirectToAction("ListeResponsable", "Admin");
 
         }
 
 
-        [AllowAnonymous]
+        [Authorize(Roles = "Admin")]
         public ActionResult SuppressionResponsable(decimal id)
         {
-
-
             OrganismeDataContext bd = new OrganismeDataContext();
-
-            var req = from i in bd.Responsable
-                      where i.Id == id
-                      select i;
-
-
-            foreach (var detail in req)
+            var resp = bd.Responsable.First(a => a.Id == id);
+            if (resp.Organismes.First().Lieux == null)
             {
-                bd.Responsable.DeleteOnSubmit(detail);
+                bd.Organismes.DeleteOnSubmit(resp.Organismes.First());
             }
-
-            try
-            {
-                bd.SubmitChanges();
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e);
-                // Provide for exceptions.
-            }
-
+            bd.Responsable.DeleteOnSubmit(resp);
+            bd.SubmitChanges();
             return RedirectToAction("ListeResponsable", "Admin");
 
         }

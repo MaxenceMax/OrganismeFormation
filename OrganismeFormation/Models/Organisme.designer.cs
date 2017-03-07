@@ -78,6 +78,9 @@ namespace OrganismeFormation.Models
     partial void InsertPresidentOrganisme(PresidentOrganisme instance);
     partial void UpdatePresidentOrganisme(PresidentOrganisme instance);
     partial void DeletePresidentOrganisme(PresidentOrganisme instance);
+    partial void InsertPrestataires(Prestataires instance);
+    partial void UpdatePrestataires(Prestataires instance);
+    partial void DeletePrestataires(Prestataires instance);
     partial void InsertResponsable(Responsable instance);
     partial void UpdateResponsable(Responsable instance);
     partial void DeleteResponsable(Responsable instance);
@@ -108,7 +111,7 @@ namespace OrganismeFormation.Models
     #endregion
 		
 		public OrganismeDataContext() : 
-				base(global::System.Configuration.ConfigurationManager.ConnectionStrings["GestionOFConnectionString1"].ConnectionString, mappingSource)
+				base(global::System.Configuration.ConfigurationManager.ConnectionStrings["GestionOFConnectionString"].ConnectionString, mappingSource)
 		{
 			OnCreated();
 		}
@@ -262,6 +265,14 @@ namespace OrganismeFormation.Models
 			get
 			{
 				return this.GetTable<PresidentOrganisme>();
+			}
+		}
+		
+		public System.Data.Linq.Table<Prestataires> Prestataires
+		{
+			get
+			{
+				return this.GetTable<Prestataires>();
 			}
 		}
 		
@@ -3070,6 +3081,8 @@ namespace OrganismeFormation.Models
 		
 		private EntitySet<Porteurs> _Porteurs;
 		
+		private EntitySet<Prestataires> _Prestataires;
+		
 		private EntityRef<Formations> _Formations;
 		
     #region Définitions de méthodes d'extensibilité
@@ -3097,6 +3110,7 @@ namespace OrganismeFormation.Models
 			this._FormationsLieux = new EntitySet<FormationsLieux>(new Action<FormationsLieux>(this.attach_FormationsLieux), new Action<FormationsLieux>(this.detach_FormationsLieux));
 			this._Organismes = new EntitySet<Organismes>(new Action<Organismes>(this.attach_Organismes), new Action<Organismes>(this.detach_Organismes));
 			this._Porteurs = new EntitySet<Porteurs>(new Action<Porteurs>(this.attach_Porteurs), new Action<Porteurs>(this.detach_Porteurs));
+			this._Prestataires = new EntitySet<Prestataires>(new Action<Prestataires>(this.attach_Prestataires), new Action<Prestataires>(this.detach_Prestataires));
 			this._Formations = default(EntityRef<Formations>);
 			OnCreated();
 		}
@@ -3284,6 +3298,19 @@ namespace OrganismeFormation.Models
 			}
 		}
 		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Lieux_Prestataires", Storage="_Prestataires", ThisKey="Id", OtherKey="LieuxId")]
+		public EntitySet<Prestataires> Prestataires
+		{
+			get
+			{
+				return this._Prestataires;
+			}
+			set
+			{
+				this._Prestataires.Assign(value);
+			}
+		}
+		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Formations_Lieux", Storage="_Formations", ThisKey="LieuFormationId", OtherKey="Id", IsForeignKey=true)]
 		public Formations Formations
 		{
@@ -3369,6 +3396,18 @@ namespace OrganismeFormation.Models
 		}
 		
 		private void detach_Porteurs(Porteurs entity)
+		{
+			this.SendPropertyChanging();
+			entity.Lieux = null;
+		}
+		
+		private void attach_Prestataires(Prestataires entity)
+		{
+			this.SendPropertyChanging();
+			entity.Lieux = this;
+		}
+		
+		private void detach_Prestataires(Prestataires entity)
 		{
 			this.SendPropertyChanging();
 			entity.Lieux = null;
@@ -5058,6 +5097,277 @@ namespace OrganismeFormation.Models
 		{
 			this.SendPropertyChanging();
 			entity.PresidentOrganisme = null;
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Prestataires")]
+	public partial class Prestataires : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private decimal _Id;
+		
+		private string _Nom;
+		
+		private System.Nullable<bool> _MiseADispoInstallation;
+		
+		private System.Nullable<bool> _GestionPaieFormateurs;
+		
+		private System.Nullable<bool> _CoPortage;
+		
+		private System.Nullable<bool> _GestionAdministrative;
+		
+		private string _Autre;
+		
+		private System.Nullable<decimal> _LieuxId;
+		
+		private EntityRef<Lieux> _Lieux;
+		
+    #region Définitions de méthodes d'extensibilité
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnIdChanging(decimal value);
+    partial void OnIdChanged();
+    partial void OnNomChanging(string value);
+    partial void OnNomChanged();
+    partial void OnMiseADispoInstallationChanging(System.Nullable<bool> value);
+    partial void OnMiseADispoInstallationChanged();
+    partial void OnGestionPaieFormateursChanging(System.Nullable<bool> value);
+    partial void OnGestionPaieFormateursChanged();
+    partial void OnCoPortageChanging(System.Nullable<bool> value);
+    partial void OnCoPortageChanged();
+    partial void OnGestionAdministrativeChanging(System.Nullable<bool> value);
+    partial void OnGestionAdministrativeChanged();
+    partial void OnAutreChanging(string value);
+    partial void OnAutreChanged();
+    partial void OnLieuxIdChanging(System.Nullable<decimal> value);
+    partial void OnLieuxIdChanged();
+    #endregion
+		
+		public Prestataires()
+		{
+			this._Lieux = default(EntityRef<Lieux>);
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Id", AutoSync=AutoSync.OnInsert, DbType="Decimal(18,0) NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public decimal Id
+		{
+			get
+			{
+				return this._Id;
+			}
+			set
+			{
+				if ((this._Id != value))
+				{
+					this.OnIdChanging(value);
+					this.SendPropertyChanging();
+					this._Id = value;
+					this.SendPropertyChanged("Id");
+					this.OnIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Nom", DbType="Char(250)")]
+		public string Nom
+		{
+			get
+			{
+				return this._Nom;
+			}
+			set
+			{
+				if ((this._Nom != value))
+				{
+					this.OnNomChanging(value);
+					this.SendPropertyChanging();
+					this._Nom = value;
+					this.SendPropertyChanged("Nom");
+					this.OnNomChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_MiseADispoInstallation", DbType="Bit")]
+		public System.Nullable<bool> MiseADispoInstallation
+		{
+			get
+			{
+				return this._MiseADispoInstallation;
+			}
+			set
+			{
+				if ((this._MiseADispoInstallation != value))
+				{
+					this.OnMiseADispoInstallationChanging(value);
+					this.SendPropertyChanging();
+					this._MiseADispoInstallation = value;
+					this.SendPropertyChanged("MiseADispoInstallation");
+					this.OnMiseADispoInstallationChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_GestionPaieFormateurs", DbType="Bit")]
+		public System.Nullable<bool> GestionPaieFormateurs
+		{
+			get
+			{
+				return this._GestionPaieFormateurs;
+			}
+			set
+			{
+				if ((this._GestionPaieFormateurs != value))
+				{
+					this.OnGestionPaieFormateursChanging(value);
+					this.SendPropertyChanging();
+					this._GestionPaieFormateurs = value;
+					this.SendPropertyChanged("GestionPaieFormateurs");
+					this.OnGestionPaieFormateursChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CoPortage", DbType="Bit")]
+		public System.Nullable<bool> CoPortage
+		{
+			get
+			{
+				return this._CoPortage;
+			}
+			set
+			{
+				if ((this._CoPortage != value))
+				{
+					this.OnCoPortageChanging(value);
+					this.SendPropertyChanging();
+					this._CoPortage = value;
+					this.SendPropertyChanged("CoPortage");
+					this.OnCoPortageChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_GestionAdministrative", DbType="Bit")]
+		public System.Nullable<bool> GestionAdministrative
+		{
+			get
+			{
+				return this._GestionAdministrative;
+			}
+			set
+			{
+				if ((this._GestionAdministrative != value))
+				{
+					this.OnGestionAdministrativeChanging(value);
+					this.SendPropertyChanging();
+					this._GestionAdministrative = value;
+					this.SendPropertyChanged("GestionAdministrative");
+					this.OnGestionAdministrativeChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Autre", DbType="Text", UpdateCheck=UpdateCheck.Never)]
+		public string Autre
+		{
+			get
+			{
+				return this._Autre;
+			}
+			set
+			{
+				if ((this._Autre != value))
+				{
+					this.OnAutreChanging(value);
+					this.SendPropertyChanging();
+					this._Autre = value;
+					this.SendPropertyChanged("Autre");
+					this.OnAutreChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_LieuxId", DbType="Decimal(18,0)")]
+		public System.Nullable<decimal> LieuxId
+		{
+			get
+			{
+				return this._LieuxId;
+			}
+			set
+			{
+				if ((this._LieuxId != value))
+				{
+					if (this._Lieux.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnLieuxIdChanging(value);
+					this.SendPropertyChanging();
+					this._LieuxId = value;
+					this.SendPropertyChanged("LieuxId");
+					this.OnLieuxIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Lieux_Prestataires", Storage="_Lieux", ThisKey="LieuxId", OtherKey="Id", IsForeignKey=true)]
+		public Lieux Lieux
+		{
+			get
+			{
+				return this._Lieux.Entity;
+			}
+			set
+			{
+				Lieux previousValue = this._Lieux.Entity;
+				if (((previousValue != value) 
+							|| (this._Lieux.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Lieux.Entity = null;
+						previousValue.Prestataires.Remove(this);
+					}
+					this._Lieux.Entity = value;
+					if ((value != null))
+					{
+						value.Prestataires.Add(this);
+						this._LieuxId = value.Id;
+					}
+					else
+					{
+						this._LieuxId = default(Nullable<decimal>);
+					}
+					this.SendPropertyChanged("Lieux");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
 		}
 	}
 	

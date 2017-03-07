@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?><Database Name="GestionOF" Class="OrganismeDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
-  <Connection Mode="WebSettings" ConnectionString="Data Source=ALEXCOMPUTER;Initial Catalog=GestionOF;Persist Security Info=True;User ID=sa" SettingsObjectName="System.Configuration.ConfigurationManager.ConnectionStrings" SettingsPropertyName="GestionOFConnectionString1" Provider="System.Data.SqlClient" />
+  <Connection Mode="WebSettings" ConnectionString="Data Source=DESKTOP-45ACTGK;Initial Catalog=GestionOF;Integrated Security=True" SettingsObjectName="System.Configuration.ConfigurationManager.ConnectionStrings" SettingsPropertyName="GestionOFConnectionString" Provider="System.Data.SqlClient" />
   <Table Name="dbo.Admin" Member="Admin">
     <Type Name="Admin">
       <Column Name="id" Type="System.Decimal" DbType="Decimal(18,0) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
@@ -129,6 +129,7 @@
       <Association Name="Lieux_FormationsLieux" Member="FormationsLieux" ThisKey="Id" OtherKey="IdLieu" Type="FormationsLieux" />
       <Association Name="Lieux_Organismes" Member="Organismes" ThisKey="Id" OtherKey="LieuxId" Type="Organismes" />
       <Association Name="Lieux_Porteurs" Member="Porteurs" ThisKey="Id" OtherKey="LieuxId" Type="Porteurs" />
+      <Association Name="Lieux_Prestataires" Member="Prestataires" ThisKey="Id" OtherKey="LieuxId" Type="Prestataires" />
       <Association Name="Formations_Lieux" Member="Formations" ThisKey="LieuFormationId" OtherKey="Id" Type="Formations" IsForeignKey="true" />
     </Type>
   </Table>
@@ -214,6 +215,19 @@
       <Column Name="Email" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
       <Column Name="Fonction" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
       <Association Name="PresidentOrganisme_Organismes" Member="Organismes" ThisKey="Id" OtherKey="PresidentId" Type="Organismes" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Prestataires" Member="Prestataires">
+    <Type Name="Prestataires">
+      <Column Name="Id" Type="System.Decimal" DbType="Decimal(18,0) NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Nom" Type="System.String" DbType="Char(250)" CanBeNull="true" />
+      <Column Name="MiseADispoInstallation" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="GestionPaieFormateurs" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="CoPortage" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="GestionAdministrative" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="Autre" Type="System.String" DbType="Text" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="LieuxId" Type="System.Decimal" DbType="Decimal(18,0)" CanBeNull="true" />
+      <Association Name="Lieux_Prestataires" Member="Lieux" ThisKey="LieuxId" OtherKey="Id" Type="Lieux" IsForeignKey="true" />
     </Type>
   </Table>
   <Table Name="dbo.Responsable" Member="Responsable">
