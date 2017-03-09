@@ -8,6 +8,6 @@ namespace OrganismeFormation.ViewModels
     public class ResponsableViewModel
     {
         public List<Models.Responsable> ListeDesResponsables { get; set; }
-
+       
     }
 }

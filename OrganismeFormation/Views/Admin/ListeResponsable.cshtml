@@ -1,5 +1,6 @@
 ﻿@model OrganismeFormation.ViewModels.ResponsableViewModel
 
+
 @{
     ViewBag.Title = "ListeResponsable";
 }
@@ -18,6 +19,8 @@
                 <th>Mail</th>
                 <th>Telephone</th>
                 <th>Identifiant</th>
+                <th>Ligue</th>
+                <th style="text-align:center;">Modifier</th>
                 <th style="text-align:center;">Supprimer</th>
 
             </tr>
@@ -29,15 +32,42 @@
                         <td>@resp.Prenom</td>
                         <td>@resp.Email</td>
                         <td>@resp.Telephone</td>
-                    <td>@resp.Licence</td>
+                        <td>@resp.Organismes.First().Ligue </td>
+                        <td>@resp.Licence</td>
 
 
+                    @if (@resp.Organismes.First().NumeroDeclaration == null) {
+                        
+                        <td style="text-align:center;">
+                           
+                        </td>
 
-                    <td style="text-align:center;">
-                        <a href='@Url.Action("ModificationResponsable", "Admin",  new {id=@resp.Id})'>
-                            <img style="width:20px; height:20px; " src='@Url.Content("~/Content/Images/Icons/icon-logout.png")' />
-                        </a>
-                    </td>
+                        <td style="text-align:center;">
+                            <a href='@Url.Action("SuppressionResponsable", "Admin",  new {id=@resp.Id})'>
+                                <img style="width:20px; height:20px; " src='@Url.Content("~/Content/Images/Icons/icon-logout.png")' />
+                            </a>
+                        </td>
+                        
+                        
+                        }
+
+                        else{
+                        
+                        
+                        <td style="text-align:center;">
+                            <a href='@Url.Action("ModificationResponsable", "Admin",  new {id=@resp.Id})'>
+                                <img style="width:20px; height:20px; " src='@Url.Content("~/Content/Images/Icons/icon-logout.png")' />
+                            </a>
+                        </td>
+
+                        <td style="text-align:center;">
+                           
+                        </td>
+
+
+                        
+                        }
+                   
                 </tr>
                 }
             }

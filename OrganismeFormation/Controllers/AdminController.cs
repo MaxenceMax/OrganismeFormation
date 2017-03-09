@@ -63,7 +63,7 @@ namespace OrganismeFormation.Controllers
             return View(resp);
         }
 
-        //Ajout Responsable
+        //Modification Responsable
         [HttpPost]
         [Authorize(Roles = "Admin")]
         public ActionResult ModificationResponsable(AjoutResponsableModel model)
