@@ -1,0 +1,1558 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="GestionOFModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Admin">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="Nom" Type="varchar" MaxLength="50" />
+          <Property Name="Prenom" Type="varchar" MaxLength="50" />
+          <Property Name="login" Type="varchar" MaxLength="50" />
+          <Property Name="password" Type="varchar" MaxLength="150" />
+        </EntityType>
+        <EntityType Name="Candidats">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="numeric" Precision="18" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nom" Type="char" MaxLength="50" />
+          <Property Name="Prenom" Type="char" MaxLength="50" />
+          <Property Name="NumeroLicence" Type="char" MaxLength="20" />
+          <Property Name="Telephone" Type="char" MaxLength="10" />
+          <Property Name="Email" Type="char" MaxLength="100" />
+          <Property Name="SexeId" Type="numeric" Precision="18" Scale="0" />
+        </EntityType>
+        <EntityType Name="CandidatsFormations">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="numeric" Precision="18" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FormationId" Type="numeric" Precision="18" Scale="0" />
+          <Property Name="Grade" Type="char" MaxLength="20" />
+          <Property Name="StructureAccueil" Type="char" MaxLength="100" />
+          <Property Name="DetailsFinancement" Type="text" />
+          <Property Name="CoutFormation" Type="money" />
+          <Property Name="CandidatsId" Type="numeric" Precision="18" Scale="0" />
+          <Property Name="TuteursId" Type="numeric" Precision="18" Scale="0" />
+          <Property Name="TypedeFinancementsId" Type="numeric" Precision="18" Scale="0" />
+          <Property Name="Nom" Type="nchar" MaxLength="10" />
+          <Property Name="Prenom" Type="nchar" MaxLength="10" />
+          <Property Name="NumeroLicence" Type="nchar" MaxLength="10" />
+          <Property Name="Telephone" Type="nchar" MaxLength="10" />
+          <Property Name="Email" Type="nchar" MaxLength="10" />
+          <Property Name="SexeId" Type="numeric" Precision="18" Scale="0" />
+        </EntityType>
+        <EntityType Name="Formations">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="numeric" Precision="18" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="LiguePorteuse" Type="bit" />
+          <Property Name="LigueSousTraite" Type="bit" />
+          <Property Name="DateDebut" Type="date" />
+          <Property Name="DateFin" Type="date" />
+          <Property Name="DateLimteInscription" Type="date" />
+          <Property Name="DateTestSelection" Type="date" />
+          <Property Name="NombreTotalHeures" Type="numeric" Precision="18" Scale="0" />
+          <Property Name="NbreHeureCentre" Type="numeric" Precision="18" Scale="0" />
+          <Property Name="NbrHeureStructAccueil" Type="numeric" Precision="18" Scale="0" />
+          <Property Name="TotalHeureFOAD" Type="numeric" Precision="18" Scale="0" />
+          <Property Name="HeureELearning" Type="numeric" Precision="18" Scale="0" />
+          <Property Name="TotalAutresHeures" Type="numeric" Precision="18" Scale="0" />
+          <Property Name="TypeHeureContenu" Type="text" />
+          <Property Name="CoutComplet" Type="numeric" Precision="18" Scale="0" />
+          <Property Name="InfoComplementaires" Type="text" />
+          <Property Name="HabilitationsId" Type="numeric" Precision="18" Scale="0" />
+          <Property Name="TypedeFormationsId" Type="numeric" Precision="18" Scale="0" />
+          <Property Name="NumeroSession" Type="varchar" MaxLength="50" />
+          <Property Name="IdOrganisateurpeda" Type="numeric" Precision="18" Scale="0" />
+          <Property Name="NbreHeureAutreEspace" Type="numeric" Precision="18" Scale="0" />
+          <Property Name="OrganismeId" Type="numeric" Precision="18" Scale="0" />
+          <Property Name="LieuSiNonPorteuse" Type="numeric" Precision="18" Scale="0" />
+          <Property Name="NombreUC" Type="numeric" Precision="18" Scale="0" />
+        </EntityType>
+        <EntityType Name="Habilitations">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="numeric" Precision="18" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NumeroHabilitation" Type="char" MaxLength="50" />
+          <Property Name="DebutDateDelivrance" Type="date" />
+          <Property Name="FinDateDelivrance" Type="date" />
+          <Property Name="NumeroDelivrance" Type="char" MaxLength="50" />
+          <Property Name="NumeroSession" Type="char" MaxLength="50" />
+          <Property Name="DateEPMSP" Type="date" />
+          <Property Name="DateTEP" Type="date" />
+        </EntityType>
+        <EntityType Name="Lieux">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="numeric" Precision="18" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Adresse" Type="char" MaxLength="100" />
+          <Property Name="CodePostal" Type="nchar" MaxLength="5" />
+          <Property Name="Ville" Type="char" MaxLength="100" />
+          <Property Name="Telephone" Type="char" MaxLength="10" />
+          <Property Name="Email" Type="char" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="Ligues">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="numeric" Precision="18" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Libelle" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="CodeLigue" Type="float" />
+        </EntityType>
+        <EntityType Name="Organismes">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="numeric" Precision="18" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Libelle" Type="varchar" MaxLength="50" />
+          <Property Name="NumeroDeclaration" Type="nchar" MaxLength="20" />
+          <Property Name="AnneeDeclaration" Type="char" MaxLength="4" />
+          <Property Name="LieuxId" Type="numeric" Precision="18" Scale="0" />
+          <Property Name="PresidentId" Type="numeric" Precision="18" Scale="0" />
+          <Property Name="CoordinateurId" Type="numeric" Precision="18" Scale="0" />
+          <Property Name="DirecteurId" Type="numeric" Precision="18" Scale="0" />
+          <Property Name="ResponsableId" Type="numeric" Precision="18" Scale="0" />
+          <Property Name="LigueId" Type="numeric" Precision="18" Scale="0" />
+        </EntityType>
+        <EntityType Name="Passages">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="Libelle" Type="char" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Personnel">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="numeric" Precision="18" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nom" Type="varchar" MaxLength="50" />
+          <Property Name="Prenom" Type="varchar" MaxLength="50" />
+          <Property Name="Telephone" Type="varchar" MaxLength="50" />
+          <Property Name="Email" Type="varchar" MaxLength="250" />
+        </EntityType>
+        <EntityType Name="Porteurs">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="numeric" Precision="18" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Etablissement" Type="char" MaxLength="60" />
+          <Property Name="LieuxId" Type="numeric" Precision="18" Scale="0" />
+        </EntityType>
+        <EntityType Name="PresidentOrganisme">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="numeric" Precision="18" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nom" Type="varbinary" MaxLength="50" />
+          <Property Name="Prenom" Type="varbinary" MaxLength="50" />
+          <Property Name="Telephone" Type="varchar" MaxLength="50" />
+          <Property Name="Email" Type="nvarchar" MaxLength="50" />
+          <Property Name="Fonction" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Prestataires">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="numeric" Precision="18" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nom" Type="char" MaxLength="250" />
+          <Property Name="MiseADispoInstallation" Type="bit" />
+          <Property Name="GestionPaieFormateurs" Type="bit" />
+          <Property Name="CoPortage" Type="bit" />
+          <Property Name="GestionAdministrative" Type="bit" />
+          <Property Name="Autre" Type="text" />
+          <Property Name="LieuxId" Type="numeric" Precision="18" Scale="0" />
+        </EntityType>
+        <EntityType Name="Responsable">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="numeric" Precision="18" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nom" Type="varchar" MaxLength="50" />
+          <Property Name="Prenom" Type="varchar" MaxLength="50" />
+          <Property Name="Licence" Type="varchar" MaxLength="50" />
+          <Property Name="Telephone" Type="varchar" MaxLength="50" />
+          <Property Name="Email" Type="varchar" MaxLength="250" />
+          <Property Name="Password" Type="varchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="Resultats">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="numeric" Precision="18" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CandidatFormationId" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="FormationValidee" Type="bit" />
+          <Property Name="NumeroDiplome" Type="char" MaxLength="60" />
+          <Property Name="EPEF" Type="bit" />
+          <Property Name="EPMSP" Type="bit" />
+          <Property Name="PassagesId" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="FormationTerminee" Type="varchar" MaxLength="1" />
+          <Property Name="Abandon" Type="varchar" MaxLength="1" />
+        </EntityType>
+        <EntityType Name="ResultatsUC">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="numeric" Precision="18" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Libelle" Type="varchar" MaxLength="50" />
+          <Property Name="Resultat" Type="numeric" Precision="18" Scale="0" />
+          <Property Name="ResultatsId" Type="numeric" Precision="18" Scale="0" />
+          <Property Name="ResultatMax" Type="numeric" Precision="18" Scale="0" />
+        </EntityType>
+        <EntityType Name="Sexes">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="numeric" Precision="18" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Code" Type="char" MaxLength="1" />
+          <Property Name="Libelle" Type="char" MaxLength="10" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="Tuteurs">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="Nom" Type="char" MaxLength="50" />
+          <Property Name="Prenom" Type="char" MaxLength="50" />
+          <Property Name="NumeroLicence" Type="char" MaxLength="20" />
+          <Property Name="Email" Type="char" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="TypedeFinancements">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="numeric" Precision="18" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Libelle" Type="char" MaxLength="20" />
+        </EntityType>
+        <EntityType Name="TypedeFormations">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="numeric" Precision="18" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Libelle" Type="char" MaxLength="40" />
+        </EntityType>
+        <Association Name="FK__Candidats__Candi__3D5E1FD2">
+          <End Role="Candidats" Type="Self.Candidats" Multiplicity="0..1" />
+          <End Role="CandidatsFormations" Type="Self.CandidatsFormations" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Candidats">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="CandidatsFormations">
+              <PropertyRef Name="CandidatsId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Candidats__Forma__403A8C7D">
+          <End Role="Formations" Type="Self.Formations" Multiplicity="0..1" />
+          <End Role="CandidatsFormations" Type="Self.CandidatsFormations" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Formations">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="CandidatsFormations">
+              <PropertyRef Name="FormationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Candidats__Sexes__3A81B327">
+          <End Role="Sexes" Type="Self.Sexes" Multiplicity="0..1" />
+          <End Role="Candidats" Type="Self.Candidats" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Sexes">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Candidats">
+              <PropertyRef Name="SexeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Candidats__Tuteu__3E52440B">
+          <End Role="Tuteurs" Type="Self.Tuteurs" Multiplicity="0..1" />
+          <End Role="CandidatsFormations" Type="Self.CandidatsFormations" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tuteurs">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="CandidatsFormations">
+              <PropertyRef Name="TuteursId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Candidats__Typed__3F466844">
+          <End Role="TypedeFinancements" Type="Self.TypedeFinancements" Multiplicity="0..1" />
+          <End Role="CandidatsFormations" Type="Self.CandidatsFormations" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TypedeFinancements">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="CandidatsFormations">
+              <PropertyRef Name="TypedeFinancementsId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Formation__Typed__37A5467C">
+          <End Role="TypedeFormations" Type="Self.TypedeFormations" Multiplicity="0..1" />
+          <End Role="Formations" Type="Self.Formations" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TypedeFormations">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Formations">
+              <PropertyRef Name="TypedeFormationsId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Organisme__Lieux__2B3F6F97">
+          <End Role="Lieux" Type="Self.Lieux" Multiplicity="0..1" />
+          <End Role="Organismes" Type="Self.Organismes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Lieux">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Organismes">
+              <PropertyRef Name="LieuxId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Porteurs__LieuxI__38996AB5">
+          <End Role="Lieux" Type="Self.Lieux" Multiplicity="0..1" />
+          <End Role="Porteurs" Type="Self.Porteurs" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Lieux">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Porteurs">
+              <PropertyRef Name="LieuxId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Resultats__Candi__3C69FB99">
+          <End Role="CandidatsFormations" Type="Self.CandidatsFormations" Multiplicity="1" />
+          <End Role="Resultats" Type="Self.Resultats" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CandidatsFormations">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Resultats">
+              <PropertyRef Name="CandidatFormationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Resultats__Passa__3B75D760">
+          <End Role="Passages" Type="Self.Passages" Multiplicity="1" />
+          <End Role="Resultats" Type="Self.Resultats" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Passages">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Resultats">
+              <PropertyRef Name="PassagesId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CandidatsFormations_Sexes">
+          <End Role="Sexes" Type="Self.Sexes" Multiplicity="0..1" />
+          <End Role="CandidatsFormations" Type="Self.CandidatsFormations" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Sexes">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="CandidatsFormations">
+              <PropertyRef Name="SexeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Formations_Habilitations">
+          <End Role="Habilitations" Type="Self.Habilitations" Multiplicity="0..1" />
+          <End Role="Formations" Type="Self.Formations" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Habilitations">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Formations">
+              <PropertyRef Name="HabilitationsId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Formations_Lieux">
+          <End Role="Lieux" Type="Self.Lieux" Multiplicity="0..1" />
+          <End Role="Formations" Type="Self.Formations" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Lieux">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Formations">
+              <PropertyRef Name="LieuSiNonPorteuse" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Formations_Organismes">
+          <End Role="Organismes" Type="Self.Organismes" Multiplicity="0..1" />
+          <End Role="Formations" Type="Self.Formations" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Organismes">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Formations">
+              <PropertyRef Name="OrganismeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Formations_Personnel">
+          <End Role="Personnel" Type="Self.Personnel" Multiplicity="0..1" />
+          <End Role="Formations" Type="Self.Formations" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Personnel">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Formations">
+              <PropertyRef Name="IdOrganisateurpeda" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Organismes_Ligues">
+          <End Role="Ligues" Type="Self.Ligues" Multiplicity="0..1" />
+          <End Role="Organismes" Type="Self.Organismes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Ligues">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Organismes">
+              <PropertyRef Name="LigueId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Organismes_Personnel">
+          <End Role="Personnel" Type="Self.Personnel" Multiplicity="0..1" />
+          <End Role="Organismes" Type="Self.Organismes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Personnel">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Organismes">
+              <PropertyRef Name="CoordinateurId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Organismes_Personnel1">
+          <End Role="Personnel" Type="Self.Personnel" Multiplicity="0..1" />
+          <End Role="Organismes" Type="Self.Organismes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Personnel">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Organismes">
+              <PropertyRef Name="DirecteurId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Organismes_PresidentOrganisme">
+          <End Role="PresidentOrganisme" Type="Self.PresidentOrganisme" Multiplicity="0..1" />
+          <End Role="Organismes" Type="Self.Organismes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PresidentOrganisme">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Organismes">
+              <PropertyRef Name="PresidentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Organismes_Responsable">
+          <End Role="Responsable" Type="Self.Responsable" Multiplicity="0..1" />
+          <End Role="Organismes" Type="Self.Organismes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Responsable">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Organismes">
+              <PropertyRef Name="ResponsableId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ResultatsUC_Resultats">
+          <End Role="Resultats" Type="Self.Resultats" Multiplicity="0..1" />
+          <End Role="ResultatsUC" Type="Self.ResultatsUC" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Resultats">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ResultatsUC">
+              <PropertyRef Name="ResultatsId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="GestionOFModelStoreContainer">
+          <EntitySet Name="Admin" EntityType="Self.Admin" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Candidats" EntityType="Self.Candidats" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CandidatsFormations" EntityType="Self.CandidatsFormations" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Formations" EntityType="Self.Formations" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Habilitations" EntityType="Self.Habilitations" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Lieux" EntityType="Self.Lieux" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Ligues" EntityType="Self.Ligues" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Organismes" EntityType="Self.Organismes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Passages" EntityType="Self.Passages" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Personnel" EntityType="Self.Personnel" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Porteurs" EntityType="Self.Porteurs" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PresidentOrganisme" EntityType="Self.PresidentOrganisme" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Prestataires" EntityType="Self.Prestataires" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Responsable" EntityType="Self.Responsable" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Resultats" EntityType="Self.Resultats" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ResultatsUC" EntityType="Self.ResultatsUC" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Sexes" EntityType="Self.Sexes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Tuteurs" EntityType="Self.Tuteurs" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TypedeFinancements" EntityType="Self.TypedeFinancements" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TypedeFormations" EntityType="Self.TypedeFormations" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__Candidats__Candi__3D5E1FD2" Association="Self.FK__Candidats__Candi__3D5E1FD2">
+            <End Role="Candidats" EntitySet="Candidats" />
+            <End Role="CandidatsFormations" EntitySet="CandidatsFormations" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Candidats__Forma__403A8C7D" Association="Self.FK__Candidats__Forma__403A8C7D">
+            <End Role="Formations" EntitySet="Formations" />
+            <End Role="CandidatsFormations" EntitySet="CandidatsFormations" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Candidats__Sexes__3A81B327" Association="Self.FK__Candidats__Sexes__3A81B327">
+            <End Role="Sexes" EntitySet="Sexes" />
+            <End Role="Candidats" EntitySet="Candidats" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Candidats__Tuteu__3E52440B" Association="Self.FK__Candidats__Tuteu__3E52440B">
+            <End Role="Tuteurs" EntitySet="Tuteurs" />
+            <End Role="CandidatsFormations" EntitySet="CandidatsFormations" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Candidats__Typed__3F466844" Association="Self.FK__Candidats__Typed__3F466844">
+            <End Role="TypedeFinancements" EntitySet="TypedeFinancements" />
+            <End Role="CandidatsFormations" EntitySet="CandidatsFormations" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Formation__Typed__37A5467C" Association="Self.FK__Formation__Typed__37A5467C">
+            <End Role="TypedeFormations" EntitySet="TypedeFormations" />
+            <End Role="Formations" EntitySet="Formations" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Organisme__Lieux__2B3F6F97" Association="Self.FK__Organisme__Lieux__2B3F6F97">
+            <End Role="Lieux" EntitySet="Lieux" />
+            <End Role="Organismes" EntitySet="Organismes" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Porteurs__LieuxI__38996AB5" Association="Self.FK__Porteurs__LieuxI__38996AB5">
+            <End Role="Lieux" EntitySet="Lieux" />
+            <End Role="Porteurs" EntitySet="Porteurs" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Resultats__Candi__3C69FB99" Association="Self.FK__Resultats__Candi__3C69FB99">
+            <End Role="CandidatsFormations" EntitySet="CandidatsFormations" />
+            <End Role="Resultats" EntitySet="Resultats" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Resultats__Passa__3B75D760" Association="Self.FK__Resultats__Passa__3B75D760">
+            <End Role="Passages" EntitySet="Passages" />
+            <End Role="Resultats" EntitySet="Resultats" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CandidatsFormations_Sexes" Association="Self.FK_CandidatsFormations_Sexes">
+            <End Role="Sexes" EntitySet="Sexes" />
+            <End Role="CandidatsFormations" EntitySet="CandidatsFormations" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Formations_Habilitations" Association="Self.FK_Formations_Habilitations">
+            <End Role="Habilitations" EntitySet="Habilitations" />
+            <End Role="Formations" EntitySet="Formations" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Formations_Lieux" Association="Self.FK_Formations_Lieux">
+            <End Role="Lieux" EntitySet="Lieux" />
+            <End Role="Formations" EntitySet="Formations" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Formations_Organismes" Association="Self.FK_Formations_Organismes">
+            <End Role="Organismes" EntitySet="Organismes" />
+            <End Role="Formations" EntitySet="Formations" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Formations_Personnel" Association="Self.FK_Formations_Personnel">
+            <End Role="Personnel" EntitySet="Personnel" />
+            <End Role="Formations" EntitySet="Formations" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Organismes_Ligues" Association="Self.FK_Organismes_Ligues">
+            <End Role="Ligues" EntitySet="Ligues" />
+            <End Role="Organismes" EntitySet="Organismes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Organismes_Personnel" Association="Self.FK_Organismes_Personnel">
+            <End Role="Personnel" EntitySet="Personnel" />
+            <End Role="Organismes" EntitySet="Organismes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Organismes_Personnel1" Association="Self.FK_Organismes_Personnel1">
+            <End Role="Personnel" EntitySet="Personnel" />
+            <End Role="Organismes" EntitySet="Organismes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Organismes_PresidentOrganisme" Association="Self.FK_Organismes_PresidentOrganisme">
+            <End Role="PresidentOrganisme" EntitySet="PresidentOrganisme" />
+            <End Role="Organismes" EntitySet="Organismes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Organismes_Responsable" Association="Self.FK_Organismes_Responsable">
+            <End Role="Responsable" EntitySet="Responsable" />
+            <End Role="Organismes" EntitySet="Organismes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ResultatsUC_Resultats" Association="Self.FK_ResultatsUC_Resultats">
+            <End Role="Resultats" EntitySet="Resultats" />
+            <End Role="ResultatsUC" EntitySet="ResultatsUC" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="GestionOFModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Admin">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="Nom" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Prenom" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="login" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="password" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="Candidats">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Decimal" Precision="18" Scale="0" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nom" Type="String" MaxLength="50" FixedLength="true" Unicode="false" />
+          <Property Name="Prenom" Type="String" MaxLength="50" FixedLength="true" Unicode="false" />
+          <Property Name="NumeroLicence" Type="String" MaxLength="20" FixedLength="true" Unicode="false" />
+          <Property Name="Telephone" Type="String" MaxLength="10" FixedLength="true" Unicode="false" />
+          <Property Name="Email" Type="String" MaxLength="100" FixedLength="true" Unicode="false" />
+          <Property Name="SexeId" Type="Decimal" Precision="18" Scale="0" />
+          <NavigationProperty Name="CandidatsFormations" Relationship="Self.FK__Candidats__Candi__3D5E1FD2" FromRole="Candidats" ToRole="CandidatsFormations" />
+          <NavigationProperty Name="Sexes" Relationship="Self.FK__Candidats__Sexes__3A81B327" FromRole="Candidats" ToRole="Sexes" />
+        </EntityType>
+        <EntityType Name="CandidatsFormations">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Decimal" Precision="18" Scale="0" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FormationId" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="Grade" Type="String" MaxLength="20" FixedLength="true" Unicode="false" />
+          <Property Name="StructureAccueil" Type="String" MaxLength="100" FixedLength="true" Unicode="false" />
+          <Property Name="DetailsFinancement" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="CoutFormation" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="CandidatsId" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="TuteursId" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="TypedeFinancementsId" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="Nom" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="Prenom" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="NumeroLicence" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="Telephone" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="Email" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="SexeId" Type="Decimal" Precision="18" Scale="0" />
+          <NavigationProperty Name="Candidats" Relationship="Self.FK__Candidats__Candi__3D5E1FD2" FromRole="CandidatsFormations" ToRole="Candidats" />
+          <NavigationProperty Name="Formations" Relationship="Self.FK__Candidats__Forma__403A8C7D" FromRole="CandidatsFormations" ToRole="Formations" />
+          <NavigationProperty Name="Tuteurs" Relationship="Self.FK__Candidats__Tuteu__3E52440B" FromRole="CandidatsFormations" ToRole="Tuteurs" />
+          <NavigationProperty Name="TypedeFinancements" Relationship="Self.FK__Candidats__Typed__3F466844" FromRole="CandidatsFormations" ToRole="TypedeFinancements" />
+          <NavigationProperty Name="Resultats" Relationship="Self.FK__Resultats__Candi__3C69FB99" FromRole="CandidatsFormations" ToRole="Resultats" />
+          <NavigationProperty Name="Sexes" Relationship="Self.FK_CandidatsFormations_Sexes" FromRole="CandidatsFormations" ToRole="Sexes" />
+        </EntityType>
+        <EntityType Name="Formations">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Decimal" Precision="18" Scale="0" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="LiguePorteuse" Type="Boolean" />
+          <Property Name="LigueSousTraite" Type="Boolean" />
+          <Property Name="DateDebut" Type="DateTime" Precision="0" />
+          <Property Name="DateFin" Type="DateTime" Precision="0" />
+          <Property Name="DateLimteInscription" Type="DateTime" Precision="0" />
+          <Property Name="DateTestSelection" Type="DateTime" Precision="0" />
+          <Property Name="NombreTotalHeures" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="NbreHeureCentre" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="NbrHeureStructAccueil" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="TotalHeureFOAD" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="HeureELearning" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="TotalAutresHeures" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="TypeHeureContenu" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="CoutComplet" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="InfoComplementaires" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="HabilitationsId" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="TypedeFormationsId" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="NumeroSession" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="IdOrganisateurpeda" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="NbreHeureAutreEspace" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="OrganismeId" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="LieuSiNonPorteuse" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="NombreUC" Type="Decimal" Precision="18" Scale="0" />
+          <NavigationProperty Name="CandidatsFormations" Relationship="Self.FK__Candidats__Forma__403A8C7D" FromRole="Formations" ToRole="CandidatsFormations" />
+          <NavigationProperty Name="TypedeFormations" Relationship="Self.FK__Formation__Typed__37A5467C" FromRole="Formations" ToRole="TypedeFormations" />
+          <NavigationProperty Name="Habilitations" Relationship="Self.FK_Formations_Habilitations" FromRole="Formations" ToRole="Habilitations" />
+          <NavigationProperty Name="Lieux" Relationship="Self.FK_Formations_Lieux" FromRole="Formations" ToRole="Lieux" />
+          <NavigationProperty Name="Organismes" Relationship="Self.FK_Formations_Organismes" FromRole="Formations" ToRole="Organismes" />
+          <NavigationProperty Name="Personnel" Relationship="Self.FK_Formations_Personnel" FromRole="Formations" ToRole="Personnel" />
+        </EntityType>
+        <EntityType Name="Habilitations">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Decimal" Precision="18" Scale="0" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NumeroHabilitation" Type="String" MaxLength="50" FixedLength="true" Unicode="false" />
+          <Property Name="DebutDateDelivrance" Type="DateTime" Precision="0" />
+          <Property Name="FinDateDelivrance" Type="DateTime" Precision="0" />
+          <Property Name="NumeroDelivrance" Type="String" MaxLength="50" FixedLength="true" Unicode="false" />
+          <Property Name="NumeroSession" Type="String" MaxLength="50" FixedLength="true" Unicode="false" />
+          <Property Name="DateEPMSP" Type="DateTime" Precision="0" />
+          <Property Name="DateTEP" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="Formations" Relationship="Self.FK_Formations_Habilitations" FromRole="Habilitations" ToRole="Formations" />
+        </EntityType>
+        <EntityType Name="Lieux">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Decimal" Precision="18" Scale="0" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Adresse" Type="String" MaxLength="100" FixedLength="true" Unicode="false" />
+          <Property Name="CodePostal" Type="String" MaxLength="5" FixedLength="true" Unicode="true" />
+          <Property Name="Ville" Type="String" MaxLength="100" FixedLength="true" Unicode="false" />
+          <Property Name="Telephone" Type="String" MaxLength="10" FixedLength="true" Unicode="false" />
+          <Property Name="Email" Type="String" MaxLength="100" FixedLength="true" Unicode="false" />
+          <NavigationProperty Name="Formations" Relationship="Self.FK_Formations_Lieux" FromRole="Lieux" ToRole="Formations" />
+          <NavigationProperty Name="Organismes" Relationship="Self.FK__Organisme__Lieux__2B3F6F97" FromRole="Lieux" ToRole="Organismes" />
+          <NavigationProperty Name="Porteurs" Relationship="Self.FK__Porteurs__LieuxI__38996AB5" FromRole="Lieux" ToRole="Porteurs" />
+        </EntityType>
+        <EntityType Name="Ligues">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Decimal" Precision="18" Scale="0" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Libelle" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="CodeLigue" Type="Double" />
+          <NavigationProperty Name="Organismes" Relationship="Self.FK_Organismes_Ligues" FromRole="Ligues" ToRole="Organismes" />
+        </EntityType>
+        <EntityType Name="Organismes">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Decimal" Precision="18" Scale="0" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Libelle" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="NumeroDeclaration" Type="String" MaxLength="20" FixedLength="true" Unicode="true" />
+          <Property Name="AnneeDeclaration" Type="String" MaxLength="4" FixedLength="true" Unicode="false" />
+          <Property Name="LieuxId" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="PresidentId" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="CoordinateurId" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="DirecteurId" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="ResponsableId" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="LigueId" Type="Decimal" Precision="18" Scale="0" />
+          <NavigationProperty Name="Formations" Relationship="Self.FK_Formations_Organismes" FromRole="Organismes" ToRole="Formations" />
+          <NavigationProperty Name="Lieux" Relationship="Self.FK__Organisme__Lieux__2B3F6F97" FromRole="Organismes" ToRole="Lieux" />
+          <NavigationProperty Name="Ligues" Relationship="Self.FK_Organismes_Ligues" FromRole="Organismes" ToRole="Ligues" />
+          <NavigationProperty Name="Personnel" Relationship="Self.FK_Organismes_Personnel" FromRole="Organismes" ToRole="Personnel" />
+          <NavigationProperty Name="Personnel1" Relationship="Self.FK_Organismes_Personnel1" FromRole="Organismes" ToRole="Personnel" />
+          <NavigationProperty Name="PresidentOrganisme" Relationship="Self.FK_Organismes_PresidentOrganisme" FromRole="Organismes" ToRole="PresidentOrganisme" />
+          <NavigationProperty Name="Responsable" Relationship="Self.FK_Organismes_Responsable" FromRole="Organismes" ToRole="Responsable" />
+        </EntityType>
+        <EntityType Name="Passages">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="Libelle" Type="String" MaxLength="50" FixedLength="true" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Resultats" Relationship="Self.FK__Resultats__Passa__3B75D760" FromRole="Passages" ToRole="Resultats" />
+        </EntityType>
+        <EntityType Name="Personnel">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Decimal" Precision="18" Scale="0" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nom" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Prenom" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Telephone" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Email" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Formations" Relationship="Self.FK_Formations_Personnel" FromRole="Personnel" ToRole="Formations" />
+          <NavigationProperty Name="Organismes" Relationship="Self.FK_Organismes_Personnel" FromRole="Personnel" ToRole="Organismes" />
+          <NavigationProperty Name="Organismes1" Relationship="Self.FK_Organismes_Personnel1" FromRole="Personnel" ToRole="Organismes" />
+        </EntityType>
+        <EntityType Name="Porteurs">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Decimal" Precision="18" Scale="0" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Etablissement" Type="String" MaxLength="60" FixedLength="true" Unicode="false" />
+          <Property Name="LieuxId" Type="Decimal" Precision="18" Scale="0" />
+          <NavigationProperty Name="Lieux" Relationship="Self.FK__Porteurs__LieuxI__38996AB5" FromRole="Porteurs" ToRole="Lieux" />
+        </EntityType>
+        <EntityType Name="PresidentOrganisme">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Decimal" Precision="18" Scale="0" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nom" Type="Binary" MaxLength="50" FixedLength="false" />
+          <Property Name="Prenom" Type="Binary" MaxLength="50" FixedLength="false" />
+          <Property Name="Telephone" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Fonction" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Organismes" Relationship="Self.FK_Organismes_PresidentOrganisme" FromRole="PresidentOrganisme" ToRole="Organismes" />
+        </EntityType>
+        <EntityType Name="Prestataires">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Decimal" Precision="18" Scale="0" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nom" Type="String" MaxLength="250" FixedLength="true" Unicode="false" />
+          <Property Name="MiseADispoInstallation" Type="Boolean" />
+          <Property Name="GestionPaieFormateurs" Type="Boolean" />
+          <Property Name="CoPortage" Type="Boolean" />
+          <Property Name="GestionAdministrative" Type="Boolean" />
+          <Property Name="Autre" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="LieuxId" Type="Decimal" Precision="18" Scale="0" />
+        </EntityType>
+        <EntityType Name="Responsable">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Decimal" Precision="18" Scale="0" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nom" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Prenom" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Licence" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Telephone" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Email" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="Password" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Organismes" Relationship="Self.FK_Organismes_Responsable" FromRole="Responsable" ToRole="Organismes" />
+        </EntityType>
+        <EntityType Name="Resultats">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Decimal" Precision="18" Scale="0" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CandidatFormationId" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="FormationValidee" Type="Boolean" />
+          <Property Name="NumeroDiplome" Type="String" MaxLength="60" FixedLength="true" Unicode="false" />
+          <Property Name="EPEF" Type="Boolean" />
+          <Property Name="EPMSP" Type="Boolean" />
+          <Property Name="PassagesId" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="FormationTerminee" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
+          <Property Name="Abandon" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="CandidatsFormations" Relationship="Self.FK__Resultats__Candi__3C69FB99" FromRole="Resultats" ToRole="CandidatsFormations" />
+          <NavigationProperty Name="Passages" Relationship="Self.FK__Resultats__Passa__3B75D760" FromRole="Resultats" ToRole="Passages" />
+          <NavigationProperty Name="ResultatsUC" Relationship="Self.FK_ResultatsUC_Resultats" FromRole="Resultats" ToRole="ResultatsUC" />
+        </EntityType>
+        <EntityType Name="ResultatsUC">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Decimal" Precision="18" Scale="0" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Libelle" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Resultat" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="ResultatsId" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="ResultatMax" Type="Decimal" Precision="18" Scale="0" />
+          <NavigationProperty Name="Resultats" Relationship="Self.FK_ResultatsUC_Resultats" FromRole="ResultatsUC" ToRole="Resultats" />
+        </EntityType>
+        <EntityType Name="Sexes">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Decimal" Precision="18" Scale="0" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Code" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="Libelle" Type="String" MaxLength="10" FixedLength="true" Unicode="false" />
+          <NavigationProperty Name="Candidats" Relationship="Self.FK__Candidats__Sexes__3A81B327" FromRole="Sexes" ToRole="Candidats" />
+          <NavigationProperty Name="CandidatsFormations" Relationship="Self.FK_CandidatsFormations_Sexes" FromRole="Sexes" ToRole="CandidatsFormations" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="Tuteurs">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="Nom" Type="String" MaxLength="50" FixedLength="true" Unicode="false" />
+          <Property Name="Prenom" Type="String" MaxLength="50" FixedLength="true" Unicode="false" />
+          <Property Name="NumeroLicence" Type="String" MaxLength="20" FixedLength="true" Unicode="false" />
+          <Property Name="Email" Type="String" MaxLength="100" FixedLength="true" Unicode="false" />
+          <NavigationProperty Name="CandidatsFormations" Relationship="Self.FK__Candidats__Tuteu__3E52440B" FromRole="Tuteurs" ToRole="CandidatsFormations" />
+        </EntityType>
+        <EntityType Name="TypedeFinancements">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Decimal" Precision="18" Scale="0" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Libelle" Type="String" MaxLength="20" FixedLength="true" Unicode="false" />
+          <NavigationProperty Name="CandidatsFormations" Relationship="Self.FK__Candidats__Typed__3F466844" FromRole="TypedeFinancements" ToRole="CandidatsFormations" />
+        </EntityType>
+        <EntityType Name="TypedeFormations">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Decimal" Precision="18" Scale="0" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Libelle" Type="String" MaxLength="40" FixedLength="true" Unicode="false" />
+          <NavigationProperty Name="Formations" Relationship="Self.FK__Formation__Typed__37A5467C" FromRole="TypedeFormations" ToRole="Formations" />
+        </EntityType>
+        <Association Name="FK__Candidats__Candi__3D5E1FD2">
+          <End Role="Candidats" Type="Self.Candidats" Multiplicity="0..1" />
+          <End Role="CandidatsFormations" Type="Self.CandidatsFormations" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Candidats">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="CandidatsFormations">
+              <PropertyRef Name="CandidatsId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Candidats__Sexes__3A81B327">
+          <End Role="Sexes" Type="Self.Sexes" Multiplicity="0..1" />
+          <End Role="Candidats" Type="Self.Candidats" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Sexes">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Candidats">
+              <PropertyRef Name="SexeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Candidats__Forma__403A8C7D">
+          <End Role="Formations" Type="Self.Formations" Multiplicity="0..1" />
+          <End Role="CandidatsFormations" Type="Self.CandidatsFormations" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Formations">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="CandidatsFormations">
+              <PropertyRef Name="FormationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Candidats__Tuteu__3E52440B">
+          <End Role="Tuteurs" Type="Self.Tuteurs" Multiplicity="0..1" />
+          <End Role="CandidatsFormations" Type="Self.CandidatsFormations" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tuteurs">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="CandidatsFormations">
+              <PropertyRef Name="TuteursId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Candidats__Typed__3F466844">
+          <End Role="TypedeFinancements" Type="Self.TypedeFinancements" Multiplicity="0..1" />
+          <End Role="CandidatsFormations" Type="Self.CandidatsFormations" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TypedeFinancements">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="CandidatsFormations">
+              <PropertyRef Name="TypedeFinancementsId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Resultats__Candi__3C69FB99">
+          <End Role="CandidatsFormations" Type="Self.CandidatsFormations" Multiplicity="1" />
+          <End Role="Resultats" Type="Self.Resultats" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CandidatsFormations">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Resultats">
+              <PropertyRef Name="CandidatFormationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CandidatsFormations_Sexes">
+          <End Role="Sexes" Type="Self.Sexes" Multiplicity="0..1" />
+          <End Role="CandidatsFormations" Type="Self.CandidatsFormations" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Sexes">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="CandidatsFormations">
+              <PropertyRef Name="SexeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Formation__Typed__37A5467C">
+          <End Role="TypedeFormations" Type="Self.TypedeFormations" Multiplicity="0..1" />
+          <End Role="Formations" Type="Self.Formations" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TypedeFormations">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Formations">
+              <PropertyRef Name="TypedeFormationsId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Formations_Habilitations">
+          <End Role="Habilitations" Type="Self.Habilitations" Multiplicity="0..1" />
+          <End Role="Formations" Type="Self.Formations" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Habilitations">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Formations">
+              <PropertyRef Name="HabilitationsId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Formations_Lieux">
+          <End Role="Lieux" Type="Self.Lieux" Multiplicity="0..1" />
+          <End Role="Formations" Type="Self.Formations" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Lieux">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Formations">
+              <PropertyRef Name="LieuSiNonPorteuse" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Formations_Organismes">
+          <End Role="Organismes" Type="Self.Organismes" Multiplicity="0..1" />
+          <End Role="Formations" Type="Self.Formations" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Organismes">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Formations">
+              <PropertyRef Name="OrganismeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Formations_Personnel">
+          <End Role="Personnel" Type="Self.Personnel" Multiplicity="0..1" />
+          <End Role="Formations" Type="Self.Formations" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Personnel">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Formations">
+              <PropertyRef Name="IdOrganisateurpeda" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Organisme__Lieux__2B3F6F97">
+          <End Role="Lieux" Type="Self.Lieux" Multiplicity="0..1" />
+          <End Role="Organismes" Type="Self.Organismes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Lieux">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Organismes">
+              <PropertyRef Name="LieuxId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Porteurs__LieuxI__38996AB5">
+          <End Role="Lieux" Type="Self.Lieux" Multiplicity="0..1" />
+          <End Role="Porteurs" Type="Self.Porteurs" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Lieux">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Porteurs">
+              <PropertyRef Name="LieuxId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Organismes_Ligues">
+          <End Role="Ligues" Type="Self.Ligues" Multiplicity="0..1" />
+          <End Role="Organismes" Type="Self.Organismes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Ligues">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Organismes">
+              <PropertyRef Name="LigueId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Organismes_Personnel">
+          <End Role="Personnel" Type="Self.Personnel" Multiplicity="0..1" />
+          <End Role="Organismes" Type="Self.Organismes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Personnel">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Organismes">
+              <PropertyRef Name="CoordinateurId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Organismes_Personnel1">
+          <End Role="Personnel" Type="Self.Personnel" Multiplicity="0..1" />
+          <End Role="Organismes" Type="Self.Organismes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Personnel">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Organismes">
+              <PropertyRef Name="DirecteurId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Organismes_PresidentOrganisme">
+          <End Role="PresidentOrganisme" Type="Self.PresidentOrganisme" Multiplicity="0..1" />
+          <End Role="Organismes" Type="Self.Organismes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PresidentOrganisme">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Organismes">
+              <PropertyRef Name="PresidentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Organismes_Responsable">
+          <End Role="Responsable" Type="Self.Responsable" Multiplicity="0..1" />
+          <End Role="Organismes" Type="Self.Organismes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Responsable">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Organismes">
+              <PropertyRef Name="ResponsableId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Resultats__Passa__3B75D760">
+          <End Role="Passages" Type="Self.Passages" Multiplicity="1" />
+          <End Role="Resultats" Type="Self.Resultats" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Passages">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Resultats">
+              <PropertyRef Name="PassagesId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ResultatsUC_Resultats">
+          <End Role="Resultats" Type="Self.Resultats" Multiplicity="0..1" />
+          <End Role="ResultatsUC" Type="Self.ResultatsUC" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Resultats">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ResultatsUC">
+              <PropertyRef Name="ResultatsId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="GestionOFEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Admin" EntityType="Self.Admin" />
+          <EntitySet Name="Candidats" EntityType="Self.Candidats" />
+          <EntitySet Name="CandidatsFormations" EntityType="Self.CandidatsFormations" />
+          <EntitySet Name="Formations" EntityType="Self.Formations" />
+          <EntitySet Name="Habilitations" EntityType="Self.Habilitations" />
+          <EntitySet Name="Lieux" EntityType="Self.Lieux" />
+          <EntitySet Name="Ligues" EntityType="Self.Ligues" />
+          <EntitySet Name="Organismes" EntityType="Self.Organismes" />
+          <EntitySet Name="Passages" EntityType="Self.Passages" />
+          <EntitySet Name="Personnel" EntityType="Self.Personnel" />
+          <EntitySet Name="Porteurs" EntityType="Self.Porteurs" />
+          <EntitySet Name="PresidentOrganisme" EntityType="Self.PresidentOrganisme" />
+          <EntitySet Name="Prestataires" EntityType="Self.Prestataires" />
+          <EntitySet Name="Responsable" EntityType="Self.Responsable" />
+          <EntitySet Name="Resultats" EntityType="Self.Resultats" />
+          <EntitySet Name="ResultatsUC" EntityType="Self.ResultatsUC" />
+          <EntitySet Name="Sexes" EntityType="Self.Sexes" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
+          <EntitySet Name="Tuteurs" EntityType="Self.Tuteurs" />
+          <EntitySet Name="TypedeFinancements" EntityType="Self.TypedeFinancements" />
+          <EntitySet Name="TypedeFormations" EntityType="Self.TypedeFormations" />
+          <AssociationSet Name="FK__Candidats__Candi__3D5E1FD2" Association="Self.FK__Candidats__Candi__3D5E1FD2">
+            <End Role="Candidats" EntitySet="Candidats" />
+            <End Role="CandidatsFormations" EntitySet="CandidatsFormations" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Candidats__Sexes__3A81B327" Association="Self.FK__Candidats__Sexes__3A81B327">
+            <End Role="Sexes" EntitySet="Sexes" />
+            <End Role="Candidats" EntitySet="Candidats" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Candidats__Forma__403A8C7D" Association="Self.FK__Candidats__Forma__403A8C7D">
+            <End Role="Formations" EntitySet="Formations" />
+            <End Role="CandidatsFormations" EntitySet="CandidatsFormations" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Candidats__Tuteu__3E52440B" Association="Self.FK__Candidats__Tuteu__3E52440B">
+            <End Role="Tuteurs" EntitySet="Tuteurs" />
+            <End Role="CandidatsFormations" EntitySet="CandidatsFormations" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Candidats__Typed__3F466844" Association="Self.FK__Candidats__Typed__3F466844">
+            <End Role="TypedeFinancements" EntitySet="TypedeFinancements" />
+            <End Role="CandidatsFormations" EntitySet="CandidatsFormations" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Resultats__Candi__3C69FB99" Association="Self.FK__Resultats__Candi__3C69FB99">
+            <End Role="CandidatsFormations" EntitySet="CandidatsFormations" />
+            <End Role="Resultats" EntitySet="Resultats" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CandidatsFormations_Sexes" Association="Self.FK_CandidatsFormations_Sexes">
+            <End Role="Sexes" EntitySet="Sexes" />
+            <End Role="CandidatsFormations" EntitySet="CandidatsFormations" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Formation__Typed__37A5467C" Association="Self.FK__Formation__Typed__37A5467C">
+            <End Role="TypedeFormations" EntitySet="TypedeFormations" />
+            <End Role="Formations" EntitySet="Formations" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Formations_Habilitations" Association="Self.FK_Formations_Habilitations">
+            <End Role="Habilitations" EntitySet="Habilitations" />
+            <End Role="Formations" EntitySet="Formations" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Formations_Lieux" Association="Self.FK_Formations_Lieux">
+            <End Role="Lieux" EntitySet="Lieux" />
+            <End Role="Formations" EntitySet="Formations" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Formations_Organismes" Association="Self.FK_Formations_Organismes">
+            <End Role="Organismes" EntitySet="Organismes" />
+            <End Role="Formations" EntitySet="Formations" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Formations_Personnel" Association="Self.FK_Formations_Personnel">
+            <End Role="Personnel" EntitySet="Personnel" />
+            <End Role="Formations" EntitySet="Formations" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Organisme__Lieux__2B3F6F97" Association="Self.FK__Organisme__Lieux__2B3F6F97">
+            <End Role="Lieux" EntitySet="Lieux" />
+            <End Role="Organismes" EntitySet="Organismes" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Porteurs__LieuxI__38996AB5" Association="Self.FK__Porteurs__LieuxI__38996AB5">
+            <End Role="Lieux" EntitySet="Lieux" />
+            <End Role="Porteurs" EntitySet="Porteurs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Organismes_Ligues" Association="Self.FK_Organismes_Ligues">
+            <End Role="Ligues" EntitySet="Ligues" />
+            <End Role="Organismes" EntitySet="Organismes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Organismes_Personnel" Association="Self.FK_Organismes_Personnel">
+            <End Role="Personnel" EntitySet="Personnel" />
+            <End Role="Organismes" EntitySet="Organismes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Organismes_Personnel1" Association="Self.FK_Organismes_Personnel1">
+            <End Role="Personnel" EntitySet="Personnel" />
+            <End Role="Organismes" EntitySet="Organismes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Organismes_PresidentOrganisme" Association="Self.FK_Organismes_PresidentOrganisme">
+            <End Role="PresidentOrganisme" EntitySet="PresidentOrganisme" />
+            <End Role="Organismes" EntitySet="Organismes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Organismes_Responsable" Association="Self.FK_Organismes_Responsable">
+            <End Role="Responsable" EntitySet="Responsable" />
+            <End Role="Organismes" EntitySet="Organismes" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Resultats__Passa__3B75D760" Association="Self.FK__Resultats__Passa__3B75D760">
+            <End Role="Passages" EntitySet="Passages" />
+            <End Role="Resultats" EntitySet="Resultats" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ResultatsUC_Resultats" Association="Self.FK_ResultatsUC_Resultats">
+            <End Role="Resultats" EntitySet="Resultats" />
+            <End Role="ResultatsUC" EntitySet="ResultatsUC" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="GestionOFModelStoreContainer" CdmEntityContainer="GestionOFEntities">
+          <EntitySetMapping Name="Admin">
+            <EntityTypeMapping TypeName="GestionOFModel.Admin">
+              <MappingFragment StoreEntitySet="Admin">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="Nom" ColumnName="Nom" />
+                <ScalarProperty Name="Prenom" ColumnName="Prenom" />
+                <ScalarProperty Name="login" ColumnName="login" />
+                <ScalarProperty Name="password" ColumnName="password" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Candidats">
+            <EntityTypeMapping TypeName="GestionOFModel.Candidats">
+              <MappingFragment StoreEntitySet="Candidats">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Nom" ColumnName="Nom" />
+                <ScalarProperty Name="Prenom" ColumnName="Prenom" />
+                <ScalarProperty Name="NumeroLicence" ColumnName="NumeroLicence" />
+                <ScalarProperty Name="Telephone" ColumnName="Telephone" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="SexeId" ColumnName="SexeId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CandidatsFormations">
+            <EntityTypeMapping TypeName="GestionOFModel.CandidatsFormations">
+              <MappingFragment StoreEntitySet="CandidatsFormations">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="FormationId" ColumnName="FormationId" />
+                <ScalarProperty Name="Grade" ColumnName="Grade" />
+                <ScalarProperty Name="StructureAccueil" ColumnName="StructureAccueil" />
+                <ScalarProperty Name="DetailsFinancement" ColumnName="DetailsFinancement" />
+                <ScalarProperty Name="CoutFormation" ColumnName="CoutFormation" />
+                <ScalarProperty Name="CandidatsId" ColumnName="CandidatsId" />
+                <ScalarProperty Name="TuteursId" ColumnName="TuteursId" />
+                <ScalarProperty Name="TypedeFinancementsId" ColumnName="TypedeFinancementsId" />
+                <ScalarProperty Name="Nom" ColumnName="Nom" />
+                <ScalarProperty Name="Prenom" ColumnName="Prenom" />
+                <ScalarProperty Name="NumeroLicence" ColumnName="NumeroLicence" />
+                <ScalarProperty Name="Telephone" ColumnName="Telephone" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="SexeId" ColumnName="SexeId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Formations">
+            <EntityTypeMapping TypeName="GestionOFModel.Formations">
+              <MappingFragment StoreEntitySet="Formations">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="LiguePorteuse" ColumnName="LiguePorteuse" />
+                <ScalarProperty Name="LigueSousTraite" ColumnName="LigueSousTraite" />
+                <ScalarProperty Name="DateDebut" ColumnName="DateDebut" />
+                <ScalarProperty Name="DateFin" ColumnName="DateFin" />
+                <ScalarProperty Name="DateLimteInscription" ColumnName="DateLimteInscription" />
+                <ScalarProperty Name="DateTestSelection" ColumnName="DateTestSelection" />
+                <ScalarProperty Name="NombreTotalHeures" ColumnName="NombreTotalHeures" />
+                <ScalarProperty Name="NbreHeureCentre" ColumnName="NbreHeureCentre" />
+                <ScalarProperty Name="NbrHeureStructAccueil" ColumnName="NbrHeureStructAccueil" />
+                <ScalarProperty Name="TotalHeureFOAD" ColumnName="TotalHeureFOAD" />
+                <ScalarProperty Name="HeureELearning" ColumnName="HeureELearning" />
+                <ScalarProperty Name="TotalAutresHeures" ColumnName="TotalAutresHeures" />
+                <ScalarProperty Name="TypeHeureContenu" ColumnName="TypeHeureContenu" />
+                <ScalarProperty Name="CoutComplet" ColumnName="CoutComplet" />
+                <ScalarProperty Name="InfoComplementaires" ColumnName="InfoComplementaires" />
+                <ScalarProperty Name="HabilitationsId" ColumnName="HabilitationsId" />
+                <ScalarProperty Name="TypedeFormationsId" ColumnName="TypedeFormationsId" />
+                <ScalarProperty Name="NumeroSession" ColumnName="NumeroSession" />
+                <ScalarProperty Name="IdOrganisateurpeda" ColumnName="IdOrganisateurpeda" />
+                <ScalarProperty Name="NbreHeureAutreEspace" ColumnName="NbreHeureAutreEspace" />
+                <ScalarProperty Name="OrganismeId" ColumnName="OrganismeId" />
+                <ScalarProperty Name="LieuSiNonPorteuse" ColumnName="LieuSiNonPorteuse" />
+                <ScalarProperty Name="NombreUC" ColumnName="NombreUC" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Habilitations">
+            <EntityTypeMapping TypeName="GestionOFModel.Habilitations">
+              <MappingFragment StoreEntitySet="Habilitations">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="NumeroHabilitation" ColumnName="NumeroHabilitation" />
+                <ScalarProperty Name="DebutDateDelivrance" ColumnName="DebutDateDelivrance" />
+                <ScalarProperty Name="FinDateDelivrance" ColumnName="FinDateDelivrance" />
+                <ScalarProperty Name="NumeroDelivrance" ColumnName="NumeroDelivrance" />
+                <ScalarProperty Name="NumeroSession" ColumnName="NumeroSession" />
+                <ScalarProperty Name="DateEPMSP" ColumnName="DateEPMSP" />
+                <ScalarProperty Name="DateTEP" ColumnName="DateTEP" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Lieux">
+            <EntityTypeMapping TypeName="GestionOFModel.Lieux">
+              <MappingFragment StoreEntitySet="Lieux">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Adresse" ColumnName="Adresse" />
+                <ScalarProperty Name="CodePostal" ColumnName="CodePostal" />
+                <ScalarProperty Name="Ville" ColumnName="Ville" />
+                <ScalarProperty Name="Telephone" ColumnName="Telephone" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Ligues">
+            <EntityTypeMapping TypeName="GestionOFModel.Ligues">
+              <MappingFragment StoreEntitySet="Ligues">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Libelle" ColumnName="Libelle" />
+                <ScalarProperty Name="CodeLigue" ColumnName="CodeLigue" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Organismes">
+            <EntityTypeMapping TypeName="GestionOFModel.Organismes">
+              <MappingFragment StoreEntitySet="Organismes">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Libelle" ColumnName="Libelle" />
+                <ScalarProperty Name="NumeroDeclaration" ColumnName="NumeroDeclaration" />
+                <ScalarProperty Name="AnneeDeclaration" ColumnName="AnneeDeclaration" />
+                <ScalarProperty Name="LieuxId" ColumnName="LieuxId" />
+                <ScalarProperty Name="PresidentId" ColumnName="PresidentId" />
+                <ScalarProperty Name="CoordinateurId" ColumnName="CoordinateurId" />
+                <ScalarProperty Name="DirecteurId" ColumnName="DirecteurId" />
+                <ScalarProperty Name="ResponsableId" ColumnName="ResponsableId" />
+                <ScalarProperty Name="LigueId" ColumnName="LigueId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Passages">
+            <EntityTypeMapping TypeName="GestionOFModel.Passages">
+              <MappingFragment StoreEntitySet="Passages">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Libelle" ColumnName="Libelle" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Personnel">
+            <EntityTypeMapping TypeName="GestionOFModel.Personnel">
+              <MappingFragment StoreEntitySet="Personnel">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Nom" ColumnName="Nom" />
+                <ScalarProperty Name="Prenom" ColumnName="Prenom" />
+                <ScalarProperty Name="Telephone" ColumnName="Telephone" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Porteurs">
+            <EntityTypeMapping TypeName="GestionOFModel.Porteurs">
+              <MappingFragment StoreEntitySet="Porteurs">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Etablissement" ColumnName="Etablissement" />
+                <ScalarProperty Name="LieuxId" ColumnName="LieuxId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PresidentOrganisme">
+            <EntityTypeMapping TypeName="GestionOFModel.PresidentOrganisme">
+              <MappingFragment StoreEntitySet="PresidentOrganisme">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Nom" ColumnName="Nom" />
+                <ScalarProperty Name="Prenom" ColumnName="Prenom" />
+                <ScalarProperty Name="Telephone" ColumnName="Telephone" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Fonction" ColumnName="Fonction" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Prestataires">
+            <EntityTypeMapping TypeName="GestionOFModel.Prestataires">
+              <MappingFragment StoreEntitySet="Prestataires">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Nom" ColumnName="Nom" />
+                <ScalarProperty Name="MiseADispoInstallation" ColumnName="MiseADispoInstallation" />
+                <ScalarProperty Name="GestionPaieFormateurs" ColumnName="GestionPaieFormateurs" />
+                <ScalarProperty Name="CoPortage" ColumnName="CoPortage" />
+                <ScalarProperty Name="GestionAdministrative" ColumnName="GestionAdministrative" />
+                <ScalarProperty Name="Autre" ColumnName="Autre" />
+                <ScalarProperty Name="LieuxId" ColumnName="LieuxId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Responsable">
+            <EntityTypeMapping TypeName="GestionOFModel.Responsable">
+              <MappingFragment StoreEntitySet="Responsable">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Nom" ColumnName="Nom" />
+                <ScalarProperty Name="Prenom" ColumnName="Prenom" />
+                <ScalarProperty Name="Licence" ColumnName="Licence" />
+                <ScalarProperty Name="Telephone" ColumnName="Telephone" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Resultats">
+            <EntityTypeMapping TypeName="GestionOFModel.Resultats">
+              <MappingFragment StoreEntitySet="Resultats">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="CandidatFormationId" ColumnName="CandidatFormationId" />
+                <ScalarProperty Name="FormationValidee" ColumnName="FormationValidee" />
+                <ScalarProperty Name="NumeroDiplome" ColumnName="NumeroDiplome" />
+                <ScalarProperty Name="EPEF" ColumnName="EPEF" />
+                <ScalarProperty Name="EPMSP" ColumnName="EPMSP" />
+                <ScalarProperty Name="PassagesId" ColumnName="PassagesId" />
+                <ScalarProperty Name="FormationTerminee" ColumnName="FormationTerminee" />
+                <ScalarProperty Name="Abandon" ColumnName="Abandon" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ResultatsUC">
+            <EntityTypeMapping TypeName="GestionOFModel.ResultatsUC">
+              <MappingFragment StoreEntitySet="ResultatsUC">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Libelle" ColumnName="Libelle" />
+                <ScalarProperty Name="Resultat" ColumnName="Resultat" />
+                <ScalarProperty Name="ResultatsId" ColumnName="ResultatsId" />
+                <ScalarProperty Name="ResultatMax" ColumnName="ResultatMax" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Sexes">
+            <EntityTypeMapping TypeName="GestionOFModel.Sexes">
+              <MappingFragment StoreEntitySet="Sexes">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
+                <ScalarProperty Name="Libelle" ColumnName="Libelle" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="GestionOFModel.sysdiagrams">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tuteurs">
+            <EntityTypeMapping TypeName="GestionOFModel.Tuteurs">
+              <MappingFragment StoreEntitySet="Tuteurs">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Nom" ColumnName="Nom" />
+                <ScalarProperty Name="Prenom" ColumnName="Prenom" />
+                <ScalarProperty Name="NumeroLicence" ColumnName="NumeroLicence" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TypedeFinancements">
+            <EntityTypeMapping TypeName="GestionOFModel.TypedeFinancements">
+              <MappingFragment StoreEntitySet="TypedeFinancements">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Libelle" ColumnName="Libelle" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TypedeFormations">
+            <EntityTypeMapping TypeName="GestionOFModel.TypedeFormations">
+              <MappingFragment StoreEntitySet="TypedeFormations">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Libelle" ColumnName="Libelle" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Aucun" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

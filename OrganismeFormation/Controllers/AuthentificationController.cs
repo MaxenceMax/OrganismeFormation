@@ -35,8 +35,7 @@ namespace OrganismeFormation.Controllers
             }
 
             //On regarde dans la fonction Validate pour donner la connexion à statut ainsi que admin ou ligue
-            StatutConnection statut = ValidateUser(model.Login, model.Password);
-            if (!statut.Connected)
+            if (!ValidateUser(model.Login,model.Password))
             {
                 ModelState.AddModelError(string.Empty, "Le nom d'utilisateur ou le mot de passe est incorrect.");
                 return View(model);
@@ -88,25 +87,19 @@ namespace OrganismeFormation.Controllers
         }
 
 
-        private StatutConnection ValidateUser(string login, string password)
+        private Boolean ValidateUser(string login, string password)
         {
 
-            OrganismeDataContext bd = new OrganismeDataContext();
-            StatutConnection statut = new StatutConnection();
-            statut.Connected = false;
+            var ctx = new GestionOFEntities();
+            var pass = encrypt(password);
             if (login == "admin")
             {
-                statut.Connected = (from i in bd.Admin
-                                    where i.login == login && i.password == encrypt(password)
-                                    select i).Count() != 0;
+                return ctx.Admin.Where(a => a.login == login && a.password == pass).Count() == 1;
             }
             else
             {
-                statut.Connected = (from i in bd.Responsable
-                                    where i.Licence == login && i.Password == encrypt(password)
-                                    select i).Count() != 0;
+                return ctx.Responsable.Where(a => a.Licence == login && a.Password == pass).Count() == 1;
             }
-            return statut;
         }
 
 
@@ -121,7 +114,7 @@ namespace OrganismeFormation.Controllers
             return RedirectToAction("Index", "Home");
         }
 
-        public String encrypt(string mdp)
+        private String encrypt(string mdp)
         {
             Byte[] clearBytes = new UnicodeEncoding().GetBytes(mdp);
             Byte[] hashedBytes = ((HashAlgorithm)CryptoConfig.CreateFromName("MD5")).ComputeHash(clearBytes);

@@ -29,7 +29,7 @@ namespace OrganismeFormation.Controllers
         public ActionResult Organisme()
         {
 
-            OrganismeDataContext bd = new OrganismeDataContext();
+            GestionOFEntities bd = new GestionOFEntities();
 
             var claimIdentity = User.Identity as ClaimsIdentity;
             var nomResponsable = claimIdentity.FindFirst(ClaimTypes.NameIdentifier).Value;
@@ -50,8 +50,9 @@ namespace OrganismeFormation.Controllers
         public ActionResult Organisme(OrganismeModel model)
         {
 
-            OrganismeDataContext bd = new OrganismeDataContext();
-            var org = bd.Organismes.First(a => a.Id == model.OrganismeId);
+            GestionOFEntities bd = new GestionOFEntities();
+            var org = bd.Organismes.Find(model.OrganismeId);
+            bd.Organismes.Attach(org);
 
             if(org.Lieux == null)
             {
@@ -63,7 +64,7 @@ namespace OrganismeFormation.Controllers
             org.Lieux.Adresse = model.Organismes.Lieux.Adresse;
             org.Lieux.CodePostal = model.Organismes.Lieux.CodePostal;
 
-            bd.SubmitChanges();
+            bd.SaveChanges();
 
             return RedirectToAction("HomeResponsable", "Responsable");
         }

@@ -28,7 +28,7 @@ namespace OrganismeFormation.Controllers
         [Authorize(Roles = "Admin")]
         public ActionResult ListeResponsable()
         {
-            OrganismeDataContext bd = new OrganismeDataContext();
+            GestionOFEntities bd = new GestionOFEntities();
             var all = bd.Responsable;
             ResponsableViewModel vm = new ResponsableViewModel
             {
@@ -49,7 +49,7 @@ namespace OrganismeFormation.Controllers
         [Authorize(Roles ="Admin")]
         public ActionResult ModificationResponsable(Decimal id)
         {
-            OrganismeDataContext bd = new OrganismeDataContext();
+            GestionOFEntities bd = new GestionOFEntities();
             var temp = bd.Responsable.First(a => a.Id == id);
             AjoutResponsableModel resp = new AjoutResponsableModel();
             resp.Licence = temp.Licence;
@@ -57,7 +57,6 @@ namespace OrganismeFormation.Controllers
             resp.Prenom = temp.Prenom;
             resp.Telephone = temp.Telephone;
             resp.AdresseEmail = temp.Email;
-            resp.Ligue = temp.Organismes.First().Ligue;
             resp.id = temp.Id;
 
             return View(resp);
@@ -69,17 +68,18 @@ namespace OrganismeFormation.Controllers
         public ActionResult ModificationResponsable(AjoutResponsableModel model)
         {
 
-            OrganismeDataContext bd = new OrganismeDataContext();
-            var resp = bd.Responsable.First(a => a.Id == model.id);
+            GestionOFEntities bd = new GestionOFEntities();
+            var resp = bd.Responsable.Find(model.id);
+            bd.Responsable.Attach(resp);
+
             resp.Licence = model.Licence;
             resp.Nom = model.Nom;
             resp.Prenom = model.Prenom;
             resp.Telephone = model.Telephone;
             resp.Email = model.AdresseEmail;
-            resp.Organismes.First().Ligue = model.Ligue;
 
-            
-            bd.SubmitChanges();
+
+            bd.SaveChanges();
 
             return RedirectToAction("ListeResponsable", "Admin");
         }
@@ -92,10 +92,14 @@ namespace OrganismeFormation.Controllers
         public ActionResult AjoutResponsable(Models.AjoutResponsableModel model)
         {
 
-            OrganismeDataContext bd = new OrganismeDataContext();
-
+            GestionOFEntities bd = new GestionOFEntities();
+            
             Responsable resp = new Responsable();
             Organismes org = new Organismes();
+
+            bd.Responsable.Attach(resp);
+            bd.Organismes.Attach(org);
+
 
             // Mise à jour des données d'un responsable
             resp.Nom = model.Nom;
@@ -105,12 +109,9 @@ namespace OrganismeFormation.Controllers
             resp.Email = model.AdresseEmail;
             resp.Telephone = model.Telephone;
 
-
-            org.Ligue = model.Ligue;
+            
             org.Responsable = resp;
-            bd.Organismes.InsertOnSubmit(org);
-            bd.Responsable.InsertOnSubmit(resp);
-            bd.SubmitChanges();
+            bd.SaveChanges();
 
             return RedirectToAction("ListeResponsable", "Admin");
 
@@ -120,14 +121,14 @@ namespace OrganismeFormation.Controllers
         [Authorize(Roles = "Admin")]
         public ActionResult SuppressionResponsable(decimal id)
         {
-            OrganismeDataContext bd = new OrganismeDataContext();
-            var resp = bd.Responsable.First(a => a.Id == id);
+            GestionOFEntities bd = new GestionOFEntities();
+            var resp = bd.Responsable.Find(id);
+            bd.Responsable.Attach(resp);
             if (resp.Organismes.First().Lieux == null)
             {
-                bd.Organismes.DeleteOnSubmit(resp.Organismes.First());
+                bd.Responsable.Remove(resp);
             }
-            bd.Responsable.DeleteOnSubmit(resp);
-            bd.SubmitChanges();
+            bd.SaveChanges();
             return RedirectToAction("ListeResponsable", "Admin");
 
         }
