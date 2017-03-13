@@ -257,6 +257,90 @@ html{
 	background-image: url("../Images/Icons/icon-home-hover.png");
 }
 
+#icon-AC{
+	background-image: url("../Images/Icons/icon-AC.png");
+	background-size: 20px 20px;
+	background-position: 17px 8px;
+	background-repeat: no-repeat;
+    margin-bottom: 14px;
+}
+
+#parent:hover #icon-AC{
+	background-image: url("../Images/Icons/icon-AC-hover.png");
+}
+
+#icon-AS{
+	background-image: url("../Images/Icons/icon-AS.png");
+	background-size: 20px 20px;
+	background-position: 17px 8px;
+	background-repeat: no-repeat;
+    margin-bottom: 14px;
+}
+
+#parent:hover #icon-AS{
+	background-image: url("../Images/Icons/icon-AS-hover.png");
+}
+
+#icon-BP{
+	background-image: url("../Images/Icons/icon-BP.png");
+	background-size: 20px 20px;
+	background-position: 17px 8px;
+	background-repeat: no-repeat;
+    margin-bottom: 14px;
+}
+
+#parent:hover #icon-BP{
+	background-image: url("../Images/Icons/icon-BP-hover.png");
+}
+
+#icon-CFEB{
+	background-image: url("../Images/Icons/icon-CFEB.png");
+	background-size: 20px 20px;
+	background-position: 17px 8px;
+	background-repeat: no-repeat;
+    margin-bottom: 14px;
+}
+
+#parent:hover #icon-CFEB{
+	background-image: url("../Images/Icons/icon-CFEB-hover.png");
+}
+
+#icon-CQP{
+	background-image: url("../Images/Icons/icon-CQP.png");
+	background-size: 20px 20px;
+	background-position: 17px 8px;
+	background-repeat: no-repeat;
+    margin-bottom: 14px;
+}
+
+#parent:hover #icon-CQP{
+	background-image: url("../Images/Icons/icon-CQP-hover.png");
+}
+
+#icon-DE{
+	background-image: url("../Images/Icons/icon-DE.png");
+	background-size: 20px 20px;
+	background-position: 17px 8px;
+	background-repeat: no-repeat;
+    margin-bottom: 14px;
+}
+
+#parent:hover #icon-DE{
+	background-image: url("../Images/Icons/icon-DE-hover.png");
+}
+
+#icon-settings{
+	background-image: url("../Images/Icons/icon-settings.png");
+	background-size: 20px 20px;
+	background-position: 17px 8px;
+	background-repeat: no-repeat;
+    margin-bottom: 14px;
+}
+
+#parent:hover #icon-settings{
+	background-image: url("../Images/Icons/icon-settings-hover.png");
+}
+
 #icon-login{
 	background-image: url("../Images/Icons/icon-login.png");
 	background-size: 20px 20px;
