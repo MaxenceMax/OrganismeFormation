@@ -107,6 +107,9 @@
           <Property Name="Id" Type="numeric" Precision="18" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Libelle" Type="nvarchar" MaxLength="255" Nullable="false" />
           <Property Name="CodeLigue" Type="float" />
+          <Property Name="login" Type="varchar" MaxLength="50" />
+          <Property Name="password" Type="varchar" MaxLength="250" />
+          <Property Name="email" Type="varchar" MaxLength="250" />
         </EntityType>
         <EntityType Name="Organismes">
           <Key>
@@ -139,14 +142,6 @@
           <Property Name="Prenom" Type="varchar" MaxLength="50" />
           <Property Name="Telephone" Type="varchar" MaxLength="50" />
           <Property Name="Email" Type="varchar" MaxLength="250" />
-        </EntityType>
-        <EntityType Name="Porteurs">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="numeric" Precision="18" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Etablissement" Type="char" MaxLength="60" />
-          <Property Name="LieuxId" Type="numeric" Precision="18" Scale="0" />
         </EntityType>
         <EntityType Name="PresidentOrganisme">
           <Key>
@@ -334,18 +329,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Porteurs__LieuxI__38996AB5">
-          <End Role="Lieux" Type="Self.Lieux" Multiplicity="0..1" />
-          <End Role="Porteurs" Type="Self.Porteurs" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Lieux">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Porteurs">
-              <PropertyRef Name="LieuxId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK__Resultats__Candi__3C69FB99">
           <End Role="CandidatsFormations" Type="Self.CandidatsFormations" Multiplicity="1" />
           <End Role="Resultats" Type="Self.Resultats" Multiplicity="*" />
@@ -513,7 +496,6 @@
           <EntitySet Name="Organismes" EntityType="Self.Organismes" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Passages" EntityType="Self.Passages" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Personnel" EntityType="Self.Personnel" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Porteurs" EntityType="Self.Porteurs" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PresidentOrganisme" EntityType="Self.PresidentOrganisme" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Prestataires" EntityType="Self.Prestataires" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Responsable" EntityType="Self.Responsable" Schema="dbo" store:Type="Tables" />
@@ -551,10 +533,6 @@
           <AssociationSet Name="FK__Organisme__Lieux__2B3F6F97" Association="Self.FK__Organisme__Lieux__2B3F6F97">
             <End Role="Lieux" EntitySet="Lieux" />
             <End Role="Organismes" EntitySet="Organismes" />
-          </AssociationSet>
-          <AssociationSet Name="FK__Porteurs__LieuxI__38996AB5" Association="Self.FK__Porteurs__LieuxI__38996AB5">
-            <End Role="Lieux" EntitySet="Lieux" />
-            <End Role="Porteurs" EntitySet="Porteurs" />
           </AssociationSet>
           <AssociationSet Name="FK__Resultats__Candi__3C69FB99" Association="Self.FK__Resultats__Candi__3C69FB99">
             <End Role="CandidatsFormations" EntitySet="CandidatsFormations" />
@@ -725,7 +703,6 @@
           <Property Name="Email" Type="String" MaxLength="100" FixedLength="true" Unicode="false" />
           <NavigationProperty Name="Formations" Relationship="Self.FK_Formations_Lieux" FromRole="Lieux" ToRole="Formations" />
           <NavigationProperty Name="Organismes" Relationship="Self.FK__Organisme__Lieux__2B3F6F97" FromRole="Lieux" ToRole="Organismes" />
-          <NavigationProperty Name="Porteurs" Relationship="Self.FK__Porteurs__LieuxI__38996AB5" FromRole="Lieux" ToRole="Porteurs" />
         </EntityType>
         <EntityType Name="Ligues">
           <Key>
@@ -734,6 +711,9 @@
           <Property Name="Id" Type="Decimal" Precision="18" Scale="0" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Libelle" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="CodeLigue" Type="Double" />
+          <Property Name="login" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="password" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="email" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="Organismes" Relationship="Self.FK_Organismes_Ligues" FromRole="Ligues" ToRole="Organismes" />
         </EntityType>
         <EntityType Name="Organismes">
@@ -778,15 +758,6 @@
           <NavigationProperty Name="Formations" Relationship="Self.FK_Formations_Personnel" FromRole="Personnel" ToRole="Formations" />
           <NavigationProperty Name="Organismes" Relationship="Self.FK_Organismes_Personnel" FromRole="Personnel" ToRole="Organismes" />
           <NavigationProperty Name="Organismes1" Relationship="Self.FK_Organismes_Personnel1" FromRole="Personnel" ToRole="Organismes" />
-        </EntityType>
-        <EntityType Name="Porteurs">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Decimal" Precision="18" Scale="0" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Etablissement" Type="String" MaxLength="60" FixedLength="true" Unicode="false" />
-          <Property Name="LieuxId" Type="Decimal" Precision="18" Scale="0" />
-          <NavigationProperty Name="Lieux" Relationship="Self.FK__Porteurs__LieuxI__38996AB5" FromRole="Porteurs" ToRole="Lieux" />
         </EntityType>
         <EntityType Name="PresidentOrganisme">
           <Key>
@@ -1057,18 +1028,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Porteurs__LieuxI__38996AB5">
-          <End Role="Lieux" Type="Self.Lieux" Multiplicity="0..1" />
-          <End Role="Porteurs" Type="Self.Porteurs" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Lieux">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Porteurs">
-              <PropertyRef Name="LieuxId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_Organismes_Ligues">
           <End Role="Ligues" Type="Self.Ligues" Multiplicity="0..1" />
           <End Role="Organismes" Type="Self.Organismes" Multiplicity="*" />
@@ -1164,7 +1123,6 @@
           <EntitySet Name="Organismes" EntityType="Self.Organismes" />
           <EntitySet Name="Passages" EntityType="Self.Passages" />
           <EntitySet Name="Personnel" EntityType="Self.Personnel" />
-          <EntitySet Name="Porteurs" EntityType="Self.Porteurs" />
           <EntitySet Name="PresidentOrganisme" EntityType="Self.PresidentOrganisme" />
           <EntitySet Name="Prestataires" EntityType="Self.Prestataires" />
           <EntitySet Name="Responsable" EntityType="Self.Responsable" />
@@ -1226,10 +1184,6 @@
           <AssociationSet Name="FK__Organisme__Lieux__2B3F6F97" Association="Self.FK__Organisme__Lieux__2B3F6F97">
             <End Role="Lieux" EntitySet="Lieux" />
             <End Role="Organismes" EntitySet="Organismes" />
-          </AssociationSet>
-          <AssociationSet Name="FK__Porteurs__LieuxI__38996AB5" Association="Self.FK__Porteurs__LieuxI__38996AB5">
-            <End Role="Lieux" EntitySet="Lieux" />
-            <End Role="Porteurs" EntitySet="Porteurs" />
           </AssociationSet>
           <AssociationSet Name="FK_Organismes_Ligues" Association="Self.FK_Organismes_Ligues">
             <End Role="Ligues" EntitySet="Ligues" />
@@ -1373,6 +1327,9 @@
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Libelle" ColumnName="Libelle" />
                 <ScalarProperty Name="CodeLigue" ColumnName="CodeLigue" />
+                <ScalarProperty Name="login" ColumnName="login" />
+                <ScalarProperty Name="password" ColumnName="password" />
+                <ScalarProperty Name="email" ColumnName="email" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1408,15 +1365,6 @@
                 <ScalarProperty Name="Prenom" ColumnName="Prenom" />
                 <ScalarProperty Name="Telephone" ColumnName="Telephone" />
                 <ScalarProperty Name="Email" ColumnName="Email" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Porteurs">
-            <EntityTypeMapping TypeName="GestionOFModel.Porteurs">
-              <MappingFragment StoreEntitySet="Porteurs">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="Etablissement" ColumnName="Etablissement" />
-                <ScalarProperty Name="LieuxId" ColumnName="LieuxId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

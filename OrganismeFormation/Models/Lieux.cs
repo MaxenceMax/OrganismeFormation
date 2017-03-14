@@ -19,7 +19,6 @@ namespace OrganismeFormation.Models
         {
             this.Formations = new HashSet<Formations>();
             this.Organismes = new HashSet<Organismes>();
-            this.Porteurs = new HashSet<Porteurs>();
         }
     
         public decimal Id { get; set; }
@@ -33,7 +32,5 @@ namespace OrganismeFormation.Models
         public virtual ICollection<Formations> Formations { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Organismes> Organismes { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Porteurs> Porteurs { get; set; }
     }
 }

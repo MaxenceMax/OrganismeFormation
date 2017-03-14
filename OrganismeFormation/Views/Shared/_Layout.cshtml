@@ -19,8 +19,13 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title - OF</title>
+    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+
     <link href="~/Content/CSS/Site.css" rel="stylesheet" type="text/css" />
     <link href="~/Content/CSS/CssExterne.css" rel="stylesheet" type="text/css" />
+    <link href="~/Content/CSS/Bootstrap/bootstrap.css" rel="stylesheet" type="text/css" />
     @Scripts.Render("~/bundles/jquery")
 </head>
 <body>
@@ -43,15 +48,9 @@
                             </a>
                         </li>
                         <li>
-                            <a id="parent" href="@Url.Action("ListeResponsable","Admin")">
+                            <a id="parent" href="@Url.Action("Index","Ligues")">
                                 <i class="fa fa-home fa-lg" id=""></i>
-                                <span class="nav-text">Liste des Responsables</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a id="parent" href="@Url.Action("AjoutResponsable","Admin")">
-                                <i class="fa fa-home fa-lg" id=""></i>
-                                <span class="nav-text">Ajouter Responsable</span>
+                                <span class="nav-text">Liste des Ligues</span>
                             </a>
                         </li>
                         <li class="darkerlishadow">
@@ -150,7 +149,7 @@
         </div>
     </nav>
     <div style="margin-left:55px">
-        @RenderBody()
+            @RenderBody()
     </div>
 </body>
 </html>

@@ -15,6 +15,14 @@ html{
   height:100%;
 }
 
+/************ Bootstrap *************/
+
+#mano-bootstrap{
+    font-family:Oswald-Regular;
+    background-color:white;
+    margin-bottom:40px;
+}
+
 /************ Custom Font ***********/
 @font-face {
   font-family: Oswald-Regular;
@@ -158,6 +166,7 @@ html{
 	padding-right:35px;
 	padding-top:35px;
 	padding-bottom:50px;
+    font-family:Oswald-Regular;
 }
             /****** Input Forms ****/
             .feedback-input {
@@ -241,6 +250,8 @@ html{
 	color: #004A73;
     text-decoration:none;
 }
+
+
 /** Icons */
 /* Icons ---------------------------------- */
 #parent{}

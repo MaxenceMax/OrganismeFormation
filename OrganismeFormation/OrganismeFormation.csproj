@@ -204,6 +204,7 @@
     <Compile Include="Controllers\AuthentificationController.cs" />
     <Compile Include="Controllers\FormationController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\LiguesController.cs" />
     <Compile Include="Controllers\ResponsableController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -256,9 +257,6 @@
     <Compile Include="Models\Personnel.cs">
       <DependentUpon>GestionOF-EF.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\Porteurs.cs">
-      <DependentUpon>GestionOF-EF.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\PresidentOrganisme.cs">
       <DependentUpon>GestionOF-EF.tt</DependentUpon>
     </Compile>
@@ -297,8 +295,6 @@
     <Compile Include="ViewModels\StatutConnection.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Content\CSS\Bootstrap\bootstrap-theme.css" />
-    <Content Include="Content\CSS\Bootstrap\bootstrap-theme.min.css" />
     <Content Include="Content\CSS\Bootstrap\bootstrap.css" />
     <Content Include="Content\CSS\CssExterne.css" />
     <Content Include="Content\Images\dojo.jpg" />
@@ -370,10 +366,6 @@
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
-    <Content Include="Content\CSS\Bootstrap\bootstrap.min.css.map" />
-    <Content Include="Content\CSS\Bootstrap\bootstrap.css.map" />
-    <Content Include="Content\CSS\Bootstrap\bootstrap-theme.min.css.map" />
-    <Content Include="Content\CSS\Bootstrap\bootstrap-theme.css.map" />
     <EntityDeploy Include="Models\GestionOF-EF.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>GestionOF-EF.Designer.cs</LastGenOutput>
@@ -420,6 +412,11 @@
     <Content Include="Views\Admin\ListeResponsable.cshtml" />
     <Content Include="Views\Responsable\Organisme.cshtml" />
     <Content Include="Views\Admin\ModificationResponsable.cshtml" />
+    <Content Include="Views\Ligues\Create.cshtml" />
+    <Content Include="Views\Ligues\Delete.cshtml" />
+    <Content Include="Views\Ligues\Details.cshtml" />
+    <Content Include="Views\Ligues\Edit.cshtml" />
+    <Content Include="Views\Ligues\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

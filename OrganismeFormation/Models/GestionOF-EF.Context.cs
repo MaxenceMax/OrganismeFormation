@@ -35,7 +35,6 @@ namespace OrganismeFormation.Models
         public virtual DbSet<Organismes> Organismes { get; set; }
         public virtual DbSet<Passages> Passages { get; set; }
         public virtual DbSet<Personnel> Personnel { get; set; }
-        public virtual DbSet<Porteurs> Porteurs { get; set; }
         public virtual DbSet<PresidentOrganisme> PresidentOrganisme { get; set; }
         public virtual DbSet<Prestataires> Prestataires { get; set; }
         public virtual DbSet<Responsable> Responsable { get; set; }
