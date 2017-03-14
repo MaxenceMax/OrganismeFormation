@@ -21,6 +21,7 @@ html{
     font-family:Oswald-Regular;
     background-color:white;
     margin-bottom:40px;
+    padding:30px;
 }
 
 /************ Custom Font ***********/
@@ -60,6 +61,7 @@ html{
     height:100px;
     margin-left:auto;
     margin-right:auto;
+    -webkit-box-sizing: initial;
 }
 
 .card-container-image{
@@ -88,6 +90,7 @@ html{
     height:144px;
     font-size:12px;
     background-color: #ECEDEE;
+    -webkit-box-sizing: initial;
 }
 
 .card-image img
@@ -230,6 +233,23 @@ html{
   background-color:white;
 }
 
+#button-red{
+    text-align:center;
+	float:left;
+	width: 100%;
+	border: #fbfbfb solid 1px;
+	cursor:pointer;
+	background-color: #c71424;
+	color:white;
+	font-size:18px; 
+	padding-top:12px;
+	padding-bottom:12px;
+    text-decoration:none;
+	-webkit-transition: all 0.3s;
+	-moz-transition: all 0.3s;
+	transition: all 0.3s;
+}
+
 #button-blue{
 	float:left;
 	width: 100%;
@@ -248,8 +268,29 @@ html{
 #button-blue:hover{
 	background-color: rgba(0,0,0,0);
 	color: #004A73;
+    border: #004A73 solid 1px;
     text-decoration:none;
 }
+
+#form-moitie
+{
+    width:50%;
+}
+
+.form-group-align
+{
+    width:30%;
+    display:flex;
+}
+
+#button-red:hover
+{
+    text-decoration:none;
+    background-color: rgba(0,0,0,0);
+	color: #c71424;
+    border: #c71424 solid 1px;
+}
+
 
 
 /** Icons */

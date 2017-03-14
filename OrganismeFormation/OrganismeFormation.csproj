@@ -295,7 +295,10 @@
     <Compile Include="ViewModels\StatutConnection.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\CSS\Bootstrap\bootstrap-theme.css" />
+    <Content Include="Content\CSS\Bootstrap\bootstrap-theme.min.css" />
     <Content Include="Content\CSS\Bootstrap\bootstrap.css" />
+    <Content Include="Content\CSS\Bootstrap\bootstrap.min.css" />
     <Content Include="Content\CSS\CssExterne.css" />
     <Content Include="Content\Images\dojo.jpg" />
     <Content Include="Content\Images\Icons\icon-AC-hover.png" />

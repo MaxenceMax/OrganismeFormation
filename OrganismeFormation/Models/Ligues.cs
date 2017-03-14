@@ -11,6 +11,7 @@ namespace OrganismeFormation.Models
 {
     using System;
     using System.Collections.Generic;
+    using System.ComponentModel;
     using System.ComponentModel.DataAnnotations;
     public partial class Ligues
     {
@@ -24,8 +25,16 @@ namespace OrganismeFormation.Models
         [Required]
         public string Libelle { get; set; }
         public Nullable<double> CodeLigue { get; set; }
+        [Required]
+        [DisplayName("Identifiant")]
         public string login { get; set; }
+        [Required]
+        [DisplayName("Mot de passe")]
+        [DataType(DataType.Password)]
         public string password { get; set; }
+        [Required]
+        [EmailAddress]
+        [DisplayName("Adresse Email du responsable")]
         public string email { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

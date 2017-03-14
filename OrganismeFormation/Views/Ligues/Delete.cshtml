@@ -4,36 +4,51 @@
     ViewBag.Title = "Delete";
 }
 
-<h2>Delete</h2>
 
-<h3>Are you sure you want to delete this?</h3>
-<div>
-    <h4>Ligues</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Libelle)
-        </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Libelle)
-        </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.CodeLigue)
-        </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.CodeLigue)
-        </dd>
+<div class="content">
+    <div class="title-content">
+        <div class="title-content-main">Gestion des organismes de formation</div>
+        <div class="title-content-second">Suppression de la ligue : @Model.Libelle</div>
+    </div>
+    <div id="mano-bootstrap">
+        <h3>Êtes-vous certain de procéder à la suppression de cet enregistrement ?</h3>
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.Libelle)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Libelle)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.login)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.login)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.email)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.email)
+            </dd>
+        </dl>
+@using (Html.BeginForm())
+{
 
-    </dl>
-
-    @using (Html.BeginForm()) {
-
-        <div class="form-actions no-color">
-            <input type="submit" value="Delete" class="btn btn-default" /> |
-            @Html.ActionLink("Back to List", "Index")
+        <div class="form-group-align">
+            <div class="submit" id="form-moitie" style="margin-right:2.5px">
+                <a href='@Url.Action("Index", "Ligues")' id="button-blue" style="text-align:center">Retour</a>
+                <div class="ease"></div>
+            </div>
+            <div class="submit" id="form-moitie" style="margin-left:2.5px">
+                <input type="submit" value="Supprimer" id="button-red" />
+                <div class="ease"></div>
+            </div>
         </div>
-    }
+}
+    </div>
+    @{Html.RenderPartial("_Footer");}
 </div>

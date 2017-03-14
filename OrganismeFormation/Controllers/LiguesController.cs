@@ -7,6 +7,8 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using OrganismeFormation.Models;
+using System.Text;
+using System.Security.Cryptography;
 
 namespace OrganismeFormation.Controllers
 {
@@ -49,10 +51,11 @@ namespace OrganismeFormation.Controllers
         // plus de détails, voir  http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [Authorize(Roles = "Admin")]
-        public ActionResult Create([Bind(Include = "Id,Libelle,CodeLigue")] Ligues ligues)
+        public ActionResult Create([Bind(Include = "Id,Libelle,login,password,email")] Ligues ligues)
         {
             if (ModelState.IsValid)
             {
+                ligues.password = encrypt(ligues.password);
                 db.Ligues.Add(ligues);
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -82,15 +85,31 @@ namespace OrganismeFormation.Controllers
         // plus de détails, voir  http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [Authorize(Roles = "Admin")]
-        public ActionResult Edit([Bind(Include = "Id,Libelle,CodeLigue")] Ligues ligues)
+        public ActionResult Edit([Bind(Include = "Id,Libelle,login,password,email")] Ligues ligues)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(ligues).State = EntityState.Modified;
+                var tmp = db.Ligues.Find(ligues.Id);
+                db.Ligues.Attach(tmp);
+                tmp.email = ligues.email;
+                tmp.login = tmp.login;
+                tmp.Libelle = tmp.Libelle;
+                if (tmp.password != ligues.password)
+                    tmp.password = encrypt(ligues.password);
+
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
             return View(ligues);
+        }
+
+        private String encrypt(string mdp)
+        {
+            Byte[] clearBytes = new UnicodeEncoding().GetBytes(mdp);
+            Byte[] hashedBytes = ((HashAlgorithm)CryptoConfig.CreateFromName("MD5")).ComputeHash(clearBytes);
+            string hashedText = BitConverter.ToString(hashedBytes);
+            return hashedText;
+
         }
 
         // GET: Ligues/Delete/5
