@@ -6,10 +6,10 @@ using System.Web.Mvc;
 
 namespace OrganismeFormation.Controllers
 {
-    public class AccesLigueController : Controller
+    public class FormationController : Controller
     {
-        // GET: AccesLigue
-        public ActionResult Home()
+        // GET: Formation
+        public ActionResult Index()
         {
             return View();
         }

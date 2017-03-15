@@ -35,8 +35,7 @@ namespace OrganismeFormation.Controllers
             }
 
             //On regarde dans la fonction Validate pour donner la connexion à statut ainsi que admin ou ligue
-            var statut = ValidateUser(model.Login, model.Password);
-            if (!statut.Connected)
+            if (!ValidateUser(model.Login,model.Password))
             {
                 ModelState.AddModelError(string.Empty, "Le nom d'utilisateur ou le mot de passe est incorrect.");
                 return View(model);
@@ -53,10 +52,6 @@ namespace OrganismeFormation.Controllers
             {
                 userClaims.AddRange(LoadRolesAdmin(model.Login));
             }
-            else if (statut.isLigue)
-            {
-                userClaims.AddRange(LoadRolesAccesLigue(model.Login));
-            }
             else
             {
                 userClaims.AddRange(LoadRolesResponsable(model.Login));
@@ -67,11 +62,12 @@ namespace OrganismeFormation.Controllers
             authenticationManager.SignIn(claimsIdentity);
 
             if (model.Login == "admin")
+            {
                 return RedirectToAction("HomeAdmin", "Admin");
-            else if (statut.isLigue)
-                return RedirectToAction("Home", "AccesLigue");
-            else
+            }
+            else {
                 return RedirectToAction("HomeResponsable", "Responsable");
+            }
             
         }
 
@@ -85,36 +81,26 @@ namespace OrganismeFormation.Controllers
 
         private IEnumerable<Claim> LoadRolesResponsable(string login)
         {
+
             yield return new Claim(ClaimTypes.Role, "Responsable");
-        }
 
-        private IEnumerable<Claim> LoadRolesAccesLigue(string login)
-        {
-            yield return new Claim(ClaimTypes.Role, "AccesLigue");
         }
 
 
-        private StatutConnection ValidateUser(string login, string password)
+        private Boolean ValidateUser(string login, string password)
         {
-            StatutConnection statut = new StatutConnection();
-            statut.Connected = false;
-            statut.isLigue = false;
+
             var ctx = new GestionOFEntities();
             var pass = encrypt(password);
             if (login == "admin")
             {
-                statut.Connected = ctx.Admin.Where(a => a.login == login && a.password == pass).Count() == 1;
+                return ctx.Admin.Where(a => a.login == login && a.password == pass).Count() == 1;
             }
-            if (!statut.Connected)
-                statut.Connected = ctx.Responsable.Where(a => a.Licence == login && a.Password == pass).Count() == 1;
-            if (!statut.Connected)
+            else
             {
-                statut.Connected = ctx.Ligues.Where(a => a.login == login && a.password == pass).Count() == 1;
-                statut.isLigue = true;
+                return ctx.Responsable.Where(a => a.Licence == login && a.Password == pass).Count() == 1;
             }
-            return statut;
         }
-       
 
 
         [HttpGet]
