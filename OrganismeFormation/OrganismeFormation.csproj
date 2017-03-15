@@ -200,12 +200,13 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
-    <Compile Include="Controllers\AccesLiguesController.cs" />
+    <Compile Include="Controllers\AccesLigueController.cs" />
     <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\AuthentificationController.cs" />
     <Compile Include="Controllers\FormationController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LiguesController.cs" />
+    <Compile Include="Controllers\OrganismesController.cs" />
     <Compile Include="Controllers\ResponsableController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -421,7 +422,12 @@
     <Content Include="Views\Ligues\Details.cshtml" />
     <Content Include="Views\Ligues\Edit.cshtml" />
     <Content Include="Views\Ligues\Index.cshtml" />
-    <Content Include="Views\AccesLigues\Home.cshtml" />
+    <Content Include="Views\AccesLigue\Home.cshtml" />
+    <Content Include="Views\Organismes\Create.cshtml" />
+    <Content Include="Views\Organismes\Delete.cshtml" />
+    <Content Include="Views\Organismes\Details.cshtml" />
+    <Content Include="Views\Organismes\Edit.cshtml" />
+    <Content Include="Views\Organismes\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

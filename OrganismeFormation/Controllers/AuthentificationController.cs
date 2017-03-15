@@ -71,7 +71,7 @@ namespace OrganismeFormation.Controllers
             }
             else {
                 if (state.isLigue)
-                    return RedirectToAction("Home", "AccesLigues");
+                    return RedirectToAction("Home", "AccesLigue");
                 else
                     return RedirectToAction("HomeResponsable", "Responsable");
 
