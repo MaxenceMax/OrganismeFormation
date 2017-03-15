@@ -200,6 +200,7 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\AccesLiguesController.cs" />
     <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\AuthentificationController.cs" />
     <Compile Include="Controllers\FormationController.cs" />
@@ -420,6 +421,7 @@
     <Content Include="Views\Ligues\Details.cshtml" />
     <Content Include="Views\Ligues\Edit.cshtml" />
     <Content Include="Views\Ligues\Index.cshtml" />
+    <Content Include="Views\AccesLigues\Home.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

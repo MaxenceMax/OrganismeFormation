@@ -7,8 +7,8 @@ namespace OrganismeFormation.ViewModels
 {
     public class StatutConnection
     {
-            public Boolean Connected { get; set; }
-        
+        public Boolean Connected { get; set; }
+        public Boolean isLigue { get; set; }
 
     }
 }
