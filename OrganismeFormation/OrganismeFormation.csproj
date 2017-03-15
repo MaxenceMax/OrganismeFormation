@@ -206,6 +206,7 @@
     <Compile Include="Controllers\FormationController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LiguesController.cs" />
+    <Compile Include="Controllers\OrganismeController.cs" />
     <Compile Include="Controllers\ResponsableController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -422,6 +423,11 @@
     <Content Include="Views\Ligues\Edit.cshtml" />
     <Content Include="Views\Ligues\Index.cshtml" />
     <Content Include="Views\AccesLigues\Home.cshtml" />
+    <Content Include="Views\Organisme\Create.cshtml" />
+    <Content Include="Views\Organisme\Delete.cshtml" />
+    <Content Include="Views\Organisme\Details.cshtml" />
+    <Content Include="Views\Organisme\Edit.cshtml" />
+    <Content Include="Views\Organisme\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
