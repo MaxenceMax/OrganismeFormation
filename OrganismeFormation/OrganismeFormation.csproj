@@ -268,6 +268,9 @@
     <Compile Include="Models\Responsable.cs">
       <DependentUpon>GestionOF-EF.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\ResponsableOrganisme.cs">
+      <DependentUpon>GestionOF-EF.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Resultats.cs">
       <DependentUpon>GestionOF-EF.tt</DependentUpon>
     </Compile>

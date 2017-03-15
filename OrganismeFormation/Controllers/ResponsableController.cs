@@ -34,11 +34,7 @@ namespace OrganismeFormation.Controllers
             var claimIdentity = User.Identity as ClaimsIdentity;
             var nomResponsable = claimIdentity.FindFirst(ClaimTypes.NameIdentifier).Value;
             var resp = bd.Responsable.First(a => a.Licence == nomResponsable);
-            var org = bd.Organismes.First(a => a.ResponsableId == resp.Id);
             OrganismeModel organismeModel = new OrganismeModel();
-            
-            organismeModel.Organismes = org;
-            organismeModel.OrganismeId = org.Id;
 
             return View(organismeModel);
         }

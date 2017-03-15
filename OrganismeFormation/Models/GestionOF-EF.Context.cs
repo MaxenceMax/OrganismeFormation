@@ -43,8 +43,8 @@ namespace OrganismeFormation.Models
         public virtual DbSet<Tuteurs> Tuteurs { get; set; }
         public virtual DbSet<TypedeFinancements> TypedeFinancements { get; set; }
         public virtual DbSet<TypedeFormations> TypedeFormations { get; set; }
+        public virtual DbSet<Organismes> Organismes { get; set; }
         public virtual DbSet<Responsable> Responsable { get; set; }
         public virtual DbSet<ResponsableOrganisme> ResponsableOrganisme { get; set; }
-        public virtual DbSet<Organismes> Organismes { get; set; }
     }
 }

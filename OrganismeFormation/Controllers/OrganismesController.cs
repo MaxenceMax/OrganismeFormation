@@ -17,7 +17,7 @@ namespace OrganismeFormation.Controllers
         // GET: Organismes
         public ActionResult Index()
         {
-            var organismes = db.Organismes.Include(o => o.Lieux).Include(o => o.Ligues).Include(o => o.Personnel).Include(o => o.Personnel1).Include(o => o.PresidentOrganisme).Include(o => o.Responsable);
+            var organismes = db.Organismes.Include(o => o.Lieux).Include(o => o.Ligues).Include(o => o.Personnel).Include(o => o.Personnel1).Include(o => o.PresidentOrganisme);
             return View(organismes.ToList());
         }
 
@@ -67,7 +67,6 @@ namespace OrganismeFormation.Controllers
             ViewBag.CoordinateurId = new SelectList(db.Personnel, "Id", "Nom", organismes.CoordinateurId);
             ViewBag.DirecteurId = new SelectList(db.Personnel, "Id", "Nom", organismes.DirecteurId);
             ViewBag.PresidentId = new SelectList(db.PresidentOrganisme, "Id", "Telephone", organismes.PresidentId);
-            ViewBag.ResponsableId = new SelectList(db.Responsable, "Id", "Nom", organismes.ResponsableId);
             return View(organismes);
         }
 
@@ -88,7 +87,6 @@ namespace OrganismeFormation.Controllers
             ViewBag.CoordinateurId = new SelectList(db.Personnel, "Id", "Nom", organismes.CoordinateurId);
             ViewBag.DirecteurId = new SelectList(db.Personnel, "Id", "Nom", organismes.DirecteurId);
             ViewBag.PresidentId = new SelectList(db.PresidentOrganisme, "Id", "Telephone", organismes.PresidentId);
-            ViewBag.ResponsableId = new SelectList(db.Responsable, "Id", "Nom", organismes.ResponsableId);
             return View(organismes);
         }
 
@@ -110,7 +108,6 @@ namespace OrganismeFormation.Controllers
             ViewBag.CoordinateurId = new SelectList(db.Personnel, "Id", "Nom", organismes.CoordinateurId);
             ViewBag.DirecteurId = new SelectList(db.Personnel, "Id", "Nom", organismes.DirecteurId);
             ViewBag.PresidentId = new SelectList(db.PresidentOrganisme, "Id", "Telephone", organismes.PresidentId);
-            ViewBag.ResponsableId = new SelectList(db.Responsable, "Id", "Nom", organismes.ResponsableId);
             return View(organismes);
         }
 

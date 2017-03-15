@@ -18,7 +18,7 @@ namespace OrganismeFormation.Models
         public Nullable<decimal> ResponsableId { get; set; }
         public Nullable<decimal> OrganismeId { get; set; }
     
-        public virtual Responsable Responsable { get; set; }
         public virtual Organismes Organismes { get; set; }
+        public virtual Responsable Responsable { get; set; }
     }
 }

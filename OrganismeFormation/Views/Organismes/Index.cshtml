@@ -3,55 +3,64 @@
 @{
     ViewBag.Title = "Index";
 }
+<div class="content">
+    <div class="title-content">
+        <div class="title-content-main">Gestion des organismes de formation</div>
+        <div class="title-content-second">Affichage des OF</div>
+    </div>
+    <p>
+        <div style="width: 230px;text-align:center">
+            <div class="submit">
+                <a href='@Url.Action("create", "Organismes")' id="button-blue">Nouvel Organisme de formation</a>
+                <div class="ease"></div>
+            </div>
+        </div>
+    </p>
+    <table class="table" id="mano-bootstrap">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Libelle)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.NumeroDeclaration)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AnneeDeclaration)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Lieux.Adresse)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Ligues.Libelle)
+            </th>
+            <th></th>
+        </tr>
 
-<h2>Index</h2>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Libelle)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NumeroDeclaration)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.AnneeDeclaration)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Lieux.Adresse)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Ligues.Libelle)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+                    @Html.ActionLink("Details", "Details", new { id = item.Id }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+                </td>
+            </tr>
+        }
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Libelle)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.NumeroDeclaration)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.AnneeDeclaration)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Lieux.Adresse)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Ligues.Libelle)
-        </th>
-        <th></th>
-    </tr>
-
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Libelle)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.NumeroDeclaration)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.AnneeDeclaration)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Lieux.Adresse)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Ligues.Libelle)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
-            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
-        </td>
-    </tr>
-}
-
-</table>
+    </table>
+</div>

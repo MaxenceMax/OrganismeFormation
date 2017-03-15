@@ -36,9 +36,6 @@
         <AssociationConnector Association="GestionOFModel.FK_Formations_Personnel" ManuallyRouted="false" />
         <AssociationConnector Association="GestionOFModel.FK__Resultats__Passa__3B75D760" ManuallyRouted="false" />
         <AssociationConnector Association="GestionOFModel.FK_ResultatsUC_Resultats" ManuallyRouted="false" />
-        <EntityTypeShape EntityType="GestionOFModel.Responsable" Width="1.5" PointX="5.625" PointY="15.125" />
-        <EntityTypeShape EntityType="GestionOFModel.ResponsableOrganisme" Width="1.5" PointX="8.625" PointY="15.375" />
-        <AssociationConnector Association="GestionOFModel.FK_ResponsableOrganisme_Responsable" />
         <EntityTypeShape EntityType="GestionOFModel.Organismes" Width="1.5" PointX="11.25" PointY="13.75" />
         <AssociationConnector Association="GestionOFModel.FK_Formations_Organismes" />
         <AssociationConnector Association="GestionOFModel.FK__Organisme__Lieux__2B3F6F97" />
@@ -46,7 +43,10 @@
         <AssociationConnector Association="GestionOFModel.FK_Organismes_Personnel" />
         <AssociationConnector Association="GestionOFModel.FK_Organismes_Personnel1" />
         <AssociationConnector Association="GestionOFModel.FK_Organismes_PresidentOrganisme" />
+        <EntityTypeShape EntityType="GestionOFModel.Responsable" Width="1.5" PointX="11.25" PointY="19.5" />
+        <EntityTypeShape EntityType="GestionOFModel.ResponsableOrganisme" Width="1.5" PointX="13.5" PointY="14.75" />
         <AssociationConnector Association="GestionOFModel.FK_ResponsableOrganisme_Organismes" />
+        <AssociationConnector Association="GestionOFModel.FK_ResponsableOrganisme_Responsable" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
