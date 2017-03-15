@@ -1,10 +1,42 @@
 ﻿
 @{
-    ViewBag.Title = "Home";
+    ViewBag.Title = "Accueil";
 }
 
 <div class="content">
-
+    <div class="title-content">
+        <div class="title-content-main">Gestion des organismes de formation</div>
+        <div class="title-content-second">Accueil Administrateur</div>
+    </div>
+    <div class="container-inline">
+        <div class="accueil-card-conteneur">
+            <div class="card-container-image">
+                <div class="card-image"><img src="~/Content/Images/vignettes/registrations.png" /></div>
+            </div>
+            <div class="card-desc-title">Formations</div>
+            <div class="card-desc">Bienvenue sur la plateforme de gestion des organismes de formations. Comme son nom l'indique cet espace va vous permettre de créer tous types de formations, allant du diplôme d'AC au DESJEPS. Vous accéderez ensuite à un suivi des ces formations avec leurs durées, leurs partenaires et les lieux porteurs.</div>
+        </div>
+        <div class="accueil-card-conteneur">
+            <div class="card-container-image">
+                <div class="card-image"><img src="~/Content/Images/vignettes/resp.png" /></div>
+            </div>
+            <div class="card-desc-title">Candidats</div>
+            <div class="card-desc">Vous pourrez bien entendu ajouter/modifier/supprimer des candidats pour toutes les formations que vous aurez créées. Cet ajout sera simplifié grâce au numéro de licence qui permettra d'accéder à toutes les informations du candidat.</div>
+        </div>
+        <div class="accueil-card-conteneur">
+            <div class="card-container-image">
+                <div class="card-image"><img src="~/Content/Images/vignettes/download.png" /></div>
+            </div>
+            <div class="card-desc-title">Exportation</div>
+            <div class="card-desc">Tout au long des formations vous pourrez éditer les données d'une formation grâce à l'exportation au format excel. Vous y retrouverez vos différents candidats ainsi que leurs résultats.</div>
+        </div>
+        <div class="accueil-card-conteneur">
+            <div class="card-container-image">
+                <div class="card-image"><img src="~/Content/Images/vignettes/statistics.png" /></div>
+            </div>
+            <div class="card-desc-title">Statistiques et résultats</div>
+            <div class="card-desc">Vous pourrez saisir les résultats de chaque candidat dans les différents UC obtenus. Dans une version future il sera possible d'accéder à des statistiques sur toutes les formations au fil des années.</div>
+        </div>
+    </div>
+    @{Html.RenderPartial("_Footer");}
 </div>
-
-

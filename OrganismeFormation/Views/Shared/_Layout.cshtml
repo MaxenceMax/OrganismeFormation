@@ -32,7 +32,6 @@
     @Scripts.Render("~/bundles/jquery")
 </head>
 <body>
-
     <nav class="main-menu">
         <div class="logo_menu"></div>
         <div class="bar-blue-2px"></div>
@@ -129,6 +128,29 @@
                         </li>
                     </ul>
 
+                }
+                else if (role.Value == "AccesLigue")
+                {
+                    <ul>
+                        <li>
+                            <a id="parent" href="@Url.Action("HomeAdmin","Admin")">
+                                <i class="fa fa-home fa-lg" id="icon-home"></i>
+                                <span class="nav-text">Home</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a id="parent" href="@Url.Action("Index","Organismes")">
+                                <i class="fa fa-home fa-lg" id=""></i>
+                                <span class="nav-text">Liste des Organismes</span>
+                            </a>
+                        </li>
+                        <li class="darkerlishadow">
+                            <a id="parent" href="@Url.Action("Logout", "Authentification")">
+                                <i class="fa fa-clock-o fa-lg" id="icon-logout"></i>
+                                <span class="nav-text">Deconnexion</span>
+                            </a>
+                        </li>
+                    </ul>
                 }
             }
             else
