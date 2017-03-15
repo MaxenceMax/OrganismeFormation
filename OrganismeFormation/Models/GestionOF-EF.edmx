@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="GestionOFModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="GestionOFModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Admin">
           <Key>
             <PropertyRef Name="id" />
@@ -123,7 +123,6 @@
           <Property Name="PresidentId" Type="numeric" Precision="18" Scale="0" />
           <Property Name="CoordinateurId" Type="numeric" Precision="18" Scale="0" />
           <Property Name="DirecteurId" Type="numeric" Precision="18" Scale="0" />
-          <Property Name="ResponsableId" Type="numeric" Precision="18" Scale="0" />
           <Property Name="LigueId" Type="numeric" Precision="18" Scale="0" />
         </EntityType>
         <EntityType Name="Passages">
@@ -178,6 +177,16 @@
           <Property Name="Telephone" Type="varchar" MaxLength="50" />
           <Property Name="Email" Type="varchar" MaxLength="250" />
           <Property Name="Password" Type="varchar" MaxLength="100" />
+        </EntityType>
+        <!--Erreurs détectées durant la génération :
+avertissement 6002: La table/vue 'GestionOF.dbo.ResponsableOrganisme' n'a pas de clé primaire définie. La clé a été déduite et la définition a été créée en tant que table/vue en lecture seule.-->
+        <EntityType Name="ResponsableOrganisme">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="numeric" Precision="18" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ResponsableId" Type="numeric" Precision="18" Scale="0" />
+          <Property Name="OrganismeId" Type="numeric" Precision="18" Scale="0" />
         </EntityType>
         <EntityType Name="Resultats">
           <Key>
@@ -461,14 +470,26 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Organismes_Responsable">
+        <Association Name="FK_ResponsableOrganisme_Organismes">
+          <End Role="Organismes" Type="Self.Organismes" Multiplicity="0..1" />
+          <End Role="ResponsableOrganisme" Type="Self.ResponsableOrganisme" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Organismes">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ResponsableOrganisme">
+              <PropertyRef Name="OrganismeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ResponsableOrganisme_Responsable">
           <End Role="Responsable" Type="Self.Responsable" Multiplicity="0..1" />
-          <End Role="Organismes" Type="Self.Organismes" Multiplicity="*" />
+          <End Role="ResponsableOrganisme" Type="Self.ResponsableOrganisme" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Responsable">
               <PropertyRef Name="Id" />
             </Principal>
-            <Dependent Role="Organismes">
+            <Dependent Role="ResponsableOrganisme">
               <PropertyRef Name="ResponsableId" />
             </Dependent>
           </ReferentialConstraint>
@@ -506,6 +527,13 @@
           <EntitySet Name="Tuteurs" EntityType="Self.Tuteurs" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TypedeFinancements" EntityType="Self.TypedeFinancements" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TypedeFormations" EntityType="Self.TypedeFormations" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ResponsableOrganisme" EntityType="Self.ResponsableOrganisme" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [ResponsableOrganisme].[id] AS [id], 
+    [ResponsableOrganisme].[ResponsableId] AS [ResponsableId], 
+    [ResponsableOrganisme].[OrganismeId] AS [OrganismeId]
+    FROM [dbo].[ResponsableOrganisme] AS [ResponsableOrganisme]</DefiningQuery>
+          </EntitySet>
           <AssociationSet Name="FK__Candidats__Candi__3D5E1FD2" Association="Self.FK__Candidats__Candi__3D5E1FD2">
             <End Role="Candidats" EntitySet="Candidats" />
             <End Role="CandidatsFormations" EntitySet="CandidatsFormations" />
@@ -578,17 +606,20 @@
             <End Role="PresidentOrganisme" EntitySet="PresidentOrganisme" />
             <End Role="Organismes" EntitySet="Organismes" />
           </AssociationSet>
-          <AssociationSet Name="FK_Organismes_Responsable" Association="Self.FK_Organismes_Responsable">
-            <End Role="Responsable" EntitySet="Responsable" />
+          <AssociationSet Name="FK_ResponsableOrganisme_Organismes" Association="Self.FK_ResponsableOrganisme_Organismes">
             <End Role="Organismes" EntitySet="Organismes" />
+            <End Role="ResponsableOrganisme" EntitySet="ResponsableOrganisme" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ResponsableOrganisme_Responsable" Association="Self.FK_ResponsableOrganisme_Responsable">
+            <End Role="Responsable" EntitySet="Responsable" />
+            <End Role="ResponsableOrganisme" EntitySet="ResponsableOrganisme" />
           </AssociationSet>
           <AssociationSet Name="FK_ResultatsUC_Resultats" Association="Self.FK_ResultatsUC_Resultats">
             <End Role="Resultats" EntitySet="Resultats" />
             <End Role="ResultatsUC" EntitySet="ResultatsUC" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="GestionOFModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -674,8 +705,8 @@
           <NavigationProperty Name="TypedeFormations" Relationship="Self.FK__Formation__Typed__37A5467C" FromRole="Formations" ToRole="TypedeFormations" />
           <NavigationProperty Name="Habilitations" Relationship="Self.FK_Formations_Habilitations" FromRole="Formations" ToRole="Habilitations" />
           <NavigationProperty Name="Lieux" Relationship="Self.FK_Formations_Lieux" FromRole="Formations" ToRole="Lieux" />
-          <NavigationProperty Name="Organismes" Relationship="Self.FK_Formations_Organismes" FromRole="Formations" ToRole="Organismes" />
           <NavigationProperty Name="Personnel" Relationship="Self.FK_Formations_Personnel" FromRole="Formations" ToRole="Personnel" />
+          <NavigationProperty Name="Organismes" Relationship="GestionOFModel.FK_Formations_Organismes" FromRole="Formations" ToRole="Organismes" />
         </EntityType>
         <EntityType Name="Habilitations">
           <Key>
@@ -702,7 +733,7 @@
           <Property Name="Telephone" Type="String" MaxLength="10" FixedLength="true" Unicode="false" />
           <Property Name="Email" Type="String" MaxLength="100" FixedLength="true" Unicode="false" />
           <NavigationProperty Name="Formations" Relationship="Self.FK_Formations_Lieux" FromRole="Lieux" ToRole="Formations" />
-          <NavigationProperty Name="Organismes" Relationship="Self.FK__Organisme__Lieux__2B3F6F97" FromRole="Lieux" ToRole="Organismes" />
+          <NavigationProperty Name="Organismes" Relationship="GestionOFModel.FK__Organisme__Lieux__2B3F6F97" FromRole="Lieux" ToRole="Organismes" />
         </EntityType>
         <EntityType Name="Ligues">
           <Key>
@@ -714,29 +745,7 @@
           <Property Name="login" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="password" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
           <Property Name="email" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="Organismes" Relationship="Self.FK_Organismes_Ligues" FromRole="Ligues" ToRole="Organismes" />
-        </EntityType>
-        <EntityType Name="Organismes">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Decimal" Precision="18" Scale="0" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Libelle" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="NumeroDeclaration" Type="String" MaxLength="20" FixedLength="true" Unicode="true" />
-          <Property Name="AnneeDeclaration" Type="String" MaxLength="4" FixedLength="true" Unicode="false" />
-          <Property Name="LieuxId" Type="Decimal" Precision="18" Scale="0" />
-          <Property Name="PresidentId" Type="Decimal" Precision="18" Scale="0" />
-          <Property Name="CoordinateurId" Type="Decimal" Precision="18" Scale="0" />
-          <Property Name="DirecteurId" Type="Decimal" Precision="18" Scale="0" />
-          <Property Name="ResponsableId" Type="Decimal" Precision="18" Scale="0" />
-          <Property Name="LigueId" Type="Decimal" Precision="18" Scale="0" />
-          <NavigationProperty Name="Formations" Relationship="Self.FK_Formations_Organismes" FromRole="Organismes" ToRole="Formations" />
-          <NavigationProperty Name="Lieux" Relationship="Self.FK__Organisme__Lieux__2B3F6F97" FromRole="Organismes" ToRole="Lieux" />
-          <NavigationProperty Name="Ligues" Relationship="Self.FK_Organismes_Ligues" FromRole="Organismes" ToRole="Ligues" />
-          <NavigationProperty Name="Personnel" Relationship="Self.FK_Organismes_Personnel" FromRole="Organismes" ToRole="Personnel" />
-          <NavigationProperty Name="Personnel1" Relationship="Self.FK_Organismes_Personnel1" FromRole="Organismes" ToRole="Personnel" />
-          <NavigationProperty Name="PresidentOrganisme" Relationship="Self.FK_Organismes_PresidentOrganisme" FromRole="Organismes" ToRole="PresidentOrganisme" />
-          <NavigationProperty Name="Responsable" Relationship="Self.FK_Organismes_Responsable" FromRole="Organismes" ToRole="Responsable" />
+          <NavigationProperty Name="Organismes" Relationship="GestionOFModel.FK_Organismes_Ligues" FromRole="Ligues" ToRole="Organismes" />
         </EntityType>
         <EntityType Name="Passages">
           <Key>
@@ -756,8 +765,8 @@
           <Property Name="Telephone" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="Email" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="Formations" Relationship="Self.FK_Formations_Personnel" FromRole="Personnel" ToRole="Formations" />
-          <NavigationProperty Name="Organismes" Relationship="Self.FK_Organismes_Personnel" FromRole="Personnel" ToRole="Organismes" />
-          <NavigationProperty Name="Organismes1" Relationship="Self.FK_Organismes_Personnel1" FromRole="Personnel" ToRole="Organismes" />
+          <NavigationProperty Name="Organismes" Relationship="GestionOFModel.FK_Organismes_Personnel" FromRole="Personnel" ToRole="Organismes" />
+          <NavigationProperty Name="Organismes1" Relationship="GestionOFModel.FK_Organismes_Personnel1" FromRole="Personnel" ToRole="Organismes" />
         </EntityType>
         <EntityType Name="PresidentOrganisme">
           <Key>
@@ -769,7 +778,7 @@
           <Property Name="Telephone" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Fonction" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Organismes" Relationship="Self.FK_Organismes_PresidentOrganisme" FromRole="PresidentOrganisme" ToRole="Organismes" />
+          <NavigationProperty Name="Organismes" Relationship="GestionOFModel.FK_Organismes_PresidentOrganisme" FromRole="PresidentOrganisme" ToRole="Organismes" />
         </EntityType>
         <EntityType Name="Prestataires">
           <Key>
@@ -783,19 +792,6 @@
           <Property Name="GestionAdministrative" Type="Boolean" />
           <Property Name="Autre" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="LieuxId" Type="Decimal" Precision="18" Scale="0" />
-        </EntityType>
-        <EntityType Name="Responsable">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Decimal" Precision="18" Scale="0" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Nom" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Prenom" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Licence" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Telephone" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Email" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
-          <Property Name="Password" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="Organismes" Relationship="Self.FK_Organismes_Responsable" FromRole="Responsable" ToRole="Organismes" />
         </EntityType>
         <EntityType Name="Resultats">
           <Key>
@@ -992,18 +988,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Formations_Organismes">
-          <End Role="Organismes" Type="Self.Organismes" Multiplicity="0..1" />
-          <End Role="Formations" Type="Self.Formations" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Organismes">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Formations">
-              <PropertyRef Name="OrganismeId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_Formations_Personnel">
           <End Role="Personnel" Type="Self.Personnel" Multiplicity="0..1" />
           <End Role="Formations" Type="Self.Formations" Multiplicity="*" />
@@ -1013,78 +997,6 @@
             </Principal>
             <Dependent Role="Formations">
               <PropertyRef Name="IdOrganisateurpeda" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__Organisme__Lieux__2B3F6F97">
-          <End Role="Lieux" Type="Self.Lieux" Multiplicity="0..1" />
-          <End Role="Organismes" Type="Self.Organismes" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Lieux">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Organismes">
-              <PropertyRef Name="LieuxId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Organismes_Ligues">
-          <End Role="Ligues" Type="Self.Ligues" Multiplicity="0..1" />
-          <End Role="Organismes" Type="Self.Organismes" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Ligues">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Organismes">
-              <PropertyRef Name="LigueId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Organismes_Personnel">
-          <End Role="Personnel" Type="Self.Personnel" Multiplicity="0..1" />
-          <End Role="Organismes" Type="Self.Organismes" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Personnel">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Organismes">
-              <PropertyRef Name="CoordinateurId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Organismes_Personnel1">
-          <End Role="Personnel" Type="Self.Personnel" Multiplicity="0..1" />
-          <End Role="Organismes" Type="Self.Organismes" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Personnel">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Organismes">
-              <PropertyRef Name="DirecteurId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Organismes_PresidentOrganisme">
-          <End Role="PresidentOrganisme" Type="Self.PresidentOrganisme" Multiplicity="0..1" />
-          <End Role="Organismes" Type="Self.Organismes" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="PresidentOrganisme">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Organismes">
-              <PropertyRef Name="PresidentId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Organismes_Responsable">
-          <End Role="Responsable" Type="Self.Responsable" Multiplicity="0..1" />
-          <End Role="Organismes" Type="Self.Organismes" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Responsable">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Organismes">
-              <PropertyRef Name="ResponsableId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1120,12 +1032,10 @@
           <EntitySet Name="Habilitations" EntityType="Self.Habilitations" />
           <EntitySet Name="Lieux" EntityType="Self.Lieux" />
           <EntitySet Name="Ligues" EntityType="Self.Ligues" />
-          <EntitySet Name="Organismes" EntityType="Self.Organismes" />
           <EntitySet Name="Passages" EntityType="Self.Passages" />
           <EntitySet Name="Personnel" EntityType="Self.Personnel" />
           <EntitySet Name="PresidentOrganisme" EntityType="Self.PresidentOrganisme" />
           <EntitySet Name="Prestataires" EntityType="Self.Prestataires" />
-          <EntitySet Name="Responsable" EntityType="Self.Responsable" />
           <EntitySet Name="Resultats" EntityType="Self.Resultats" />
           <EntitySet Name="ResultatsUC" EntityType="Self.ResultatsUC" />
           <EntitySet Name="Sexes" EntityType="Self.Sexes" />
@@ -1173,37 +1083,9 @@
             <End Role="Lieux" EntitySet="Lieux" />
             <End Role="Formations" EntitySet="Formations" />
           </AssociationSet>
-          <AssociationSet Name="FK_Formations_Organismes" Association="Self.FK_Formations_Organismes">
-            <End Role="Organismes" EntitySet="Organismes" />
-            <End Role="Formations" EntitySet="Formations" />
-          </AssociationSet>
           <AssociationSet Name="FK_Formations_Personnel" Association="Self.FK_Formations_Personnel">
             <End Role="Personnel" EntitySet="Personnel" />
             <End Role="Formations" EntitySet="Formations" />
-          </AssociationSet>
-          <AssociationSet Name="FK__Organisme__Lieux__2B3F6F97" Association="Self.FK__Organisme__Lieux__2B3F6F97">
-            <End Role="Lieux" EntitySet="Lieux" />
-            <End Role="Organismes" EntitySet="Organismes" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Organismes_Ligues" Association="Self.FK_Organismes_Ligues">
-            <End Role="Ligues" EntitySet="Ligues" />
-            <End Role="Organismes" EntitySet="Organismes" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Organismes_Personnel" Association="Self.FK_Organismes_Personnel">
-            <End Role="Personnel" EntitySet="Personnel" />
-            <End Role="Organismes" EntitySet="Organismes" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Organismes_Personnel1" Association="Self.FK_Organismes_Personnel1">
-            <End Role="Personnel" EntitySet="Personnel" />
-            <End Role="Organismes" EntitySet="Organismes" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Organismes_PresidentOrganisme" Association="Self.FK_Organismes_PresidentOrganisme">
-            <End Role="PresidentOrganisme" EntitySet="PresidentOrganisme" />
-            <End Role="Organismes" EntitySet="Organismes" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Organismes_Responsable" Association="Self.FK_Organismes_Responsable">
-            <End Role="Responsable" EntitySet="Responsable" />
-            <End Role="Organismes" EntitySet="Organismes" />
           </AssociationSet>
           <AssociationSet Name="FK__Resultats__Passa__3B75D760" Association="Self.FK__Resultats__Passa__3B75D760">
             <End Role="Passages" EntitySet="Passages" />
@@ -1213,7 +1095,182 @@
             <End Role="Resultats" EntitySet="Resultats" />
             <End Role="ResultatsUC" EntitySet="ResultatsUC" />
           </AssociationSet>
+          <EntitySet Name="Responsable" EntityType="GestionOFModel.Responsable" />
+          <EntitySet Name="ResponsableOrganisme" EntityType="GestionOFModel.ResponsableOrganisme" />
+          <AssociationSet Name="FK_ResponsableOrganisme_Responsable" Association="GestionOFModel.FK_ResponsableOrganisme_Responsable">
+            <End Role="Responsable" EntitySet="Responsable" />
+            <End Role="ResponsableOrganisme" EntitySet="ResponsableOrganisme" />
+          </AssociationSet>
+          <EntitySet Name="Organismes" EntityType="GestionOFModel.Organismes" />
+          <AssociationSet Name="FK_Formations_Organismes" Association="GestionOFModel.FK_Formations_Organismes">
+            <End Role="Organismes" EntitySet="Organismes" />
+            <End Role="Formations" EntitySet="Formations" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Organisme__Lieux__2B3F6F97" Association="GestionOFModel.FK__Organisme__Lieux__2B3F6F97">
+            <End Role="Lieux" EntitySet="Lieux" />
+            <End Role="Organismes" EntitySet="Organismes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Organismes_Ligues" Association="GestionOFModel.FK_Organismes_Ligues">
+            <End Role="Ligues" EntitySet="Ligues" />
+            <End Role="Organismes" EntitySet="Organismes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Organismes_Personnel" Association="GestionOFModel.FK_Organismes_Personnel">
+            <End Role="Personnel" EntitySet="Personnel" />
+            <End Role="Organismes" EntitySet="Organismes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Organismes_Personnel1" Association="GestionOFModel.FK_Organismes_Personnel1">
+            <End Role="Personnel" EntitySet="Personnel" />
+            <End Role="Organismes" EntitySet="Organismes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Organismes_PresidentOrganisme" Association="GestionOFModel.FK_Organismes_PresidentOrganisme">
+            <End Role="PresidentOrganisme" EntitySet="PresidentOrganisme" />
+            <End Role="Organismes" EntitySet="Organismes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ResponsableOrganisme_Organismes" Association="GestionOFModel.FK_ResponsableOrganisme_Organismes">
+            <End Role="Organismes" EntitySet="Organismes" />
+            <End Role="ResponsableOrganisme" EntitySet="ResponsableOrganisme" />
+          </AssociationSet>
         </EntityContainer>
+        <EntityType Name="Responsable">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Decimal" Nullable="false" Precision="18" Scale="0" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nom" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Prenom" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Licence" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Telephone" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Email" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="Password" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="ResponsableOrganisme" Relationship="GestionOFModel.FK_ResponsableOrganisme_Responsable" FromRole="Responsable" ToRole="ResponsableOrganisme" />
+        </EntityType>
+        <EntityType Name="ResponsableOrganisme">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Decimal" Nullable="false" Precision="18" Scale="0" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ResponsableId" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="OrganismeId" Type="Decimal" Precision="18" Scale="0" />
+          <NavigationProperty Name="Responsable" Relationship="GestionOFModel.FK_ResponsableOrganisme_Responsable" FromRole="ResponsableOrganisme" ToRole="Responsable" />
+          <NavigationProperty Name="Organismes" Relationship="GestionOFModel.FK_ResponsableOrganisme_Organismes" FromRole="ResponsableOrganisme" ToRole="Organismes" />
+        </EntityType>
+        <Association Name="FK_ResponsableOrganisme_Responsable">
+          <End Type="GestionOFModel.Responsable" Role="Responsable" Multiplicity="0..1" />
+          <End Type="GestionOFModel.ResponsableOrganisme" Role="ResponsableOrganisme" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Responsable">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ResponsableOrganisme">
+              <PropertyRef Name="ResponsableId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Organismes">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Decimal" Nullable="false" Precision="18" Scale="0" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Libelle" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="NumeroDeclaration" Type="String" MaxLength="20" FixedLength="true" Unicode="true" />
+          <Property Name="AnneeDeclaration" Type="String" MaxLength="4" FixedLength="true" Unicode="false" />
+          <Property Name="LieuxId" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="PresidentId" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="CoordinateurId" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="DirecteurId" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="LigueId" Type="Decimal" Precision="18" Scale="0" />
+          <NavigationProperty Name="Formations" Relationship="GestionOFModel.FK_Formations_Organismes" FromRole="Organismes" ToRole="Formations" />
+          <NavigationProperty Name="Lieux" Relationship="GestionOFModel.FK__Organisme__Lieux__2B3F6F97" FromRole="Organismes" ToRole="Lieux" />
+          <NavigationProperty Name="Ligues" Relationship="GestionOFModel.FK_Organismes_Ligues" FromRole="Organismes" ToRole="Ligues" />
+          <NavigationProperty Name="Personnel" Relationship="GestionOFModel.FK_Organismes_Personnel" FromRole="Organismes" ToRole="Personnel" />
+          <NavigationProperty Name="Personnel1" Relationship="GestionOFModel.FK_Organismes_Personnel1" FromRole="Organismes" ToRole="Personnel" />
+          <NavigationProperty Name="PresidentOrganisme" Relationship="GestionOFModel.FK_Organismes_PresidentOrganisme" FromRole="Organismes" ToRole="PresidentOrganisme" />
+          <NavigationProperty Name="ResponsableOrganisme" Relationship="GestionOFModel.FK_ResponsableOrganisme_Organismes" FromRole="Organismes" ToRole="ResponsableOrganisme" />
+        </EntityType>
+        <Association Name="FK_Formations_Organismes">
+          <End Type="GestionOFModel.Organismes" Role="Organismes" Multiplicity="0..1" />
+          <End Type="GestionOFModel.Formations" Role="Formations" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Organismes">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Formations">
+              <PropertyRef Name="OrganismeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Organisme__Lieux__2B3F6F97">
+          <End Type="GestionOFModel.Lieux" Role="Lieux" Multiplicity="0..1" />
+          <End Type="GestionOFModel.Organismes" Role="Organismes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Lieux">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Organismes">
+              <PropertyRef Name="LieuxId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Organismes_Ligues">
+          <End Type="GestionOFModel.Ligues" Role="Ligues" Multiplicity="0..1" />
+          <End Type="GestionOFModel.Organismes" Role="Organismes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Ligues">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Organismes">
+              <PropertyRef Name="LigueId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Organismes_Personnel">
+          <End Type="GestionOFModel.Personnel" Role="Personnel" Multiplicity="0..1" />
+          <End Type="GestionOFModel.Organismes" Role="Organismes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Personnel">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Organismes">
+              <PropertyRef Name="CoordinateurId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Organismes_Personnel1">
+          <End Type="GestionOFModel.Personnel" Role="Personnel" Multiplicity="0..1" />
+          <End Type="GestionOFModel.Organismes" Role="Organismes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Personnel">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Organismes">
+              <PropertyRef Name="DirecteurId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Organismes_PresidentOrganisme">
+          <End Type="GestionOFModel.PresidentOrganisme" Role="PresidentOrganisme" Multiplicity="0..1" />
+          <End Type="GestionOFModel.Organismes" Role="Organismes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PresidentOrganisme">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Organismes">
+              <PropertyRef Name="PresidentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ResponsableOrganisme_Organismes">
+          <End Type="GestionOFModel.Organismes" Role="Organismes" Multiplicity="0..1" />
+          <End Type="GestionOFModel.ResponsableOrganisme" Role="ResponsableOrganisme" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Organismes">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ResponsableOrganisme">
+              <PropertyRef Name="OrganismeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1333,22 +1390,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Organismes">
-            <EntityTypeMapping TypeName="GestionOFModel.Organismes">
-              <MappingFragment StoreEntitySet="Organismes">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="Libelle" ColumnName="Libelle" />
-                <ScalarProperty Name="NumeroDeclaration" ColumnName="NumeroDeclaration" />
-                <ScalarProperty Name="AnneeDeclaration" ColumnName="AnneeDeclaration" />
-                <ScalarProperty Name="LieuxId" ColumnName="LieuxId" />
-                <ScalarProperty Name="PresidentId" ColumnName="PresidentId" />
-                <ScalarProperty Name="CoordinateurId" ColumnName="CoordinateurId" />
-                <ScalarProperty Name="DirecteurId" ColumnName="DirecteurId" />
-                <ScalarProperty Name="ResponsableId" ColumnName="ResponsableId" />
-                <ScalarProperty Name="LigueId" ColumnName="LigueId" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="Passages">
             <EntityTypeMapping TypeName="GestionOFModel.Passages">
               <MappingFragment StoreEntitySet="Passages">
@@ -1391,19 +1432,6 @@
                 <ScalarProperty Name="GestionAdministrative" ColumnName="GestionAdministrative" />
                 <ScalarProperty Name="Autre" ColumnName="Autre" />
                 <ScalarProperty Name="LieuxId" ColumnName="LieuxId" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Responsable">
-            <EntityTypeMapping TypeName="GestionOFModel.Responsable">
-              <MappingFragment StoreEntitySet="Responsable">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="Nom" ColumnName="Nom" />
-                <ScalarProperty Name="Prenom" ColumnName="Prenom" />
-                <ScalarProperty Name="Licence" ColumnName="Licence" />
-                <ScalarProperty Name="Telephone" ColumnName="Telephone" />
-                <ScalarProperty Name="Email" ColumnName="Email" />
-                <ScalarProperty Name="Password" ColumnName="Password" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1477,6 +1505,43 @@
               <MappingFragment StoreEntitySet="TypedeFormations">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Libelle" ColumnName="Libelle" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Responsable">
+            <EntityTypeMapping TypeName="GestionOFModel.Responsable">
+              <MappingFragment StoreEntitySet="Responsable">
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Telephone" ColumnName="Telephone" />
+                <ScalarProperty Name="Licence" ColumnName="Licence" />
+                <ScalarProperty Name="Prenom" ColumnName="Prenom" />
+                <ScalarProperty Name="Nom" ColumnName="Nom" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ResponsableOrganisme">
+            <EntityTypeMapping TypeName="GestionOFModel.ResponsableOrganisme">
+              <MappingFragment StoreEntitySet="ResponsableOrganisme">
+                <ScalarProperty Name="OrganismeId" ColumnName="OrganismeId" />
+                <ScalarProperty Name="ResponsableId" ColumnName="ResponsableId" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Organismes">
+            <EntityTypeMapping TypeName="GestionOFModel.Organismes">
+              <MappingFragment StoreEntitySet="Organismes">
+                <ScalarProperty Name="LigueId" ColumnName="LigueId" />
+                <ScalarProperty Name="DirecteurId" ColumnName="DirecteurId" />
+                <ScalarProperty Name="CoordinateurId" ColumnName="CoordinateurId" />
+                <ScalarProperty Name="PresidentId" ColumnName="PresidentId" />
+                <ScalarProperty Name="LieuxId" ColumnName="LieuxId" />
+                <ScalarProperty Name="AnneeDeclaration" ColumnName="AnneeDeclaration" />
+                <ScalarProperty Name="NumeroDeclaration" ColumnName="NumeroDeclaration" />
+                <ScalarProperty Name="Libelle" ColumnName="Libelle" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

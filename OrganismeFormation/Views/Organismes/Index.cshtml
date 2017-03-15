@@ -26,18 +26,6 @@
         <th>
             @Html.DisplayNameFor(model => model.Ligues.Libelle)
         </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Personnel.Nom)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Personnel1.Nom)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.PresidentOrganisme.Telephone)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Responsable.Nom)
-        </th>
         <th></th>
     </tr>
 
@@ -57,18 +45,6 @@
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.Ligues.Libelle)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Personnel.Nom)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Personnel1.Nom)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.PresidentOrganisme.Telephone)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Responsable.Nom)
         </td>
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |

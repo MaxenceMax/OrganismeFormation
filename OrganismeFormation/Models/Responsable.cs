@@ -17,7 +17,7 @@ namespace OrganismeFormation.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Responsable()
         {
-            this.Organismes = new HashSet<Organismes>();
+            this.ResponsableOrganisme = new HashSet<ResponsableOrganisme>();
         }
     
         public decimal Id { get; set; }
@@ -29,6 +29,6 @@ namespace OrganismeFormation.Models
         public string Password { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Organismes> Organismes { get; set; }
+        public virtual ICollection<ResponsableOrganisme> ResponsableOrganisme { get; set; }
     }
 }

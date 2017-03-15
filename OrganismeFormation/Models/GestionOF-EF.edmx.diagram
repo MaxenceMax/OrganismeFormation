@@ -5,26 +5,24 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="0cf211130312492e903cbf8afcc13602" Name="Diagram1" ZoomLevel="63">
-        <EntityTypeShape EntityType="GestionOFModel.Admin" Width="1.5" PointX="0.75" PointY="1.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="GestionOFModel.Candidats" Width="1.5" PointX="6" PointY="20.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="GestionOFModel.CandidatsFormations" Width="1.5" PointX="8.25" PointY="5.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="GestionOFModel.Formations" Width="1.5" PointX="3" PointY="4.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="GestionOFModel.Habilitations" Width="1.5" PointX="0.75" PointY="13.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="GestionOFModel.Lieux" Width="1.5" PointX="0.75" PointY="16.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="GestionOFModel.Ligues" Width="1.5" PointX="3.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="GestionOFModel.Organismes" Width="1.5" PointX="6" PointY="6" IsExpanded="true" />
-        <EntityTypeShape EntityType="GestionOFModel.Passages" Width="1.5" PointX="8.25" PointY="2.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="GestionOFModel.Personnel" Width="1.5" PointX="0.75" PointY="6.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="GestionOFModel.PresidentOrganisme" Width="1.5" PointX="3.75" PointY="12.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="GestionOFModel.Prestataires" Width="1.5" PointX="10.75" PointY="1.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="GestionOFModel.Responsable" Width="1.5" PointX="3.75" PointY="16" IsExpanded="true" />
-        <EntityTypeShape EntityType="GestionOFModel.Resultats" Width="1.5" PointX="10.5" PointY="6.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="GestionOFModel.ResultatsUC" Width="1.5" PointX="12.75" PointY="7" IsExpanded="true" />
-        <EntityTypeShape EntityType="GestionOFModel.Sexes" Width="1.5" PointX="3.75" PointY="20.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="GestionOFModel.sysdiagrams" Width="1.5" PointX="8.75" PointY="11.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="GestionOFModel.Tuteurs" Width="1.5" PointX="6" PointY="11.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="GestionOFModel.TypedeFinancements" Width="1.5" PointX="6" PointY="14.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="GestionOFModel.TypedeFormations" Width="1.5" PointX="0.75" PointY="20" IsExpanded="true" />
+        <EntityTypeShape EntityType="GestionOFModel.Admin" Width="1.5" PointX="9.75" PointY="1.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="GestionOFModel.Candidats" Width="1.5" PointX="5.25" PointY="22" IsExpanded="true" />
+        <EntityTypeShape EntityType="GestionOFModel.CandidatsFormations" Width="1.5" PointX="7.5" PointY="5.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="GestionOFModel.Formations" Width="1.5" PointX="5.25" PointY="4.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="GestionOFModel.Habilitations" Width="1.5" PointX="3" PointY="12.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="GestionOFModel.Lieux" Width="1.5" PointX="3" PointY="16.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="GestionOFModel.Ligues" Width="1.5" PointX="0.75" PointY="3" IsExpanded="true" />
+        <EntityTypeShape EntityType="GestionOFModel.Passages" Width="1.5" PointX="7.5" PointY="2" IsExpanded="true" />
+        <EntityTypeShape EntityType="GestionOFModel.Personnel" Width="1.5" PointX="0.75" PointY="6.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="GestionOFModel.PresidentOrganisme" Width="1.5" PointX="0.75" PointY="10.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="GestionOFModel.Prestataires" Width="1.5" PointX="9.75" PointY="10.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="GestionOFModel.Resultats" Width="1.5" PointX="9.75" PointY="6.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="GestionOFModel.ResultatsUC" Width="1.5" PointX="12" PointY="6.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="GestionOFModel.Sexes" Width="1.5" PointX="3" PointY="22.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="GestionOFModel.sysdiagrams" Width="1.5" PointX="11.75" PointY="1.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="GestionOFModel.Tuteurs" Width="1.5" PointX="5.25" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="GestionOFModel.TypedeFinancements" Width="1.5" PointX="5.25" PointY="12.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="GestionOFModel.TypedeFormations" Width="1.5" PointX="3" PointY="19.375" IsExpanded="true" />
         <AssociationConnector Association="GestionOFModel.FK__Candidats__Candi__3D5E1FD2" ManuallyRouted="false" />
         <AssociationConnector Association="GestionOFModel.FK__Candidats__Sexes__3A81B327" ManuallyRouted="false" />
         <AssociationConnector Association="GestionOFModel.FK__Candidats__Forma__403A8C7D" ManuallyRouted="false" />
@@ -35,16 +33,20 @@
         <AssociationConnector Association="GestionOFModel.FK__Formation__Typed__37A5467C" ManuallyRouted="false" />
         <AssociationConnector Association="GestionOFModel.FK_Formations_Habilitations" ManuallyRouted="false" />
         <AssociationConnector Association="GestionOFModel.FK_Formations_Lieux" ManuallyRouted="false" />
-        <AssociationConnector Association="GestionOFModel.FK_Formations_Organismes" ManuallyRouted="false" />
         <AssociationConnector Association="GestionOFModel.FK_Formations_Personnel" ManuallyRouted="false" />
-        <AssociationConnector Association="GestionOFModel.FK__Organisme__Lieux__2B3F6F97" ManuallyRouted="false" />
-        <AssociationConnector Association="GestionOFModel.FK_Organismes_Ligues" ManuallyRouted="false" />
-        <AssociationConnector Association="GestionOFModel.FK_Organismes_Personnel" ManuallyRouted="false" />
-        <AssociationConnector Association="GestionOFModel.FK_Organismes_Personnel1" ManuallyRouted="false" />
-        <AssociationConnector Association="GestionOFModel.FK_Organismes_PresidentOrganisme" ManuallyRouted="false" />
-        <AssociationConnector Association="GestionOFModel.FK_Organismes_Responsable" ManuallyRouted="false" />
         <AssociationConnector Association="GestionOFModel.FK__Resultats__Passa__3B75D760" ManuallyRouted="false" />
         <AssociationConnector Association="GestionOFModel.FK_ResultatsUC_Resultats" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="GestionOFModel.Responsable" Width="1.5" PointX="5.625" PointY="15.125" />
+        <EntityTypeShape EntityType="GestionOFModel.ResponsableOrganisme" Width="1.5" PointX="8.625" PointY="15.375" />
+        <AssociationConnector Association="GestionOFModel.FK_ResponsableOrganisme_Responsable" />
+        <EntityTypeShape EntityType="GestionOFModel.Organismes" Width="1.5" PointX="11.25" PointY="13.75" />
+        <AssociationConnector Association="GestionOFModel.FK_Formations_Organismes" />
+        <AssociationConnector Association="GestionOFModel.FK__Organisme__Lieux__2B3F6F97" />
+        <AssociationConnector Association="GestionOFModel.FK_Organismes_Ligues" />
+        <AssociationConnector Association="GestionOFModel.FK_Organismes_Personnel" />
+        <AssociationConnector Association="GestionOFModel.FK_Organismes_Personnel1" />
+        <AssociationConnector Association="GestionOFModel.FK_Organismes_PresidentOrganisme" />
+        <AssociationConnector Association="GestionOFModel.FK_ResponsableOrganisme_Organismes" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

@@ -18,6 +18,7 @@ namespace OrganismeFormation.Models
         public Organismes()
         {
             this.Formations = new HashSet<Formations>();
+            this.ResponsableOrganisme = new HashSet<ResponsableOrganisme>();
         }
     
         public decimal Id { get; set; }
@@ -28,7 +29,6 @@ namespace OrganismeFormation.Models
         public Nullable<decimal> PresidentId { get; set; }
         public Nullable<decimal> CoordinateurId { get; set; }
         public Nullable<decimal> DirecteurId { get; set; }
-        public Nullable<decimal> ResponsableId { get; set; }
         public Nullable<decimal> LigueId { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
@@ -38,6 +38,7 @@ namespace OrganismeFormation.Models
         public virtual Personnel Personnel { get; set; }
         public virtual Personnel Personnel1 { get; set; }
         public virtual PresidentOrganisme PresidentOrganisme { get; set; }
-        public virtual Responsable Responsable { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<ResponsableOrganisme> ResponsableOrganisme { get; set; }
     }
 }
