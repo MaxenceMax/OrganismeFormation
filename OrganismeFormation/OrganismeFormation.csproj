@@ -207,7 +207,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LiguesController.cs" />
     <Compile Include="Controllers\OrganismesController.cs" />
-    <Compile Include="Controllers\ResponsableController.cs" />
+    <Compile Include="Controllers\ResponsablesController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -411,14 +411,12 @@
     <Content Include="Views\Web.config" />
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Responsable\HomeResponsable.cshtml" />
     <Content Include="Views\Authentification\Login.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Admin\HomeAdmin.cshtml" />
     <Content Include="Views\Shared\_Footer.cshtml" />
     <Content Include="Views\Admin\AjoutResponsable.cshtml" />
     <Content Include="Views\Admin\ListeResponsable.cshtml" />
-    <Content Include="Views\Responsable\Organisme.cshtml" />
     <Content Include="Views\Admin\ModificationResponsable.cshtml" />
     <Content Include="Views\Ligues\Create.cshtml" />
     <Content Include="Views\Ligues\Delete.cshtml" />
@@ -431,6 +429,11 @@
     <Content Include="Views\Organismes\Details.cshtml" />
     <Content Include="Views\Organismes\Edit.cshtml" />
     <Content Include="Views\Organismes\Index.cshtml" />
+    <Content Include="Views\Responsables\Create.cshtml" />
+    <Content Include="Views\Responsables\Delete.cshtml" />
+    <Content Include="Views\Responsables\Details.cshtml" />
+    <Content Include="Views\Responsables\Edit.cshtml" />
+    <Content Include="Views\Responsables\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
