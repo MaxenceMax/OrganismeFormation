@@ -205,6 +205,7 @@
     <Compile Include="Controllers\AuthentificationController.cs" />
     <Compile Include="Controllers\FormationController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\LieuxController.cs" />
     <Compile Include="Controllers\LiguesController.cs" />
     <Compile Include="Controllers\OrganismesController.cs" />
     <Compile Include="Controllers\ResponsablesController.cs" />
@@ -434,6 +435,11 @@
     <Content Include="Views\Responsables\Details.cshtml" />
     <Content Include="Views\Responsables\Edit.cshtml" />
     <Content Include="Views\Responsables\Index.cshtml" />
+    <Content Include="Views\Lieux\Create.cshtml" />
+    <Content Include="Views\Lieux\Delete.cshtml" />
+    <Content Include="Views\Lieux\Details.cshtml" />
+    <Content Include="Views\Lieux\Edit.cshtml" />
+    <Content Include="Views\Lieux\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

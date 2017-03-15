@@ -39,13 +39,17 @@ namespace OrganismeFormation.Controllers
         // GET: Organismes/Create
         public ActionResult Create()
         {
-            ViewBag.LieuxId = new SelectList(db.Lieux, "Id", "Adresse");
-            ViewBag.LigueId = new SelectList(db.Ligues, "Id", "Libelle");
-            ViewBag.CoordinateurId = new SelectList(db.Personnel, "Id", "Nom");
-            ViewBag.DirecteurId = new SelectList(db.Personnel, "Id", "Nom");
-            ViewBag.PresidentId = new SelectList(db.PresidentOrganisme, "Id", "Telephone");
-            ViewBag.ResponsableId = new SelectList(db.Responsable, "Id", "Nom");
-            return View();
+            //ViewBag.LieuxId = new SelectList(db.Lieux, "Id", "Adresse");
+            //ViewBag.LigueId = new SelectList(db.Ligues, "Id", "Libelle");
+            //ViewBag.CoordinateurId = new SelectList(db.Personnel, "Id", "Nom");
+            //ViewBag.DirecteurId = new SelectList(db.Personnel, "Id", "Nom");
+            //ViewBag.PresidentId = new SelectList(db.PresidentOrganisme, "Id", "Telephone");
+            //ViewBag.ResponsableId = new SelectList(db.Responsable, "Id", "Nom");
+
+            Organismes orga = new Organismes();
+            Lieux lieux = new Lieux();
+            orga.Lieux = lieux;
+            return View(orga);
         }
 
         // POST: Organismes/Create
@@ -53,7 +57,7 @@ namespace OrganismeFormation.Controllers
         // plus de détails, voir  http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Libelle,NumeroDeclaration,AnneeDeclaration,LieuxId,PresidentId,CoordinateurId,DirecteurId,ResponsableId,LigueId")] Organismes organismes)
+        public ActionResult Create(Organismes organismes)
         {
             if (ModelState.IsValid)
             {
