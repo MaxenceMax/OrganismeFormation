@@ -73,7 +73,7 @@ namespace OrganismeFormation.Controllers
                 if (state.isLigue)
                     return RedirectToAction("Home", "AccesLigue");
                 else
-                    return RedirectToAction("HomeResponsable", "Responsable");
+                    return RedirectToAction("Home", "AccesResponsable");
 
             }
             
@@ -82,21 +82,21 @@ namespace OrganismeFormation.Controllers
 
         private IEnumerable<Claim> LoadRolesAdmin(string login)
         {
-
             yield return new Claim(ClaimTypes.Role, "Admin");
 
         }
 
         private IEnumerable<Claim> LoadRolesResponsable(string login)
         {
-
+            GestionOFEntities db = new GestionOFEntities();
+            Session["responsable"] = db.Responsable.Where(a => a.Licence == login);
             yield return new Claim(ClaimTypes.Role, "Responsable");
-
         }
 
         private IEnumerable<Claim> LoadRolesAccesLigue(string login)
         {
-
+            GestionOFEntities db = new GestionOFEntities();
+            Session["login"] = db.Ligues.Where(a => a.login == login);
             yield return new Claim(ClaimTypes.Role, "AccesLigue");
 
         }
@@ -128,6 +128,7 @@ namespace OrganismeFormation.Controllers
             var ctx = Request.GetOwinContext();
             var authenticationManager = ctx.Authentication;
             authenticationManager.SignOut();
+            Session.Clear();
 
             // Rediriger vers la page d'accueil :
             return RedirectToAction("Index", "Home");
