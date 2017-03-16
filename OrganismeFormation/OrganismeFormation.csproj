@@ -439,12 +439,9 @@
     <Content Include="Views\Lieux\Details.cshtml" />
     <Content Include="Views\Lieux\Edit.cshtml" />
     <Content Include="Views\Lieux\Index.cshtml" />
-<<<<<<< HEAD
     <Content Include="Views\Organismes\Create2.cshtml" />
-=======
     <Content Include="Views\AccesResponsable\Home.cshtml" />
     <Content Include="Views\AccesResponsable\Organismes.cshtml" />
->>>>>>> 7374f852cdae962a1fda2a1a4dae37f7415d510c
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
