@@ -76,43 +76,12 @@
                 @Html.DropDownList("LieuxId", null, htmlAttributes: new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.LieuxId, "", new { @class = "text-danger" })
             </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.PresidentId, "PresidentId", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DropDownList("PresidentId", null, htmlAttributes: new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.PresidentId, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.CoordinateurId, "CoordinateurId", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DropDownList("CoordinateurId", null, htmlAttributes: new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.CoordinateurId, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.DirecteurId, "DirecteurId", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DropDownList("DirecteurId", null, htmlAttributes: new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.DirecteurId, "", new { @class = "text-danger" })
-            </div>
         </div>*@
 
-        @*<div class="form-group">
-            @Html.LabelFor(model => model.LigueId, "LigueId", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DropDownList("LigueId", null, htmlAttributes: new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.LigueId, "", new { @class = "text-danger" })
-            </div>
-        </div>*@
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
+                <input type="submit" value="Suivant" class="btn btn-default" />
             </div>
         </div>
     </div>

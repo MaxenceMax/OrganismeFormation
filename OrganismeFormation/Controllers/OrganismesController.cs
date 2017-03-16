@@ -39,13 +39,7 @@ namespace OrganismeFormation.Controllers
         // GET: Organismes/Create
         public ActionResult Create()
         {
-            //ViewBag.LieuxId = new SelectList(db.Lieux, "Id", "Adresse");
-            //ViewBag.LigueId = new SelectList(db.Ligues, "Id", "Libelle");
-            //ViewBag.CoordinateurId = new SelectList(db.Personnel, "Id", "Nom");
-            //ViewBag.DirecteurId = new SelectList(db.Personnel, "Id", "Nom");
-            //ViewBag.PresidentId = new SelectList(db.PresidentOrganisme, "Id", "Telephone");
-            //ViewBag.ResponsableId = new SelectList(db.Responsable, "Id", "Nom");
-
+            
             Organismes orga = new Organismes();
             Lieux lieux = new Lieux();
             orga.Lieux = lieux;
@@ -59,20 +53,72 @@ namespace OrganismeFormation.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create(Organismes organismes)
         {
-            if (ModelState.IsValid)
-            {
-                db.Organismes.Add(organismes);
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
+            //if (ModelState.IsValid)
+            //{
+            //    db.Organismes.Add(organismes);
+            //    db.SaveChanges();
+            //    return RedirectToAction("Index");
+            //}
 
-            ViewBag.LieuxId = new SelectList(db.Lieux, "Id", "Adresse", organismes.LieuxId);
-            ViewBag.LigueId = new SelectList(db.Ligues, "Id", "Libelle", organismes.LigueId);
-            ViewBag.CoordinateurId = new SelectList(db.Personnel, "Id", "Nom", organismes.CoordinateurId);
-            ViewBag.DirecteurId = new SelectList(db.Personnel, "Id", "Nom", organismes.DirecteurId);
-            ViewBag.PresidentId = new SelectList(db.PresidentOrganisme, "Id", "Telephone", organismes.PresidentId);
-            return View(organismes);
+            //return View(organismes);
+            //if (!ModelState.IsValid)
+            //{
+            //    return View(organismes);
+            //}
+
+            //db.Lieux.Add(organismes.Lieux);
+            //db.SaveChanges();
+
+            TempData["model"] = organismes;
+            return RedirectToAction("Create2");
+
+            //return Create2(organismes);
         }
+
+
+
+        // GET: Organismes/Create
+        public ActionResult Create2()
+        {
+
+            Organismes orga = TempData["model"] as Organismes;
+           
+            orga.PresidentOrganisme = new PresidentOrganisme();
+            orga.Personnel = new Personnel();
+            orga.Personnel1 = new Personnel();
+
+            //if (ModelState.IsValid)
+            //{
+            //    db.Organismes.Add(orga);
+            //    db.SaveChanges();
+            //}
+
+           
+            if (orga == null)
+                return RedirectToAction("Create");
+         
+            return View(orga);
+        }
+
+        // POST: Organismes/Create
+        // Afin de déjouer les attaques par sur-validation, activez les propriétés spécifiques que vous voulez lier. Pour 
+        // plus de détails, voir  http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Create2(Organismes orga)
+        {
+
+            
+
+            db.Organismes.Add(orga);
+            db.SaveChanges();
+            return RedirectToAction("Index");
+            
+
+           
+        }
+
+
 
         // GET: Organismes/Edit/5
         public ActionResult Edit(decimal id)
@@ -129,6 +175,8 @@ namespace OrganismeFormation.Controllers
             }
             return View(organismes);
         }
+
+
 
         // POST: Organismes/Delete/5
         [HttpPost, ActionName("Delete")]
