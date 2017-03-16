@@ -21,8 +21,8 @@ namespace OrganismeFormation.Models
         }
     
         public decimal Id { get; set; }
-        public byte[] Nom { get; set; }
-        public byte[] Prenom { get; set; }
+        public string Nom { get; set; }
+        public string Prenom { get; set; }
         public string Telephone { get; set; }
         public string Email { get; set; }
         public string Fonction { get; set; }

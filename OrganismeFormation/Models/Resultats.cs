@@ -27,8 +27,8 @@ namespace OrganismeFormation.Models
         public Nullable<bool> EPEF { get; set; }
         public Nullable<bool> EPMSP { get; set; }
         public decimal PassagesId { get; set; }
-        public string FormationTerminee { get; set; }
-        public string Abandon { get; set; }
+        public Nullable<bool> FormationTerminee { get; set; }
+        public Nullable<bool> Abandon { get; set; }
     
         public virtual CandidatsFormations CandidatsFormations { get; set; }
         public virtual Passages Passages { get; set; }

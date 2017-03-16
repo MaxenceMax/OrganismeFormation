@@ -32,10 +32,12 @@ namespace OrganismeFormation.Models
         public virtual DbSet<Habilitations> Habilitations { get; set; }
         public virtual DbSet<Lieux> Lieux { get; set; }
         public virtual DbSet<Ligues> Ligues { get; set; }
+        public virtual DbSet<Organismes> Organismes { get; set; }
         public virtual DbSet<Passages> Passages { get; set; }
         public virtual DbSet<Personnel> Personnel { get; set; }
         public virtual DbSet<PresidentOrganisme> PresidentOrganisme { get; set; }
         public virtual DbSet<Prestataires> Prestataires { get; set; }
+        public virtual DbSet<Responsable> Responsable { get; set; }
         public virtual DbSet<Resultats> Resultats { get; set; }
         public virtual DbSet<ResultatsUC> ResultatsUC { get; set; }
         public virtual DbSet<Sexes> Sexes { get; set; }
@@ -43,7 +45,5 @@ namespace OrganismeFormation.Models
         public virtual DbSet<Tuteurs> Tuteurs { get; set; }
         public virtual DbSet<TypedeFinancements> TypedeFinancements { get; set; }
         public virtual DbSet<TypedeFormations> TypedeFormations { get; set; }
-        public virtual DbSet<Organismes> Organismes { get; set; }
-        public virtual DbSet<Responsable> Responsable { get; set; }
     }
 }

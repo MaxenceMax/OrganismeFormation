@@ -50,7 +50,7 @@ namespace OrganismeFormation.Models
         public virtual TypedeFormations TypedeFormations { get; set; }
         public virtual Habilitations Habilitations { get; set; }
         public virtual Lieux Lieux { get; set; }
-        public virtual Personnel Personnel { get; set; }
         public virtual Organismes Organismes { get; set; }
+        public virtual Personnel Personnel { get; set; }
     }
 }

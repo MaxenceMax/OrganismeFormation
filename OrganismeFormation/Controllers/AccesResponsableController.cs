@@ -18,14 +18,7 @@ namespace OrganismeFormation.Controllers
 
         public ActionResult Organismes()
         {
-            Responsable resp = Session["Responsable"] as Responsable;
-            var tmp = resp.ResponsableOrganisme;
-            ICollection<Organismes> orga = new Collection<Organismes>();
-            foreach(var v in tmp)
-            {
-                orga.Add(v.Organismes);
-            }
-            return View(orga);
+            return View((Session["Responsable"] as Responsable).Organismes);
         }
     }
 }
