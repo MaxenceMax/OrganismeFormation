@@ -90,7 +90,6 @@ namespace OrganismeFormation.Controllers
         {
             GestionOFEntities db = new GestionOFEntities();
             var resp = db.Responsable.Where(a => a.Licence == login).First();
-            System.Diagnostics.Debug.WriteLine("ID RESP" + resp.Nom);
             Session["Responsable"] = resp;
             yield return new Claim(ClaimTypes.Role, "Responsable");
         }

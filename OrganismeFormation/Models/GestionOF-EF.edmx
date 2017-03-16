@@ -75,6 +75,7 @@
           <Property Name="OrganismeId" Type="numeric" Precision="18" Scale="0" />
           <Property Name="LieuSiNonPorteuse" Type="numeric" Precision="18" Scale="0" />
           <Property Name="NombreUC" Type="numeric" Precision="18" Scale="0" />
+          <Property Name="FormationEnded" Type="bit" />
         </EntityType>
         <EntityType Name="Habilitations">
           <Key>
@@ -801,6 +802,7 @@
           <NavigationProperty Name="Lieux" Relationship="GestionOFModel.FK_Formations_Lieux" FromRole="Formations" ToRole="Lieux" />
           <NavigationProperty Name="Organismes" Relationship="GestionOFModel.FK_Formations_Organismes" FromRole="Formations" ToRole="Organismes" />
           <NavigationProperty Name="Personnel" Relationship="GestionOFModel.FK_Formations_Personnel" FromRole="Formations" ToRole="Personnel" />
+          <Property Name="FormationEnded" Type="Boolean" />
         </EntityType>
         <EntityType Name="Habilitations">
           <Key>
@@ -1282,6 +1284,7 @@
           <EntitySetMapping Name="Formations">
             <EntityTypeMapping TypeName="GestionOFModel.Formations">
               <MappingFragment StoreEntitySet="Formations">
+                <ScalarProperty Name="FormationEnded" ColumnName="FormationEnded" />
                 <ScalarProperty Name="NombreUC" ColumnName="NombreUC" />
                 <ScalarProperty Name="LieuSiNonPorteuse" ColumnName="LieuSiNonPorteuse" />
                 <ScalarProperty Name="OrganismeId" ColumnName="OrganismeId" />

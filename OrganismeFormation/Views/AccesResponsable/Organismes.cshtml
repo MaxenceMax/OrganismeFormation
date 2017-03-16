@@ -13,12 +13,23 @@
         @foreach(var item in Model)
         {
             <div class="organisme_card">
+                <div class="organisme_card_subtitle">
+                    Organisme de formation 
+                </div>
                 <div class="organisme_card_title">
                     @item.Libelle
                 </div>
-
+                <div class="organisme_card_lieux">
+                    <div style="text-align:center">Situé :</div>
+                    <br />
+                    26 rue des peuplier<br />
+                    92120 Montrouge
+                </div>
+                <div class="organisme_card_formations">
+                    Nombre de formations en cours :<br />
+                    @item.Formations.Count(a => a.FormationEnded == false)
+                </div>
             </div>
-
         }
     </div>
 </div>

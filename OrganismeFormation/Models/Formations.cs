@@ -44,6 +44,7 @@ namespace OrganismeFormation.Models
         public Nullable<decimal> OrganismeId { get; set; }
         public Nullable<decimal> LieuSiNonPorteuse { get; set; }
         public Nullable<decimal> NombreUC { get; set; }
+        public Nullable<bool> FormationEnded { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CandidatsFormations> CandidatsFormations { get; set; }

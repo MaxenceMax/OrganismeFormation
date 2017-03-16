@@ -11,9 +11,7 @@ namespace OrganismeFormation.Models
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel;
-    using System.ComponentModel.DataAnnotations;
-    using System.ComponentModel.DataAnnotations.Schema;
+    
     public partial class Ligues
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -21,28 +19,14 @@ namespace OrganismeFormation.Models
         {
             this.Organismes = new HashSet<Organismes>();
         }
-
-        [Index("IdAndRating", 1)]
+    
         public decimal Id { get; set; }
-        [Required]
         public string Libelle { get; set; }
         public Nullable<double> CodeLigue { get; set; }
-        [Required]
-        [StringLength(250)]
-        [Index("LoginIdex")]
-        [Index("IdAndRating", 2, IsUnique = true)]
-        [DisplayName("Identifiant")]
         public string login { get; set; }
-        [Required]
-        [DisplayName("Mot de passe")]
-        [DataType(DataType.Password)]
         public string password { get; set; }
-        [Required]
-        [DisplayName("Adresse Email Responsable")]
-        [DataType(DataType.EmailAddress)]
-        [EmailAddress]
         public string email { get; set; }
-
+    
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Organismes> Organismes { get; set; }
     }
