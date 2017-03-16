@@ -89,14 +89,16 @@ namespace OrganismeFormation.Controllers
         private IEnumerable<Claim> LoadRolesResponsable(string login)
         {
             GestionOFEntities db = new GestionOFEntities();
-            Session["responsable"] = db.Responsable.Where(a => a.Licence == login);
+            var resp = db.Responsable.Where(a => a.Licence == login).First();
+            System.Diagnostics.Debug.WriteLine("ID RESP" + resp.Nom);
+            Session["Responsable"] = resp;
             yield return new Claim(ClaimTypes.Role, "Responsable");
         }
 
         private IEnumerable<Claim> LoadRolesAccesLigue(string login)
         {
             GestionOFEntities db = new GestionOFEntities();
-            Session["login"] = db.Ligues.Where(a => a.login == login);
+            Session["Ligue"] = db.Ligues.Where(a => a.login == login);
             yield return new Claim(ClaimTypes.Role, "AccesLigue");
 
         }

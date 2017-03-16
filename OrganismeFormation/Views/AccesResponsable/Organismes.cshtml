@@ -9,6 +9,18 @@
         <div class="title-content-main">Gestion des organismes de formation</div>
         <div class="title-content-second">Accueil Responsable</div>
     </div>
+    <div class="content_organisme_card">
+        @foreach(var item in Model)
+        {
+            <div class="organisme_card">
+                <div class="organisme_card_title">
+                    @item.Libelle
+                </div>
+
+            </div>
+
+        }
+    </div>
 </div>
 
 

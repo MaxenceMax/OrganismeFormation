@@ -18,7 +18,10 @@ namespace OrganismeFormation.Controllers
 
         public ActionResult Organismes()
         {
-            return View((Session["Responsable"] as Responsable).Organismes);
+            GestionOFEntities db = new GestionOFEntities();
+            System.Diagnostics.Debug.WriteLine("ID RESP" + ((Responsable) Session["idResponsable"]).Nom);
+            Responsable rp = db.Responsable.Find(Session["idResponsable"]);
+            return View(rp.Organismes);
         }
     }
 }
