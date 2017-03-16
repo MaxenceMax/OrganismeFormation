@@ -178,15 +178,13 @@
           <Property Name="Email" Type="varchar" MaxLength="250" />
           <Property Name="Password" Type="varchar" MaxLength="100" />
         </EntityType>
-        <!--Erreurs détectées durant la génération :
-avertissement 6002: La table/vue 'GestionOF.dbo.ResponsableOrganisme' n'a pas de clé primaire définie. La clé a été déduite et la définition a été créée en tant que table/vue en lecture seule.-->
         <EntityType Name="ResponsableOrganisme">
           <Key>
-            <PropertyRef Name="id" />
+            <PropertyRef Name="ResponsableId" />
+            <PropertyRef Name="OrganismeId" />
           </Key>
-          <Property Name="id" Type="numeric" Precision="18" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="ResponsableId" Type="numeric" Precision="18" Scale="0" />
-          <Property Name="OrganismeId" Type="numeric" Precision="18" Scale="0" />
+          <Property Name="ResponsableId" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="OrganismeId" Type="numeric" Precision="18" Scale="0" Nullable="false" />
         </EntityType>
         <EntityType Name="Resultats">
           <Key>
@@ -471,7 +469,7 @@ avertissement 6002: La table/vue 'GestionOF.dbo.ResponsableOrganisme' n'a pas de
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_ResponsableOrganisme_Organismes">
-          <End Role="Organismes" Type="Self.Organismes" Multiplicity="0..1" />
+          <End Role="Organismes" Type="Self.Organismes" Multiplicity="1" />
           <End Role="ResponsableOrganisme" Type="Self.ResponsableOrganisme" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Organismes">
@@ -483,7 +481,7 @@ avertissement 6002: La table/vue 'GestionOF.dbo.ResponsableOrganisme' n'a pas de
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_ResponsableOrganisme_Responsable">
-          <End Role="Responsable" Type="Self.Responsable" Multiplicity="0..1" />
+          <End Role="Responsable" Type="Self.Responsable" Multiplicity="1" />
           <End Role="ResponsableOrganisme" Type="Self.ResponsableOrganisme" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Responsable">
@@ -520,6 +518,7 @@ avertissement 6002: La table/vue 'GestionOF.dbo.ResponsableOrganisme' n'a pas de
           <EntitySet Name="PresidentOrganisme" EntityType="Self.PresidentOrganisme" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Prestataires" EntityType="Self.Prestataires" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Responsable" EntityType="Self.Responsable" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ResponsableOrganisme" EntityType="Self.ResponsableOrganisme" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Resultats" EntityType="Self.Resultats" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ResultatsUC" EntityType="Self.ResultatsUC" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Sexes" EntityType="Self.Sexes" Schema="dbo" store:Type="Tables" />
@@ -527,13 +526,6 @@ avertissement 6002: La table/vue 'GestionOF.dbo.ResponsableOrganisme' n'a pas de
           <EntitySet Name="Tuteurs" EntityType="Self.Tuteurs" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TypedeFinancements" EntityType="Self.TypedeFinancements" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TypedeFormations" EntityType="Self.TypedeFormations" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="ResponsableOrganisme" EntityType="Self.ResponsableOrganisme" store:Type="Tables" store:Schema="dbo">
-            <DefiningQuery>SELECT 
-    [ResponsableOrganisme].[id] AS [id], 
-    [ResponsableOrganisme].[ResponsableId] AS [ResponsableId], 
-    [ResponsableOrganisme].[OrganismeId] AS [OrganismeId]
-    FROM [dbo].[ResponsableOrganisme] AS [ResponsableOrganisme]</DefiningQuery>
-          </EntitySet>
           <AssociationSet Name="FK__Candidats__Candi__3D5E1FD2" Association="Self.FK__Candidats__Candi__3D5E1FD2">
             <End Role="Candidats" EntitySet="Candidats" />
             <End Role="CandidatsFormations" EntitySet="CandidatsFormations" />
@@ -1121,16 +1113,11 @@ avertissement 6002: La table/vue 'GestionOF.dbo.ResponsableOrganisme' n'a pas de
             <End Role="Organismes" EntitySet="Organismes" />
           </AssociationSet>
           <EntitySet Name="Responsable" EntityType="GestionOFModel.Responsable" />
-          <EntitySet Name="ResponsableOrganisme" EntityType="GestionOFModel.ResponsableOrganisme" />
-          <AssociationSet Name="FK_ResponsableOrganisme_Organismes" Association="GestionOFModel.FK_ResponsableOrganisme_Organismes">
+          <AssociationSet Name="ResponsableOrganisme" Association="GestionOFModel.ResponsableOrganisme">
             <End Role="Organismes" EntitySet="Organismes" />
-            <End Role="ResponsableOrganisme" EntitySet="ResponsableOrganisme" />
-          </AssociationSet>
-          <AssociationSet Name="FK_ResponsableOrganisme_Responsable" Association="GestionOFModel.FK_ResponsableOrganisme_Responsable">
             <End Role="Responsable" EntitySet="Responsable" />
-            <End Role="ResponsableOrganisme" EntitySet="ResponsableOrganisme" />
           </AssociationSet>
-        </EntityContainer>
+          </EntityContainer>
         <EntityType Name="Organismes">
           <Key>
             <PropertyRef Name="Id" />
@@ -1150,7 +1137,7 @@ avertissement 6002: La table/vue 'GestionOF.dbo.ResponsableOrganisme' n'a pas de
           <NavigationProperty Name="Personnel" Relationship="GestionOFModel.FK_Organismes_Personnel" FromRole="Organismes" ToRole="Personnel" />
           <NavigationProperty Name="Personnel1" Relationship="GestionOFModel.FK_Organismes_Personnel1" FromRole="Organismes" ToRole="Personnel" />
           <NavigationProperty Name="PresidentOrganisme" Relationship="GestionOFModel.FK_Organismes_PresidentOrganisme" FromRole="Organismes" ToRole="PresidentOrganisme" />
-          <NavigationProperty Name="ResponsableOrganisme" Relationship="GestionOFModel.FK_ResponsableOrganisme_Organismes" FromRole="Organismes" ToRole="ResponsableOrganisme" />
+          <NavigationProperty Name="Responsable" Relationship="GestionOFModel.ResponsableOrganisme" FromRole="Organismes" ToRole="Responsable" />
         </EntityType>
         <Association Name="FK_Formations_Organismes">
           <End Type="GestionOFModel.Organismes" Role="Organismes" Multiplicity="0..1" />
@@ -1235,43 +1222,13 @@ avertissement 6002: La table/vue 'GestionOF.dbo.ResponsableOrganisme' n'a pas de
           <Property Name="Telephone" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="Email" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
           <Property Name="Password" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="ResponsableOrganisme" Relationship="GestionOFModel.FK_ResponsableOrganisme_Responsable" FromRole="Responsable" ToRole="ResponsableOrganisme" />
+          <NavigationProperty Name="Organismes" Relationship="GestionOFModel.ResponsableOrganisme" FromRole="Responsable" ToRole="Organismes" />
         </EntityType>
-        <EntityType Name="ResponsableOrganisme">
-          <Key>
-            <PropertyRef Name="id" />
-          </Key>
-          <Property Name="id" Type="Decimal" Nullable="false" Precision="18" Scale="0" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="ResponsableId" Type="Decimal" Precision="18" Scale="0" />
-          <Property Name="OrganismeId" Type="Decimal" Precision="18" Scale="0" />
-          <NavigationProperty Name="Organismes" Relationship="GestionOFModel.FK_ResponsableOrganisme_Organismes" FromRole="ResponsableOrganisme" ToRole="Organismes" />
-          <NavigationProperty Name="Responsable" Relationship="GestionOFModel.FK_ResponsableOrganisme_Responsable" FromRole="ResponsableOrganisme" ToRole="Responsable" />
-        </EntityType>
-        <Association Name="FK_ResponsableOrganisme_Organismes">
-          <End Type="GestionOFModel.Organismes" Role="Organismes" Multiplicity="0..1" />
-          <End Type="GestionOFModel.ResponsableOrganisme" Role="ResponsableOrganisme" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Organismes">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="ResponsableOrganisme">
-              <PropertyRef Name="OrganismeId" />
-            </Dependent>
-          </ReferentialConstraint>
+        <Association Name="ResponsableOrganisme">
+          <End Type="GestionOFModel.Organismes" Role="Organismes" Multiplicity="*" />
+          <End Type="GestionOFModel.Responsable" Role="Responsable" Multiplicity="*" />
         </Association>
-        <Association Name="FK_ResponsableOrganisme_Responsable">
-          <End Type="GestionOFModel.Responsable" Role="Responsable" Multiplicity="0..1" />
-          <End Type="GestionOFModel.ResponsableOrganisme" Role="ResponsableOrganisme" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Responsable">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="ResponsableOrganisme">
-              <PropertyRef Name="ResponsableId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-      </Schema>
+        </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
@@ -1536,15 +1493,14 @@ avertissement 6002: La table/vue 'GestionOF.dbo.ResponsableOrganisme' n'a pas de
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="ResponsableOrganisme">
-            <EntityTypeMapping TypeName="GestionOFModel.ResponsableOrganisme">
-              <MappingFragment StoreEntitySet="ResponsableOrganisme">
-                <ScalarProperty Name="OrganismeId" ColumnName="OrganismeId" />
-                <ScalarProperty Name="ResponsableId" ColumnName="ResponsableId" />
-                <ScalarProperty Name="id" ColumnName="id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
+          <AssociationSetMapping Name="ResponsableOrganisme" TypeName="GestionOFModel.ResponsableOrganisme" StoreEntitySet="ResponsableOrganisme">
+            <EndProperty Name="Responsable">
+              <ScalarProperty Name="Id" ColumnName="ResponsableId" />
+            </EndProperty>
+            <EndProperty Name="Organismes">
+              <ScalarProperty Name="Id" ColumnName="OrganismeId" />
+            </EndProperty>
+          </AssociationSetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
