@@ -4,61 +4,79 @@
     ViewBag.Title = "Create2";
 }
 
-<h2>Create2</h2>
-
-@using (Html.BeginForm("Create2", "Organismes"))
-{
-    @Html.AntiForgeryToken()
-
-    <div class="form-horizontal">
-        <h4>Organismes</h4>
-        <hr/>
-
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
 
-        @Html.HiddenFor(model => model.AnneeDeclaration, new { Value = Model.AnneeDeclaration})
-        @Html.HiddenFor(model => model.Libelle, new { Value = Model.Libelle })
-        @Html.HiddenFor(model => model.NumeroDeclaration, new { Value = Model.NumeroDeclaration })
-        @Html.HiddenFor(model => model.LieuxId, new { Value = Model.Lieux.Id })
-        @Html.HiddenFor(model => model.Lieux.Adresse, new { Value = Model.Lieux.Adresse })
-        @Html.HiddenFor(model => model.Lieux.CodePostal, new { Value = Model.Lieux.CodePostal })
-        @Html.HiddenFor(model => model.Lieux.Ville, new { Value = Model.Lieux.Ville })
-        @Html.HiddenFor(model => model.Lieux.Telephone, new { Value = Model.Lieux.Telephone })
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.PresidentOrganisme.Nom, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.PresidentOrganisme.Nom, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.PresidentOrganisme.Nom, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.Personnel.Nom, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Personnel.Nom, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Personnel.Nom, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.Personnel.Prenom, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Personnel.Prenom, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Personnel.Prenom, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-      
-
-
-
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
-            </div>
-        </div>
-
+<div class="content">
+    <div class="title-content">
+        <div class="title-content-main">Créer un organisme de formation</div>
+        <div class="title-content-second">Etape 2/2</div>
     </div>
- }
+
+    @using (Html.BeginForm("Create2", "Organismes"))
+    {
+
+        @Html.AntiForgeryToken()
+        <div class="form-horizontal" id="mano-bootstrap">
+
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+           
+                @Html.HiddenFor(model => model.AnneeDeclaration, new { Value = Model.AnneeDeclaration })
+                @Html.HiddenFor(model => model.Libelle, new { Value = Model.Libelle })
+                @Html.HiddenFor(model => model.NumeroDeclaration, new { Value = Model.NumeroDeclaration })
+                @Html.HiddenFor(model => model.LieuxId, new { Value = Model.Lieux.Id })
+                @Html.HiddenFor(model => model.Lieux.Adresse, new { Value = Model.Lieux.Adresse })
+                @Html.HiddenFor(model => model.Lieux.CodePostal, new { Value = Model.Lieux.CodePostal })
+                @Html.HiddenFor(model => model.Lieux.Ville, new { Value = Model.Lieux.Ville })
+                @Html.HiddenFor(model => model.Lieux.Telephone, new { Value = Model.Lieux.Telephone })
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.PresidentOrganisme.Nom, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.PresidentOrganisme.Nom, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.PresidentOrganisme.Nom, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Personnel.Nom, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.Personnel.Nom, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.Personnel.Nom, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Personnel.Prenom, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.Personnel.Prenom, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.Personnel.Prenom, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+
+
+
+
+                @*<div class="form-group">
+                    <div class="col-md-offset-2 col-md-10">
+                        <input type="submit" value="Créer" class="btn btn-default" />
+                    </div>
+                </div>*@
+
+
+            <div class="form-group-align">
+                <div class="submit" id="form-moitie" style="margin-right:2.5px">
+                    <input type="submit" value="Créer" id="button-blue" />
+                    <div class="ease"></div>
+                </div>
+                <div class="submit" id="form-moitie" style="margin-left:2.5px">
+                    <a href='@Url.Action("Index", "Organismes")' id="button-red">Retour</a>
+                    <div class="ease"></div>
+                </div>
+            </div>
+
+            </div>
+    }
+
+    @{Html.RenderPartial("_Footer");}
+</div>

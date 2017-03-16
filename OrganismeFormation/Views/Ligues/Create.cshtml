@@ -13,6 +13,7 @@
     {
         <div class="form-horizontal" id="mano-bootstrap">
             @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
             <div class="form-group">
                 @Html.LabelFor(model => model.Libelle, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
@@ -44,6 +45,7 @@
                     @Html.ValidationMessageFor(model => model.password, "", new { @class = "text-danger" })
                 </div>
             </div>
+
             <div class="form-group-align">
                 <div class="submit" id="form-moitie" style="margin-right:2.5px">
                     <input type="submit" value="Créer" id="button-blue" />
@@ -54,6 +56,7 @@
                     <div class="ease"></div>
                 </div>
             </div>
+
         </div>
     }
 
