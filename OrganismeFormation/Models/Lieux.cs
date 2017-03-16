@@ -11,7 +11,10 @@ namespace OrganismeFormation.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel;
+    using System.ComponentModel.DataAnnotations;
+    using System.ComponentModel.DataAnnotations.Schema;
+
     public partial class Lieux
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -22,9 +25,18 @@ namespace OrganismeFormation.Models
         }
     
         public decimal Id { get; set; }
+        [Required]
+        [DisplayName("Adresse")]
         public string Adresse { get; set; }
+        [Required]
+        [DisplayName("Code Postal")]
+        [DataType(DataType.PostalCode)]
         public string CodePostal { get; set; }
+        [Required]
+        [DisplayName("Ville")]
         public string Ville { get; set; }
+        [Required]
+        [DisplayName("Téléphone")]
         public string Telephone { get; set; }
         public string Email { get; set; }
     
