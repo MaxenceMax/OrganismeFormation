@@ -16,6 +16,7 @@ namespace OrganismeFormation.ViewModels
             termine = new Collection<Formations>();
         }
 
+        public Organismes organisme { get; set; }
         public IEnumerable<Formations> enCours { get; set; }
         public IEnumerable<Formations> termine { get; set; }
     }

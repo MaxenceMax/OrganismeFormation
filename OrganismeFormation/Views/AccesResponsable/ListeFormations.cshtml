@@ -10,7 +10,7 @@
         <div class="title-content-second">Formation de l'organisme : @Model.organisme.Libelle </div>
     </div>
     <div class="content_lf_card">
-        <div class="lf_card" onclick="location.href='@Url.Action("ListeFormations", "AccesResponsable", new { id = Model.organisme.Id })'">
+        <div class="lf_card" onclick="location.href='@Url.Action("EtatFormationAC", "AccesResponsable", new { id = Model.organisme.Id })'">
             <div class="lf_card_image"><img src="@Url.Content("~/Content/Images/Icons/icon-AC-hover.png")" /></div>
             <div class="lf_card_title">Assisstant Club</div>
             <div class="lf_card_desc">
@@ -20,7 +20,7 @@
 
             </div>
         </div>
-        <div class="lf_card">
+        <div class="lf_card" onclick="location.href='@Url.Action("EtatFormationAS", "AccesResponsable", new { id = Model.organisme.Id })'">
             <div class="lf_card_image"><img src="@Url.Content("~/Content/Images/Icons/icon-AS-hover.png")" /></div>
             <div class="lf_card_title">Animateur Suppléant</div>
             <div class="lf_card_desc">
@@ -30,7 +30,7 @@
 
             </div>
         </div>
-        <div class="lf_card">
+        <div class="lf_card" onclick="location.href='@Url.Action("EtatFormationCFEB", "AccesResponsable", new { id = Model.organisme.Id })'">
             <div class="lf_card_image"><img src="@Url.Content("~/Content/Images/Icons/icon-CFEB-hover.png")" /></div>
             <div class="lf_card_title">CFEB</div>
             <div class="lf_card_desc">
@@ -40,7 +40,7 @@
 
             </div>
         </div>
-        <div class="lf_card">
+        <div class="lf_card" onclick="location.href='@Url.Action("EtatFormationCQP", "AccesResponsable", new { id = Model.organisme.Id })'">
             <div class="lf_card_image"><img src="@Url.Content("~/Content/Images/Icons/icon-CQP-hover.png")" /></div>
             <div class="lf_card_title">CQP</div>
             <div class="lf_card_desc">
@@ -50,7 +50,7 @@
 
             </div>
         </div>
-        <div class="lf_card">
+        <div class="lf_card" onclick="location.href='@Url.Action("EtatFormationBPJEPS", "AccesResponsable", new { id = Model.organisme.Id })'">
             <div class="lf_card_image"><img src="@Url.Content("~/Content/Images/Icons/icon-BP-hover.png")" /></div>
             <div class="lf_card_title">BPJEPS</div>
             <div class="lf_card_desc">
@@ -60,7 +60,7 @@
 
             </div>
         </div>
-        <div class="lf_card">
+        <div class="lf_card" onclick="location.href='@Url.Action("EtatFormationDEJEPS", "AccesResponsable", new { id = Model.organisme.Id })'">
             <div class="lf_card_image"><img src="@Url.Content("~/Content/Images/Icons/icon-DE-hover.png")" /></div>
             <div class="lf_card_title">DEJEPS</div>
             <div class="lf_card_desc">
@@ -70,7 +70,7 @@
 
             </div>
         </div>
-        <div class="lf_card">
+        <div class="lf_card" onclick="location.href='@Url.Action("EtatFormationDESJEPS", "AccesResponsable", new { id = Model.organisme.Id })'">
             <div class="lf_card_image"><img src="@Url.Content("~/Content/Images/Icons/icon-DE-hover.png")" /></div>
             <div class="lf_card_title">DESJEPS</div>
             <div class="lf_card_desc">

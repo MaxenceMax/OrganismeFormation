@@ -56,8 +56,93 @@ namespace OrganismeFormation.Controllers
                 RedirectToAction("Organismes", "AccesResponsable");
             Organismes org = db.Organismes.Find(id);
             ListeFormationEtatViewModel formations = new ListeFormationEtatViewModel();
+            formations.organisme = org;
             formations.enCours = db.Formations.Where(f => f.OrganismeId == org.Id && f.TypedeFormationsId == 1 && f.FormationEnded == false);
             formations.termine = db.Formations.Where(f => f.OrganismeId == org.Id && f.TypedeFormationsId == 1 && f.FormationEnded == true);
+
+            return View(formations);
+        }
+
+        [Authorize(Roles = "Responsable")]
+        public ActionResult EtatFormationAS(decimal id)
+        {
+            if (id == null)
+                RedirectToAction("Organismes", "AccesResponsable");
+            Organismes org = db.Organismes.Find(id);
+            ListeFormationEtatViewModel formations = new ListeFormationEtatViewModel();
+            formations.organisme = org;
+            formations.enCours = db.Formations.Where(f => f.OrganismeId == org.Id && f.TypedeFormationsId == 2 && f.FormationEnded == false);
+            formations.termine = db.Formations.Where(f => f.OrganismeId == org.Id && f.TypedeFormationsId == 2 && f.FormationEnded == true);
+
+            return View(formations);
+        }
+
+        [Authorize(Roles = "Responsable")]
+        public ActionResult EtatFormationCFEB(decimal id)
+        {
+            if (id == null)
+                RedirectToAction("Organismes", "AccesResponsable");
+            Organismes org = db.Organismes.Find(id);
+            ListeFormationEtatViewModel formations = new ListeFormationEtatViewModel();
+            formations.organisme = org;
+            formations.enCours = db.Formations.Where(f => f.OrganismeId == org.Id && f.TypedeFormationsId == 3 && f.FormationEnded == false);
+            formations.termine = db.Formations.Where(f => f.OrganismeId == org.Id && f.TypedeFormationsId == 3 && f.FormationEnded == true);
+
+            return View(formations);
+        }
+
+        [Authorize(Roles = "Responsable")]
+        public ActionResult EtatFormationCQP(decimal id)
+        {
+            if (id == null)
+                RedirectToAction("Organismes", "AccesResponsable");
+            Organismes org = db.Organismes.Find(id);
+            ListeFormationEtatViewModel formations = new ListeFormationEtatViewModel();
+            formations.organisme = org;
+            formations.enCours = db.Formations.Where(f => f.OrganismeId == org.Id && f.TypedeFormationsId == 4 && f.FormationEnded == false);
+            formations.termine = db.Formations.Where(f => f.OrganismeId == org.Id && f.TypedeFormationsId == 4 && f.FormationEnded == true);
+
+            return View(formations);
+        }
+
+        [Authorize(Roles = "Responsable")]
+        public ActionResult EtatFormationBPJEPS(decimal id)
+        {
+            if (id == null)
+                RedirectToAction("Organismes", "AccesResponsable");
+            Organismes org = db.Organismes.Find(id);
+            ListeFormationEtatViewModel formations = new ListeFormationEtatViewModel();
+            formations.organisme = org;
+            formations.enCours = db.Formations.Where(f => f.OrganismeId == org.Id && f.TypedeFormationsId == 5 && f.FormationEnded == false);
+            formations.termine = db.Formations.Where(f => f.OrganismeId == org.Id && f.TypedeFormationsId == 5 && f.FormationEnded == true);
+
+            return View(formations);
+        }
+
+        [Authorize(Roles = "Responsable")]
+        public ActionResult EtatFormationDEJEPS(decimal id)
+        {
+            if (id == null)
+                RedirectToAction("Organismes", "AccesResponsable");
+            Organismes org = db.Organismes.Find(id);
+            ListeFormationEtatViewModel formations = new ListeFormationEtatViewModel();
+            formations.organisme = org;
+            formations.enCours = db.Formations.Where(f => f.OrganismeId == org.Id && f.TypedeFormationsId == 6 && f.FormationEnded == false);
+            formations.termine = db.Formations.Where(f => f.OrganismeId == org.Id && f.TypedeFormationsId == 6 && f.FormationEnded == true);
+
+            return View(formations);
+        }
+
+        [Authorize(Roles = "Responsable")]
+        public ActionResult EtatFormationDESJEPS(decimal id)
+        {
+            if (id == null)
+                RedirectToAction("Organismes", "AccesResponsable");
+            Organismes org = db.Organismes.Find(id);
+            ListeFormationEtatViewModel formations = new ListeFormationEtatViewModel();
+            formations.organisme = org;
+            formations.enCours = db.Formations.Where(f => f.OrganismeId == org.Id && f.TypedeFormationsId == 7 && f.FormationEnded == false);
+            formations.termine = db.Formations.Where(f => f.OrganismeId == org.Id && f.TypedeFormationsId == 7 && f.FormationEnded == true);
 
             return View(formations);
         }

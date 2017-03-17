@@ -446,6 +446,12 @@
     <Content Include="Views\AccesResponsable\Organismes.cshtml" />
     <Content Include="Views\AccesResponsable\ListeFormations.cshtml" />
     <Content Include="Views\AccesResponsable\EtatFormationAC.cshtml" />
+    <Content Include="Views\AccesResponsable\EtatFormationCFEB.cshtml" />
+    <Content Include="Views\AccesResponsable\EtatFormationAS.cshtml" />
+    <Content Include="Views\AccesResponsable\EtatFormationDESJEPS.cshtml" />
+    <Content Include="Views\AccesResponsable\EtatFormationDEJEPS.cshtml" />
+    <Content Include="Views\AccesResponsable\EtatFormationBPJEPS.cshtml" />
+    <Content Include="Views\AccesResponsable\EtatFormationCQP.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
