@@ -99,16 +99,6 @@ namespace OrganismeFormation.Controllers
            
         }
 
-
-        public ActionResult AddResponsable()
-        {
-
-            //int tempUniqueID = -1 * new Random().Next();
-
-            return PartialView("AddResponsable", new Responsable {});
-
-        }
-
         // GET: Organismes/Edit/5
         public ActionResult Edit(decimal id)
         {

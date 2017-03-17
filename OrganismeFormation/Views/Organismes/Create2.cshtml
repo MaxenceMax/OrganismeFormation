@@ -33,17 +33,7 @@
                 @Html.HiddenFor(model => model.CoordinateurId, new { Value = Model.Personnel.Id })    
                 @Html.HiddenFor(model => model.DirecteurId, new { Value = Model.Personnel1.Id })
 
-                <p> Responsable(s) de l'organisme, ajoutez-en un ou plusieurs </p>
 
-                <div id="items">
-
-                   
-
-                </div>
-
-                <a href="#" id="addItem">Ajouter un responsable</a>    
-          
-                 <hr />
 
                 <p> Président de l'organisme </p>
                
@@ -180,21 +170,3 @@
 
     @{Html.RenderPartial("_Footer");}
 </div>
-
-<script>
-    $(function () {
-        $("#addItem").click(function () {
-            $.ajax({
-                url: '@Url.Action("AddResponsable")',
-                cache: false,
-                success: function (html) { $("#items").append(html); }
-            });
-        });
-    });
-
-    $(function () {
-        $("a.deleteRow").on("click", function () {
-            alert("A");
-        });
-    });
-</script>

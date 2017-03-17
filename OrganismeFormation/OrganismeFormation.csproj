@@ -442,7 +442,6 @@
     <Content Include="Views\Organismes\Create2.cshtml" />
     <Content Include="Views\AccesResponsable\Home.cshtml" />
     <Content Include="Views\AccesResponsable\Organismes.cshtml" />
-    <Content Include="Views\Organismes\AddResponsable.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
