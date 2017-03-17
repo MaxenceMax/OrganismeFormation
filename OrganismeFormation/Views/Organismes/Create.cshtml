@@ -18,6 +18,8 @@
 
                 @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
+           
+            <p> Nom de l'organisme </p>
 
                 <div class="form-group">
                     @Html.LabelFor(model => model.Libelle, htmlAttributes: new { @class = "control-label col-md-2" })
@@ -26,6 +28,10 @@
                         @Html.ValidationMessageFor(model => model.Libelle, "", new { @class = "text-danger" })
                     </div>
                 </div>
+
+                <hr />
+                <p> Déclaration de l'organisme </p>
+
 
                 <div class="form-group">
                     @Html.LabelFor(model => model.NumeroDeclaration, htmlAttributes: new { @class = "control-label col-md-2" })
@@ -42,6 +48,9 @@
                         @Html.ValidationMessageFor(model => model.AnneeDeclaration, "", new { @class = "text-danger" })
                     </div>
                 </div>
+
+                <hr />
+                <p> Adresse de l'organisme </p>
 
                 <div class="form-group">
                     @Html.LabelFor(model => model.Lieux.Adresse, htmlAttributes: new { @class = "control-label col-md-2" })

@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using OrganismeFormation.Models;
+using System.Collections.ObjectModel;
 
 namespace OrganismeFormation.Controllers
 {
@@ -53,26 +54,10 @@ namespace OrganismeFormation.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create(Organismes organismes)
         {
-            //if (ModelState.IsValid)
-            //{
-            //    db.Organismes.Add(organismes);
-            //    db.SaveChanges();
-            //    return RedirectToAction("Index");
-            //}
-
-            //return View(organismes);
-            //if (!ModelState.IsValid)
-            //{
-            //    return View(organismes);
-            //}
-
-            //db.Lieux.Add(organismes.Lieux);
-            //db.SaveChanges();
-
+            
             TempData["model"] = organismes;
             return RedirectToAction("Create2");
 
-            //return Create2(organismes);
         }
 
 
@@ -87,12 +72,9 @@ namespace OrganismeFormation.Controllers
             orga.Personnel = new Personnel();
             orga.Personnel1 = new Personnel();
 
-            //if (ModelState.IsValid)
-            //{
-            //    db.Organismes.Add(orga);
-            //    db.SaveChanges();
-            //}
-
+            ICollection<Responsable> resps = new Collection<Responsable>();
+            orga.Responsable = resps;
+          
            
             if (orga == null)
                 return RedirectToAction("Create");
@@ -109,7 +91,6 @@ namespace OrganismeFormation.Controllers
         {
 
             
-
             db.Organismes.Add(orga);
             db.SaveChanges();
             return RedirectToAction("Index");
@@ -119,6 +100,14 @@ namespace OrganismeFormation.Controllers
         }
 
 
+        public ActionResult AddResponsable()
+        {
+
+            //int tempUniqueID = -1 * new Random().Next();
+
+            return PartialView("AddResponsable", new Responsable {});
+
+        }
 
         // GET: Organismes/Edit/5
         public ActionResult Edit(decimal id)
