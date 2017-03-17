@@ -12,7 +12,7 @@
     <div class="content_organisme_card">
         @foreach(var item in Model)
         {
-            <div class="organisme_card">
+            <div class="organisme_card" onclick="location.href='@Url.Action("ListeFormations", "AccesResponsable", new { id = item.Id })'">
                 <div class="organisme_card_subtitle">
                     Organisme de formation 
                 </div>
@@ -32,6 +32,7 @@
             </div>
         }
     </div>
+    @{Html.RenderPartial("_Footer");}
 </div>
 
 

@@ -1,0 +1,85 @@
+﻿@model OrganismeFormation.ViewModels.ListeFormationsViewModel
+
+@{
+    ViewBag.Title = "Liste des formations";
+}
+
+<div class="content" style="height:auto">
+    <div class="title-content">
+        <div class="title-content-main">Gestion des organismes de formation</div>
+        <div class="title-content-second">Formation de l'organisme : @Model.organisme.Libelle </div>
+    </div>
+    <div class="content_lf_card">
+        <div class="lf_card" onclick="location.href='@Url.Action("ListeFormations", "AccesResponsable", new { id = Model.organisme.Id })'">
+            <div class="lf_card_image"><img src="@Url.Content("~/Content/Images/Icons/icon-AC-hover.png")" /></div>
+            <div class="lf_card_title">Assisstant Club</div>
+            <div class="lf_card_desc">
+                Dans cette section vous retrouverez toutes vos formations de type Assisstant Club.<br /><br /><br />
+                Nombre de formation en cours :<br />
+                @Model.AC.Count(f=> f.FormationEnded == false)
+
+            </div>
+        </div>
+        <div class="lf_card">
+            <div class="lf_card_image"><img src="@Url.Content("~/Content/Images/Icons/icon-AS-hover.png")" /></div>
+            <div class="lf_card_title">Animateur Suppléant</div>
+            <div class="lf_card_desc">
+                Dans cette section vous retrouverez toutes vos formations de type Animateur Suppléant.<br /><br /><br />
+                Nombre de formation en cours :<br />
+                @Model.AS.Count(f => f.FormationEnded == false)
+
+            </div>
+        </div>
+        <div class="lf_card">
+            <div class="lf_card_image"><img src="@Url.Content("~/Content/Images/Icons/icon-CFEB-hover.png")" /></div>
+            <div class="lf_card_title">CFEB</div>
+            <div class="lf_card_desc">
+                Dans cette section vous retrouverez toutes vos formations de type Certificat Fédéral d'Enseignement Bénévole.<br /><br />
+                Nombre de formation en cours :<br />
+                @Model.CFEB.Count(f => f.FormationEnded == false)
+
+            </div>
+        </div>
+        <div class="lf_card">
+            <div class="lf_card_image"><img src="@Url.Content("~/Content/Images/Icons/icon-CQP-hover.png")" /></div>
+            <div class="lf_card_title">CQP</div>
+            <div class="lf_card_desc">
+                Dans cette section vous retrouverez toutes vos formations de type Certificat de Qualification Supérieure.<br /><br />
+                Nombre de formation en cours :<br />
+                @Model.CQP.Count(f => f.FormationEnded == false)
+
+            </div>
+        </div>
+        <div class="lf_card">
+            <div class="lf_card_image"><img src="@Url.Content("~/Content/Images/Icons/icon-BP-hover.png")" /></div>
+            <div class="lf_card_title">BPJEPS</div>
+            <div class="lf_card_desc">
+                Dans cette section vous retrouverez toutes vos formations de type Brevet Professionnel de la Jeunesse, de l’Education Populaire et du Sport.<br /><br />
+                Nombre de formation en cours :<br />
+                @Model.BPJEPS.Count(f => f.FormationEnded == false)
+
+            </div>
+        </div>
+        <div class="lf_card">
+            <div class="lf_card_image"><img src="@Url.Content("~/Content/Images/Icons/icon-DE-hover.png")" /></div>
+            <div class="lf_card_title">DEJEPS</div>
+            <div class="lf_card_desc">
+                Dans cette section vous retrouverez toutes vos formations de type Diplôme d’Etat de la Jeunesse, de l’Education Populaire et du Sport.<br /><br />
+                Nombre de formation en cours :<br />
+                @Model.DEJEPS.Count(f => f.FormationEnded == false)
+
+            </div>
+        </div>
+        <div class="lf_card">
+            <div class="lf_card_image"><img src="@Url.Content("~/Content/Images/Icons/icon-DE-hover.png")" /></div>
+            <div class="lf_card_title">DESJEPS</div>
+            <div class="lf_card_desc">
+                Dans cette section vous retrouverez toutes vos formations de type Diplôme d’Etat Supérieur de la Jeunesse, de l’Education Populaire et du Sport.<br /><br />
+                Nombre de formation en cours :<br />
+                @Model.DESJEPS.Count(f => f.FormationEnded == false)
+
+            </div>
+        </div>
+    </div>
+    @{Html.RenderPartial("_Footer");}
+</div>

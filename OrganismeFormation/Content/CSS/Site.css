@@ -15,6 +15,70 @@ html{
   height:100%;
 }
 
+/************* Liste formations card **/
+.content_lf_card{
+    width:inherit;
+    margin-left:30px;
+    color:#004A73;
+    padding-bottom:70px;
+}
+
+.lf_card{
+    font-family: Oswald-Regular;
+    background-color:white;
+    width: 200px;
+    margin-right: 20px;
+    margin-top: 30px;
+    display: inline-block;
+    text-align: center;
+}
+
+.lf_card_title
+{
+    font-size:20px;
+    padding-top:7px;
+    padding-bottom:7px;
+    box-shadow: 0px 6px 10px -2px grey;
+}
+
+.lf_card_desc
+{
+    margin-top: 15px;
+    width:inherit;
+    text-align:center;
+    font-size: 12px;
+    margin-bottom:15px;
+
+}
+
+.lf_card_image{
+    margin-top:7px;
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    font-size: 50px;
+    line-height: 91px;
+    background: #004A73;
+    margin-left: auto;
+    margin-right: auto;
+    vertical-align: middle;
+}
+
+.lf_card:hover{
+    cursor: pointer;
+    background-color: #eef8ff;
+    -webkit-box-shadow: 0px 3px 24px 3px #004a73;
+    -moz-box-shadow: 0px 3px 24px 3px #004a73;
+    -o-box-shadow: 0px 3px 24px 3px #004a73;
+    box-shadow: 0px 3px 24px 3px #004a73;
+}
+
+.lf_card_image img
+{
+    height:60px;
+    width:60px;
+}
+
 /************* Organisme card ********/
 .content_organisme_card
 {

@@ -1,0 +1,29 @@
+﻿@model OrganismeFormation.ViewModels.ListeFormationEtatViewModel
+@{
+    ViewBag.Title = "EtatFormationAC";
+}
+
+<h2>EtatFormationAC</h2>
+
+<div class="content">
+    <div class="title-content">
+        <div class="title-content-main">Gestion des organismes de formation</div>
+        <div class="title-content-second">Affichage des ligues</div>
+    </div>
+    <p>
+        <div style="width: 130px;text-align:center">
+            <div class="submit">
+                <a href='@Url.Action("create", "Ligues")' id="button-blue">Nouvelle Ligue</a>
+                <div class="ease"></div>
+            </div>
+        </div>
+    </p>
+    <table class="table" id="mano-bootstrap">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.enCours.First().DateDebut)
+            </th>
+        </tr>
+    </table>
+    @{Html.RenderPartial("_Footer");}
+</div>
