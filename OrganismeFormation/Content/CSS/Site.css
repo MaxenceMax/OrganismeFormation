@@ -79,6 +79,16 @@ html{
     width:60px;
 }
 
+.tr_clickable:hover
+{
+    cursor: pointer;
+    background-color: #eef8ff;
+    -webkit-box-shadow: 0px 3px 24px 3px #004a73;
+    -moz-box-shadow: 0px 3px 24px 3px #004a73;
+    -o-box-shadow: 0px 3px 24px 3px #004a73;
+    box-shadow: 0px 3px 24px 3px #004a73;
+}
+
 /************* Organisme card ********/
 .content_organisme_card
 {

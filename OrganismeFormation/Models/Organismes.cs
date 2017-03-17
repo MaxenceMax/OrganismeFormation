@@ -11,10 +11,7 @@ namespace OrganismeFormation.Models
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel;
-    using System.ComponentModel.DataAnnotations;
-    using System.ComponentModel.DataAnnotations.Schema;
-
+    
     public partial class Organismes
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -25,13 +22,8 @@ namespace OrganismeFormation.Models
         }
     
         public decimal Id { get; set; }
-        [Required]
         public string Libelle { get; set; }
-        [Required]
-        [DisplayName("Numéro de déclaration")]
         public string NumeroDeclaration { get; set; }
-        [Required]
-        [DisplayName("Année de déclaration")]
         public string AnneeDeclaration { get; set; }
         public Nullable<decimal> LieuxId { get; set; }
         public Nullable<decimal> PresidentId { get; set; }

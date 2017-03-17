@@ -30,15 +30,67 @@
                 <th>
                     @Html.DisplayNameFor(model => model.enCours.First().DateDebut)
                 </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.enCours.First().DateFin)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.enCours.First().NumeroSession)
+                </th>
+                <th>
+                    Nombre de candidats
+                </th>
             </tr>
-        </table>
+            @foreach (var item in Model.enCours)
+            {
+                <tr class="tr_clickable" onclick="location.href='@Url.Action("ListeFormations", "AccesResponsable", new { id = Model.organisme.Id })'">
+                    <td>
+                        @String.Format("{0:d/MM/yyyy}", @item.DateDebut)
+                    </td>
+                    <td>
+                        @String.Format("{0:d/MM/yyyy}", @item.DateFin)
+                    </td>
+                    <td>
+                        @item.NumeroSession
+                    </td>
+                    <td>
+                        @item.CandidatsFormations.Count()
+                    </td>
+                </tr>
+            }
+         </table>
         <h3> Formations AC terminée :</h3>
         <table class="table">
             <tr>
                 <th>
                     @Html.DisplayNameFor(model => model.enCours.First().DateDebut)
                 </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.enCours.First().DateFin)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.enCours.First().NumeroSession)
+                </th>
+                <th>
+                    Nombre de candidats
+                </th>
             </tr>
+            @foreach (var item in Model.termine)
+            {
+                <tr class="tr_clickable">
+                    <td>
+                        @String.Format("{0:d/MM/yyyy}", @item.DateDebut)
+                    </td>
+                    <td>
+                        @String.Format("{0:d/MM/yyyy}", @item.DateFin)
+                    </td>
+                    <td>
+                        @item.NumeroSession
+                    </td>
+                    <td>
+                        @item.CandidatsFormations.Count()
+                    </td>
+                </tr>
+            }
         </table>
     </div>
     @{Html.RenderPartial("_Footer");}
