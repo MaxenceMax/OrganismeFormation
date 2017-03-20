@@ -4,79 +4,218 @@
     ViewBag.Title = "Details";
 }
 
-<h2>Details</h2>
 
-<div>
-    <h4>Organismes</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Libelle)
-        </dt>
+<div class="content">
+    <div class="title-content">
+        <div class="title-content-main">Gestion des organismes de formation</div>
+        <div class="title-content-second">Détail de l'organisme</div>
+    </div>
+    <div id="mano-bootstrap">
+        <dl class="dl-horizontal">
+            <dt>
+                Nom de l'OF
+            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Libelle)
-        </dd>
+            <dd>
+                @Html.DisplayFor(model => model.Libelle)
+            </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.NumeroDeclaration)
-        </dt>
+            <dt>
+                Ligue d'appartenance
+            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.NumeroDeclaration)
-        </dd>
+            <dd>
+                @Html.DisplayFor(model => model.Ligues.Libelle)
+            </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.AnneeDeclaration)
-        </dt>
+        </dl>
 
-        <dd>
-            @Html.DisplayFor(model => model.AnneeDeclaration)
-        </dd>
+        <hr />
+        
+        <dl class="dl-horizontal">
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Lieux.Adresse)
-        </dt>
+            <dt>
+                Numéro de déclaration
+            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Lieux.Adresse)
-        </dd>
+            <dd>
+                @Html.DisplayFor(model => model.NumeroDeclaration)
+            </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Ligues.Libelle)
-        </dt>
+            <dt>
+                Année de déclaration
+            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Ligues.Libelle)
-        </dd>
+            <dd>
+                @Html.DisplayFor(model => model.AnneeDeclaration)
+            </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Personnel.Nom)
-        </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Personnel.Nom)
-        </dd>
+        </dl>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Personnel1.Nom)
-        </dt>
+        <hr />
+        <p>Siège de l'organisme </p>
+        <dl class="dl-horizontal">
 
-        <dd>
-            @Html.DisplayFor(model => model.Personnel1.Nom)
-        </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.PresidentOrganisme.Telephone)
-        </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.PresidentOrganisme.Telephone)
-        </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.Lieux.Adresse)
+            </dt>
 
-    </dl>
+            <dd>
+                @Html.DisplayFor(model => model.Lieux.Adresse)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Lieux.CodePostal)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Lieux.CodePostal)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Lieux.Ville)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Lieux.Ville)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.Lieux.Telephone)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Lieux.Telephone)
+            </dd>
+
+        </dl>
+
+        <hr />
+        <p>Président de l'organisme </p>
+        <dl class="dl-horizontal">
+            
+            <dt>
+                Nom
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.PresidentOrganisme.Nom)
+            </dd>
+
+            <dt>
+                Prénom
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.PresidentOrganisme.Prenom)
+            </dd>
+            <dt>
+                Email
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.PresidentOrganisme.Email)
+            </dd>
+            <dt>
+                Téléphone
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.PresidentOrganisme.Telephone)
+            </dd>
+
+        </dl>
+
+        <hr />
+        <p>Coordinateur de l'organisme </p>
+        <dl class="dl-horizontal">
+            <dt>
+                Nom
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Personnel.Nom)
+            </dd>
+
+            <dt>
+                Prénom
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Personnel.Prenom)
+            </dd>
+            <dt>
+                Email
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Personnel.Email)
+            </dd>
+            <dt>
+                Téléphone
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Personnel.Telephone)
+            </dd>
+
+        </dl>
+
+        <hr />
+        <p>Directeur de l'organisme </p>
+        <dl class="dl-horizontal">
+            <dt>
+                Nom
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Personnel1.Nom)
+            </dd>
+
+            <dt>
+                Prénom
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Personnel1.Prenom)
+            </dd>
+            <dt>
+                Email
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Personnel1.Email)
+            </dd>
+
+
+            <dt>
+                Téléphone
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Personnel1.Telephone)
+            </dd>
+
+
+
+
+
+        </dl>
+
+        <hr />
+
+        <div class="form-group-align">
+            <div class="submit" id="form-moitie" style="margin-left:2.5px">
+                <a href='@Url.Action("Index", "Organismes")' id="button-red">Retour</a>
+                <div class="ease"></div>
+            </div>
+            <div class="submit" id="form-moitie" style="margin-right:2.5px">
+                <a href='@Url.Action("Edit", "Organismes", new { id = Model.Id })' id="button-blue" style="text-align:center">Modifier</a>
+                <div class="ease"></div>
+            </div>
+        </div>
+    </div>
+    @{Html.RenderPartial("_Footer");}
 </div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>
+
+
+
+
+
+
+
+
+
+

@@ -19,7 +19,7 @@
     <table class="table" id="mano-bootstrap">
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Libelle)
+              Nom de l'OF
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.NumeroDeclaration)
@@ -28,10 +28,10 @@
                 @Html.DisplayNameFor(model => model.AnneeDeclaration)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Lieux.Adresse)
+                Ligue
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Ligues.Libelle)
+                Responsable(s)
             </th>
             <th></th>
         </tr>
@@ -48,11 +48,12 @@
                 <td>
                     @Html.DisplayFor(modelItem => item.AnneeDeclaration)
                 </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Lieux.Adresse)
-                </td>
+               
                 <td>
                     @Html.DisplayFor(modelItem => item.Ligues.Libelle)
+                </td>
+                <td>
+                    @Html.ActionLink("Voir", "AddResponsable", new { id = item.Id })
                 </td>
                 <td>
                     @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |

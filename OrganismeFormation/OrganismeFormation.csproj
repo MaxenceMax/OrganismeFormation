@@ -292,6 +292,7 @@
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
+    <Compile Include="ViewModels\AddResponsableViewModel.cs" />
     <Compile Include="ViewModels\ListeFormationEtatViewModel.cs" />
     <Compile Include="ViewModels\ListeFormationsViewModel.cs" />
     <Compile Include="ViewModels\FormationViewModel.cs" />
@@ -452,6 +453,7 @@
     <Content Include="Views\AccesResponsable\EtatFormationDEJEPS.cshtml" />
     <Content Include="Views\AccesResponsable\EtatFormationBPJEPS.cshtml" />
     <Content Include="Views\AccesResponsable\EtatFormationCQP.cshtml" />
+    <Content Include="Views\Organismes\AddResponsable.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -97,7 +97,7 @@ namespace OrganismeFormation.Controllers
         private IEnumerable<Claim> LoadRolesAccesLigue(string login)
         {
             GestionOFEntities db = new GestionOFEntities();
-            Session["Ligue"] = db.Ligues.Where(a => a.login == login);
+            Session["Ligue"] = db.Ligues.Where(a => a.login == login).First();
             yield return new Claim(ClaimTypes.Role, "AccesLigue");
 
         }

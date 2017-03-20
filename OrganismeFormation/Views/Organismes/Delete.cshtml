@@ -4,84 +4,212 @@
     ViewBag.Title = "Delete";
 }
 
-<h2>Delete</h2>
+<div class="content">
+    <div class="title-content">
+        <div class="title-content-main">Gestion des organismes de formation</div>
+        <div class="title-content-second">Détail de l'organisme</div>
+    </div>
+    <div id="mano-bootstrap">
+        <dl class="dl-horizontal">
+            <dt>
+                Nom de l'OF
+            </dt>
 
-<h3>Are you sure you want to delete this?</h3>
-<div>
-    <h4>Organismes</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Libelle)
-        </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Libelle)
+            </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.Libelle)
-        </dd>
+            <dt>
+                Ligue d'appartenance
+            </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.NumeroDeclaration)
-        </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Ligues.Libelle)
+            </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.NumeroDeclaration)
-        </dd>
+        </dl>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.AnneeDeclaration)
-        </dt>
+        <hr />
 
-        <dd>
-            @Html.DisplayFor(model => model.AnneeDeclaration)
-        </dd>
+        <dl class="dl-horizontal">
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Lieux.Adresse)
-        </dt>
+            <dt>
+                Numéro de déclaration
+            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Lieux.Adresse)
-        </dd>
+            <dd>
+                @Html.DisplayFor(model => model.NumeroDeclaration)
+            </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Ligues.Libelle)
-        </dt>
+            <dt>
+                Année de déclaration
+            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Ligues.Libelle)
-        </dd>
+            <dd>
+                @Html.DisplayFor(model => model.AnneeDeclaration)
+            </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Personnel.Nom)
-        </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Personnel.Nom)
-        </dd>
+        </dl>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Personnel1.Nom)
-        </dt>
+        <hr />
+        <p>Siège de l'organisme </p>
+        <dl class="dl-horizontal">
 
-        <dd>
-            @Html.DisplayFor(model => model.Personnel1.Nom)
-        </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.PresidentOrganisme.Telephone)
-        </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.PresidentOrganisme.Telephone)
-        </dd>
-    </dl>
+            <dt>
+                @Html.DisplayNameFor(model => model.Lieux.Adresse)
+            </dt>
 
-    @using (Html.BeginForm()) {
-        @Html.AntiForgeryToken()
+            <dd>
+                @Html.DisplayFor(model => model.Lieux.Adresse)
+            </dd>
 
-        <div class="form-actions no-color">
-            <input type="submit" value="Delete" class="btn btn-default" /> |
-            @Html.ActionLink("Back to List", "Index")
-        </div>
-    }
+            <dt>
+                @Html.DisplayNameFor(model => model.Lieux.CodePostal)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Lieux.CodePostal)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Lieux.Ville)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Lieux.Ville)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.Lieux.Telephone)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Lieux.Telephone)
+            </dd>
+
+        </dl>
+
+        <hr />
+        <p>Président de l'organisme </p>
+        <dl class="dl-horizontal">
+
+            <dt>
+                Nom
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.PresidentOrganisme.Nom)
+            </dd>
+
+            <dt>
+                Prénom
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.PresidentOrganisme.Prenom)
+            </dd>
+            <dt>
+                Email
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.PresidentOrganisme.Email)
+            </dd>
+            <dt>
+                Téléphone
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.PresidentOrganisme.Telephone)
+            </dd>
+
+        </dl>
+
+        <hr />
+        <p>Coordinateur de l'organisme </p>
+        <dl class="dl-horizontal">
+            <dt>
+                Nom
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Personnel.Nom)
+            </dd>
+
+            <dt>
+                Prénom
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Personnel.Prenom)
+            </dd>
+            <dt>
+                Email
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Personnel.Email)
+            </dd>
+            <dt>
+                Téléphone
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Personnel.Telephone)
+            </dd>
+
+        </dl>
+
+        <hr />
+        <p>Directeur de l'organisme </p>
+        <dl class="dl-horizontal">
+            <dt>
+                Nom
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Personnel1.Nom)
+            </dd>
+
+            <dt>
+                Prénom
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Personnel1.Prenom)
+            </dd>
+            <dt>
+                Email
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Personnel1.Email)
+            </dd>
+
+
+            <dt>
+                Téléphone
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Personnel1.Telephone)
+            </dd>
+
+
+
+
+
+        </dl>
+
+        <hr />
+
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+
+            <div class="form-group-align">
+                <div class="submit" id="form-moitie" style="margin-right:2.5px">
+                    <a href='@Url.Action("Index", "Organismes")' id="button-blue" style="text-align:center">Retour</a>
+                    <div class="ease"></div>
+                </div>
+                <div class="submit" id="form-moitie" style="margin-left:2.5px">
+                    <input type="submit" value="Supprimer" id="button-red" />
+                    <div class="ease"></div>
+                </div>
+            </div>
+        }
+    </div>
+    @{Html.RenderPartial("_Footer");}
 </div>
