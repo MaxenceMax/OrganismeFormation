@@ -57,7 +57,7 @@ namespace OrganismeFormation.Controllers
             {
                 if (db.Ligues.Any(a => a.login == ligues.login))
                 {
-                    ModelState.AddModelError("login", "L'identifiant doit être unique.");
+                    ModelState.AddModelError("login", "Un responsabe de ligue avec cet identifiant existe déjà, veuillez en saisir un nouveau.");
                     return View(ligues);
                 } 
                 ligues.password = encrypt(ligues.password);
