@@ -97,6 +97,11 @@ namespace OrganismeFormation.Controllers
                 var tmp = db.Ligues.Find(ligues.Id);
                 db.Ligues.Attach(tmp);
                 tmp.email = ligues.email;
+                if (db.Ligues.Any(a => a.login == ligues.login))
+                {
+                    ModelState.AddModelError("login", "Un responsabe de ligue avec cet identifiant existe déjà, veuillez en saisir un nouveau.");
+                    return View(ligues);
+                }
                 tmp.login = tmp.login;
                 tmp.Libelle = tmp.Libelle;
                 if (tmp.password != ligues.password)
