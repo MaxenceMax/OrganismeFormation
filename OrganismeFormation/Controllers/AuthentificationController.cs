@@ -82,6 +82,9 @@ namespace OrganismeFormation.Controllers
 
         private IEnumerable<Claim> LoadRolesAdmin(string login)
         {
+            GestionOFEntities db = new GestionOFEntities();
+            var admin = db.Admin.Where(a => a.login == login).First();
+            Session["Admin"] = admin;
             yield return new Claim(ClaimTypes.Role, "Admin");
 
         }

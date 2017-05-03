@@ -447,6 +447,18 @@ html{
 	background-image: url("../Images/Icons/icon-home-hover.png");
 }
 
+#icon-location{
+	background-image: url("../Images/Icons/icon-location.png");
+	background-size: 20px 20px;
+	background-position: 17px 8px;
+	background-repeat: no-repeat;
+    margin-bottom: 14px;
+}
+
+#parent:hover #icon-location{
+	background-image: url("../Images/Icons/icon-location-hover.png");
+}
+
 #icon-AC{
 	background-image: url("../Images/Icons/icon-AC.png");
 	background-size: 20px 20px;

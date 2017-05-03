@@ -11,13 +11,18 @@ namespace OrganismeFormation.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel;
+    using System.ComponentModel.DataAnnotations;
     public partial class Admin
     {
         public decimal id { get; set; }
         public string Nom { get; set; }
         public string Prenom { get; set; }
+
         public string login { get; set; }
+        [Required]
+        [DisplayName("Mot de passe")]
+        [DataType(DataType.Password)]
         public string password { get; set; }
     }
 }

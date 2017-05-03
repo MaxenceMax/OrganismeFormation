@@ -45,13 +45,19 @@
                         <li>
                             <a id="parent" href="@Url.Action("HomeAdmin","Admin")">
                                 <i class="fa fa-home fa-lg" id="icon-home"></i>
-                                <span class="nav-text">Home</span>
+                                <span class="nav-text">Accueil Admin</span>
                             </a>
                         </li>
                         <li>
                             <a id="parent" href="@Url.Action("Index","Ligues")">
-                                <i class="fa fa-home fa-lg" id=""></i>
+                                <i class="fa fa-home fa-lg" id="icon-location"></i>
                                 <span class="nav-text">Liste des Ligues</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a id="parent" href="@Url.Action("ParametreAdmin","Admin")">
+                                <i class="fa fa-home fa-lg" id="icon-settings"></i>
+                                <span class="nav-text">Paramètres</span>
                             </a>
                         </li>
                         <li class="darkerlishadow">
@@ -68,7 +74,7 @@
                         <li>
                             <a id="parent" href="@Url.Action("Home","AccesResponsable")">
                                 <i class="fa fa-home fa-lg" id="icon-home"></i>
-                                <span class="nav-text">Home</span>
+                                <span class="nav-text">Acceuil Responsable</span>
                             </a>
                         </li>
                         <li>
@@ -92,17 +98,21 @@
                         <li>
                             <a id="parent" href="@Url.Action("Home","AccesLigue")">
                                 <i class="fa fa-home fa-lg" id="icon-home"></i>
-                                <span class="nav-text">Home</span>
+                                <span class="nav-text">Accueil Ligue</span>
                             </a>
                         </li>
-
                         <li>
                             <a id="parent" href="@Url.Action("Index","Organismes")">
-                                <i class="fa fa-home fa-lg" id="icon-settings"></i>
+                                <i class="fa fa-home fa-lg" id="icon-formation"></i>
                                 <span class="nav-text">Gestion des OF</span>
                             </a>
                         </li>
-
+                        <li>
+                            <a id="parent" href="@Url.Action("ParametreLigue","AccesLigue")">
+                                <i class="fa fa-home fa-lg" id="icon-settings"></i>
+                                <span class="nav-text">Paramètres</span>
+                            </a>
+                        </li>
                         <li class="darkerlishadow">
                             <a id="parent" href="@Url.Action("Logout", "Authentification")">
                                 <i class="fa fa-clock-o fa-lg" id="icon-logout"></i>

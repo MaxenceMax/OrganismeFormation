@@ -9,6 +9,8 @@ using System.Web.Mvc;
 using OrganismeFormation.Models;
 using OrganismeFormation.ViewModels;
 using System.Collections.ObjectModel;
+using System.Text;
+using System.Security.Cryptography;
 
 namespace OrganismeFormation.Controllers
 {

@@ -324,6 +324,8 @@
     <Content Include="Content\Images\Icons\icon-home-hover.png" />
     <Content Include="Content\Images\Icons\icon-home.png" />
     <Content Include="Content\Images\Icons\icon-email.svg" />
+    <Content Include="Content\Images\Icons\icon-location-hover.png" />
+    <Content Include="Content\Images\Icons\icon-location.png" />
     <Content Include="Content\Images\Icons\icon-login-hover.png" />
     <Content Include="Content\Images\Icons\icon-logout-hover.png" />
     <Content Include="Content\Images\Icons\icon-logout.png" />
@@ -454,6 +456,8 @@
     <Content Include="Views\AccesResponsable\EtatFormationBPJEPS.cshtml" />
     <Content Include="Views\AccesResponsable\EtatFormationCQP.cshtml" />
     <Content Include="Views\Organismes\AddResponsable.cshtml" />
+    <Content Include="Views\Admin\ParametreAdmin.cshtml" />
+    <Content Include="Views\AccesLigue\ParametreLigue.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
