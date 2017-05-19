@@ -11,7 +11,8 @@ namespace OrganismeFormation.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel;
+    using System.ComponentModel.DataAnnotations;
     public partial class Lieux
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -20,12 +21,27 @@ namespace OrganismeFormation.Models
             this.Formations = new HashSet<Formations>();
             this.Organismes = new HashSet<Organismes>();
         }
-    
+
         public decimal Id { get; set; }
+        [Required]
+        [StringLength(255, ErrorMessage = "L'adresse doit contenir entre 5 et 255 caractères.", MinimumLength = 5)]
         public string Adresse { get; set; }
+        [Required]
+        [DisplayName("Code postal")]
+        [StringLength(255, ErrorMessage = "Le code postal n'est pas au bon format", MinimumLength = 5)]
         public string CodePostal { get; set; }
+        [Required]
+        [StringLength(100,MinimumLength =2,ErrorMessage ="La ville doit contenir entre 2 et 100 caractères")]
         public string Ville { get; set; }
+        [Required]
+        [StringLength(10, MinimumLength = 10)]
+        [DisplayName("Téléphone")]
+        [DataType(DataType.PhoneNumber)]
         public string Telephone { get; set; }
+        [Required]
+        [DisplayName("Adresse Email Responsable")]
+        [DataType(DataType.EmailAddress)]
+        [EmailAddress]
         public string Email { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

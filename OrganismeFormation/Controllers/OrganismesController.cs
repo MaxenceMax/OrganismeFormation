@@ -109,55 +109,100 @@ namespace OrganismeFormation.Controllers
         }
 
 
-        //GET Organisme ID for Add Responsable
         [Authorize(Roles = "AccesLigue")]
-        public ActionResult AddResponsable(decimal id)
+        public ActionResult ShowResponsable(decimal id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
+            SearchResponsableViewModel sr = new SearchResponsableViewModel();
+            sr.organisme = db.Organismes.Find(id);
+            sr.OrganismeId = id;
 
-
-            AddResponsableViewModel ar = new AddResponsableViewModel();
-
-            Organismes organismes = db.Organismes.Find(id);
-            if (organismes == null)
-            {
-                return HttpNotFound();
-            }
-
-            ar.organisme = organismes;
-            ar.organismeId = organismes.Id;
-
-            // ViewBag.Responsable = new SelectList(db.Responsable, "Id", "Nom", organismes.Responsable);
-
-
-
-            return View(ar);
-
+            // Tempdata use when delete on responsable is called
+            TempData["organisme"] = sr.organisme.Id;
+            return View(sr);
         }
-
 
         [HttpPost]
-        [ValidateAntiForgeryToken]
         [Authorize(Roles = "AccesLigue")]
-        public ActionResult AddResponsable(AddResponsableViewModel ar)
+        public ActionResult ShowResponsable(SearchResponsableViewModel sr)
         {
+            Organismes org = db.Organismes.Find(sr.OrganismeId);
+            sr.organisme = org;
+            if (ModelState.IsValid)
+            {
+                if (db.Responsable.Any(r => r.Licence == sr.NumeroLicence))
+                {
+                    ResponsableOrgaViewModel Ro = new ResponsableOrgaViewModel();
+                    Ro.responsable = db.Responsable.Where(r => r.Licence == sr.NumeroLicence).First();
+                    Ro.OrganismeId = sr.OrganismeId;
+                    TempData["responsable"] = Ro;
+                    return RedirectToAction("AddResponsable");
+                }
+                else
+                {
+                    ModelState.AddModelError("NumeroLicence", "Ne nous trouvons personne avec le numéro de licence : "+sr.NumeroLicence);
+                }
+            }
 
+            // Tempdata use when delete on responsable is called
+            TempData["organisme"] = org.Id;
+            return View(sr);
+        }
 
-            var org = db.Organismes.Find(ar.organismeId);
-            db.Organismes.Attach(org);
-            ar.responsable.Password = encrypt(ar.responsable.Password);
-            org.Responsable.Add(ar.responsable);
-
-            db.SaveChanges();
-
-            return RedirectToAction("Index");
-
-
+        //GET Organisme ID for Add Responsable
+        [Authorize(Roles = "AccesLigue")]
+        public ActionResult AddResponsable()
+        {
+            ResponsableOrgaViewModel ro = TempData["responsable"] as ResponsableOrgaViewModel;
+            Organismes organisme = db.Organismes.Find(ro.OrganismeId);
+            ViewBag.libelleOrganisme = organisme.Libelle;
+            return View(ro);
 
         }
+
+        [HttpPost]
+        [Authorize (Roles ="AccesLigue")]
+        public ActionResult AddResponsable(ResponsableOrgaViewModel ro)
+        {
+            Organismes organisme = db.Organismes.Find(ro.OrganismeId);
+            ViewBag.libelleOrganisme = organisme.Libelle;
+            if(ModelState.IsValid)
+            {
+                db.Organismes.Attach(organisme);
+                ro.responsable.Password = encrypt(ro.responsable.Password);
+                db.Responsable.Attach(ro.responsable);
+                organisme.Responsable.Add(ro.responsable);
+                db.SaveChanges();
+                return RedirectToAction("ShowResponsable","Organismes",new { @id = ro.OrganismeId });
+
+            }
+            return View(ro);
+        }
+        
+
+        [Authorize(Roles ="AccesLigue")]
+        public ActionResult DeleteResponsable(decimal id)
+        {
+            if(id==null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+            Responsable rp = db.Responsable.Find(id);
+            Organismes orga = db.Organismes.Find(TempData["organisme"]);
+
+            db.Organismes.Attach(orga);
+            db.Responsable.Attach(rp);
+
+            orga.Responsable.Remove(rp);
+            db.SaveChanges();
+
+            return RedirectToAction("ShowResponsable", "Organismes", new { @id = orga.Id });
+        }
+
 
 
 
@@ -182,7 +227,6 @@ namespace OrganismeFormation.Controllers
         // Afin de déjouer les attaques par sur-validation, activez les propriétés spécifiques que vous voulez lier. Pour 
         // plus de détails, voir  http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        [ValidateAntiForgeryToken]
         [Authorize(Roles = "AccesLigue")]
         public ActionResult Edit(Organismes organismes)
         {

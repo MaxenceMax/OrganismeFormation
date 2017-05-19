@@ -1,7 +1,7 @@
-﻿@model OrganismeFormation.ViewModels.AddResponsableViewModel
+﻿@model OrganismeFormation.ViewModels.ResponsableOrgaViewModel
 
 @{
-    ViewBag.Title = "Add Responsable";
+    ViewBag.Title = "Ajout d'un Responsable ";
 }
 
 
@@ -10,65 +10,14 @@
         <div class="title-content-main">Gestion des organismes de formation</div>
         <div class="title-content-second">Affichage et ajout d'un responsable</div>
     </div>
-
-    <table class="table" id="mano-bootstrap">
-        <tr>
-            <th>
-                Nom
-            </th>
-            <th>
-                Prenom
-            </th>
-            <th>
-                Email
-            </th>
-            <th>
-                Numéro de Licence
-            </th>
-            <th>
-                Telephone
-            </th>
-
-            <th></th>
-        </tr>
-
-        @foreach (var item in Model.organisme.Responsable)
-        {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Nom)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Prenom)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Email)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Licence)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Telephone)
-                </td>
-               
-            </tr>
-        }
-
-    </table>
-
-
-
-    @using (Html.BeginForm("AddResponsable", "Organismes"))
+    @using (Html.BeginForm())
     {
-
-        @Html.AntiForgeryToken()
+        @Html.HiddenFor(model => model.OrganismeId)
+        @Html.HiddenFor(model=>model.responsable.Id)
         <div class="form-horizontal" id="mano-bootstrap">
-            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-
-            @Html.HiddenFor(model => model.organismeId)
-            <p> Ajouter un responsable </p>
+            <h4>Ajouter le responsable suivant à l'organisme @ViewBag.LibelleOrganisme</h4>
             <hr />
-
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
             <div class="form-group">
                 @Html.LabelFor(model => model.responsable.Nom, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
@@ -86,10 +35,10 @@
             </div>
 
             <div class="form-group">
-                @Html.LabelFor(model => model.responsable.Email, htmlAttributes: new { @class = "control-label col-md-2" })
+                @Html.LabelFor(model => model.responsable.Licence, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
-                    @Html.EditorFor(model => model.responsable.Email, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.responsable.Email, "", new { @class = "text-danger" })
+                    @Html.EditorFor(model => model.responsable.Licence, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.responsable.Licence, "", new { @class = "text-danger" })
                 </div>
             </div>
 
@@ -102,10 +51,10 @@
             </div>
 
             <div class="form-group">
-                @Html.LabelFor(model => model.responsable.Licence, htmlAttributes: new { @class = "control-label col-md-2" })
+                @Html.LabelFor(model => model.responsable.Email, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
-                    @Html.EditorFor(model => model.responsable.Licence, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.responsable.Licence, "", new { @class = "text-danger" })
+                    @Html.EditorFor(model => model.responsable.Email, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.responsable.Email, "", new { @class = "text-danger" })
                 </div>
             </div>
 
@@ -117,21 +66,15 @@
                 </div>
             </div>
 
-            <hr />
-
             <div class="form-group-align">
                 <div class="submit" id="form-moitie" style="margin-right:2.5px">
-                    <input type="submit" value="Créer" id="button-blue" />
+                    <input type="submit" value="Ajouter" id="button-blue" />
                     <div class="ease"></div>
                 </div>
                 <div class="submit" id="form-moitie" style="margin-left:2.5px">
-                    <a href='@Url.Action("Index", "Organismes")' id="button-red">Retour</a>
+                    <a href='@Url.Action("ShowResponsable", "Organismes",new {id = Model.OrganismeId })' id="button-red">Retour</a>
                     <div class="ease"></div>
                 </div>
             </div>
-
         </div>
     }
-
-    @{Html.RenderPartial("_Footer");}
-</div>

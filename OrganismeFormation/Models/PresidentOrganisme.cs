@@ -11,7 +11,8 @@ namespace OrganismeFormation.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel;
+    using System.ComponentModel.DataAnnotations;
     public partial class PresidentOrganisme
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -21,9 +22,22 @@ namespace OrganismeFormation.Models
         }
     
         public decimal Id { get; set; }
+        [Required]
+        [StringLength(50, MinimumLength = 2)]
         public string Nom { get; set; }
+        [Required]
+        [DisplayName("Prénom")]
+        [StringLength(50, MinimumLength = 2)]
         public string Prenom { get; set; }
+        [Required]
+        [StringLength(10, MinimumLength = 10)]
+        [DisplayName("Téléphone")]
+        [DataType(DataType.PhoneNumber)]
         public string Telephone { get; set; }
+        [Required]
+        [DisplayName("Adresse Email Responsable")]
+        [DataType(DataType.EmailAddress)]
+        [EmailAddress]
         public string Email { get; set; }
         public string Fonction { get; set; }
     

@@ -95,15 +95,15 @@ namespace OrganismeFormation.Controllers
             if (ModelState.IsValid)
             {
                 var tmp = db.Ligues.Find(ligues.Id);
-                db.Ligues.Attach(tmp);
-                tmp.email = ligues.email;
-                if (db.Ligues.Any(a => a.login == ligues.login))
+                if (tmp.login != ligues.login && db.Ligues.Any(l => l.login == ligues.login))
                 {
                     ModelState.AddModelError("login", "Un responsabe de ligue avec cet identifiant existe déjà, veuillez en saisir un nouveau.");
                     return View(ligues);
                 }
-                tmp.login = tmp.login;
-                tmp.Libelle = tmp.Libelle;
+                db.Ligues.Attach(tmp);
+                tmp.email = ligues.email;
+                tmp.login = ligues.login;
+                tmp.Libelle = ligues.Libelle;
                 if (tmp.password != ligues.password)
                     tmp.password = encrypt(ligues.password);
 

@@ -11,7 +11,8 @@ namespace OrganismeFormation.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel;
+    using System.ComponentModel.DataAnnotations;
     public partial class Responsable
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -21,11 +22,31 @@ namespace OrganismeFormation.Models
         }
     
         public decimal Id { get; set; }
+
+        [Required]
+        [StringLength(50, MinimumLength = 2)]
         public string Nom { get; set; }
+        [Required]
+        [StringLength(50, MinimumLength = 2)]
+        [DisplayName("Prénom")]
         public string Prenom { get; set; }
+        [Required]
+        [StringLength(16, MinimumLength = 16)]
         public string Licence { get; set; }
+        [Required]
+        [StringLength(10, MinimumLength = 10)]
+        [DisplayName("Téléphone")]
+        [DataType(DataType.PhoneNumber)]
         public string Telephone { get; set; }
+        [Required]
+        [DisplayName("Adresse Email Responsable")]
+        [DataType(DataType.EmailAddress)]
+        [EmailAddress]
         public string Email { get; set; }
+        [Required]
+        [DisplayName("Mot de passe")]
+        [DataType(DataType.Password)]
+        [StringLength(255, ErrorMessage = "Le mot de passe doit contenir entre 5 et 255 caractères.", MinimumLength = 5)]
         public string Password { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

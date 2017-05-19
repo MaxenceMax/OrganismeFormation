@@ -292,12 +292,10 @@
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
-    <Compile Include="ViewModels\AddResponsableViewModel.cs" />
+    <Compile Include="ViewModels\ResponsableOrgaViewModel.cs" />
+    <Compile Include="ViewModels\SearchResponsableViewModel.cs" />
     <Compile Include="ViewModels\ListeFormationEtatViewModel.cs" />
     <Compile Include="ViewModels\ListeFormationsViewModel.cs" />
-    <Compile Include="ViewModels\FormationViewModel.cs" />
-    <Compile Include="ViewModels\OrganismeViewModel.cs" />
-    <Compile Include="ViewModels\ResponsableViewModel.cs" />
     <Compile Include="ViewModels\StatutConnection.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -430,11 +428,10 @@
     <Content Include="Views\Ligues\Index.cshtml" />
     <Content Include="Views\AccesLigue\Home.cshtml" />
     <Content Include="Views\Organismes\Create.cshtml" />
-    <Content Include="Views\Organismes\Delete.cshtml" />
     <Content Include="Views\Organismes\Details.cshtml" />
     <Content Include="Views\Organismes\Edit.cshtml" />
     <Content Include="Views\Organismes\Index.cshtml" />
-    <Content Include="Views\Responsables\Create.cshtml" />
+    <Content Include="Views\Organismes\AddResponsable.cshtml" />
     <Content Include="Views\Responsables\Delete.cshtml" />
     <Content Include="Views\Responsables\Details.cshtml" />
     <Content Include="Views\Responsables\Edit.cshtml" />
@@ -455,9 +452,11 @@
     <Content Include="Views\AccesResponsable\EtatFormationDEJEPS.cshtml" />
     <Content Include="Views\AccesResponsable\EtatFormationBPJEPS.cshtml" />
     <Content Include="Views\AccesResponsable\EtatFormationCQP.cshtml" />
-    <Content Include="Views\Organismes\AddResponsable.cshtml" />
+    <Content Include="Views\Organismes\ShowResponsable.cshtml" />
     <Content Include="Views\Admin\ParametreAdmin.cshtml" />
     <Content Include="Views\AccesLigue\ParametreLigue.cshtml" />
+    <Content Include="Views\AccesResponsable\ParametreResponsable.cshtml" />
+    <Content Include="Views\Organismes\Delete.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

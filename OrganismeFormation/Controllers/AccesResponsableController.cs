@@ -4,6 +4,8 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Security.Cryptography;
+using System.Text;
 using System.Web;
 using System.Web.Mvc;
 
@@ -23,9 +25,57 @@ namespace OrganismeFormation.Controllers
         [Authorize(Roles = "Responsable")]
         public ActionResult Organismes()
         {
-            System.Diagnostics.Debug.WriteLine("ID RESP" + ((Responsable) Session["Responsable"]).Nom);
-            Responsable rp = (Responsable)Session["Responsable"];
-            return View(rp.Organismes);
+            var resp = db.Responsable.Find(((Responsable)Session["Responsable"]).Id);
+            System.Diagnostics.Debug.WriteLine(resp.Id);
+            return View(resp.Organismes);
+        }
+
+        [HttpPost]
+        [Authorize(Roles = "Responsable")]
+        public ActionResult ParametreResponsable(Responsable responsable)
+        {
+            if (ModelState.IsValid)
+            {
+                var updateResp = db.Responsable.Find(responsable.Id);
+                db.Responsable.Attach(updateResp);
+                if(updateResp.Licence != responsable.Licence)
+                {
+                    if(db.Responsable.Any(r => r.Licence == responsable.Licence))
+                    {
+                        ModelState.AddModelError("Licence", "Un responsabe est déjà renseigné avec ce numéro de licence veuillez en choisir un autre.");
+                        return View(responsable);
+                    }
+                    updateResp.Licence = responsable.Licence;
+                }
+                if (updateResp.Password != responsable.Password)
+                {
+                    updateResp.Password = encrypt(responsable.Password);
+                }
+
+                updateResp.Nom = responsable.Nom;
+                updateResp.Prenom = responsable.Prenom;
+                updateResp.Telephone = responsable.Telephone;
+                updateResp.Email = responsable.Email;
+                db.SaveChanges();
+                return RedirectToAction("Home");
+            }
+            return View(responsable);
+        }
+
+        private String encrypt(string mdp)
+        {
+            Byte[] clearBytes = new UnicodeEncoding().GetBytes(mdp);
+            Byte[] hashedBytes = ((HashAlgorithm)CryptoConfig.CreateFromName("MD5")).ComputeHash(clearBytes);
+            string hashedText = BitConverter.ToString(hashedBytes);
+            return hashedText;
+
+        }
+
+        [Authorize(Roles ="Responsable")]
+        public ActionResult ParametreResponsable()
+        {
+            Responsable rp = db.Responsable.Find(((Responsable)Session["Responsable"]).Id);
+            return View(rp);
         }
 
         [Authorize(Roles = "Responsable")]

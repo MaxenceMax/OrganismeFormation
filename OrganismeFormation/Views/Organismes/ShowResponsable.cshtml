@@ -1,0 +1,135 @@
+﻿@model OrganismeFormation.ViewModels.SearchResponsableViewModel
+
+@{
+    ViewBag.Title = "Ajout d'un Responsable ";
+}
+
+
+<div class="content">
+    <div class="title-content">
+        <div class="title-content-main">Gestion des organismes de formation</div>
+        <div class="title-content-second">Affichage et ajout d'un responsable organisme : @Model.organisme.Libelle</div>
+    </div>
+
+    <table class="table" id="mano-bootstrap">
+        <tr>
+            <th>
+                Nom
+            </th>
+            <th>
+                Prenom
+            </th>
+            <th>
+                Email
+            </th>
+            <th>
+                Numéro de Licence
+            </th>
+            <th>
+                Telephone
+            </th>
+
+            <th>
+                Actions
+            </th>
+        </tr>
+
+        @foreach (var item in Model.organisme.Responsable)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Nom)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Prenom)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Email)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Licence)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Telephone)
+                </td>
+                <td>
+                <td>
+
+                    @*Mise en place d'une pop up pour la confirmation de la suppression d'un responsable*@ 
+                    <a data-popup-open="popup-@item.Id" href="#">Supprimer</a>
+                    <div class="popup" data-popup="popup-@item.Id">
+                        <div class="popup-inner">
+                            <h2>Attention suppresion !</h2>
+                            <p>
+                                Êtes vous sur de vouloir retirer le responsable @item.Prenom @item.Nom de l'organisme @Model.organisme.Libelle ?
+                            </p>
+                            <div class="form-group-align">
+                                <div class="submit" id="form-moitie" style="margin-right:2.5px">
+                                    <a href='@Url.Action("DeleteResponsable","Organismes",new { @id = item.Id })' style="padding-left:10px;" id="button-blue">Supprimer</a>
+                                    <div class="ease"></div>
+                                </div>
+                                <div class="submit" id="form-moitie" style="margin-left:2.5px">
+                                    <a data-popup-close="popup-@item.Id" href="#" id="button-red">Retour</a>
+                                    <div class="ease"></div>
+                                </div>
+                            </div>
+                            <a class="popup-close" data-popup-close="popup-@item.Id" href="#">x</a>
+                        </div>
+                    </div>
+
+                </td>
+            </tr>
+        }
+    </table>
+    @using (Html.BeginForm("ShowResponsable", "Organismes"))
+    {
+
+        @Html.AntiForgeryToken()
+        <div class="form-horizontal" id="mano-bootstrap">
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            @Html.HiddenFor(model => model.OrganismeId)
+
+            <p> Pour ajouter un responsable veuillez renseigner son numéro de licence : </p>
+            <hr />
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.NumeroLicence, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.NumeroLicence, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.NumeroLicence, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group-align">
+                <div class="submit" id="form-moitie" style="margin-right:2.5px">
+                    <input type="submit" value="Rechercher" id="button-blue" />
+                    <div class="ease"></div>
+                </div>
+                <div class="submit" id="form-moitie" style="margin-left:2.5px">
+                    <a href='@Url.Action("Index", "Organismes")' id="button-red">Retour</a>
+                    <div class="ease"></div>
+                </div>
+            </div>
+        </div>
+    }
+    @{Html.RenderPartial("_Footer");}
+</div>
+
+<script>
+    $(function () {
+        //----- OPEN
+        $('[data-popup-open]').on('click', function (e) {
+            var targeted_popup_class = jQuery(this).attr('data-popup-open');
+            $('[data-popup="' + targeted_popup_class + '"]').fadeIn(350);
+
+            e.preventDefault();
+        });
+
+        //----- CLOSE
+        $('[data-popup-close]').on('click', function (e) {
+            var targeted_popup_class = jQuery(this).attr('data-popup-close');
+            $('[data-popup="' + targeted_popup_class + '"]').fadeOut(350);
+
+            e.preventDefault();
+        });
+    });
+</script>

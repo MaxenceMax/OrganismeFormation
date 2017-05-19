@@ -18,6 +18,8 @@ namespace OrganismeFormation.Controllers
         [Authorize(Roles ="AccesLigue")]
         public ActionResult Home()
         {
+            Ligues tmp = db.Ligues.Find(((Ligues)Session["Ligue"]).Id);
+            ViewBag.libelle = tmp.Libelle;
             return View();
         }
 
@@ -35,12 +37,11 @@ namespace OrganismeFormation.Controllers
         [Authorize(Roles = "AccesLigue")]
         public ActionResult ParametreLigue(Ligues ligue)
         {
-
             if (ModelState.IsValid)
             {
                 var tmp = db.Ligues.Find(ligue.Id);
                 db.Ligues.Attach(tmp);
-                if(tmp.login != ligue.login)
+                if (tmp.login != ligue.login)
                 {
                     if (db.Ligues.Any(a => a.login == ligue.login))
                     {
@@ -53,6 +54,8 @@ namespace OrganismeFormation.Controllers
                 {
                     tmp.password = encrypt(ligue.password);
                 }
+                tmp.Libelle = ligue.Libelle;
+                tmp.email = ligue.email;
                 db.SaveChanges();
                 return RedirectToAction("Home");
             }

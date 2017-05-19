@@ -2,26 +2,26 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 
 namespace OrganismeFormation.ViewModels
 {
-    public class AddResponsableViewModel
+    public class SearchResponsableViewModel
     {
 
-        public AddResponsableViewModel()
+        public SearchResponsableViewModel()
         {
             organisme = new Organismes();
-            responsable = new Responsable();
         }
-
-
+        
         public Organismes organisme { get; set; }
+        public decimal OrganismeId { set; get; }
 
-        public Responsable responsable { get; set; }
-
-        public decimal organismeId { get; set; }
+        [Required]
+        [StringLength(16, MinimumLength = 16)]
+        public String NumeroLicence { get; set; }
 
     }
 }
