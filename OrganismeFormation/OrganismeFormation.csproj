@@ -204,11 +204,13 @@
     <Compile Include="Controllers\AccesResponsableController.cs" />
     <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\AuthentificationController.cs" />
+    <Compile Include="Controllers\FormationsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LieuxController.cs" />
     <Compile Include="Controllers\LiguesController.cs" />
     <Compile Include="Controllers\OrganismesController.cs" />
     <Compile Include="Controllers\ResponsablesController.cs" />
+    <Compile Include="Controllers\TypedeFormationsController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -458,9 +460,15 @@
     <Content Include="Views\AccesResponsable\ParametreResponsable.cshtml" />
     <Content Include="Views\Organismes\Delete.cshtml" />
     <Content Include="Views\Organismes\UpdateResponsable.cshtml" />
+    <Content Include="Views\TypedeFormations\Create.cshtml" />
+    <Content Include="Views\TypedeFormations\Delete.cshtml" />
+    <Content Include="Views\TypedeFormations\Details.cshtml" />
+    <Content Include="Views\TypedeFormations\Edit.cshtml" />
+    <Content Include="Views\TypedeFormations\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\Formations\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

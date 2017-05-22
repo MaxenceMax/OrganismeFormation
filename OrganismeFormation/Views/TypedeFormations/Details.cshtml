@@ -1,0 +1,34 @@
+﻿@model OrganismeFormation.Models.TypedeFormations
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<div class="content">
+    <div class="title-content">
+        <div class="title-content-main">Gestion des organismes de formation</div>
+        <div class="title-content-second">Détail du type de formations</div>
+    </div>
+    <div id="mano-bootstrap">
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.Libelle)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Libelle)
+            </dd>
+
+        </dl>
+        <div class="form-group-align">
+            <div class="submit" id="form-moitie" style="margin-right:2.5px">
+                <a href='@Url.Action("Edit", "TypedeFormations", new { id = Model.Id })' id="button-blue" style="text-align:center">Modifier</a>
+                <div class="ease"></div>
+            </div>
+            <div class="submit" id="form-moitie" style="margin-left:2.5px">
+                <a href='@Url.Action("Index")' id="button-red">Retour</a>
+                <div class="ease"></div>
+            </div>
+        </div>
+    </div>
+</div>
