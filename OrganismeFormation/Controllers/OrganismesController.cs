@@ -60,10 +60,16 @@ namespace OrganismeFormation.Controllers
         [Authorize(Roles = "AccesLigue")]
         public ActionResult Create(Organismes organismes)
         {
-            
-            TempData["model"] = organismes;
-            return RedirectToAction("Create2");
-
+            if (ModelState.IsValidField("Libelle") && ModelState.IsValidField("NumeroDeclaration") &&
+                ModelState.IsValidField("AnneeDeclaration") && ModelState.IsValidField("Lieux.Adresse") &&
+                ModelState.IsValidField("Lieux.CodePostal") && ModelState.IsValidField("Lieux.Ville") &&
+                ModelState.IsValidField("Lieux.Telephone")
+                )
+            {
+                TempData["model"] = organismes;
+                return RedirectToAction("Create2");
+            }
+            return View(organismes);
         }
 
 
@@ -98,14 +104,14 @@ namespace OrganismeFormation.Controllers
         [Authorize(Roles = "AccesLigue")]
         public ActionResult Create2(Organismes orga)
         {
-
-            orga.LigueId = ((Ligues)Session["Ligue"]).Id;
-            db.Organismes.Add(orga);
-            db.SaveChanges();
-            return RedirectToAction("Index");
-            
-
-           
+            if (ModelState.IsValid)
+            {
+                orga.LigueId = ((Ligues)Session["Ligue"]).Id;
+                db.Organismes.Add(orga);
+                db.SaveChanges();
+                return RedirectToAction("Index", "Organismes");
+            }
+            return View(orga);
         }
 
 
@@ -133,7 +139,7 @@ namespace OrganismeFormation.Controllers
             sr.organisme = org;
             if (ModelState.IsValid)
             {
-                if (db.Responsable.Any(r => r.Licence == sr.NumeroLicence))
+                if (db.Responsable.Any(r => r.Licence == sr.NumeroLicence) && !org.Responsable.Any(r=> r.Licence == sr.NumeroLicence))
                 {
                     ResponsableOrgaViewModel Ro = new ResponsableOrgaViewModel();
                     Ro.responsable = db.Responsable.Where(r => r.Licence == sr.NumeroLicence).First();
@@ -143,7 +149,9 @@ namespace OrganismeFormation.Controllers
                 }
                 else
                 {
-                    ModelState.AddModelError("NumeroLicence", "Ne nous trouvons personne avec le numéro de licence : "+sr.NumeroLicence);
+
+                    // APPEL de web service à ajouter 
+                    ModelState.AddModelError("NumeroLicence", "La personne avec le numéro de licence "+sr.NumeroLicence+" n'existe pas ou est déjà présente pour cette organisme.");
                 }
             }
 
@@ -172,11 +180,58 @@ namespace OrganismeFormation.Controllers
             if(ModelState.IsValid)
             {
                 db.Organismes.Attach(organisme);
-                ro.responsable.Password = encrypt(ro.responsable.Password);
-                db.Responsable.Attach(ro.responsable);
+                Responsable toUpdate = db.Responsable.Find(ro.responsable.Id);
+                db.Responsable.Attach(toUpdate);
+                if (toUpdate.Password != ro.responsable.Password && toUpdate.Password != encrypt(ro.responsable.Password))
+                {
+                    toUpdate.Password = encrypt(ro.responsable.Password);
+                }
+                toUpdate.Licence = ro.responsable.Licence;
+                toUpdate.Nom = ro.responsable.Nom;
+                toUpdate.Prenom = ro.responsable.Prenom;
+                toUpdate.Email = ro.responsable.Email;
+                toUpdate.Telephone = ro.responsable.Telephone;
+
                 organisme.Responsable.Add(ro.responsable);
                 db.SaveChanges();
                 return RedirectToAction("ShowResponsable","Organismes",new { @id = ro.OrganismeId });
+
+            }
+            return View(ro);
+        }
+
+        [Authorize (Roles ="AccesLigue")]
+        public ActionResult UpdateResponsable(decimal id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            ResponsableOrgaViewModel ro = new ResponsableOrgaViewModel();
+            ro.responsable = db.Responsable.Find(id);
+            ro.OrganismeId = System.Convert.ToDecimal(TempData["organisme"]);
+            return View(ro);
+        }
+
+        [Authorize(Roles ="AccesLigue")]
+        [HttpPost]
+        public ActionResult UpdateResponsable(ResponsableOrgaViewModel ro)
+        {
+            if(ModelState.IsValid)
+            {
+                Responsable toUpdate = db.Responsable.Find(ro.responsable.Id);
+                db.Responsable.Attach(toUpdate);
+                if(toUpdate.Password != ro.responsable.Password && toUpdate.Password!= encrypt( ro.responsable.Password))
+                {
+                    toUpdate.Password = encrypt(ro.responsable.Password);
+                }
+                toUpdate.Licence = ro.responsable.Licence;
+                toUpdate.Nom = ro.responsable.Nom;
+                toUpdate.Prenom = ro.responsable.Prenom;
+                toUpdate.Email = ro.responsable.Email;
+                toUpdate.Telephone = ro.responsable.Telephone;
+                db.SaveChanges();
+                return RedirectToAction("ShowResponsable", "Organismes", new { @id = ro.OrganismeId });
 
             }
             return View(ro);
@@ -305,9 +360,11 @@ namespace OrganismeFormation.Controllers
         public ActionResult DeleteConfirmed(decimal id)
         {
             Organismes organismes = db.Organismes.Find(id);
-            db.Organismes.Remove(organismes);
             db.Lieux.Remove(organismes.Lieux);
             db.PresidentOrganisme.Remove(organismes.PresidentOrganisme);
+            db.Personnel.Remove(organismes.Personnel);
+            db.Personnel.Remove(organismes.Personnel1);
+            db.Organismes.Remove(organismes);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

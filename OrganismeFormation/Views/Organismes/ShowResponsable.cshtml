@@ -56,6 +56,7 @@
                 <td>
 
                     @*Mise en place d'une pop up pour la confirmation de la suppression d'un responsable*@ 
+                    <a href="@Url.Action("UpdateResponsable","Organismes",new { @id = item.Id })">Modifier </a>|
                     <a data-popup-open="popup-@item.Id" href="#">Supprimer</a>
                     <div class="popup" data-popup="popup-@item.Id">
                         <div class="popup-inner">

@@ -457,6 +457,7 @@
     <Content Include="Views\AccesLigue\ParametreLigue.cshtml" />
     <Content Include="Views\AccesResponsable\ParametreResponsable.cshtml" />
     <Content Include="Views\Organismes\Delete.cshtml" />
+    <Content Include="Views\Organismes\UpdateResponsable.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
