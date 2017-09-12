@@ -47,6 +47,16 @@
           <Property Name="Email" Type="varchar" MaxLength="250" />
           <Property Name="SexeId" Type="numeric" Precision="18" Scale="0" />
         </EntityType>
+        <EntityType Name="DescriptifUC">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="numeric" Precision="18" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Libelle" Type="varchar" MaxLength="50" />
+          <Property Name="Resultat" Type="numeric" Precision="18" Scale="0" />
+          <Property Name="ResultatMax" Type="numeric" Precision="18" Scale="0" />
+          <Property Name="FormationsId" Type="numeric" Precision="18" Scale="0" />
+        </EntityType>
         <EntityType Name="Formations">
           <Key>
             <PropertyRef Name="Id" />
@@ -76,6 +86,7 @@
           <Property Name="LieuSiNonPorteuse" Type="numeric" Precision="18" Scale="0" />
           <Property Name="NombreUC" Type="numeric" Precision="18" Scale="0" />
           <Property Name="FormationEnded" Type="bit" />
+          <Property Name="DescriptionSousTraite" Type="text" />
         </EntityType>
         <EntityType Name="Habilitations">
           <Key>
@@ -201,15 +212,16 @@
           <Property Name="FormationTerminee" Type="bit" />
           <Property Name="Abandon" Type="bit" />
         </EntityType>
-        <EntityType Name="ResultatsUC">
+        <!--Erreurs détectées durant la génération :
+avertissement 6002: La table/vue 'GestionOF.dbo.ResultatUc' n'a pas de clé primaire définie. La clé a été déduite et la définition a été créée en tant que table/vue en lecture seule.-->
+        <EntityType Name="ResultatUc">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="numeric" Precision="18" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Libelle" Type="varchar" MaxLength="50" />
           <Property Name="Resultat" Type="numeric" Precision="18" Scale="0" />
           <Property Name="ResultatsId" Type="numeric" Precision="18" Scale="0" />
-          <Property Name="ResultatMax" Type="numeric" Precision="18" Scale="0" />
+          <Property Name="DescriptifUCId" Type="numeric" Precision="18" Scale="0" />
         </EntityType>
         <EntityType Name="Sexes">
           <Key>
@@ -373,6 +385,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_DescriptifUC_Formations">
+          <End Role="Formations" Type="Self.Formations" Multiplicity="0..1" />
+          <End Role="DescriptifUC" Type="Self.DescriptifUC" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Formations">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="DescriptifUC">
+              <PropertyRef Name="FormationsId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Formations_Habilitations">
           <End Role="Habilitations" Type="Self.Habilitations" Multiplicity="0..1" />
           <End Role="Formations" Type="Self.Formations" Multiplicity="*" />
@@ -493,14 +517,26 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_ResultatsUC_Resultats">
+        <Association Name="FK_ResultatUc_DescriptifUC">
+          <End Role="DescriptifUC" Type="Self.DescriptifUC" Multiplicity="0..1" />
+          <End Role="ResultatUc" Type="Self.ResultatUc" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DescriptifUC">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ResultatUc">
+              <PropertyRef Name="DescriptifUCId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ResultatUc_Resultats">
           <End Role="Resultats" Type="Self.Resultats" Multiplicity="0..1" />
-          <End Role="ResultatsUC" Type="Self.ResultatsUC" Multiplicity="*" />
+          <End Role="ResultatUc" Type="Self.ResultatUc" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Resultats">
               <PropertyRef Name="Id" />
             </Principal>
-            <Dependent Role="ResultatsUC">
+            <Dependent Role="ResultatUc">
               <PropertyRef Name="ResultatsId" />
             </Dependent>
           </ReferentialConstraint>
@@ -509,6 +545,7 @@
           <EntitySet Name="Admin" EntityType="Self.Admin" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Candidats" EntityType="Self.Candidats" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CandidatsFormations" EntityType="Self.CandidatsFormations" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DescriptifUC" EntityType="Self.DescriptifUC" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Formations" EntityType="Self.Formations" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Habilitations" EntityType="Self.Habilitations" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Lieux" EntityType="Self.Lieux" Schema="dbo" store:Type="Tables" />
@@ -521,12 +558,19 @@
           <EntitySet Name="Responsable" EntityType="Self.Responsable" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ResponsableOrganisme" EntityType="Self.ResponsableOrganisme" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Resultats" EntityType="Self.Resultats" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="ResultatsUC" EntityType="Self.ResultatsUC" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Sexes" EntityType="Self.Sexes" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Tuteurs" EntityType="Self.Tuteurs" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TypedeFinancements" EntityType="Self.TypedeFinancements" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TypedeFormations" EntityType="Self.TypedeFormations" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ResultatUc" EntityType="Self.ResultatUc" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [ResultatUc].[Id] AS [Id], 
+    [ResultatUc].[Resultat] AS [Resultat], 
+    [ResultatUc].[ResultatsId] AS [ResultatsId], 
+    [ResultatUc].[DescriptifUCId] AS [DescriptifUCId]
+    FROM [dbo].[ResultatUc] AS [ResultatUc]</DefiningQuery>
+          </EntitySet>
           <AssociationSet Name="FK__Candidats__Candi__3D5E1FD2" Association="Self.FK__Candidats__Candi__3D5E1FD2">
             <End Role="Candidats" EntitySet="Candidats" />
             <End Role="CandidatsFormations" EntitySet="CandidatsFormations" />
@@ -566,6 +610,10 @@
           <AssociationSet Name="FK_CandidatsFormations_Sexes" Association="Self.FK_CandidatsFormations_Sexes">
             <End Role="Sexes" EntitySet="Sexes" />
             <End Role="CandidatsFormations" EntitySet="CandidatsFormations" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DescriptifUC_Formations" Association="Self.FK_DescriptifUC_Formations">
+            <End Role="Formations" EntitySet="Formations" />
+            <End Role="DescriptifUC" EntitySet="DescriptifUC" />
           </AssociationSet>
           <AssociationSet Name="FK_Formations_Habilitations" Association="Self.FK_Formations_Habilitations">
             <End Role="Habilitations" EntitySet="Habilitations" />
@@ -607,9 +655,13 @@
             <End Role="Responsable" EntitySet="Responsable" />
             <End Role="ResponsableOrganisme" EntitySet="ResponsableOrganisme" />
           </AssociationSet>
-          <AssociationSet Name="FK_ResultatsUC_Resultats" Association="Self.FK_ResultatsUC_Resultats">
+          <AssociationSet Name="FK_ResultatUc_DescriptifUC" Association="Self.FK_ResultatUc_DescriptifUC">
+            <End Role="DescriptifUC" EntitySet="DescriptifUC" />
+            <End Role="ResultatUc" EntitySet="ResultatUc" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ResultatUc_Resultats" Association="Self.FK_ResultatUc_Resultats">
             <End Role="Resultats" EntitySet="Resultats" />
-            <End Role="ResultatsUC" EntitySet="ResultatsUC" />
+            <End Role="ResultatUc" EntitySet="ResultatUc" />
           </AssociationSet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
@@ -631,7 +683,6 @@
           <EntitySet Name="Prestataires" EntityType="GestionOFModel.Prestataires" />
           <EntitySet Name="Responsable" EntityType="GestionOFModel.Responsable" />
           <EntitySet Name="Resultats" EntityType="GestionOFModel.Resultats" />
-          <EntitySet Name="ResultatsUC" EntityType="GestionOFModel.ResultatsUC" />
           <EntitySet Name="Sexes" EntityType="GestionOFModel.Sexes" />
           <EntitySet Name="sysdiagrams" EntityType="GestionOFModel.sysdiagrams" />
           <EntitySet Name="Tuteurs" EntityType="GestionOFModel.Tuteurs" />
@@ -709,13 +760,23 @@
             <End Role="Passages" EntitySet="Passages" />
             <End Role="Resultats" EntitySet="Resultats" />
           </AssociationSet>
-          <AssociationSet Name="FK_ResultatsUC_Resultats" Association="GestionOFModel.FK_ResultatsUC_Resultats">
-            <End Role="Resultats" EntitySet="Resultats" />
-            <End Role="ResultatsUC" EntitySet="ResultatsUC" />
-          </AssociationSet>
           <AssociationSet Name="ResponsableOrganisme" Association="GestionOFModel.ResponsableOrganisme">
             <End Role="Organismes" EntitySet="Organismes" />
             <End Role="Responsable" EntitySet="Responsable" />
+          </AssociationSet>
+          <EntitySet Name="DescriptifUC" EntityType="GestionOFModel.DescriptifUC" />
+          <EntitySet Name="ResultatUc" EntityType="GestionOFModel.ResultatUc" />
+          <AssociationSet Name="FK_DescriptifUC_Formations" Association="GestionOFModel.FK_DescriptifUC_Formations">
+            <End Role="Formations" EntitySet="Formations" />
+            <End Role="DescriptifUC" EntitySet="DescriptifUC" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ResultatUc_DescriptifUC" Association="GestionOFModel.FK_ResultatUc_DescriptifUC">
+            <End Role="DescriptifUC" EntitySet="DescriptifUC" />
+            <End Role="ResultatUc" EntitySet="ResultatUc" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ResultatUc_Resultats" Association="GestionOFModel.FK_ResultatUc_Resultats">
+            <End Role="Resultats" EntitySet="Resultats" />
+            <End Role="ResultatUc" EntitySet="ResultatUc" />
           </AssociationSet>
         </EntityContainer>
         <EntityType Name="Admin">
@@ -803,6 +864,8 @@
           <NavigationProperty Name="Organismes" Relationship="GestionOFModel.FK_Formations_Organismes" FromRole="Formations" ToRole="Organismes" />
           <NavigationProperty Name="Personnel" Relationship="GestionOFModel.FK_Formations_Personnel" FromRole="Formations" ToRole="Personnel" />
           <Property Name="FormationEnded" Type="Boolean" />
+          <NavigationProperty Name="DescriptifUC" Relationship="GestionOFModel.FK_DescriptifUC_Formations" FromRole="Formations" ToRole="DescriptifUC" />
+          <Property Name="DescriptionSousTraite" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="Habilitations">
           <Key>
@@ -938,18 +1001,7 @@
           <Property Name="Abandon" Type="Boolean" />
           <NavigationProperty Name="CandidatsFormations" Relationship="GestionOFModel.FK__Resultats__Candi__3C69FB99" FromRole="Resultats" ToRole="CandidatsFormations" />
           <NavigationProperty Name="Passages" Relationship="GestionOFModel.FK__Resultats__Passa__3B75D760" FromRole="Resultats" ToRole="Passages" />
-          <NavigationProperty Name="ResultatsUC" Relationship="GestionOFModel.FK_ResultatsUC_Resultats" FromRole="Resultats" ToRole="ResultatsUC" />
-        </EntityType>
-        <EntityType Name="ResultatsUC">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Decimal" Nullable="false" Precision="18" Scale="0" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Libelle" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Resultat" Type="Decimal" Precision="18" Scale="0" />
-          <Property Name="ResultatsId" Type="Decimal" Precision="18" Scale="0" />
-          <Property Name="ResultatMax" Type="Decimal" Precision="18" Scale="0" />
-          <NavigationProperty Name="Resultats" Relationship="GestionOFModel.FK_ResultatsUC_Resultats" FromRole="ResultatsUC" ToRole="Resultats" />
+          <NavigationProperty Name="ResultatUc" Relationship="GestionOFModel.FK_ResultatUc_Resultats" FromRole="Resultats" ToRole="ResultatUc" />
         </EntityType>
         <EntityType Name="Sexes">
           <Key>
@@ -1214,21 +1266,68 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_ResultatsUC_Resultats">
+        <Association Name="ResponsableOrganisme">
+          <End Type="GestionOFModel.Organismes" Role="Organismes" Multiplicity="*" />
+          <End Type="GestionOFModel.Responsable" Role="Responsable" Multiplicity="*" />
+        </Association>
+        <EntityType Name="DescriptifUC">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Decimal" Nullable="false" Precision="18" Scale="0" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Libelle" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Resultat" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="ResultatMax" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="FormationsId" Type="Decimal" Precision="18" Scale="0" />
+          <NavigationProperty Name="Formations" Relationship="GestionOFModel.FK_DescriptifUC_Formations" FromRole="DescriptifUC" ToRole="Formations" />
+          <NavigationProperty Name="ResultatUc" Relationship="GestionOFModel.FK_ResultatUc_DescriptifUC" FromRole="DescriptifUC" ToRole="ResultatUc" />
+        </EntityType>
+        <EntityType Name="ResultatUc">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Decimal" Nullable="false" Precision="18" Scale="0" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Resultat" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="ResultatsId" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="DescriptifUCId" Type="Decimal" Precision="18" Scale="0" />
+          <NavigationProperty Name="DescriptifUC" Relationship="GestionOFModel.FK_ResultatUc_DescriptifUC" FromRole="ResultatUc" ToRole="DescriptifUC" />
+          <NavigationProperty Name="Resultats" Relationship="GestionOFModel.FK_ResultatUc_Resultats" FromRole="ResultatUc" ToRole="Resultats" />
+        </EntityType>
+        <Association Name="FK_DescriptifUC_Formations">
+          <End Type="GestionOFModel.Formations" Role="Formations" Multiplicity="0..1" />
+          <End Type="GestionOFModel.DescriptifUC" Role="DescriptifUC" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Formations">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="DescriptifUC">
+              <PropertyRef Name="FormationsId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ResultatUc_DescriptifUC">
+          <End Type="GestionOFModel.DescriptifUC" Role="DescriptifUC" Multiplicity="0..1" />
+          <End Type="GestionOFModel.ResultatUc" Role="ResultatUc" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DescriptifUC">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ResultatUc">
+              <PropertyRef Name="DescriptifUCId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ResultatUc_Resultats">
           <End Type="GestionOFModel.Resultats" Role="Resultats" Multiplicity="0..1" />
-          <End Type="GestionOFModel.ResultatsUC" Role="ResultatsUC" Multiplicity="*" />
+          <End Type="GestionOFModel.ResultatUc" Role="ResultatUc" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Resultats">
               <PropertyRef Name="Id" />
             </Principal>
-            <Dependent Role="ResultatsUC">
+            <Dependent Role="ResultatUc">
               <PropertyRef Name="ResultatsId" />
             </Dependent>
           </ReferentialConstraint>
-        </Association>
-        <Association Name="ResponsableOrganisme">
-          <End Type="GestionOFModel.Organismes" Role="Organismes" Multiplicity="*" />
-          <End Type="GestionOFModel.Responsable" Role="Responsable" Multiplicity="*" />
         </Association>
         </Schema>
     </edmx:ConceptualModels>
@@ -1284,6 +1383,7 @@
           <EntitySetMapping Name="Formations">
             <EntityTypeMapping TypeName="GestionOFModel.Formations">
               <MappingFragment StoreEntitySet="Formations">
+                <ScalarProperty Name="DescriptionSousTraite" ColumnName="DescriptionSousTraite" />
                 <ScalarProperty Name="FormationEnded" ColumnName="FormationEnded" />
                 <ScalarProperty Name="NombreUC" ColumnName="NombreUC" />
                 <ScalarProperty Name="LieuSiNonPorteuse" ColumnName="LieuSiNonPorteuse" />
@@ -1438,17 +1538,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="ResultatsUC">
-            <EntityTypeMapping TypeName="GestionOFModel.ResultatsUC">
-              <MappingFragment StoreEntitySet="ResultatsUC">
-                <ScalarProperty Name="ResultatMax" ColumnName="ResultatMax" />
-                <ScalarProperty Name="ResultatsId" ColumnName="ResultatsId" />
-                <ScalarProperty Name="Resultat" ColumnName="Resultat" />
-                <ScalarProperty Name="Libelle" ColumnName="Libelle" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="Sexes">
             <EntityTypeMapping TypeName="GestionOFModel.Sexes">
               <MappingFragment StoreEntitySet="Sexes">
@@ -1504,6 +1593,27 @@
               <ScalarProperty Name="Id" ColumnName="OrganismeId" />
             </EndProperty>
           </AssociationSetMapping>
+          <EntitySetMapping Name="DescriptifUC">
+            <EntityTypeMapping TypeName="GestionOFModel.DescriptifUC">
+              <MappingFragment StoreEntitySet="DescriptifUC">
+                <ScalarProperty Name="FormationsId" ColumnName="FormationsId" />
+                <ScalarProperty Name="ResultatMax" ColumnName="ResultatMax" />
+                <ScalarProperty Name="Resultat" ColumnName="Resultat" />
+                <ScalarProperty Name="Libelle" ColumnName="Libelle" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ResultatUc">
+            <EntityTypeMapping TypeName="GestionOFModel.ResultatUc">
+              <MappingFragment StoreEntitySet="ResultatUc">
+                <ScalarProperty Name="DescriptifUCId" ColumnName="DescriptifUCId" />
+                <ScalarProperty Name="ResultatsId" ColumnName="ResultatsId" />
+                <ScalarProperty Name="Resultat" ColumnName="Resultat" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

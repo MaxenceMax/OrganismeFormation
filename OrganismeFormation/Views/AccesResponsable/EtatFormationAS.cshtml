@@ -33,9 +33,6 @@
                     @Html.DisplayNameFor(model => model.enCours.First().DateFin)
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.enCours.First().NumeroSession)
-                </th>
-                <th>
                     Nombre de candidats
                 </th>
             </tr>
@@ -47,9 +44,6 @@
                     </td>
                     <td>
                         @String.Format("{0:d/MM/yyyy}", @item.DateFin)
-                    </td>
-                    <td>
-                        @item.NumeroSession
                     </td>
                     <td>
                         @item.CandidatsFormations.Count()
@@ -67,9 +61,6 @@
                     @Html.DisplayNameFor(model => model.enCours.First().DateFin)
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.enCours.First().NumeroSession)
-                </th>
-                <th>
                     Nombre de candidats
                 </th>
             </tr>
@@ -81,9 +72,6 @@
                     </td>
                     <td>
                         @String.Format("{0:d/MM/yyyy}", @item.DateFin)
-                    </td>
-                    <td>
-                        @item.NumeroSession
                     </td>
                     <td>
                         @item.CandidatsFormations.Count()

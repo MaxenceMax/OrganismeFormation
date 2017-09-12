@@ -21,7 +21,7 @@ namespace OrganismeFormation.Models
             this.Formations = new HashSet<Formations>();
             this.Organismes = new HashSet<Organismes>();
         }
-
+    
         public decimal Id { get; set; }
         [Required]
         [StringLength(255, ErrorMessage = "L'adresse doit contenir entre 5 et 255 caractères.", MinimumLength = 5)]
@@ -31,7 +31,7 @@ namespace OrganismeFormation.Models
         [StringLength(255, ErrorMessage = "Le code postal n'est pas au bon format", MinimumLength = 5)]
         public string CodePostal { get; set; }
         [Required]
-        [StringLength(100,MinimumLength =2,ErrorMessage ="La ville doit contenir entre 2 et 100 caractères")]
+        [StringLength(100, MinimumLength = 2, ErrorMessage = "La ville doit contenir entre 2 et 100 caractères")]
         public string Ville { get; set; }
         [Required]
         [StringLength(10, MinimumLength = 10)]

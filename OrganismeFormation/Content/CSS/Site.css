@@ -268,6 +268,13 @@ html{
     font-family: 'Bebas Neue';
 }
 
+.title_blue{
+    color: #004A73;
+    font-size: 24px;
+    font-weight: bold;
+    border-bottom: #004173 7px solid;
+}
+
 .title-content
 {
     text-align:center;
@@ -457,6 +464,18 @@ html{
 
 #parent:hover #icon-location{
 	background-image: url("../Images/Icons/icon-location-hover.png");
+}
+
+#icon-money{
+	background-image: url("../Images/Icons/icon-money.png");
+	background-size: 20px 20px;
+	background-position: 17px 8px;
+	background-repeat: no-repeat;
+    margin-bottom: 14px;
+}
+
+#parent:hover #icon-money{
+	background-image: url("../Images/Icons/icon-money-hover.png");
 }
 
 #icon-AC{

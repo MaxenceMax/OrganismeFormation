@@ -1,4 +1,4 @@
-﻿@model OrganismeFormation.Models.TypedeFormations
+﻿@model OrganismeFormation.Models.TypedeFinancements
 
 @{
     ViewBag.Title = "Ajout type de formation";
@@ -6,14 +6,14 @@
 <div class="content">
     <div class="title-content">
         <div class="title-content-main">Gestion des organismes de formation</div>
-        <div class="title-content-second">Ajout d'un type de formation</div>
+        <div class="title-content-second">Ajout d'un type de financement</div>
     </div>
 
     @using (Html.BeginForm())
     {
         @Html.AntiForgeryToken()
 
-        <div class="form-horizontal"  id="mano-bootstrap">
+        <div class="form-horizontal" id="mano-bootstrap">
             @Html.ValidationSummary(true, "", new { @class = "text-danger" })
             <div class="form-group">
                 @Html.LabelFor(model => model.Libelle, htmlAttributes: new { @class = "control-label col-md-2" })

@@ -1,0 +1,42 @@
+﻿@model OrganismeFormation.Models.TypedeFinancements
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<div class="content">
+    <div class="title-content">
+        <div class="title-content-main">Gestion des organismes de formation</div>
+        <div class="title-content-second">Suppression d'un type de financement</div>
+    </div>
+
+    <div id="mano-bootstrap">
+        <h3>Êtes-vous certain de procéder à la suppression de cet enregistrement ?</h3>
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.Libelle)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Libelle)
+            </dd>
+
+        </dl>
+
+        @using (Html.BeginForm())
+            {
+            @Html.AntiForgeryToken()
+            <div class="form-group-align">
+                <div class="submit" id="form-moitie" style="margin-right:2.5px">
+                    <a href='@Url.Action("Index")' id="button-blue" style="text-align:center">Retour</a>
+                    <div class="ease"></div>
+                </div>
+                <div class="submit" id="form-moitie" style="margin-left:2.5px">
+                    <input type="submit" value="Supprimer" id="button-red" />
+                    <div class="ease"></div>
+                </div>
+            </div>
+        }
+    </div>
+    @{Html.RenderPartial("_Footer");}
+</div>

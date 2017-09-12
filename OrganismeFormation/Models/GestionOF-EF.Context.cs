@@ -39,11 +39,12 @@ namespace OrganismeFormation.Models
         public virtual DbSet<Prestataires> Prestataires { get; set; }
         public virtual DbSet<Responsable> Responsable { get; set; }
         public virtual DbSet<Resultats> Resultats { get; set; }
-        public virtual DbSet<ResultatsUC> ResultatsUC { get; set; }
         public virtual DbSet<Sexes> Sexes { get; set; }
         public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
         public virtual DbSet<Tuteurs> Tuteurs { get; set; }
         public virtual DbSet<TypedeFinancements> TypedeFinancements { get; set; }
         public virtual DbSet<TypedeFormations> TypedeFormations { get; set; }
+        public virtual DbSet<DescriptifUC> DescriptifUC { get; set; }
+        public virtual DbSet<ResultatUc> ResultatUc { get; set; }
     }
 }

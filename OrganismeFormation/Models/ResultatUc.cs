@@ -12,14 +12,14 @@ namespace OrganismeFormation.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class ResultatsUC
+    public partial class ResultatUc
     {
         public decimal Id { get; set; }
-        public string Libelle { get; set; }
         public Nullable<decimal> Resultat { get; set; }
         public Nullable<decimal> ResultatsId { get; set; }
-        public Nullable<decimal> ResultatMax { get; set; }
+        public Nullable<decimal> DescriptifUCId { get; set; }
     
+        public virtual DescriptifUC DescriptifUC { get; set; }
         public virtual Resultats Resultats { get; set; }
     }
 }

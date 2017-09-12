@@ -11,40 +11,89 @@ namespace OrganismeFormation.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel;
+    using System.ComponentModel.DataAnnotations;
     public partial class Formations
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Formations()
         {
             this.CandidatsFormations = new HashSet<CandidatsFormations>();
+            this.DescriptifUC = new HashSet<DescriptifUC>();
         }
-    
+
         public decimal Id { get; set; }
-        public Nullable<bool> LiguePorteuse { get; set; }
-        public Nullable<bool> LigueSousTraite { get; set; }
+        [DisplayName("La ligue est porteuse de la formation")]
+        public bool LiguePorteuse { get; set; }
+        [DisplayName("La ligue sous-traite elle ?")]
+        public bool LigueSousTraite { get; set; }
+        [Required]
+        [DataType(DataType.Date)]
+        [DisplayName("Date de début de la formation")]
+        [DisplayFormat(DataFormatString = "{0:dd-MM-yyyy}", ApplyFormatInEditMode = true)]
         public Nullable<System.DateTime> DateDebut { get; set; }
+        [Required]
+        [DisplayName("Date de fin de la formation")]
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:dd-MM-yyyy}", ApplyFormatInEditMode = true)]
         public Nullable<System.DateTime> DateFin { get; set; }
+        [Required]
+        [DisplayName("Date limite d'inscription")]
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:dd-MM-yyyy}", ApplyFormatInEditMode = true)]
         public Nullable<System.DateTime> DateLimteInscription { get; set; }
+        [Required]
+        [DisplayName("Date des tests de sélection")]
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:dd-MM-yyyy}", ApplyFormatInEditMode = true)]
         public Nullable<System.DateTime> DateTestSelection { get; set; }
+        [Required]
+        [DisplayName("Nombre d'heures totales")]
+        [Range(0, int.MaxValue, ErrorMessage = "Veuillez renseigner un nombre total d'heure valide.")]
         public Nullable<decimal> NombreTotalHeures { get; set; }
+        [Required]
+        [DisplayName("Nombre d'heures en centre de formation")]
+        [Range(0, int.MaxValue, ErrorMessage = "Veuillez renseigner un nombre total d'heure valide.")]
         public Nullable<decimal> NbreHeureCentre { get; set; }
+        [Required]
+        [DisplayName("Nombre d'heures en structure d'accueil")]
+        [Range(0, int.MaxValue, ErrorMessage = "Veuillez renseigner un nombre total d'heure valide.")]
         public Nullable<decimal> NbrHeureStructAccueil { get; set; }
+        [Required]
+        [DisplayName("Nombre d'heures FOAD")]
+        [Range(0, int.MaxValue, ErrorMessage = "Veuillez renseigner un nombre d'heure FOAD valide.")]
         public Nullable<decimal> TotalHeureFOAD { get; set; }
+        [Required]
+        [DisplayName("Nombre d'heures ELearning")]
+        [Range(0, int.MaxValue, ErrorMessage = "Veuillez renseigner un nombre d'heure ELearning valide.")]
         public Nullable<decimal> HeureELearning { get; set; }
+        [Required]
+        [DisplayName("Nombre d'autres heures")]
+        [Range(0, int.MaxValue, ErrorMessage = "Veuillez renseigner un nombre d'autres heures valide.")]
         public Nullable<decimal> TotalAutresHeures { get; set; }
+        [StringLength(50, MinimumLength = 2)]
+        [DisplayName("Type heure/contenu")]
         public string TypeHeureContenu { get; set; }
+        [Required]
+        [Range(0, float.MaxValue, ErrorMessage = "Veuilez renseigner un coût valide.")]
+        [DisplayName("Coût complet de la formation")]
         public Nullable<decimal> CoutComplet { get; set; }
+        [DisplayName("Informations complémentaires")]
         public string InfoComplementaires { get; set; }
         public Nullable<decimal> HabilitationsId { get; set; }
         public Nullable<decimal> TypedeFormationsId { get; set; }
         public string NumeroSession { get; set; }
         public Nullable<decimal> IdOrganisateurpeda { get; set; }
+        [Required]
+        [DisplayName("Nombre d'heures sur un autre espace")]
+        [Range(0, int.MaxValue, ErrorMessage = "Veuillez renseigner un nombre d'autres heures valide.")]
         public Nullable<decimal> NbreHeureAutreEspace { get; set; }
         public Nullable<decimal> OrganismeId { get; set; }
         public Nullable<decimal> LieuSiNonPorteuse { get; set; }
         public Nullable<decimal> NombreUC { get; set; }
         public Nullable<bool> FormationEnded { get; set; }
+        [DisplayName("Description")]
+        public string DescriptionSousTraite { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CandidatsFormations> CandidatsFormations { get; set; }
@@ -53,5 +102,7 @@ namespace OrganismeFormation.Models
         public virtual Lieux Lieux { get; set; }
         public virtual Organismes Organismes { get; set; }
         public virtual Personnel Personnel { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<DescriptifUC> DescriptifUC { get; set; }
     }
 }

@@ -1,0 +1,98 @@
+﻿@model OrganismeFormation.Models.Formations
+@model2 OrganismeFormation.Models.For
+@{
+    ViewBag.Title = "Detail Formation";
+}
+
+<div class="content">
+    <div class="title-content">
+        <div class="title-content-main">Diplôme visé</div>
+        <div class="title-content-second">@Model.TypedeFormations.Libelle</div>
+    </div>
+    <div id="mano-bootstrap">
+        <table class="table">
+            <tr>
+                <th>Ligue porteuse de la formation</th>
+                <th>Date l'imite d'inscription</th>
+                <th>Date des sélections</th>
+                <th>Début de formation</th>
+                <th>Fin de formation</th>
+                <th>Coordinateur pédagogique</th>
+            </tr>
+            <tr>
+                <td>
+
+                        @if (Model.LiguePorteuse)
+                        {
+                            @:Oui
+                        }
+                        else
+                        {
+                           @:Non
+                        }
+                    
+                </td>
+                <td>
+                    @Html.DisplayFor(model => model.DateLimteInscription)
+                </td>
+                <td>
+                    @Html.DisplayFor(model => model.DateTestSelection)
+                </td>
+                <td>
+                    @Html.DisplayFor(model => model.DateDebut)
+                </td>
+                <td>
+                    @Html.DisplayFor(model => model.DateFin)
+                </td>
+                <td>
+                    @Model.Personnel.Prenom @Model.Personnel.Nom <br />
+                    @Model.Personnel.Email @Model.Personnel.Telephone
+                </td>
+            </tr>
+        </table>
+
+        <div class="title_blue">
+            <div style="display:inline-block">Détail des UC</div>
+
+            <div style="width: 170px;text-align:center;display:inline-block">
+                <div class="submit">
+                    <a href='@Url.Action("AddSimpleFormation", "Formations",new { id = 1 })' id="button-blue" style="padding-top: 2px;padding-bottom: 2px;">Ajouter un UC</a>
+                    <div class="ease" style="height:auto"></div>
+                </div>
+            </div>
+        </div>
+        @if (Model.CandidatsFormations.Count > 0)
+        {
+            <table>
+
+            </table>
+        }
+        else
+        {
+            @:Aucun UC saisi.
+        }
+    </div>
+    @{Html.RenderPartial("_Footer");}
+</div>
+
+Popup pour l'ajout 
+<a data-popup-open="popup-@item.Id" href="#">Supprimer</a>
+<div class="popup" data-popup="popup-@item.Id">
+    <div class="popup-inner">
+        <h2>Attention suppresion !</h2>
+        <p>
+            Êtes vous sur de vouloir retirer le responsable @item.Prenom @item.Nom de l'organisme @Model.organisme.Libelle ?
+        </p>
+        <div class="form-group-align">
+            <div class="submit" id="form-moitie" style="margin-right:2.5px">
+                <a href='@Url.Action("DeleteResponsable","Organismes",new { @id = item.Id })' style="padding-left:10px;" id="button-blue">Supprimer</a>
+                <div class="ease"></div>
+            </div>
+            <div class="submit" id="form-moitie" style="margin-left:2.5px">
+                <a data-popup-close="popup-@item.Id" href="#" id="button-red">Retour</a>
+                <div class="ease"></div>
+            </div>
+        </div>
+        <a class="popup-close" data-popup-close="popup-@item.Id" href="#">x</a>
+    </div>
+</div>

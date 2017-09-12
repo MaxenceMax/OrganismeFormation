@@ -1,4 +1,4 @@
-﻿@model OrganismeFormation.Models.TypedeFormations
+﻿@model OrganismeFormation.Models.TypedeFinancements
 
 @{
     ViewBag.Title = "Details";
@@ -7,7 +7,7 @@
 <div class="content">
     <div class="title-content">
         <div class="title-content-main">Gestion des organismes de formation</div>
-        <div class="title-content-second">Détail du type de formations</div>
+        <div class="title-content-second">Détail du type de financement</div>
     </div>
     <div id="mano-bootstrap">
         <dl class="dl-horizontal">
@@ -22,7 +22,7 @@
         </dl>
         <div class="form-group-align">
             <div class="submit" id="form-moitie" style="margin-right:2.5px">
-                <a href='@Url.Action("Edit", "TypedeFormations", new { id = Model.Id })' id="button-blue" style="text-align:center">Modifier</a>
+                <a href='@Url.Action("Edit", "TypedeFinancements", new { id = Model.Id })' id="button-blue" style="text-align:center">Modifier</a>
                 <div class="ease"></div>
             </div>
             <div class="submit" id="form-moitie" style="margin-left:2.5px">

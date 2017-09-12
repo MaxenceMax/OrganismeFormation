@@ -26,7 +26,7 @@ namespace OrganismeFormation.Controllers
         public ActionResult Organismes()
         {
             var resp = db.Responsable.Find(((Responsable)Session["Responsable"]).Id);
-            System.Diagnostics.Debug.WriteLine(resp.Id);
+
             return View(resp.Organismes);
         }
 
@@ -107,8 +107,9 @@ namespace OrganismeFormation.Controllers
             Organismes org = db.Organismes.Find(id);
             ListeFormationEtatViewModel formations = new ListeFormationEtatViewModel();
             formations.organisme = org;
-            formations.enCours = db.Formations.Where(f => f.OrganismeId == org.Id && f.TypedeFormationsId == 1 && f.FormationEnded == false);
-            formations.termine = db.Formations.Where(f => f.OrganismeId == org.Id && f.TypedeFormationsId == 1 && f.FormationEnded == true);
+            formations.enCours = db.Formations.Where(f => f.OrganismeId == org.Id && f.TypedeFormationsId == 1 && f.FormationEnded == false).OrderByDescending(f => f.DateDebut);
+            formations.termine = db.Formations.Where(f => f.OrganismeId == org.Id && f.TypedeFormationsId == 1 && f.FormationEnded == true).OrderByDescending(f => f.DateDebut);
+            TempData["model"] = org;
 
             return View(formations);
         }
@@ -121,9 +122,9 @@ namespace OrganismeFormation.Controllers
             Organismes org = db.Organismes.Find(id);
             ListeFormationEtatViewModel formations = new ListeFormationEtatViewModel();
             formations.organisme = org;
-            formations.enCours = db.Formations.Where(f => f.OrganismeId == org.Id && f.TypedeFormationsId == 2 && f.FormationEnded == false);
-            formations.termine = db.Formations.Where(f => f.OrganismeId == org.Id && f.TypedeFormationsId == 2 && f.FormationEnded == true);
-
+            formations.enCours = db.Formations.Where(f => f.OrganismeId == org.Id && f.TypedeFormationsId == 2 && f.FormationEnded == false).OrderByDescending(f => f.DateDebut);
+            formations.termine = db.Formations.Where(f => f.OrganismeId == org.Id && f.TypedeFormationsId == 2 && f.FormationEnded == true).OrderByDescending(f => f.DateDebut);
+            TempData["model"] = org;
             return View(formations);
         }
 
@@ -135,9 +136,9 @@ namespace OrganismeFormation.Controllers
             Organismes org = db.Organismes.Find(id);
             ListeFormationEtatViewModel formations = new ListeFormationEtatViewModel();
             formations.organisme = org;
-            formations.enCours = db.Formations.Where(f => f.OrganismeId == org.Id && f.TypedeFormationsId == 3 && f.FormationEnded == false);
-            formations.termine = db.Formations.Where(f => f.OrganismeId == org.Id && f.TypedeFormationsId == 3 && f.FormationEnded == true);
-
+            formations.enCours = db.Formations.Where(f => f.OrganismeId == org.Id && f.TypedeFormationsId == 3 && f.FormationEnded == false).OrderByDescending(f => f.DateDebut);
+            formations.termine = db.Formations.Where(f => f.OrganismeId == org.Id && f.TypedeFormationsId == 3 && f.FormationEnded == true).OrderByDescending(f => f.DateDebut);
+            TempData["model"] = org;
             return View(formations);
         }
 
@@ -149,9 +150,9 @@ namespace OrganismeFormation.Controllers
             Organismes org = db.Organismes.Find(id);
             ListeFormationEtatViewModel formations = new ListeFormationEtatViewModel();
             formations.organisme = org;
-            formations.enCours = db.Formations.Where(f => f.OrganismeId == org.Id && f.TypedeFormationsId == 4 && f.FormationEnded == false);
-            formations.termine = db.Formations.Where(f => f.OrganismeId == org.Id && f.TypedeFormationsId == 4 && f.FormationEnded == true);
-
+            formations.enCours = db.Formations.Where(f => f.OrganismeId == org.Id && f.TypedeFormationsId == 4 && f.FormationEnded == false).OrderByDescending(f => f.DateDebut);
+            formations.termine = db.Formations.Where(f => f.OrganismeId == org.Id && f.TypedeFormationsId == 4 && f.FormationEnded == true).OrderByDescending(f => f.DateDebut);
+            TempData["model"] = org;
             return View(formations);
         }
 
@@ -163,9 +164,9 @@ namespace OrganismeFormation.Controllers
             Organismes org = db.Organismes.Find(id);
             ListeFormationEtatViewModel formations = new ListeFormationEtatViewModel();
             formations.organisme = org;
-            formations.enCours = db.Formations.Where(f => f.OrganismeId == org.Id && f.TypedeFormationsId == 5 && f.FormationEnded == false);
-            formations.termine = db.Formations.Where(f => f.OrganismeId == org.Id && f.TypedeFormationsId == 5 && f.FormationEnded == true);
-
+            formations.enCours = db.Formations.Where(f => f.OrganismeId == org.Id && f.TypedeFormationsId == 5 && f.FormationEnded == false).OrderByDescending(f => f.DateDebut);
+            formations.termine = db.Formations.Where(f => f.OrganismeId == org.Id && f.TypedeFormationsId == 5 && f.FormationEnded == true).OrderByDescending(f => f.DateDebut);
+            TempData["model"] = org;
             return View(formations);
         }
 
@@ -177,9 +178,9 @@ namespace OrganismeFormation.Controllers
             Organismes org = db.Organismes.Find(id);
             ListeFormationEtatViewModel formations = new ListeFormationEtatViewModel();
             formations.organisme = org;
-            formations.enCours = db.Formations.Where(f => f.OrganismeId == org.Id && f.TypedeFormationsId == 6 && f.FormationEnded == false);
-            formations.termine = db.Formations.Where(f => f.OrganismeId == org.Id && f.TypedeFormationsId == 6 && f.FormationEnded == true);
-
+            formations.enCours = db.Formations.Where(f => f.OrganismeId == org.Id && f.TypedeFormationsId == 6 && f.FormationEnded == false).OrderByDescending(f => f.DateDebut);
+            formations.termine = db.Formations.Where(f => f.OrganismeId == org.Id && f.TypedeFormationsId == 6 && f.FormationEnded == true).OrderByDescending(f => f.DateDebut);
+            TempData["model"] = org;
             return View(formations);
         }
 
@@ -191,9 +192,9 @@ namespace OrganismeFormation.Controllers
             Organismes org = db.Organismes.Find(id);
             ListeFormationEtatViewModel formations = new ListeFormationEtatViewModel();
             formations.organisme = org;
-            formations.enCours = db.Formations.Where(f => f.OrganismeId == org.Id && f.TypedeFormationsId == 7 && f.FormationEnded == false);
-            formations.termine = db.Formations.Where(f => f.OrganismeId == org.Id && f.TypedeFormationsId == 7 && f.FormationEnded == true);
-
+            formations.enCours = db.Formations.Where(f => f.OrganismeId == org.Id && f.TypedeFormationsId == 7 && f.FormationEnded == false).OrderByDescending(f => f.DateDebut);
+            formations.termine = db.Formations.Where(f => f.OrganismeId == org.Id && f.TypedeFormationsId == 7 && f.FormationEnded == true).OrderByDescending(f => f.DateDebut);
+            TempData["model"] = org;
             return View(formations);
         }
     }

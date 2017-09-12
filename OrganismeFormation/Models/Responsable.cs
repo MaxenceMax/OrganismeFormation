@@ -22,7 +22,6 @@ namespace OrganismeFormation.Models
         }
     
         public decimal Id { get; set; }
-
         [Required]
         [StringLength(50, MinimumLength = 2)]
         public string Nom { get; set; }
@@ -46,7 +45,6 @@ namespace OrganismeFormation.Models
         [Required]
         [DisplayName("Mot de passe")]
         [DataType(DataType.Password)]
-        [StringLength(255, ErrorMessage = "Le mot de passe doit contenir entre 5 et 255 caractères.", MinimumLength = 5)]
         public string Password { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

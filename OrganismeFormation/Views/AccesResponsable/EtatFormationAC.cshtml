@@ -10,9 +10,9 @@
 
     </div>
     <p>
-        <div style="width: 130px;text-align:center;display:inline-block">
+        <div style="width: 170px;text-align:center;display:inline-block">
             <div class="submit">
-                <a href='@Url.Action("create", "Ligues")' id="button-blue">Nouvelle Ligue</a>
+                <a href='@Url.Action("AddSimpleFormation", "Formations",new { id = 1 })' id="button-blue">Nouvelle Formation AC</a>
                 <div class="ease"></div>
             </div>
         </div>
@@ -34,23 +34,17 @@
                     @Html.DisplayNameFor(model => model.enCours.First().DateFin)
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.enCours.First().NumeroSession)
-                </th>
-                <th>
                     Nombre de candidats
                 </th>
             </tr>
             @foreach (var item in Model.enCours)
             {
-                <tr class="tr_clickable" onclick="location.href='@Url.Action("ListeFormations", "AccesResponsable", new { id = Model.organisme.Id })'">
+                <tr class="tr_clickable" onclick="location.href='@Url.Action("ShowASAC", "Formations", new { id = item.Id })'">
                     <td>
                         @String.Format("{0:d/MM/yyyy}", @item.DateDebut)
                     </td>
                     <td>
                         @String.Format("{0:d/MM/yyyy}", @item.DateFin)
-                    </td>
-                    <td>
-                        @item.NumeroSession
                     </td>
                     <td>
                         @item.CandidatsFormations.Count()
@@ -68,9 +62,6 @@
                     @Html.DisplayNameFor(model => model.enCours.First().DateFin)
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.enCours.First().NumeroSession)
-                </th>
-                <th>
                     Nombre de candidats
                 </th>
             </tr>
@@ -82,9 +73,6 @@
                     </td>
                     <td>
                         @String.Format("{0:d/MM/yyyy}", @item.DateFin)
-                    </td>
-                    <td>
-                        @item.NumeroSession
                     </td>
                     <td>
                         @item.CandidatsFormations.Count()

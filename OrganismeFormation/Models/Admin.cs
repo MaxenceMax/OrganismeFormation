@@ -18,7 +18,6 @@ namespace OrganismeFormation.Models
         public decimal id { get; set; }
         public string Nom { get; set; }
         public string Prenom { get; set; }
-
         public string login { get; set; }
         [Required]
         [DisplayName("Mot de passe")]

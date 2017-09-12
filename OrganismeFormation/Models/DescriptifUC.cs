@@ -11,35 +11,23 @@ namespace OrganismeFormation.Models
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel;
-    using System.ComponentModel.DataAnnotations;
-    public partial class Ligues
+    
+    public partial class DescriptifUC
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Ligues()
+        public DescriptifUC()
         {
-            this.Organismes = new HashSet<Organismes>();
+            this.ResultatUc = new HashSet<ResultatUc>();
         }
     
         public decimal Id { get; set; }
-        [Required]
         public string Libelle { get; set; }
-        public Nullable<double> CodeLigue { get; set; }
-        [Required]
-        [StringLength(250)]
-        [DisplayName("Identifiant")]
-        public string login { get; set; }
-        [Required]
-        [DisplayName("Mot de passe")]
-        [DataType(DataType.Password)]
-        public string password { get; set; }
-        [Required]
-        [DisplayName("Adresse Email Responsable")]
-        [DataType(DataType.EmailAddress)]
-        [EmailAddress]
-        public string email { get; set; }
+        public Nullable<decimal> Resultat { get; set; }
+        public Nullable<decimal> ResultatMax { get; set; }
+        public Nullable<decimal> FormationsId { get; set; }
     
+        public virtual Formations Formations { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Organismes> Organismes { get; set; }
+        public virtual ICollection<ResultatUc> ResultatUc { get; set; }
     }
 }

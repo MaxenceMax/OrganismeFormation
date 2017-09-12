@@ -17,7 +17,7 @@ namespace OrganismeFormation.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Resultats()
         {
-            this.ResultatsUC = new HashSet<ResultatsUC>();
+            this.ResultatUc = new HashSet<ResultatUc>();
         }
     
         public decimal Id { get; set; }
@@ -33,6 +33,6 @@ namespace OrganismeFormation.Models
         public virtual CandidatsFormations CandidatsFormations { get; set; }
         public virtual Passages Passages { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<ResultatsUC> ResultatsUC { get; set; }
+        public virtual ICollection<ResultatUc> ResultatUc { get; set; }
     }
 }

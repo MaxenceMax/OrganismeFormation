@@ -32,7 +32,7 @@ namespace OrganismeFormation.Models
         public string NumeroDeclaration { get; set; }
         [Required]
         [DisplayName("Année de déclaration")]
-        [StringLength(4, MinimumLength = 4,ErrorMessage ="L'année n'est pas au bon format.")]
+        [StringLength(4, MinimumLength = 4, ErrorMessage = "L'année n'est pas au bon format.")]
         public string AnneeDeclaration { get; set; }
         public Nullable<decimal> LieuxId { get; set; }
         public Nullable<decimal> PresidentId { get; set; }

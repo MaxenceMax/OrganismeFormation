@@ -11,7 +11,8 @@ namespace OrganismeFormation.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel;
+    using System.ComponentModel.DataAnnotations;
     public partial class Habilitations
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -21,15 +22,34 @@ namespace OrganismeFormation.Models
         }
     
         public decimal Id { get; set; }
+        [DisplayName("Numéro d'habilitation")]
+        [StringLength(50, MinimumLength = 2)]
         public string NumeroHabilitation { get; set; }
+        [DisplayName("Date de début délivrance habilitation")]
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:dd-MM-yyyy}", ApplyFormatInEditMode = true)]
         public Nullable<System.DateTime> DebutDateDelivrance { get; set; }
+        [DisplayName("Date de fin délivrance habilitation")]
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:dd-MM-yyyy}", ApplyFormatInEditMode = true)]
         public Nullable<System.DateTime> FinDateDelivrance { get; set; }
+        [DisplayName("Numéro d'habilitation")]
+        [StringLength(50, MinimumLength = 2)]
         public string NumeroDelivrance { get; set; }
+        [DisplayName("Numéro de session")]
+        [StringLength(50, MinimumLength = 2)]
         public string NumeroSession { get; set; }
+        [DisplayName("Date d'exigences préalable à la mise en situation pédagogique (EPMSP)")]
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:dd-MM-yyyy}", ApplyFormatInEditMode = true)]
         public Nullable<System.DateTime> DateEPMSP { get; set; }
+        [DisplayName("Date d'exigences préalable à l'entrée en formation (EPMSP)")]
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:dd-MM-yyyy}", ApplyFormatInEditMode = true)]
         public Nullable<System.DateTime> DateTEP { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Formations> Formations { get; set; }
     }
 }
+
