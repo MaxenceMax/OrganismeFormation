@@ -49,6 +49,14 @@
                     @Html.ValidationMessageFor(model => model.DateTestSelection, "", new { @class = "text-danger" })
                 </div>
             </div>
+            @{ int [] habIds = { 4, 5, 6, 7}; }
+            @if (habIds.ToList().Contains(int.Parse(Model.TypedeFormationsId.ToString()))) {
+                <hr />
+                <h3> Habilitation </h3>
+                <hr />
+                <h4>Specificités types 4 5 6 et 7</h4>
+            }
+
             <hr />
             <h3> Détail des heures de formation</h3>
             <hr />
