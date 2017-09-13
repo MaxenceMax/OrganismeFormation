@@ -41,7 +41,7 @@
             </tr>
             @foreach (var item in Model.enCours)
             {
-                <tr class="tr_clickable">
+                <tr class="tr_clickable" onclick="location.href='@Url.Action("ShowASAC", "Formations", new { id = item.Id })'">
                     <td>
                         @String.Format("{0:d/MM/yyyy}", @item.DateDebut)
                     </td>

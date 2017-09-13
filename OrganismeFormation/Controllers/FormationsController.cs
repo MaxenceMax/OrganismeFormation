@@ -43,7 +43,8 @@ namespace OrganismeFormation.Controllers
                ModelState.IsValidField("TotalHeureFOAD") && ModelState.IsValidField("HeureELearning") && ModelState.IsValidField("TotalAutresHeures") &&
                ModelState.IsValidField("TypeHeureContenu") && ModelState.IsValidField("CoutComplet") && ModelState.IsValidField("NbreHeureAutreEspace") &&
                ModelState.IsValidField("Personnel.Nom") && ModelState.IsValidField("Personnel.Prenom") && ModelState.IsValidField("Personnel.Email") && ModelState.IsValidField("Personnel.Telephone") &&
-               ModelState.IsValidField("Lieux.Ville") && ModelState.IsValidField("Lieux.Adresse") && ModelState.IsValidField("Lieux.CodePostal")
+               ModelState.IsValidField("Lieux.Ville") && ModelState.IsValidField("Lieux.Adresse") && ModelState.IsValidField("Lieux.CodePostal") && 
+               ModelState.IsValidField("Habilitations.NumeroHabilitation") && ModelState.IsValidField("Habilitations.DebutDateDelivrance") && ModelState.IsValidField("Habilitations.FinDateDelivrance") && ModelState.IsValidField("Habilitations.NumeroSession") && ModelState.IsValidField("Habilitations.DateEPMSP") && ModelState.IsValidField("Habilitations.DateTEP")
                )
             {
                 // Mise en place de l'organisateur pédagogique
@@ -66,6 +67,7 @@ namespace OrganismeFormation.Controllers
                 db.Lieux.Add(l);
                 db.Personnel.Add(p);
                 db.Formations.Add(formation);
+                db.Habilitations.Add(formation.Habilitations);
                 db.SaveChanges();
                 return backToGoodFormation((decimal)formation.OrganismeId, (decimal)formation.TypedeFormationsId);
             }
@@ -76,12 +78,20 @@ namespace OrganismeFormation.Controllers
 
         private ActionResult backToGoodFormation(decimal org, decimal id)
         {
-            if(id == 1)
-            {
-                return RedirectToAction("EtatFormationAC", "AccesResponsable", new { id = org });
-            }
+            List<string> Etats = new List<string>();
+            Etats.Add("EtatFormationAC");
+            Etats.Add("EtatFormationAS");
+            Etats.Add("EtatFormationCFEB");
+            Etats.Add("EtatFormationCQP");
+            Etats.Add("EtatFormationBPJEPS");
+            Etats.Add("EtatFormationDEJEPS");
+            Etats.Add("EtatFormationDESJEPS");
+            //if (id == 1)
+            //{
+            return RedirectToAction(Etats[int.Parse(id.ToString())-1], "AccesResponsable", new { id = org });
+            //}
 
-            return RedirectToAction("Index");
+            //return RedirectToAction("Index");
         }
 
         [Authorize(Roles = "Responsable")]
@@ -109,6 +119,8 @@ namespace OrganismeFormation.Controllers
             Formations formation = new Formations();
             formation.TypedeFormationsId = id;
             formation.OrganismeId = orga.Id;
+
+            formation.Habilitations = new Habilitations();
 
             Personnel pers = new Personnel();
             pers.Nom = rp.Nom;

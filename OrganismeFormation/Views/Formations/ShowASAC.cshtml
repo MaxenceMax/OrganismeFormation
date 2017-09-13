@@ -49,6 +49,37 @@
                 </td>
             </tr>
         </table>
+        @{ int[] habIds = { 4, 5, 6, 7 }; }
+        @if (habIds.ToList().Contains(int.Parse(Model.TypedeFormationsId.ToString()))) {
+        <table class="table">
+            <tr>
+                <th>Durée de la formation</th>
+                <th>OF Porteur</th>
+                <th>Numéro de déclaration de l'OF</th>
+                <th>Numéro d'habilitation de session</th>
+                <th>Numéro d'habilitation de la formation</th>
+            </tr>
+            <tr>
+                <td>
+                    @{ var duree = (Model.DateFin.Value.Month - Model.DateDebut.Value.Month) + 12 * (Model.DateFin.Value.Year - Model.DateDebut.Value.Year);}
+                    @duree  mois
+                </td>
+                <td>
+                    @Html.DisplayFor(model => model.Organismes.Libelle)
+                </td>
+                <td>
+                    @Html.DisplayFor(model => model.Organismes.NumeroDeclaration)
+                </td>
+                <td>
+                    @Html.DisplayFor(model => model.Habilitations.NumeroSession)
+                </td>
+                <td>
+                    @Model.Personnel.Prenom @Model.Habilitations.NumeroHabilitation
+                </td>
+            </tr>
+        </table>
+        }
+
 
         <div class="title_blue">
             <div style="display:inline-block">Détail des UC</div>
@@ -74,7 +105,7 @@
     @{Html.RenderPartial("_Footer");}
 </div>
 
-Popup pour l'ajout 
+@*Popup pour l'ajout 
 <a data-popup-open="popup-@item.Id" href="#">Supprimer</a>
 <div class="popup" data-popup="popup-@item.Id">
     <div class="popup-inner">
@@ -94,4 +125,4 @@ Popup pour l'ajout
         </div>
         <a class="popup-close" data-popup-close="popup-@item.Id" href="#">x</a>
     </div>
-</div>
+</div>*@
