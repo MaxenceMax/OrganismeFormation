@@ -25,6 +25,7 @@
     <UseGlobalApplicationHostFile />
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
+    <Use64BitIISExpress />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -478,6 +479,8 @@
     <Content Include="Views\TypedeFinancements\Index.cshtml" />
     <Content Include="Views\Formations\AddSimpleFormation.cshtml" />
     <Content Include="Views\Formations\ShowASAC.cshtml" />
+    <Content Include="Views\Formations\AddSimpleUC.cshtml" />
+    <Content Include="Views\Formations\EditSimpleFormation.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
