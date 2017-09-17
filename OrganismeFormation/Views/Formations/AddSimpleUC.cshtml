@@ -1,0 +1,50 @@
+﻿@model OrganismeFormation.Models.DescriptifUC
+@{
+    ViewBag.Title = "Nouvel UC";
+}
+
+<div class="content">
+    <div class="title-content">
+        <div class="title-content-main">Création UC</div>
+        <div class="title-content-second">@ViewBag.Libelle</div>
+    </div>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    <div class="form-horizontal" id="mano-bootstrap">
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.FormationsId)
+
+        <hr />
+        <h3> Détail de l'UC </h3>
+        <hr />
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Libelle, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Libelle, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Libelle, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.ResultatMax, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.ResultatMax, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.ResultatMax, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+
+        <div class="form-group-align">
+            <div class="submit" id="form-moitie" style="margin-right:2.5px">
+                <input type="submit" value="Ajouter" id="button-blue" />
+                <div class="ease"></div>
+            </div>
+        </div>
+
+    </div>
+}
+</div>

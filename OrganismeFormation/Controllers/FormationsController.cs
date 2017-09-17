@@ -22,7 +22,7 @@ namespace OrganismeFormation.Controllers
         [Authorize(Roles = "Responsable")]
         public ActionResult AddSimpleFormation(decimal id)
         {
-            if(id == null)
+            if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
@@ -30,6 +30,19 @@ namespace OrganismeFormation.Controllers
             ViewBag.Libelle = type.Libelle;
 
             Formations formation = initializeFormation(id);
+
+            return View(formation);
+        }
+
+        [Authorize(Roles = "Responsable")]
+        public ActionResult EditSimpleFormation(decimal id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            
+            Formations formation = db.Formations.Find(id);
 
             return View(formation);
         }
@@ -43,7 +56,7 @@ namespace OrganismeFormation.Controllers
                ModelState.IsValidField("TotalHeureFOAD") && ModelState.IsValidField("HeureELearning") && ModelState.IsValidField("TotalAutresHeures") &&
                ModelState.IsValidField("TypeHeureContenu") && ModelState.IsValidField("CoutComplet") && ModelState.IsValidField("NbreHeureAutreEspace") &&
                ModelState.IsValidField("Personnel.Nom") && ModelState.IsValidField("Personnel.Prenom") && ModelState.IsValidField("Personnel.Email") && ModelState.IsValidField("Personnel.Telephone") &&
-               ModelState.IsValidField("Lieux.Ville") && ModelState.IsValidField("Lieux.Adresse") && ModelState.IsValidField("Lieux.CodePostal") && 
+               ModelState.IsValidField("Lieux.Ville") && ModelState.IsValidField("Lieux.Adresse") && ModelState.IsValidField("Lieux.CodePostal") &&
                ModelState.IsValidField("Habilitations.NumeroHabilitation") && ModelState.IsValidField("Habilitations.DebutDateDelivrance") && ModelState.IsValidField("Habilitations.FinDateDelivrance") && ModelState.IsValidField("Habilitations.NumeroSession") && ModelState.IsValidField("Habilitations.DateEPMSP") && ModelState.IsValidField("Habilitations.DateTEP")
                )
             {
@@ -88,7 +101,7 @@ namespace OrganismeFormation.Controllers
             Etats.Add("EtatFormationDESJEPS");
             //if (id == 1)
             //{
-            return RedirectToAction(Etats[int.Parse(id.ToString())-1], "AccesResponsable", new { id = org });
+            return RedirectToAction(Etats[int.Parse(id.ToString()) - 1], "AccesResponsable", new { id = org });
             //}
 
             //return RedirectToAction("Index");
@@ -133,5 +146,46 @@ namespace OrganismeFormation.Controllers
             return formation;
         }
 
+        [Authorize(Roles = "Responsable")]
+        public ActionResult AddSimpleUC(decimal id)
+        {
+            var descriptif = new DescriptifUC();
+
+            //var formation = db.Formations.Find(id);
+
+            descriptif.FormationsId = id;
+            return View(descriptif);
+        }
+
+        [HttpPost]
+        [Authorize(Roles = "Responsable")]
+        public ActionResult AddSimpleUC(DescriptifUC d)
+        {
+            if (ModelState.IsValidField("Libelle") && ModelState.IsValidField("ResultatMax"))
+            {
+                db.DescriptifUC.Add(d);
+                db.SaveChanges();
+            }
+            return RedirectToAction("ShowASAC", "Formations", new { id = d.FormationsId });
+        }
+
+        [HttpPost]
+        [Authorize(Roles = "Responsable")]
+        public ActionResult EditSimpleFormation(Formations formation)
+        {
+            if (ModelState.IsValidField("DateDebut") && ModelState.IsValidField("DateFin") && ModelState.IsValidField("DateLimiteInscription") && ModelState.IsValidField("DateTestSelection") &&
+               ModelState.IsValidField("NombreTotalHeures") && ModelState.IsValidField("NbreHeureCentre") && ModelState.IsValidField("NbrHeureStructAccueil") &&
+               ModelState.IsValidField("TotalHeureFOAD") && ModelState.IsValidField("HeureELearning") && ModelState.IsValidField("TotalAutresHeures") &&
+               ModelState.IsValidField("TypeHeureContenu") && ModelState.IsValidField("CoutComplet") && ModelState.IsValidField("NbreHeureAutreEspace") &&
+               ModelState.IsValidField("Personnel.Nom") && ModelState.IsValidField("Personnel.Prenom") && ModelState.IsValidField("Personnel.Email") && ModelState.IsValidField("Personnel.Telephone") &&
+               ModelState.IsValidField("Lieux.Ville") && ModelState.IsValidField("Lieux.Adresse") && ModelState.IsValidField("Lieux.CodePostal") &&
+               ModelState.IsValidField("Habilitations.NumeroHabilitation") && ModelState.IsValidField("Habilitations.DebutDateDelivrance") && ModelState.IsValidField("Habilitations.FinDateDelivrance") && ModelState.IsValidField("Habilitations.NumeroSession") && ModelState.IsValidField("Habilitations.DateEPMSP") && ModelState.IsValidField("Habilitations.DateTEP")
+               )
+            {
+                db.Formations.Attach(formation);
+                db.SaveChanges();
+            }
+            return RedirectToAction("ShowASAC","Formations", (decimal)formation.Id);
+        }
     }
 }
