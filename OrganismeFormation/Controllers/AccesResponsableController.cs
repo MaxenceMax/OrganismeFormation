@@ -1,18 +1,161 @@
 ﻿using OrganismeFormation.Models;
 using OrganismeFormation.ViewModels;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.IO;
 using System.Linq;
+using System.Net;
 using System.Security.Cryptography;
 using System.Text;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Script.Serialization;
 
 namespace OrganismeFormation.Controllers
 {
     public class AccesResponsableController : Controller
     {
+
+        [AllowAnonymous]
+        public ActionResult NewCandidatFirstStep(decimal id)
+        {
+            CandidatTuteurViewModel model = new CandidatTuteurViewModel();
+            model.FormationId = id;
+            return View(model);
+        }
+
+        public ActionResult NewCandidatFirstStep(CandidatTuteurViewModel model)
+        {
+
+        }
+
+        private Boolean IsExistInWebServiceTuteur(Tuteurs model)
+        {
+            /**
+            Create url from licencie
+            */
+            String url = "http://www.ffjda.org/ws_mobile/webRestGet/service.svc/infosInscriptionASP/";
+            String numLicChange = model.NumeroLicence.Replace("*", "@").Replace(" ", "§");
+            /**
+            Make the request
+            */
+            HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url + numLicChange);
+            try
+            {
+                WebResponse response = request.GetResponse();
+                using (Stream responseStream = response.GetResponseStream())
+                {
+                    // Reader to open http response
+                    StreamReader reader = new StreamReader(responseStream, Encoding.UTF8);
+                    String back = reader.ReadToEnd();
+                    // test le retour de la fonction web
+                    // Si j'ai rien le licencie n'existe pas, sinon 
+                    if (back.Length == 0 || back == null)
+                        return false;
+
+                    // Use dictionnary to reade Json string
+                    var dict = new JavaScriptSerializer().Deserialize<Dictionary<string, object>>(back);
+                    // List to skip first stage
+                    ArrayList list = (ArrayList)dict["infosInscriptionASPResult"];
+                    // Je récupére tous les items de ma chaine json
+                    Dictionary<String, Object> items = (Dictionary<String, Object>)list[0];
+                    // Et je traite ceux que je veux
+                    object item;
+                    items.TryGetValue("numLicence", out item);
+                    model.NumeroLicence = (String)item;
+                    // Si le num licence est vide alors la licence n'existe pas
+                    if (model.NumeroLicence == null || model.NumeroLicence.Length == 0)
+                        return false;
+                    items.TryGetValue("mail", out item);
+                    model.Email = (String)item;
+                    items.TryGetValue("prenom", out item);
+                    model.Prenom = (String)item;
+                    items.TryGetValue("nom", out item);
+                    model.Nom = (String)item;
+                    return true;
+                }
+            }
+            catch (WebException ex)
+            {
+                WebResponse errorResponse = ex.Response;
+                using (Stream responseStream = errorResponse.GetResponseStream())
+                {
+                    StreamReader reader = new StreamReader(responseStream, Encoding.GetEncoding("utf-8"));
+                    String errorText = reader.ReadToEnd();
+                    // log errorText
+                }
+                throw;
+            }
+        }
+
+        private Boolean IsExistInWebServiceCandidat(Candidats model)
+        {
+            /**
+            Create url from licencie
+            */
+            String url = "http://www.ffjda.org/ws_mobile/webRestGet/service.svc/infosInscriptionASP/";
+            String numLicChange = model.NumeroLicence.Replace("*", "@").Replace(" ", "§");
+            /**
+            Make the request
+            */
+            HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url + numLicChange);
+            try
+            {
+                WebResponse response = request.GetResponse();
+                using (Stream responseStream = response.GetResponseStream())
+                {
+                    // Reader to open http response
+                    StreamReader reader = new StreamReader(responseStream, Encoding.UTF8);
+                    String back = reader.ReadToEnd();
+                    // test le retour de la fonction web
+                    // Si j'ai rien le licencie n'existe pas, sinon 
+                    if (back.Length == 0 || back == null)
+                        return false;
+
+                    // Use dictionnary to reade Json string
+                    var dict = new JavaScriptSerializer().Deserialize<Dictionary<string, object>>(back);
+                    // List to skip first stage
+                    ArrayList list = (ArrayList)dict["infosInscriptionASPResult"];
+                    // Je récupére tous les items de ma chaine json
+                    Dictionary<String, Object> items = (Dictionary<String, Object>)list[0];
+                    // Et je traite ceux que je veux
+                    object item;
+                    items.TryGetValue("numLicence", out item);
+                    model.NumeroLicence = (String)item;
+                    // Si le num licence est vide alors la licence n'existe pas
+                    if (model.NumeroLicence == null || model.NumeroLicence.Length == 0)
+                        return false;
+                    items.TryGetValue("mail", out item);
+                    model.Email = (String)item;
+                    items.TryGetValue("prenom", out item);
+                    model.Prenom = (String)item;
+                    items.TryGetValue("nom", out item);
+                    model.Nom = (String)item;
+                    items.TryGetValue("tel", out item);
+                    
+                   
+                    items.TryGetValue("sexe", out item);
+                    //model.Sexe = (String)item;
+                    items.TryGetValue("tel", out item);
+                    model.Telephone = (String)item;
+                    return true;
+                }
+            }
+            catch (WebException ex)
+            {
+                WebResponse errorResponse = ex.Response;
+                using (Stream responseStream = errorResponse.GetResponseStream())
+                {
+                    StreamReader reader = new StreamReader(responseStream, Encoding.GetEncoding("utf-8"));
+                    String errorText = reader.ReadToEnd();
+                    // log errorText
+                }
+                throw;
+            }
+        }
+
 
         GestionOFEntities db = new GestionOFEntities();
         // GET: AccesResponsable

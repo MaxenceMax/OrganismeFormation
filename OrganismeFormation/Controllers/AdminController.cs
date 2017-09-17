@@ -61,5 +61,11 @@ namespace OrganismeFormation.Controllers
             return RedirectToAction("HomeAdmin", "Admin");
         }
 
+        [Authorize(Roles ="Admin")]
+        public ActionResult SearchCandidat()
+        {
+            return View();
+        }
+
     }
 }

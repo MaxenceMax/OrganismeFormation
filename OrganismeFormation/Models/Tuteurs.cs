@@ -11,7 +11,8 @@ namespace OrganismeFormation.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel;
+    using System.ComponentModel.DataAnnotations;
     public partial class Tuteurs
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -19,11 +20,20 @@ namespace OrganismeFormation.Models
         {
             this.CandidatsFormations = new HashSet<CandidatsFormations>();
         }
-    
+
         public decimal Id { get; set; }
+        [DisplayName("Nom")]
+        [StringLength(200, ErrorMessage = "Le nom doit contenir entre 2 et 200 caractères.", MinimumLength = 2)]
         public string Nom { get; set; }
+        [DisplayName("Prénom")]
+        [StringLength(200, ErrorMessage = "Le prénom doit contenir entre 2 et 200 caractères.", MinimumLength = 2)]
         public string Prenom { get; set; }
+        [DisplayName("Numéro de licence")]
+        [StringLength(16, MinimumLength = 16, ErrorMessage="Le numéro de licence n'est pas au bon format.")]
         public string NumeroLicence { get; set; }
+        [DisplayName("Adresse email")]
+        [DataType(DataType.EmailAddress)]
+        [EmailAddress]
         public string Email { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

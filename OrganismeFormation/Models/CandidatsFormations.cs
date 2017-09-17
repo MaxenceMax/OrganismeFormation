@@ -11,7 +11,8 @@ namespace OrganismeFormation.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel;
+    using System.ComponentModel.DataAnnotations;
     public partial class CandidatsFormations
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -22,17 +23,36 @@ namespace OrganismeFormation.Models
     
         public decimal Id { get; set; }
         public Nullable<decimal> FormationId { get; set; }
+        [Required]
         public string Grade { get; set; }
+        [Required]
         public string StructureAccueil { get; set; }
         public string DetailsFinancement { get; set; }
         public Nullable<decimal> CoutFormation { get; set; }
         public Nullable<decimal> CandidatsId { get; set; }
         public Nullable<decimal> TuteursId { get; set; }
         public Nullable<decimal> TypedeFinancementsId { get; set; }
+        [Required]
+        [DisplayName("Nom")]
+        [StringLength(200, ErrorMessage = "Le nom doit contenir entre 5 et 200 caractères.", MinimumLength = 2)]
         public string Nom { get; set; }
+        [Required]
+        [DisplayName("Prénom")]
+        [StringLength(200, ErrorMessage = "Le prénom doit contenir entre 5 et 200 caractères.", MinimumLength = 2)]
         public string Prenom { get; set; }
+        [Required]
+        [DisplayName("Numéro de licence")]
+        [StringLength(16, MinimumLength = 16)]
         public string NumeroLicence { get; set; }
+        [Required]
+        [StringLength(10, MinimumLength = 10)]
+        [DisplayName("Téléphone")]
+        [DataType(DataType.PhoneNumber)]
         public string Telephone { get; set; }
+        [Required]
+        [DisplayName("Adresse email")]
+        [DataType(DataType.EmailAddress)]
+        [EmailAddress]
         public string Email { get; set; }
         public Nullable<decimal> SexeId { get; set; }
     

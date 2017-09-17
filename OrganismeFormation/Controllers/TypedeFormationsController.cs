@@ -96,34 +96,6 @@ namespace OrganismeFormation.Controllers
             return View(typedeFormations);
         }
 
-        // GET: TypedeFormations/Delete/5
-        [Authorize(Roles = "Admin")]
-        public ActionResult Delete(decimal id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            TypedeFormations typedeFormations = db.TypedeFormations.Find(id);
-            if (typedeFormations == null)
-            {
-                return HttpNotFound();
-            }
-            return View(typedeFormations);
-        }
-
-        // POST: TypedeFormations/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [Authorize(Roles = "Admin")]
-        [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(decimal id)
-        {
-            TypedeFormations typedeFormations = db.TypedeFormations.Find(id);
-            db.TypedeFormations.Remove(typedeFormations);
-            db.SaveChanges();
-            return RedirectToAction("Index");
-        }
-
         protected override void Dispose(bool disposing)
         {
             if (disposing)

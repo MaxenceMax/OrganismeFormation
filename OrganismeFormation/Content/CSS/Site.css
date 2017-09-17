@@ -15,6 +15,15 @@ html{
   height:100%;
 }
 
+.blanc_login
+{
+    color: white;
+    text-align: center;
+    margin-top: 23px;
+    font-size: 14px;
+    width: 100%;
+}
+
 /************* Liste formations card **/
 .content_lf_card{
     width:inherit;

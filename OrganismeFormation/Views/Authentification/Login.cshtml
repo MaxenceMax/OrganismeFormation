@@ -17,12 +17,13 @@
                 @Html.ValidationMessageFor(model => model.Login, "", new { @class = "text-danger" })
 
                 @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @autocomplete = "off", @class = "feedback-input", @placeholder = "Mot de passe", @id = "icon-password" } })
-                @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
+                @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })              
 
                 <div class="submit">
                     <input type="submit" value="Se connecter" id="button-blue" />
                     <div class="ease"></div>
                 </div>
+                <a id="parent" href="@Url.Action("NewPassword","Home")"><div class="blanc_login">Mot de passe oublié ?</div></a>
             </div>
         </div>
 
