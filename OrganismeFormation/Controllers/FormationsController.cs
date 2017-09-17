@@ -182,10 +182,25 @@ namespace OrganismeFormation.Controllers
                ModelState.IsValidField("Habilitations.NumeroHabilitation") && ModelState.IsValidField("Habilitations.DebutDateDelivrance") && ModelState.IsValidField("Habilitations.FinDateDelivrance") && ModelState.IsValidField("Habilitations.NumeroSession") && ModelState.IsValidField("Habilitations.DateEPMSP") && ModelState.IsValidField("Habilitations.DateTEP")
                )
             {
-                db.Formations.Attach(formation);
+
+                db.Entry(formation).State = System.Data.Entity.EntityState.Modified;
                 db.SaveChanges();
+                return RedirectToAction("ShowASAC","Formations", new { id = (decimal)formation.Id });
             }
-            return RedirectToAction("ShowASAC","Formations", (decimal)formation.Id);
+            return View(formation);
+        }
+        
+        [Authorize(Roles = "Responsable")]
+        public ActionResult EndSimpleFormation(decimal id)
+        {
+            var form = db.Formations.Find(id);
+            form.FormationEnded = true;
+
+            db.Entry(form).State = System.Data.Entity.EntityState.Modified;
+
+            db.SaveChanges();
+
+            return backToGoodFormation((decimal)form.OrganismeId, (decimal)form.TypedeFormationsId);
         }
     }
 }
