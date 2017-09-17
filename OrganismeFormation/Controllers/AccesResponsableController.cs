@@ -16,19 +16,54 @@ using System.Web.Script.Serialization;
 namespace OrganismeFormation.Controllers
 {
     public class AccesResponsableController : Controller
-    {
-
+    { 
         [AllowAnonymous]
         public ActionResult NewCandidatFirstStep(decimal id)
         {
             CandidatTuteurViewModel model = new CandidatTuteurViewModel();
-            model.FormationId = id;
+            if (id != null)
+            {
+                model.FormationId = id;
+            }
+            else
+            {
+                RedirectToAction("Home");
+            }
             return View(model);
         }
 
+        [HttpPost]
+        [Authorize(Roles = "Responsable")]
         public ActionResult NewCandidatFirstStep(CandidatTuteurViewModel model)
         {
+            if (ModelState.IsValid)
+            {
+                CandidatFormationViewModel candidat = new CandidatFormationViewModel();
+                if(model.LicenceTuteur != null)
+                {
+                    if(db.Tuteurs.Where(t => t.NumeroLicence == model.LicenceTuteur).Count() !=0)
+                    {
+                        candidat.Tuteur = db.Tuteurs.Where(t => t.NumeroLicence == model.LicenceTuteur).FirstOrDefault();
+                    }
+                    else
+                    {
+                        candidat.Tuteur.NumeroLicence = model.LicenceTuteur;
+                        IsExistInWebServiceTuteur(candidat.Tuteur);
+                    }
+                }
+                if(db.CandidatsFormations.Where(c => c.NumeroLicence == model.LicenceCandidat).Count() != 1)
+                {
+                    candidat.Candidat = db.CandidatsFormations.Where(c => c.NumeroLicence == model.LicenceCandidat).FirstOrDefault();
+                }
+                else
+                {
+                    candidat.Candidat.NumeroLicence = model.LicenceCandidat;
+                    IsExistInWebServiceCandidat(candidat.Candidat);
+                }
 
+
+            }
+            return View(model);
         }
 
         private Boolean IsExistInWebServiceTuteur(Tuteurs model)
@@ -90,7 +125,7 @@ namespace OrganismeFormation.Controllers
             }
         }
 
-        private Boolean IsExistInWebServiceCandidat(Candidats model)
+        private Boolean IsExistInWebServiceCandidat(CandidatsFormations model)
         {
             /**
             Create url from licencie
@@ -137,7 +172,8 @@ namespace OrganismeFormation.Controllers
                     
                    
                     items.TryGetValue("sexe", out item);
-                    //model.Sexe = (String)item;
+                    model.Sexes = db.Sexes.Where(s=> s.Code == (String)item).FirstOrDefault();
+
                     items.TryGetValue("tel", out item);
                     model.Telephone = (String)item;
                     return true;

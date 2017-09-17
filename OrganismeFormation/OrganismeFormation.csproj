@@ -299,6 +299,7 @@
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
+    <Compile Include="ViewModels\CandidatFormationViewModel.cs" />
     <Compile Include="ViewModels\CandidatTuteurViewModel.cs" />
     <Compile Include="ViewModels\PasswordViewModel.cs" />
     <Compile Include="ViewModels\ResponsableOrgaViewModel.cs" />
