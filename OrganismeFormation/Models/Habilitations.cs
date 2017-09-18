@@ -27,11 +27,11 @@ namespace OrganismeFormation.Models
         public string NumeroHabilitation { get; set; }
         [DisplayName("Date de début délivrance habilitation")]
         [DataType(DataType.Date)]
-        [DisplayFormat(DataFormatString = "{0:dd-MM-yyyy}", ApplyFormatInEditMode = true)]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public Nullable<System.DateTime> DebutDateDelivrance { get; set; }
         [DisplayName("Date de fin délivrance habilitation")]
         [DataType(DataType.Date)]
-        [DisplayFormat(DataFormatString = "{0:dd-MM-yyyy}", ApplyFormatInEditMode = true)]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public Nullable<System.DateTime> FinDateDelivrance { get; set; }
         [DisplayName("Numéro d'habilitation")]
         [StringLength(50, MinimumLength = 2)]
@@ -41,11 +41,11 @@ namespace OrganismeFormation.Models
         public string NumeroSession { get; set; }
         [DisplayName("Date d'exigences préalable à la mise en situation pédagogique (EPMSP)")]
         [DataType(DataType.Date)]
-        [DisplayFormat(DataFormatString = "{0:dd-MM-yyyy}", ApplyFormatInEditMode = true)]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public Nullable<System.DateTime> DateEPMSP { get; set; }
         [DisplayName("Date d'exigences préalable à l'entrée en formation (EPMSP)")]
         [DataType(DataType.Date)]
-        [DisplayFormat(DataFormatString = "{0:dd-MM-yyyy}", ApplyFormatInEditMode = true)]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public Nullable<System.DateTime> DateTEP { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

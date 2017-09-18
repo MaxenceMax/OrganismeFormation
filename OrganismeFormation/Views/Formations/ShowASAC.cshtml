@@ -19,6 +19,39 @@
         </div>
     </div>
 
+
+        <div style="width: 48%; margin-left: 2%; text-align:center;display:inline-block">
+            <div class="submit">
+                <a href='@Url.Action("EndSimpleFormation", "Formations", new { id = Model.Id })' id="button-red">Terminer</a>
+                <div class="ease"></div>
+            </div>
+        </div>
+
+
+        <div style="width: 48%; text-align:center;display:inline-block">
+            <div class="submit">
+                <a href='@Url.Action("ExportCSV", "Formations", new { id = Model.Id })' id="button-blue">Export CSV</a>
+                <div class="ease"></div>
+            </div>
+        </div>
+
+        <div class="title_blue" style="border-bottom-width: 2px;">
+            <div style="display:inline-block">Informations</div>
+        </div>
+        <table class="table">
+            <tr>
+                <th>Ligue porteuse de la formation</th>
+                <th>Date l'imite d'inscription</th>
+                <th>Date des sélections</th>
+                <th>Début de formation</th>
+                <th>Fin de formation</th>
+                <th>Coordinateur pédagogique</th>
+            </tr>
+            <tr>
+                <td>
+                    @if (Model.LiguePorteuse)
+                    {
+                        @:Oui
     <div class="title_blue" style="border-bottom-width: 2px;">
         <div style="display:inline-block">Informations</div>
     </div>

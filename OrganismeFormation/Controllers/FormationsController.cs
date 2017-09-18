@@ -3,6 +3,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
+using System.Reflection;
+using System.Text;
 using System.Web;
 using System.Web.Mvc;
 
@@ -192,3 +194,55 @@ namespace OrganismeFormation.Controllers
         }
     }
 }
+            {
+
+                db.Entry(formation).State = System.Data.Entity.EntityState.Modified;
+                db.SaveChanges();
+                return RedirectToAction("ShowASAC","Formations", new { id = (decimal)formation.Id });
+            }
+            return View(formation);
+        }
+        
+        [Authorize(Roles = "Responsable")]
+        public ActionResult EndSimpleFormation(decimal id)
+        {
+            var form = db.Formations.Find(id);
+            form.FormationEnded = true;
+
+            db.Entry(form).State = System.Data.Entity.EntityState.Modified;
+
+            db.SaveChanges();
+
+            return backToGoodFormation((decimal)form.OrganismeId, (decimal)form.TypedeFormationsId);
+        }
+
+        public ActionResult ExportCSV(decimal id)
+        {
+            Formations obj = db.Formations.Find(id);
+            StringBuilder sb = new StringBuilder();
+            StringBuilder sbP = new StringBuilder();
+            Type t = obj.GetType();
+            PropertyInfo[] pi = t.GetProperties();
+
+
+            for (int index = 0; index < pi.Length; index++)
+            {
+                if (pi[index].PropertyType.IsAssignableFrom(typeof(string)) || 
+                    pi[index].PropertyType.IsAssignableFrom(typeof(DateTime)) ||
+                    pi[index].PropertyType.IsAssignableFrom(typeof(int)) ||
+                    pi[index].PropertyType.IsAssignableFrom(typeof(decimal)) ||
+                    pi[index].PropertyType.IsAssignableFrom(typeof(bool)))
+                {
+
+                    sb.Append(pi[index].GetValue(obj, null));
+                    sbP.Append(pi[index].Name);
+
+                    if (index < pi.Length - 1)
+                    {
+                        sb.Append(";");
+                        sbP.Append(";");
+                    }
+                }
+            }
+            return Content((sbP.ToString() + Environment.NewLine + sb.ToString()));
+        }
