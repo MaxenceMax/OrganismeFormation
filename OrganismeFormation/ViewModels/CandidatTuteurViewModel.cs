@@ -14,7 +14,7 @@ namespace OrganismeFormation.ViewModels
         [StringLength(16, MinimumLength = 16, ErrorMessage = "Le numéro de licence n'est pas au bon format.")]
         public string LicenceCandidat { get; set; }
 
-        [DisplayName("Numéro de licence du candidat")]
+        [DisplayName("Numéro de licence du tuteur")]
         [StringLength(16, MinimumLength = 16, ErrorMessage = "Le numéro de licence n'est pas au bon format.")]
         public string LicenceTuteur { get; set; }
 

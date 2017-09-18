@@ -1,4 +1,5 @@
 ﻿@model OrganismeFormation.Models.CandidatsFormations
+@using OrganismeFormation.Models
 @{
     ViewBag.Title = "Affichage Candidat";
 }
@@ -25,52 +26,182 @@
                 </div>
             </div>
         </div>
-            <div class="title_blue" style="border-bottom-width: 2px;">
-                <div style="display:inline-block">Informations</div>
-            </div>
-            <table class="table">
-                <tr>
+        <div class="title_blue" style="border-bottom-width: 2px;">
+            <div style="display:inline-block">Informations</div>
+        </div>
+        <table class="table">
+            <tr>
+                <th>Nom Prénom</th>
+                <th>Numéro de licence</th>
+                <th>Grade</th>
+                <th>Tél</th>
+                <th>Email</th>
+                <th>Type Financement</th>
+                <th>Detail Financement</th>
+            </tr>
+            <tr>
+                <td>@Model.Nom&nbsp;@Model.Prenom</td>
+                <td>@Model.NumeroLicence</td>
+                <td>@Model.Grade</td>
+                <td>@Model.Telephone</td>
+                <td>@Model.Email</td>
+                <td>@Model.TypedeFinancements.Libelle</td>
+                <td>@Model.DetailsFinancement</td>
+            </tr>
+        </table>
+        <div class="title_blue" style="border-bottom-width: 2px;">
+            <div style="display:inline-block">Structure et tuteur</div>
+        </div>
+        <table class="table">
+            <tr>
+                <th>Strucutre d'accueil</th>
+                @if (Model.Tuteurs != null)
+                {
                     <th>Nom Prénom</th>
                     <th>Numéro de licence</th>
-                    <th>Grade</th>
-                    <th>Tél</th>
-                    <th>Email</th>
-                    <th>Type Financement</th>
-                    <th>Detail Financement</th>
-                </tr>
-                <tr>
-                    <td>@Model.Nom&nbsp;@Model.Prenom</td>
-                    <td>@Model.NumeroLicence</td>
-                    <td>@Model.Grade</td>
-                    <td>@Model.Telephone</td>
-                    <td>@Model.Email</td>
-                    <td>@Model.TypedeFinancements.Libelle</td>
-                    <td>@Model.DetailsFinancement</td>
-                </tr>
-            </table>
-            <div class="title_blue" style="border-bottom-width: 2px;">
-                <div style="display:inline-block">Structure et tuteur</div>
-            </div>
+                        <th>Mail</th>
+                }
+            </tr>
+            <tr>
+                <td>@Model.StructureAccueil</td>
+                @if (Model.Tuteurs != null)
+                {
+                    <td>@Model.Tuteurs.Nom&nbsp;@Model.Tuteurs.Prenom</td>
+                    <td>@Model.Tuteurs.NumeroLicence</td>
+                        <td>@Model.Tuteurs.Email</td>
+                }
+            </tr>
+        </table>
+        <div class="title_blue" style="border-bottom-width: 2px;">
+            <div style="display:inline-block">Suivi de formation</div>
+        </div>
+        <p>Résultats généraux :</p>
+        <table class="table">
+            <tr>
+                <th>Formation validée</th>
+                <th>Numéro diplôme</th>
+                <th> EPEF </th>
+                <th> EPMSP </th>
+                <th>Formation terminée</th>
+                <th>Abandon</th>
+            </tr>
+            <tr>
+                <td>
+                    @if (Model.Resultats.FirstOrDefault().FormationValidee != null)
+                    {
+                        if (Model.Resultats.FirstOrDefault().FormationValidee == true)
+                        {
+                            @:Oui
+                        }
+                        else
+                        {
+                            @:Non
+                        }
+
+                    }
+                    else
+                    {
+                        @:Non renseigné.
+                    }
+                </td>
+                <td>
+                    @if (Model.Resultats.FirstOrDefault().NumeroDiplome != null)
+                    {
+                        @Model.Resultats.FirstOrDefault().NumeroDiplome
+                    }
+                    else
+                    {
+                        @:Non renseigné.
+                    }
+                </td>
+                <td>
+                    @if (Model.Resultats.FirstOrDefault().EPEF != null)
+                    {
+                        @Model.Resultats.FirstOrDefault().EPEF
+
+                    }
+                    else
+                    {
+                        @:Non renseigné.
+                    }
+                </td>
+                <td>
+                    @if (Model.Resultats.FirstOrDefault().EPMSP != null)
+                    {
+                        @Model.Resultats.FirstOrDefault().EPMSP
+                    }
+                    else
+                    {
+                        @:Non renseigné.
+                    }
+                </td>
+                <td>
+                    @if (Model.Resultats.FirstOrDefault().FormationTerminee != null)
+                    {
+                        if (Model.Resultats.FirstOrDefault().FormationTerminee == true)
+                        {
+                            @:Oui
+                        }
+                        else
+                        {
+                            @:Non
+                        }
+
+                    }
+                    else
+                    {
+                        @:Non renseigné.
+                    }
+                </td>
+                <td>
+                    @if (Model.Resultats.FirstOrDefault().Abandon != null)
+                    {
+                        if (Model.Resultats.FirstOrDefault().Abandon == true)
+                        {
+                            @:Oui
+                        }
+                        else
+                        {
+                            @:Non
+                        }
+
+                    }
+                    else
+                    {
+                        @:Non renseigné.
+                    }
+                </td>
+            </tr>
+        </table>
+        <p>Résultats UC :</p>
+        @if (Model.Formations.DescriptifUC.Count != 0 && Model.Resultats.FirstOrDefault().ResultatUc.Count() !=0)
+        {
             <table class="table">
                 <tr>
-                    <th>Strucutre d'accueil</th>
-                    @if(Model.Tuteurs != null)
+                    @foreach (DescriptifUC uc in Model.Formations.DescriptifUC)
                     {
-                        <th>Nom Prénom</th>
-                        <th>Numéro de licence</th>
-                        <th>Mail</th>
+                        <th>@uc.Libelle</th>
                     }
                 </tr>
                 <tr>
-                    <td>@Model.StructureAccueil</td>
-                    @if (Model.Tuteurs != null)
+                    @foreach(DescriptifUC uc in Model.Formations.DescriptifUC)
                     {
-                        <th>@Model.Tuteurs.Nom&nbsp;@Model.Tuteurs.Prenom</th>
-                        <th>@Model.Tuteurs.NumeroLicence</th>
-                        <th>@Model.Tuteurs.Email</th>
+                        <td>@Model.Resultats.FirstOrDefault().ResultatUc.Where(r => r.DescriptifUCId == uc.Id).FirstOrDefault()&nbsp;/&nbsp;@uc.ResultatMax</td>
                     }
                 </tr>
             </table>
+        }
+        else
+        {
+            @:Aucun UC pour ce candidat
+        }
+
+        <div class="form-group-align">
+            <div class="submit" id="form-moitie" style="margin-left:2.5px">
+                <a href='@Url.Action("ShowASAC", "Formations", new { id = Model.FormationId})' id="button-red">Retour</a>
+                <div class="ease"></div>
+            </div>
+        </div>
     </div>
 </div>
 
