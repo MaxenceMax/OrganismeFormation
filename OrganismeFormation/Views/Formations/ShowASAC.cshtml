@@ -10,63 +10,63 @@
     </div>
     <div id="mano-bootstrap">
 
-        <div style="text-align: center;">
-            <div style="width: 100%;text-align:center;display:inline-block">
-                <div class="submit">
-                    <a href='@Url.Action("EditSimpleFormation", "Formations",new { id = Model.Id })' id="button-blue" style="padding-top: 2px;padding-bottom: 2px;">Editer</a>
-                    <div class="ease" style="height:auto"></div>
-                </div>
+    <div style="text-align: center;">
+        <div style="width: 100%;text-align:center;display:inline-block">
+            <div class="submit">
+                <a href='@Url.Action("EditSimpleFormation", "Formations",new { id = Model.Id })' id="button-blue" style="padding-top: 2px;padding-bottom: 2px;">Editer</a>
+                <div class="ease" style="height:auto"></div>
             </div>
         </div>
+    </div>
 
-        <div class="title_blue" style="border-bottom-width: 2px;">
-            <div style="display:inline-block">Informations</div>
-        </div>
-        <table class="table">
-            <tr>
-                <th>Ligue porteuse de la formation</th>
-                <th>Date l'imite d'inscription</th>
-                <th>Date des sélections</th>
-                <th>Début de formation</th>
-                <th>Fin de formation</th>
-                <th>Coordinateur pédagogique</th>
-            </tr>
-            <tr>
-                <td>
-                    @if (Model.LiguePorteuse)
-                    {
-                        @:Oui
+    <div class="title_blue" style="border-bottom-width: 2px;">
+        <div style="display:inline-block">Informations</div>
+    </div>
+    <table class="table">
+        <tr>
+            <th>Ligue porteuse de la formation</th>
+            <th>Date l'imite d'inscription</th>
+            <th>Date des sélections</th>
+            <th>Début de formation</th>
+            <th>Fin de formation</th>
+            <th>Coordinateur pédagogique</th>
+        </tr>
+        <tr>
+            <td>
+                @if (Model.LiguePorteuse)
+                {
+                    @:Oui
                         }
-                    else
-                    {
-                        @:Non
+                else
+                {
+                    @:Non
                         }
 
-                </td>
-                <td>
-                    @Html.DisplayFor(model => model.DateLimteInscription)
-                </td>
-                <td>
-                    @Html.DisplayFor(model => model.DateTestSelection)
-                </td>
-                <td>
-                    @Html.DisplayFor(model => model.DateDebut)
-                </td>
-                <td>
-                    @Html.DisplayFor(model => model.DateFin)
-                </td>
-                <td>
-                    @Model.Personnel.Prenom @Model.Personnel.Nom <br />
-                    @Model.Personnel.Email @Model.Personnel.Telephone
-                </td>
-            </tr>
-        </table>
+            </td>
+            <td>
+                @Html.DisplayFor(model => model.DateLimteInscription)
+            </td>
+            <td>
+                @Html.DisplayFor(model => model.DateTestSelection)
+            </td>
+            <td>
+                @Html.DisplayFor(model => model.DateDebut)
+            </td>
+            <td>
+                @Html.DisplayFor(model => model.DateFin)
+            </td>
+            <td>
+                @Model.Personnel.Prenom @Model.Personnel.Nom <br />
+                @Model.Personnel.Email @Model.Personnel.Telephone
+            </td>
+        </tr>
+    </table>
+    @{ int[] habIds = { 4, 5, 6, 7 }; }
+    @if (habIds.ToList().Contains(int.Parse(Model.TypedeFormationsId.ToString())))
+            {
         <div class="title_blue" style="border-bottom-width: 2px;">
             <div style="display:inline-block">Habilitation</div>
         </div>
-        @{ int[] habIds = { 4, 5, 6, 7 }; }
-        @if (habIds.ToList().Contains(int.Parse(Model.TypedeFormationsId.ToString())))
-            {
             <table class="table">
                 <tr>
                     <th>Durée de la formation</th>
@@ -95,37 +95,134 @@
                 </tr>
             </table>
                             }
-        <div class="title_blue" style="border-bottom-width: 2px;">
-            <div style="display:inline-block">Détail des UC</div>
-        </div>
-        @if (Model.DescriptifUC.Count > 0)
+    <div class="title_blue" style="border-bottom-width: 2px;">
+        <div style="display:inline-block">Détail des UC</div>
+    </div>
+    @if (Model.DescriptifUC.Count > 0)
             {
-            <table class="table">
-                <tr>
-                    <th>Libellé</th>
-                    <th>Note maximale</th>
-                </tr>
-                @foreach (DescriptifUC uc in Model.DescriptifUC)
+        <table class="table">
+            <tr>
+                <th>Libellé</th>
+                <th>Note maximale</th>
+            </tr>
+            @foreach (DescriptifUC uc in Model.DescriptifUC)
                 {
-                    <tr>
-                        <td>@Html.DisplayFor(duc => uc.Libelle)</td>
-                        <td>@Html.DisplayFor(duc => uc.ResultatMax)</td>
-                    </tr>
-                }
-            </table>
+                <tr>
+                    <td>@Html.DisplayFor(duc => uc.Libelle)</td>
+                    <td>@Html.DisplayFor(duc => uc.ResultatMax)</td>
+                </tr>
+            }
+        </table>
+    }
+    else
+    {
+        @:Aucun UC saisi.
         }
-        else
-        {
-            @:Aucun UC saisi.
-        }
-        <div style="text-align: center;">
-            <div style="width: 170px;text-align:center;display:inline-block">
-                <div class="submit">
-                    <a href='@Url.Action("AddSimpleUC", "Formations",new { id = Model.Id })' id="button-blue" style="padding-top: 2px;padding-bottom: 2px;">Ajouter un UC</a>
-                    <div class="ease" style="height:auto"></div>
-                </div>
+    <div style="text-align: center;">
+        <div style="width: 170px;text-align:center;display:inline-block">
+            <div class="submit">
+                <a href='@Url.Action("AddSimpleUC", "Formations",new { id = Model.Id })' id="button-blue" style="padding-top: 2px;padding-bottom: 2px;">Ajouter un UC</a>
+                <div class="ease" style="height:auto"></div>
             </div>
         </div>
+    </div>
+    <div class="title_blue" style="border-bottom-width: 2px;">
+        <div style="display:inline-block">Candidats</div>
+    </div>
+    @if (Model.CandidatsFormations.Count > 0)
+            {
+        <table class="table">
+            <tr>
+                <th>Nom</th>
+                <th>Prénom</th>
+                <th>Numéro de licence</th>
+                <th>Grade</th>
+                <th>Téléphone</th>
+                <th>Mail</th>
+                <th></th>
+            </tr>
+            @foreach (CandidatsFormations uc in Model.CandidatsFormations)
+                {
+                <tr>
+                    <td>@Html.DisplayFor(duc => uc.Nom)</td>
+                    <td>@Html.DisplayFor(duc => uc.Prenom)</td>
+                    <td>@Html.DisplayFor(duc => uc.NumeroLicence)</td>
+                    <td>@Html.DisplayFor(duc => uc.Grade)</td>
+                    <td>@Html.DisplayFor(duc => uc.Telephone)</td>
+                    <td>@Html.DisplayFor(duc => uc.Email)</td>
+                    <td><a href='@Url.Action("Index", "CandidatsFormations",new { id = uc.Id })'>Afficher</a></td>
+                </tr>
+            }
+        </table>
+    }
+    else
+    {
+        @:Aucun Candidat saisi.
+        }
+    <div style="text-align: center;">
+        <div style="width: 170px;text-align:center;display:inline-block">
+            <div class="submit">
+                <a href='@Url.Action("NewCandidatFirstStep", "AccesResponsable",new { id = Model.Id })' id="button-blue" style="padding-top: 2px;padding-bottom: 2px;">Ajouter un candidat</a>
+                <div class="ease" style="height:auto"></div>
+            </div>
+        </div>
+    </div>
+    <div class="title_blue" style="border-bottom-width: 2px;">
+        <div style="display:inline-block">Suivi de formations</div>
+    </div>
+    @if (Model.CandidatsFormations.Count == 0 || Model.DescriptifUC.Count == 0)
+    {
+        @:Veuillez rensigner des candidats et des UC
+        }
+    else
+    {
+        <table class="table">
+            <tr>
+                <th> Candidat </th>
+                <th> Formation validée</th>
+                @foreach(DescriptifUC uc in Model.DescriptifUC )
+                {
+                    <th>
+                        @uc.Libelle
+                    </th>
+                }
+            </tr>
+            @foreach ( CandidatsFormations c in Model.CandidatsFormations)
+            {
+                <tr>
+                    <td>
+                        @c.Nom &nbsp; @c.Prenom
+                    </td>
+                    <td>
+                        @if (c.Resultats.FirstOrDefault().FormationValidee ==  null)
+                        {
+                            @: Non renseigné.
+                        }else if (c.Resultats.FirstOrDefault().FormationValidee == true)
+                        {
+                            @:Oui
+                        }
+                        else
+                        {
+                            @:Non
+                        }
+                    </td>
+                    @foreach(DescriptifUC uc in Model.DescriptifUC)
+                    {
+                        <td>
+                            @if (c.Resultats.FirstOrDefault().ResultatUc.Where(r => r.DescriptifUCId == uc.Id).Count() == 1)
+                            {
+                                @c.Resultats.FirstOrDefault().ResultatUc.Where(r => r.DescriptifUCId == uc.Id).FirstOrDefault().Resultat @:/ @uc.ResultatMax
+                            }
+                            else
+                            {
+                                @:Non Renseigné.
+                            }
+                        </td>
+                    }
+                </tr>
+            }
+        </table>
+    }
     </div>
     @{Html.RenderPartial("_Footer");}
 </div>

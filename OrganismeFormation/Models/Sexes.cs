@@ -11,7 +11,7 @@ namespace OrganismeFormation.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel;
     public partial class Sexes
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -23,6 +23,7 @@ namespace OrganismeFormation.Models
     
         public decimal Id { get; set; }
         public string Code { get; set; }
+        [DisplayName("Sexe")]
         public string Libelle { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

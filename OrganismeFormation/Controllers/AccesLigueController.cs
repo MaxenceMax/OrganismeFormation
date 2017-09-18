@@ -19,7 +19,7 @@ namespace OrganismeFormation.Controllers
         private GestionOFEntities db = new GestionOFEntities();
 
         // GET: AccesLigue
-        [Authorize(Roles ="AccesLigue")]
+        [Authorize(Roles = "AccesLigue")]
         public ActionResult Home()
         {
             Ligues tmp = db.Ligues.Find(((Ligues)Session["Ligue"]).Id);

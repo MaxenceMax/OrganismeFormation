@@ -205,6 +205,7 @@
     <Compile Include="Controllers\AccesResponsableController.cs" />
     <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\AuthentificationController.cs" />
+    <Compile Include="Controllers\CandidatsFormationsController.cs" />
     <Compile Include="Controllers\FormationsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LieuxController.cs" />
@@ -488,6 +489,8 @@
     <Content Include="Views\AccesResponsable\NewCandidatFirstStep.cshtml" />
     <Content Include="Views\Formations\AddSimpleUC.cshtml" />
     <Content Include="Views\Formations\EditSimpleFormation.cshtml" />
+    <Content Include="Views\AccesResponsable\NewCandidatSecondStep.cshtml" />
+    <Content Include="Views\CandidatsFormations\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

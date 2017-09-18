@@ -16,8 +16,8 @@ using System.Web.Script.Serialization;
 namespace OrganismeFormation.Controllers
 {
     public class AccesResponsableController : Controller
-    { 
-        [AllowAnonymous]
+    {
+        [Authorize(Roles = "Responsable")]
         public ActionResult NewCandidatFirstStep(decimal id)
         {
             CandidatTuteurViewModel model = new CandidatTuteurViewModel();
@@ -41,7 +41,7 @@ namespace OrganismeFormation.Controllers
                 CandidatFormationViewModel candidat = new CandidatFormationViewModel();
                 if(model.LicenceTuteur != null)
                 {
-                    if(db.Tuteurs.Where(t => t.NumeroLicence == model.LicenceTuteur).Count() !=0)
+                    if(db.Tuteurs.Where(t => t.NumeroLicence == model.LicenceTuteur).Count() ==1)
                     {
                         candidat.Tuteur = db.Tuteurs.Where(t => t.NumeroLicence == model.LicenceTuteur).FirstOrDefault();
                     }
@@ -51,7 +51,7 @@ namespace OrganismeFormation.Controllers
                         IsExistInWebServiceTuteur(candidat.Tuteur);
                     }
                 }
-                if(db.CandidatsFormations.Where(c => c.NumeroLicence == model.LicenceCandidat).Count() != 1)
+                if(db.CandidatsFormations.Where(c => c.NumeroLicence == model.LicenceCandidat).Count() == 1)
                 {
                     candidat.Candidat = db.CandidatsFormations.Where(c => c.NumeroLicence == model.LicenceCandidat).FirstOrDefault();
                 }
@@ -61,7 +61,66 @@ namespace OrganismeFormation.Controllers
                     IsExistInWebServiceCandidat(candidat.Candidat);
                 }
 
+                candidat.Formation = db.Formations.Where(f => f.Id == model.FormationId).FirstOrDefault();
+                TempData["candidatViewModel"] = candidat;
+                return RedirectToAction("NewCandidatSecondStep");
+            }
+            return View(model);
+        }
 
+        [Authorize(Roles = "Responsable")]
+        public ActionResult NewCandidatSecondStep()
+        {
+            CandidatFormationViewModel vm = TempData["candidatViewModel"] as CandidatFormationViewModel;
+            if(vm == null)
+            {
+                RedirectToAction("Home");
+            }
+            ViewBag.Financements = db.TypedeFinancements.ToList();
+            return View(vm);
+        }
+
+        [HttpPost]
+        [Authorize(Roles = "Responsable")]
+        public ActionResult NewCandidatSecondStep(CandidatFormationViewModel model)
+        {
+            if(ModelState.IsValidField("Candidat.Nom") && ModelState.IsValidField("Candidat.Prenom") && ModelState.IsValidField("Candidat.Grade") &&
+                ModelState.IsValidField("Candidat.NumeroLicence") && ModelState.IsValidField("Candidat.Email")  && ModelState.IsValidField("Candidat.Telephone") &&
+                ModelState.IsValidField("Tuteur.Nom") && ModelState.IsValidField("Tuteur.Prenom") && ModelState.IsValidField("Tuteur.Email") &&
+                ModelState.IsValidField("Tuteur.NumeroLicence")
+                )
+            {
+                CandidatsFormations candidat = model.Candidat;
+
+                Tuteurs t = model.Tuteur;
+                candidat.FormationId = model.Formation.Id;
+                candidat.TypedeFinancements = db.TypedeFinancements.Where(td => td .Id ==model.FinancementId).FirstOrDefault();
+                candidat.Tuteurs = t;
+                Resultats r = new Resultats();
+                Passages p = new Passages();
+                try
+                {
+                    if(t!= null && db.Tuteurs.Where(tu => tu.Id == model.Tuteur.Id).Count() == 0)
+                    {
+                        db.Tuteurs.Add(t);
+                    }
+                    r.PassagesId = 0;
+                    db.CandidatsFormations.Add(candidat);
+                    db.SaveChanges();
+                    r.CandidatsFormations = candidat;
+                    db.Resultats.Add(r);
+                    db.SaveChanges();
+                }
+                catch(Exception e)
+                {
+
+                }
+                return RedirectToAction("ShowASAC", "Formations", new { id = model.Formation.Id });
+
+            }
+            else
+            {
+                ViewBag.Financements = db.TypedeFinancements.ToList();
             }
             return View(model);
         }

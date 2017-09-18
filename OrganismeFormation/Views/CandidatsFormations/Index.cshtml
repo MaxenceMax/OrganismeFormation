@@ -1,0 +1,72 @@
+﻿@model OrganismeFormation.Models.CandidatsFormations
+@{
+    ViewBag.Title = "Affichage Candidat";
+}
+
+<div class="content">
+    <div class="title-content">
+        <div class="title-content-main">Affichage Candidat</div>
+        <div class="title-content-second">@Model.Nom&nbsp;@Model.Prenom</div>
+    </div>
+    <div id="mano-bootstrap">
+        <div style="text-align: center;">
+            <div style="width: 100%;text-align:center;display:inline-block">
+                <div class="submit">
+                    <a href='@Url.Action("EditCandidat", "CandidatsFormations",new { id = Model.Id })' id="button-blue" style="padding-top: 2px;padding-bottom: 2px;">Editer</a>
+                    <div class="ease" style="height:auto"></div>
+                </div>
+                <div class="submit">
+                    <a href='@Url.Action("EditCandidat", "CandidatsFormations",new { id = Model.Id })' id="button-blue" style="padding-top: 2px;padding-bottom: 2px;">Saisir Résultats</a>
+                    <div class="ease" style="height:auto"></div>
+                </div>
+            </div>
+            <div class="title_blue" style="border-bottom-width: 2px;">
+                <div style="display:inline-block">Informations</div>
+            </div>
+            <table class="table">
+                <tr>
+                    <th>Nom Prénom</th>
+                    <th>Numéro de licence</th>
+                    <th>Grade</th>
+                    <th>Tél</th>
+                    <th>Email</th>
+                    <th>Type Financement</th>
+                    <th>Detail Financement</th>
+                </tr>
+                <tr>
+                    <td>@Model.Nom&nbsp;@Model.Prenom</td>
+                    <td>@Model.NumeroLicence</td>
+                    <td>@Model.Grade</td>
+                    <td>@Model.Telephone</td>
+                    <td>@Model.Email</td>
+                    <td>@Model.TypedeFinancements.Libelle</td>
+                    <td>@Model.DetailsFinancement</td>
+                </tr>
+            </table>
+            <div class="title_blue" style="border-bottom-width: 2px;">
+                <div style="display:inline-block">Structure et tuteur</div>
+            </div>
+            <table class="table">
+                <tr>
+                    <th>Strucutre d'accueil</th>
+                    @if(Model.Tuteurs != null)
+                    {
+                        <th>Nom Prénom</th>
+                        <th>Numéro de licence</th>
+                        <th>Mail</th>
+                    }
+                </tr>
+                <tr>
+                    <td>@Model.StructureAccueil</td>
+                    @if (Model.Tuteurs != null)
+                    {
+                        <th>@Model.Tuteurs.Nom&nbsp;@Model.Tuteurs.Prenom</th>
+                        <th>@Model.Tuteurs.NumeroLicence</th>
+                        <th>@Model.Tuteurs.Email</th>
+                    }
+                </tr>
+            </table>
+        </div>
+    </div>
+</div>
+

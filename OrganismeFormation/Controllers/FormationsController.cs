@@ -80,7 +80,10 @@ namespace OrganismeFormation.Controllers
                 db.Lieux.Add(l);
                 db.Personnel.Add(p);
                 db.Formations.Add(formation);
-                db.Habilitations.Add(formation.Habilitations);
+                if(formation.Habilitations != null)
+                {
+                    db.Habilitations.Add(formation.Habilitations);
+                }
                 db.SaveChanges();
                 return backToGoodFormation((decimal)formation.OrganismeId, (decimal)formation.TypedeFormationsId);
             }

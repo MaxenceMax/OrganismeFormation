@@ -3,42 +3,48 @@
     ViewBag.Title = "Nouveau Candidat";
 }
 
+<div class="content">
+    <div class="title-content">
+        <div class="title-content-main">Gestion des organismes de formation</div>
+        <div class="title-content-second">Ajout d'un candidat</div>
 
-@using (Html.BeginForm())
-{
-
-    @Html.AntiForgeryToken()
-    <div class="form-horizontal" id="mano-bootstrap">
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        @Html.HiddenFor(model => model.FormationId)
-
-        <p> Pour ajouter un candidata veuillez renseigner son numéro de licence et celui de son tuteur si nécessaire : </p>
-        <hr />
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.LicenceCandidat, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.LicenceCandidat, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.LicenceCandidat, "", new { @class = "text-danger" })
-            </div>
-        </div>
-        <div class="form-group">
-            @Html.LabelFor(model => model.LicenceTuteur, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.LicenceTuteur, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.LicenceTuteur, "", new { @class = "text-danger" })
-            </div>
-        </div>
-        <div class="form-group-align">
-            <div class="submit" id="form-moitie" style="margin-right:2.5px">
-                <input type="submit" value="Rechercher" id="button-blue" />
-                <div class="ease"></div>
-            </div>
-            <div class="submit" id="form-moitie" style="margin-left:2.5px">
-                <a href='@Url.Action("Index", "Organismes")' id="button-red">Retour</a>
-                <div class="ease"></div>
-            </div>
-        </div>
     </div>
-}
-@{Html.RenderPartial("_Footer");}
+    @using (Html.BeginForm())
+    {
+
+        @Html.AntiForgeryToken()
+        <div class="form-horizontal" id="mano-bootstrap">
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            @Html.HiddenFor(model => model.FormationId)
+
+            <p> Pour ajouter un candidata veuillez renseigner son numéro de licence et celui de son tuteur si nécessaire : </p>
+            <hr />
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.LicenceCandidat, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.LicenceCandidat, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.LicenceCandidat, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.LicenceTuteur, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.LicenceTuteur, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.LicenceTuteur, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group-align">
+                <div class="submit" id="form-moitie" style="margin-right:2.5px">
+                    <input type="submit" value="Rechercher" id="button-blue" />
+                    <div class="ease"></div>
+                </div>
+                <div class="submit" id="form-moitie" style="margin-left:2.5px">
+                    <a href='@Url.Action("ShowASAC", "Formations", new { id = Model.FormationId})' id="button-red">Retour</a>
+                    <div class="ease"></div>
+                </div>
+            </div>
+        </div>
+    }
+    @{Html.RenderPartial("_Footer");}
+</div>
