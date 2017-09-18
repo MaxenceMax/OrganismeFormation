@@ -10,16 +10,21 @@
     </div>
     <div id="mano-bootstrap">
         <div style="text-align: center;">
-            <div style="width: 100%;text-align:center;display:inline-block">
+            <div style="width: 48%; margin-left: 2%; text-align:center;display:inline-block">
                 <div class="submit">
-                    <a href='@Url.Action("EditCandidat", "CandidatsFormations",new { id = Model.Id })' id="button-blue" style="padding-top: 2px;padding-bottom: 2px;">Editer</a>
-                    <div class="ease" style="height:auto"></div>
-                </div>
-                <div class="submit">
-                    <a href='@Url.Action("EditCandidat", "CandidatsFormations",new { id = Model.Id })' id="button-blue" style="padding-top: 2px;padding-bottom: 2px;">Saisir Résultats</a>
-                    <div class="ease" style="height:auto"></div>
+                    <a href='@Url.Action("EditCandidat", "CandidatsFormations",new { id = Model.Id })' id="button-blue">Editer</a>
+                    <div class="ease"></div>
                 </div>
             </div>
+
+
+            <div style="width: 48%; text-align:center;display:inline-block">
+                <div class="submit">
+                    <a href='@Url.Action("EditCandidat", "CandidatsFormations",new { id = Model.Id })' id="button-blue">Saisir Résultats</a>
+                    <div class="ease"></div>
+                </div>
+            </div>
+        </div>
             <div class="title_blue" style="border-bottom-width: 2px;">
                 <div style="display:inline-block">Informations</div>
             </div>
@@ -66,7 +71,6 @@
                     }
                 </tr>
             </table>
-        </div>
     </div>
 </div>
 
