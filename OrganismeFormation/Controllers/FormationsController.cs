@@ -43,7 +43,7 @@ namespace OrganismeFormation.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            
+
             Formations formation = db.Formations.Find(id);
 
             return View(formation);
@@ -82,7 +82,7 @@ namespace OrganismeFormation.Controllers
                 db.Lieux.Add(l);
                 db.Personnel.Add(p);
                 db.Formations.Add(formation);
-                if(formation.Habilitations != null)
+                if (formation.Habilitations != null)
                 {
                     db.Habilitations.Add(formation.Habilitations);
                 }
@@ -187,22 +187,14 @@ namespace OrganismeFormation.Controllers
                ModelState.IsValidField("Habilitations.NumeroHabilitation") && ModelState.IsValidField("Habilitations.DebutDateDelivrance") && ModelState.IsValidField("Habilitations.FinDateDelivrance") && ModelState.IsValidField("Habilitations.NumeroSession") && ModelState.IsValidField("Habilitations.DateEPMSP") && ModelState.IsValidField("Habilitations.DateTEP")
                )
             {
-                db.Formations.Attach(formation);
-                db.SaveChanges();
-            }
-            return RedirectToAction("ShowASAC","Formations", (decimal)formation.Id);
-        }
-    }
-}
-            {
 
-                db.Entry(formation).State = System.Data.Entity.EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("ShowASAC","Formations", new { id = (decimal)formation.Id });
+              //  db.Entry(formation).State = System.Data.Entity.EntityState.Modified;
+              //  db.SaveChanges();
+              //  return RedirectToAction("ShowASAC", "Formations", new { id = (decimal)formation.Id });
             }
             return View(formation);
         }
-        
+
         [Authorize(Roles = "Responsable")]
         public ActionResult EndSimpleFormation(decimal id)
         {
@@ -227,7 +219,7 @@ namespace OrganismeFormation.Controllers
 
             for (int index = 0; index < pi.Length; index++)
             {
-                if (pi[index].PropertyType.IsAssignableFrom(typeof(string)) || 
+                if (pi[index].PropertyType.IsAssignableFrom(typeof(string)) ||
                     pi[index].PropertyType.IsAssignableFrom(typeof(DateTime)) ||
                     pi[index].PropertyType.IsAssignableFrom(typeof(int)) ||
                     pi[index].PropertyType.IsAssignableFrom(typeof(decimal)) ||
@@ -245,4 +237,6 @@ namespace OrganismeFormation.Controllers
                 }
             }
             return Content((sbP.ToString() + Environment.NewLine + sb.ToString()));
-        }
+        }
+    }
+}
