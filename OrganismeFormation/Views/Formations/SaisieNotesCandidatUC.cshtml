@@ -1,0 +1,43 @@
+﻿@using OrganismeFormation.Models;
+@model OrganismeFormation.Models.CandidatsFormations
+@{
+    ViewBag.Title = "Saisie des notes";
+}
+
+<div class="content">
+    <div class="title-content">
+        <div class="title-content-main">Editer une formation</div>
+        <div class="title-content-second">@ViewBag.Libelle</div>
+    </div>
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+        <div class="form-horizontal" id="mano-bootstrap">
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            @Html.HiddenFor(model => model.Resultats)
+            @Html.HiddenFor(model => model.FormationId)
+            @Html.HiddenFor(model => model.CandidatsId)
+
+            <hr />
+            <h3> Détail des notes pour @Model.Nom @Model.Prenom </h3>
+            <hr />
+
+            @foreach (ResultatUc res in Model.Resultats.FirstOrDefault().ResultatUc)
+            {
+                <div class="form-group">
+                    <div class="col-md-10">
+                        @res.DescriptifUC.Libelle : @Html.EditorFor(model => res.Resultat, new { htmlAttributes = new { @type = "number", @min = "0", @step = "0.1", @value = "0", @max = res.DescriptifUC.ResultatMax } }) / @res.DescriptifUC.ResultatMax
+                        @Html.ValidationMessageFor(model => res.Resultat, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            }
+            <hr/>
+            <div class="form-group-align">
+                <div class="submit" id="form-moitie" style="margin-right:2.5px">
+                    <input type="submit" value="Valider" id="button-blue" />
+                    <div class="ease"></div>
+                </div>
+            </div>
+        </div>
+    }
+</div>

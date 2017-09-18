@@ -87,7 +87,7 @@
             </tr>
             <tr>
                 <td>
-                    @if (Model.Resultats.FirstOrDefault().FormationValidee != null)
+                    @if (Model.Resultats.Count > 0 && Model.Resultats.FirstOrDefault().FormationValidee != null)
                     {
                         if (Model.Resultats.FirstOrDefault().FormationValidee == true)
                         {

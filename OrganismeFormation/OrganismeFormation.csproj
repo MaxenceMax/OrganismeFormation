@@ -491,6 +491,7 @@
     <Content Include="Views\Formations\EditSimpleFormation.cshtml" />
     <Content Include="Views\AccesResponsable\NewCandidatSecondStep.cshtml" />
     <Content Include="Views\CandidatsFormations\Index.cshtml" />
+    <Content Include="Views\Formations\SaisieNotesCandidatUC.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

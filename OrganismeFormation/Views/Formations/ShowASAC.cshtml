@@ -60,16 +60,16 @@
 
             </td>
             <td>
-                @Html.DisplayFor(model => model.DateLimteInscription)
+                @Model.DateLimteInscription.Value.ToString("dd-MM-yyyy")
             </td>
             <td>
-                @Html.DisplayFor(model => model.DateTestSelection)
+                @Model.DateTestSelection.Value.ToString("dd-MM-yyyy")
             </td>
             <td>
-                @Html.DisplayFor(model => model.DateDebut)
+                @Model.DateDebut.Value.ToString("dd-MM-yyyy")
             </td>
             <td>
-                @Html.DisplayFor(model => model.DateFin)
+                @Model.DateFin.Value.ToString("dd-MM-yyyy")
             </td>
             <td>
                 @Model.Personnel.Prenom @Model.Personnel.Nom <br />
@@ -205,15 +205,15 @@
             </tr>
             @foreach ( CandidatsFormations c in Model.CandidatsFormations)
             {
-                <tr>
+                <tr  class="tr_clickable" onclick="location.href='@Url.Action("SaisieNotesCandidatUC", "Formations", new { id = c.Id })'">
                     <td>
                         @c.Nom &nbsp; @c.Prenom
                     </td>
                     <td>
-                        @if (c.Resultats.FirstOrDefault().FormationValidee ==  null)
+                        @if (c.Resultats.Count > 0 && c.Resultats.FirstOrDefault().FormationValidee ==  null)
                         {
                             @: Non renseigné.
-                        }else if (c.Resultats.FirstOrDefault().FormationValidee == true)
+                        }else if (c.Resultats.Count > 0 &&  c.Resultats.FirstOrDefault().FormationValidee == true)
                         {
                             @:Oui
                         }
@@ -225,7 +225,7 @@
                     @foreach(DescriptifUC uc in Model.DescriptifUC)
                     {
                         <td>
-                            @if (c.Resultats.FirstOrDefault().ResultatUc.Where(r => r.DescriptifUCId == uc.Id).Count() == 1)
+                            @if (c.Resultats.Count > 0 && c.Resultats.FirstOrDefault().ResultatUc.Where(r => r.DescriptifUCId == uc.Id).Count() == 1)
                             {
                                 @c.Resultats.FirstOrDefault().ResultatUc.Where(r => r.DescriptifUCId == uc.Id).FirstOrDefault().Resultat @:/ @uc.ResultatMax
                             }

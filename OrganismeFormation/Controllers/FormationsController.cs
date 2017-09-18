@@ -188,9 +188,9 @@ namespace OrganismeFormation.Controllers
                )
             {
 
-              //  db.Entry(formation).State = System.Data.Entity.EntityState.Modified;
-              //  db.SaveChanges();
-              //  return RedirectToAction("ShowASAC", "Formations", new { id = (decimal)formation.Id });
+                db.Entry(formation).State = System.Data.Entity.EntityState.Modified;
+                db.SaveChanges();
+                return RedirectToAction("ShowASAC", "Formations", new { id = (decimal)formation.Id });
             }
             return View(formation);
         }
@@ -238,5 +238,59 @@ namespace OrganismeFormation.Controllers
             }
             return Content((sbP.ToString() + Environment.NewLine + sb.ToString()));
         }
+        
+        [Authorize(Roles = "Responsable")]
+        public ActionResult SaisieNotesCandidatUC(decimal id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+            CandidatsFormations cf = db.CandidatsFormations.Find(id);
+            if (cf.Resultats == null || cf.Resultats.Count == 0)
+            {
+                cf.Resultats.Add(new Resultats());
+            }
+
+            foreach (DescriptifUC uc in cf.Formations.DescriptifUC)
+            {
+                ResultatUc existing = null;
+                foreach (ResultatUc resUc in cf.Resultats.FirstOrDefault().ResultatUc)
+                {
+                    if (resUc.DescriptifUC == uc)
+                    {
+                        existing = resUc;break;
+                    }
+                }
+                if (existing == null)
+                {
+                    existing = new ResultatUc();
+                    existing.DescriptifUC = uc;
+                    cf.Resultats.FirstOrDefault().ResultatUc.Add(existing);
+                }
+            }
+
+            return View(cf);
+        }
+
+        [HttpPost]
+        [Authorize(Roles = "Responsable")]
+        public ActionResult SaisieNotesCandidatUC(CandidatsFormations cf)
+        {
+            bool isValid = true;
+            foreach (string key in ModelState.Keys)
+            {
+                isValid = isValid && ModelState.IsValidField(key);
+
+            }
+            if (isValid)
+            {
+                db.Entry(cf).State = System.Data.Entity.EntityState.Modified;
+                db.SaveChanges();
+            }
+            return RedirectToAction("ShowASAC", "Formations", new { id = (decimal)cf.FormationId });
+        }
+
     }
 }

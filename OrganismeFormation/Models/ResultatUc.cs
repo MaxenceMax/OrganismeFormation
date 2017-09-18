@@ -11,10 +11,12 @@ namespace OrganismeFormation.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class ResultatUc
     {
         public decimal Id { get; set; }
+        
         public Nullable<decimal> Resultat { get; set; }
         public Nullable<decimal> ResultatsId { get; set; }
         public Nullable<decimal> DescriptifUCId { get; set; }
