@@ -96,8 +96,7 @@ namespace OrganismeFormation.Controllers
                 candidat.FormationId = model.Formation.Id;
                 candidat.TypedeFinancements = db.TypedeFinancements.Where(td => td .Id ==model.FinancementId).FirstOrDefault();
                 candidat.Tuteurs = t;
-                Resultats r = new Resultats();
-                Passages p = new Passages();
+                Resultats r = new Resultats();               
                 try
                 {
                     if(t == null)
@@ -111,10 +110,7 @@ namespace OrganismeFormation.Controllers
                         db.SaveChanges();
                         candidat.Tuteurs = t;
                     }
-                    r.Passages = p;
-                    p.Libelle = "Passage";
-                    p.Resultats.Add(r);
-                    db.Passages.Add(p);
+                    
                     db.Resultats.Add(r);
                     db.CandidatsFormations.Add(candidat);
                     db.SaveChanges();

@@ -1,5 +1,19 @@
 ﻿@model OrganismeFormation.Models.CandidatsFormations
 @using OrganismeFormation.Models
+@using System.Security.Claims
+@{
+    var userRoles = new List<Claim>();
+    if (Request.IsAuthenticated)
+    {
+        var claimIdentity = User.Identity as ClaimsIdentity;
+        if (claimIdentity != null)
+        {
+            userRoles = claimIdentity.FindAll(ClaimTypes.Role).ToList();
+        }
+    }
+}
+
+
 @{
     ViewBag.Title = "Affichage Candidat";
 }
@@ -13,18 +27,23 @@
         <div style="text-align: center;">
             <div style="width: 48%; margin-left: 2%; text-align:center;display:inline-block">
                 <div class="submit">
-                    <a href='@Url.Action("EditCandidat", "CandidatsFormations",new { id = Model.Id })' id="button-blue">Editer</a>
+                    <a href='@Url.Action("EditCandidat", "CandidatsFormations", new { id = Model.Id })' id="button-blue">Editer</a>
                     <div class="ease"></div>
                 </div>
             </div>
 
-
-            <div style="width: 48%; text-align:center;display:inline-block">
-                <div class="submit">
-                    <a href='@Url.Action("EditCandidat", "CandidatsFormations",new { id = Model.Id })' id="button-blue">Saisir Résultats</a>
-                    <div class="ease"></div>
-                </div>
-            </div>
+            @{
+                var role = userRoles.First();
+                if (role.Value != "Admin")
+                {
+                    <div style="width: 48%; text-align:center;display:inline-block">
+                        <div class="submit">
+                            <a href='@Url.Action("EditCandidat", "CandidatsFormations", new { id = Model.Id })' id="button-blue">Saisir Résultats</a>
+                            <div class="ease"></div>
+                        </div>
+                    </div>
+                }
+            }
         </div>
         <div class="title_blue" style="border-bottom-width: 2px;">
             <div style="display:inline-block">Informations</div>
@@ -174,7 +193,7 @@
             </tr>
         </table>
         <p>Résultats UC :</p>
-        @if (Model.Formations.DescriptifUC.Count != 0 && Model.Resultats.FirstOrDefault().ResultatUc.Count() !=0)
+        @if (Model.Formations.DescriptifUC.Count != 0 && Model.Resultats.FirstOrDefault().ResultatUc.Count() != 0)
         {
             <table class="table">
                 <tr>
@@ -184,7 +203,7 @@
                     }
                 </tr>
                 <tr>
-                    @foreach(DescriptifUC uc in Model.Formations.DescriptifUC)
+                    @foreach (DescriptifUC uc in Model.Formations.DescriptifUC)
                     {
                         <td>@Model.Resultats.FirstOrDefault().ResultatUc.Where(r => r.DescriptifUCId == uc.Id).FirstOrDefault()&nbsp;/&nbsp;@uc.ResultatMax</td>
                     }
@@ -196,11 +215,26 @@
             @:Aucun UC pour ce candidat
         }
 
+        
         <div class="form-group-align">
             <div class="submit" id="form-moitie" style="margin-left:2.5px">
-                <a href='@Url.Action("ShowASAC", "Formations", new { id = Model.FormationId})' id="button-blue" style="text-align:center">Retour</a>
+                @{
+                    if (role.Value == "Responsable")
+                    {
+                        <a href='@Url.Action("ShowASAC", "Formations", new { id = Model.FormationId})' id="button-blue" style="text-align:center">Retour</a>
+                    }
+                    else
+                    {
+                        <a href='#' onclick="history.go(-1)" id="button-blue" style="text-align:center">Retour</a>
+                    }
+
+                }
                 <div class="ease"></div>
+
             </div>
+        @{
+            if (role.Value != "Admin")
+            {
             <div class="submit" id="form-moitie" style="margin-left:2.5px">
                 <a data-popup-open="popup-34545245245" id="button-red" href="#">Supprimer</a>
                 <div class="ease"></div>
@@ -210,20 +244,26 @@
                         <p>
                             Êtes vous sur de vouloir supprimer le candidat ?
                         </p>
-                        <div class="form-group-align">
-                            <div class="submit" id="form-moitie" style="margin-right:2.5px">
-                                <a href='@Url.Action("DeleteCandidat","CandidatsFormations",new { @id = Model.Id })' style="padding-left:10px;" id="button-red">Supprimer</a>
-                                <div class="ease"></div>
-                            </div>
-                            <div class="submit" id="form-moitie" style="margin-left:2.5px">
-                                <a data-popup-close="popup-34545245245" href="#" id="button-blue" style="text-align:center">Retour</a>
-                                <div class="ease"></div>
-                            </div>
-                        </div>
+                        
+
+                                <div class="form-group-align">
+                                    <div class="submit" id="form-moitie" style="margin-right:2.5px">
+                                        <a href='@Url.Action("DeleteCandidat","CandidatsFormations",new { @id = Model.Id })' style="padding-left:10px;" id="button-red">Supprimer</a>
+                                        <div class="ease"></div>
+                                    </div>
+                                    <div class="submit" id="form-moitie" style="margin-left:2.5px">
+                                        <a data-popup-close="popup-34545245245" href="#" id="button-blue" style="text-align:center">Retour</a>
+                                        <div class="ease"></div>
+                                    </div>
+                                </div>
+
+                         
                         <a class="popup-close" data-popup-close="popup-34545245245" href="#">x</a>
                     </div>
                 </div>
             </div>
+                }
+            }
         </div>
     </div>
 </div>

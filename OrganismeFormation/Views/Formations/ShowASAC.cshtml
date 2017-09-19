@@ -182,7 +182,7 @@
                 <th>Mail</th>
                 <th></th>
             </tr>
-            @foreach (CandidatsFormations uc in Model.CandidatsFormations)
+            @foreach (CandidatsFormations uc in Model.CandidatsFormations.OrderBy(candi=>candi.Nom))
                 {
                 <tr>
                     <td>@Html.DisplayFor(duc => uc.Nom)</td>

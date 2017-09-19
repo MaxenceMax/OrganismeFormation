@@ -67,5 +67,22 @@ namespace OrganismeFormation.Controllers
             return View();
         }
 
+        [HttpPost]
+        [Authorize(Roles ="Admin")]
+        public ActionResult SearchCandidat(SearchCandidatViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                if (db.CandidatsFormations.Where(c => c.NumeroLicence == model.NumeroLicence).Count() > 0)
+                {
+                    RedirectToAction("CandidatsFormations", "Index", new { id = db.CandidatsFormations.Where(c => c.NumeroLicence == model.NumeroLicence).FirstOrDefault().Id });
+                }
+                else
+                {
+                    ModelState.AddModelError("", "Candidat Inconnu");
+                }
+            }
+            return View(model);
+        }
     }
 }

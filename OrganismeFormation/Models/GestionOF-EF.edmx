@@ -15,18 +15,6 @@
           <Property Name="login" Type="varchar" MaxLength="50" />
           <Property Name="password" Type="varchar" MaxLength="150" />
         </EntityType>
-        <EntityType Name="Candidats">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="numeric" Precision="18" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Nom" Type="char" MaxLength="50" />
-          <Property Name="Prenom" Type="char" MaxLength="50" />
-          <Property Name="NumeroLicence" Type="char" MaxLength="20" />
-          <Property Name="Telephone" Type="char" MaxLength="10" />
-          <Property Name="Email" Type="char" MaxLength="100" />
-          <Property Name="SexeId" Type="numeric" Precision="18" Scale="0" />
-        </EntityType>
         <EntityType Name="CandidatsFormations">
           <Key>
             <PropertyRef Name="Id" />
@@ -137,13 +125,6 @@
           <Property Name="DirecteurId" Type="numeric" Precision="18" Scale="0" />
           <Property Name="LigueId" Type="numeric" Precision="18" Scale="0" />
         </EntityType>
-        <EntityType Name="Passages">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="numeric" Precision="18" Scale="0" Nullable="false" />
-          <Property Name="Libelle" Type="char" MaxLength="50" Nullable="false" />
-        </EntityType>
         <EntityType Name="Personnel">
           <Key>
             <PropertyRef Name="Id" />
@@ -164,19 +145,6 @@
           <Property Name="Telephone" Type="varchar" MaxLength="50" />
           <Property Name="Email" Type="varchar" MaxLength="250" />
           <Property Name="Fonction" Type="varchar" MaxLength="50" />
-        </EntityType>
-        <EntityType Name="Prestataires">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="numeric" Precision="18" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Nom" Type="char" MaxLength="250" />
-          <Property Name="MiseADispoInstallation" Type="bit" />
-          <Property Name="GestionPaieFormateurs" Type="bit" />
-          <Property Name="CoPortage" Type="bit" />
-          <Property Name="GestionAdministrative" Type="bit" />
-          <Property Name="Autre" Type="text" />
-          <Property Name="LieuxId" Type="numeric" Precision="18" Scale="0" />
         </EntityType>
         <EntityType Name="Responsable">
           <Key>
@@ -208,12 +176,9 @@
           <Property Name="NumeroDiplome" Type="varchar" MaxLength="60" />
           <Property Name="EPEF" Type="bit" />
           <Property Name="EPMSP" Type="bit" />
-          <Property Name="PassagesId" Type="numeric" Precision="18" Scale="0" Nullable="false" />
           <Property Name="FormationTerminee" Type="bit" />
           <Property Name="Abandon" Type="bit" />
         </EntityType>
-        <!--Erreurs détectées durant la génération :
-avertissement 6002: La table/vue 'GestionOF.dbo.ResultatUc' n'a pas de clé primaire définie. La clé a été déduite et la définition a été créée en tant que table/vue en lecture seule.-->
         <EntityType Name="ResultatUc">
           <Key>
             <PropertyRef Name="Id" />
@@ -230,16 +195,6 @@ avertissement 6002: La table/vue 'GestionOF.dbo.ResultatUc' n'a pas de clé prim
           <Property Name="Id" Type="numeric" Precision="18" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Code" Type="varchar" MaxLength="1" />
           <Property Name="Libelle" Type="varchar" MaxLength="50" />
-        </EntityType>
-        <EntityType Name="sysdiagrams">
-          <Key>
-            <PropertyRef Name="diagram_id" />
-          </Key>
-          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
-          <Property Name="principal_id" Type="int" Nullable="false" />
-          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="version" Type="int" />
-          <Property Name="definition" Type="varbinary(max)" />
         </EntityType>
         <EntityType Name="Tuteurs">
           <Key>
@@ -265,18 +220,6 @@ avertissement 6002: La table/vue 'GestionOF.dbo.ResultatUc' n'a pas de clé prim
           <Property Name="Id" Type="numeric" Precision="18" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Libelle" Type="varchar" MaxLength="50" />
         </EntityType>
-        <Association Name="FK__Candidats__Candi__3D5E1FD2">
-          <End Role="Candidats" Type="Self.Candidats" Multiplicity="0..1" />
-          <End Role="CandidatsFormations" Type="Self.CandidatsFormations" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Candidats">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="CandidatsFormations">
-              <PropertyRef Name="CandidatsId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK__Candidats__Forma__403A8C7D">
           <End Role="Formations" Type="Self.Formations" Multiplicity="0..1" />
           <End Role="CandidatsFormations" Type="Self.CandidatsFormations" Multiplicity="*" />
@@ -286,18 +229,6 @@ avertissement 6002: La table/vue 'GestionOF.dbo.ResultatUc' n'a pas de clé prim
             </Principal>
             <Dependent Role="CandidatsFormations">
               <PropertyRef Name="FormationId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__Candidats__Sexes__3A81B327">
-          <End Role="Sexes" Type="Self.Sexes" Multiplicity="0..1" />
-          <End Role="Candidats" Type="Self.Candidats" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Sexes">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Candidats">
-              <PropertyRef Name="SexeId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -358,18 +289,6 @@ avertissement 6002: La table/vue 'GestionOF.dbo.ResultatUc' n'a pas de clé prim
             </Principal>
             <Dependent Role="Resultats">
               <PropertyRef Name="CandidatFormationId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__Resultats__Passa__3B75D760">
-          <End Role="Passages" Type="Self.Passages" Multiplicity="1" />
-          <End Role="Resultats" Type="Self.Resultats" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Passages">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Resultats">
-              <PropertyRef Name="PassagesId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -543,7 +462,6 @@ avertissement 6002: La table/vue 'GestionOF.dbo.ResultatUc' n'a pas de clé prim
         </Association>
         <EntityContainer Name="GestionOFModelStoreContainer">
           <EntitySet Name="Admin" EntityType="Self.Admin" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Candidats" EntityType="Self.Candidats" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CandidatsFormations" EntityType="Self.CandidatsFormations" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DescriptifUC" EntityType="Self.DescriptifUC" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Formations" EntityType="Self.Formations" Schema="dbo" store:Type="Tables" />
@@ -551,37 +469,19 @@ avertissement 6002: La table/vue 'GestionOF.dbo.ResultatUc' n'a pas de clé prim
           <EntitySet Name="Lieux" EntityType="Self.Lieux" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Ligues" EntityType="Self.Ligues" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Organismes" EntityType="Self.Organismes" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Passages" EntityType="Self.Passages" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Personnel" EntityType="Self.Personnel" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PresidentOrganisme" EntityType="Self.PresidentOrganisme" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Prestataires" EntityType="Self.Prestataires" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Responsable" EntityType="Self.Responsable" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ResponsableOrganisme" EntityType="Self.ResponsableOrganisme" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Resultats" EntityType="Self.Resultats" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ResultatUc" EntityType="Self.ResultatUc" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Sexes" EntityType="Self.Sexes" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Tuteurs" EntityType="Self.Tuteurs" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TypedeFinancements" EntityType="Self.TypedeFinancements" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TypedeFormations" EntityType="Self.TypedeFormations" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="ResultatUc" EntityType="Self.ResultatUc" store:Type="Tables" store:Schema="dbo">
-            <DefiningQuery>SELECT 
-    [ResultatUc].[Id] AS [Id], 
-    [ResultatUc].[Resultat] AS [Resultat], 
-    [ResultatUc].[ResultatsId] AS [ResultatsId], 
-    [ResultatUc].[DescriptifUCId] AS [DescriptifUCId]
-    FROM [dbo].[ResultatUc] AS [ResultatUc]</DefiningQuery>
-          </EntitySet>
-          <AssociationSet Name="FK__Candidats__Candi__3D5E1FD2" Association="Self.FK__Candidats__Candi__3D5E1FD2">
-            <End Role="Candidats" EntitySet="Candidats" />
-            <End Role="CandidatsFormations" EntitySet="CandidatsFormations" />
-          </AssociationSet>
           <AssociationSet Name="FK__Candidats__Forma__403A8C7D" Association="Self.FK__Candidats__Forma__403A8C7D">
             <End Role="Formations" EntitySet="Formations" />
             <End Role="CandidatsFormations" EntitySet="CandidatsFormations" />
-          </AssociationSet>
-          <AssociationSet Name="FK__Candidats__Sexes__3A81B327" Association="Self.FK__Candidats__Sexes__3A81B327">
-            <End Role="Sexes" EntitySet="Sexes" />
-            <End Role="Candidats" EntitySet="Candidats" />
           </AssociationSet>
           <AssociationSet Name="FK__Candidats__Tuteu__3E52440B" Association="Self.FK__Candidats__Tuteu__3E52440B">
             <End Role="Tuteurs" EntitySet="Tuteurs" />
@@ -601,10 +501,6 @@ avertissement 6002: La table/vue 'GestionOF.dbo.ResultatUc' n'a pas de clé prim
           </AssociationSet>
           <AssociationSet Name="FK__Resultats__Candi__3C69FB99" Association="Self.FK__Resultats__Candi__3C69FB99">
             <End Role="CandidatsFormations" EntitySet="CandidatsFormations" />
-            <End Role="Resultats" EntitySet="Resultats" />
-          </AssociationSet>
-          <AssociationSet Name="FK__Resultats__Passa__3B75D760" Association="Self.FK__Resultats__Passa__3B75D760">
-            <End Role="Passages" EntitySet="Passages" />
             <End Role="Resultats" EntitySet="Resultats" />
           </AssociationSet>
           <AssociationSet Name="FK_CandidatsFormations_Sexes" Association="Self.FK_CandidatsFormations_Sexes">
@@ -670,32 +566,22 @@ avertissement 6002: La table/vue 'GestionOF.dbo.ResultatUc' n'a pas de clé prim
       <Schema Namespace="GestionOFModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityContainer Name="GestionOFEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Admin" EntityType="GestionOFModel.Admin" />
-          <EntitySet Name="Candidats" EntityType="GestionOFModel.Candidats" />
           <EntitySet Name="CandidatsFormations" EntityType="GestionOFModel.CandidatsFormations" />
+          <EntitySet Name="DescriptifUC" EntityType="GestionOFModel.DescriptifUC" />
           <EntitySet Name="Formations" EntityType="GestionOFModel.Formations" />
           <EntitySet Name="Habilitations" EntityType="GestionOFModel.Habilitations" />
           <EntitySet Name="Lieux" EntityType="GestionOFModel.Lieux" />
           <EntitySet Name="Ligues" EntityType="GestionOFModel.Ligues" />
           <EntitySet Name="Organismes" EntityType="GestionOFModel.Organismes" />
-          <EntitySet Name="Passages" EntityType="GestionOFModel.Passages" />
           <EntitySet Name="Personnel" EntityType="GestionOFModel.Personnel" />
           <EntitySet Name="PresidentOrganisme" EntityType="GestionOFModel.PresidentOrganisme" />
-          <EntitySet Name="Prestataires" EntityType="GestionOFModel.Prestataires" />
           <EntitySet Name="Responsable" EntityType="GestionOFModel.Responsable" />
           <EntitySet Name="Resultats" EntityType="GestionOFModel.Resultats" />
+          <EntitySet Name="ResultatUc" EntityType="GestionOFModel.ResultatUc" />
           <EntitySet Name="Sexes" EntityType="GestionOFModel.Sexes" />
-          <EntitySet Name="sysdiagrams" EntityType="GestionOFModel.sysdiagrams" />
           <EntitySet Name="Tuteurs" EntityType="GestionOFModel.Tuteurs" />
           <EntitySet Name="TypedeFinancements" EntityType="GestionOFModel.TypedeFinancements" />
           <EntitySet Name="TypedeFormations" EntityType="GestionOFModel.TypedeFormations" />
-          <AssociationSet Name="FK__Candidats__Candi__3D5E1FD2" Association="GestionOFModel.FK__Candidats__Candi__3D5E1FD2">
-            <End Role="Candidats" EntitySet="Candidats" />
-            <End Role="CandidatsFormations" EntitySet="CandidatsFormations" />
-          </AssociationSet>
-          <AssociationSet Name="FK__Candidats__Sexes__3A81B327" Association="GestionOFModel.FK__Candidats__Sexes__3A81B327">
-            <End Role="Sexes" EntitySet="Sexes" />
-            <End Role="Candidats" EntitySet="Candidats" />
-          </AssociationSet>
           <AssociationSet Name="FK__Candidats__Forma__403A8C7D" Association="GestionOFModel.FK__Candidats__Forma__403A8C7D">
             <End Role="Formations" EntitySet="Formations" />
             <End Role="CandidatsFormations" EntitySet="CandidatsFormations" />
@@ -715,6 +601,14 @@ avertissement 6002: La table/vue 'GestionOF.dbo.ResultatUc' n'a pas de clé prim
           <AssociationSet Name="FK_CandidatsFormations_Sexes" Association="GestionOFModel.FK_CandidatsFormations_Sexes">
             <End Role="Sexes" EntitySet="Sexes" />
             <End Role="CandidatsFormations" EntitySet="CandidatsFormations" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DescriptifUC_Formations" Association="GestionOFModel.FK_DescriptifUC_Formations">
+            <End Role="Formations" EntitySet="Formations" />
+            <End Role="DescriptifUC" EntitySet="DescriptifUC" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ResultatUc_DescriptifUC" Association="GestionOFModel.FK_ResultatUc_DescriptifUC">
+            <End Role="DescriptifUC" EntitySet="DescriptifUC" />
+            <End Role="ResultatUc" EntitySet="ResultatUc" />
           </AssociationSet>
           <AssociationSet Name="FK__Formation__Typed__37A5467C" Association="GestionOFModel.FK__Formation__Typed__37A5467C">
             <End Role="TypedeFormations" EntitySet="TypedeFormations" />
@@ -756,27 +650,13 @@ avertissement 6002: La table/vue 'GestionOF.dbo.ResultatUc' n'a pas de clé prim
             <End Role="PresidentOrganisme" EntitySet="PresidentOrganisme" />
             <End Role="Organismes" EntitySet="Organismes" />
           </AssociationSet>
-          <AssociationSet Name="FK__Resultats__Passa__3B75D760" Association="GestionOFModel.FK__Resultats__Passa__3B75D760">
-            <End Role="Passages" EntitySet="Passages" />
+          <AssociationSet Name="FK_ResultatUc_Resultats" Association="GestionOFModel.FK_ResultatUc_Resultats">
             <End Role="Resultats" EntitySet="Resultats" />
+            <End Role="ResultatUc" EntitySet="ResultatUc" />
           </AssociationSet>
           <AssociationSet Name="ResponsableOrganisme" Association="GestionOFModel.ResponsableOrganisme">
             <End Role="Organismes" EntitySet="Organismes" />
             <End Role="Responsable" EntitySet="Responsable" />
-          </AssociationSet>
-          <EntitySet Name="DescriptifUC" EntityType="GestionOFModel.DescriptifUC" />
-          <EntitySet Name="ResultatUc" EntityType="GestionOFModel.ResultatUc" />
-          <AssociationSet Name="FK_DescriptifUC_Formations" Association="GestionOFModel.FK_DescriptifUC_Formations">
-            <End Role="Formations" EntitySet="Formations" />
-            <End Role="DescriptifUC" EntitySet="DescriptifUC" />
-          </AssociationSet>
-          <AssociationSet Name="FK_ResultatUc_DescriptifUC" Association="GestionOFModel.FK_ResultatUc_DescriptifUC">
-            <End Role="DescriptifUC" EntitySet="DescriptifUC" />
-            <End Role="ResultatUc" EntitySet="ResultatUc" />
-          </AssociationSet>
-          <AssociationSet Name="FK_ResultatUc_Resultats" Association="GestionOFModel.FK_ResultatUc_Resultats">
-            <End Role="Resultats" EntitySet="Resultats" />
-            <End Role="ResultatUc" EntitySet="ResultatUc" />
           </AssociationSet>
         </EntityContainer>
         <EntityType Name="Admin">
@@ -788,20 +668,6 @@ avertissement 6002: La table/vue 'GestionOF.dbo.ResultatUc' n'a pas de clé prim
           <Property Name="Prenom" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="login" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="password" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
-        </EntityType>
-        <EntityType Name="Candidats">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Decimal" Nullable="false" Precision="18" Scale="0" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Nom" Type="String" MaxLength="50" FixedLength="true" Unicode="false" />
-          <Property Name="Prenom" Type="String" MaxLength="50" FixedLength="true" Unicode="false" />
-          <Property Name="NumeroLicence" Type="String" MaxLength="20" FixedLength="true" Unicode="false" />
-          <Property Name="Telephone" Type="String" MaxLength="10" FixedLength="true" Unicode="false" />
-          <Property Name="Email" Type="String" MaxLength="100" FixedLength="true" Unicode="false" />
-          <Property Name="SexeId" Type="Decimal" Precision="18" Scale="0" />
-          <NavigationProperty Name="CandidatsFormations" Relationship="GestionOFModel.FK__Candidats__Candi__3D5E1FD2" FromRole="Candidats" ToRole="CandidatsFormations" />
-          <NavigationProperty Name="Sexes" Relationship="GestionOFModel.FK__Candidats__Sexes__3A81B327" FromRole="Candidats" ToRole="Sexes" />
         </EntityType>
         <EntityType Name="CandidatsFormations">
           <Key>
@@ -822,12 +688,23 @@ avertissement 6002: La table/vue 'GestionOF.dbo.ResultatUc' n'a pas de clé prim
           <Property Name="Telephone" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="Email" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
           <Property Name="SexeId" Type="Decimal" Precision="18" Scale="0" />
-          <NavigationProperty Name="Candidats" Relationship="GestionOFModel.FK__Candidats__Candi__3D5E1FD2" FromRole="CandidatsFormations" ToRole="Candidats" />
           <NavigationProperty Name="Formations" Relationship="GestionOFModel.FK__Candidats__Forma__403A8C7D" FromRole="CandidatsFormations" ToRole="Formations" />
           <NavigationProperty Name="Tuteurs" Relationship="GestionOFModel.FK__Candidats__Tuteu__3E52440B" FromRole="CandidatsFormations" ToRole="Tuteurs" />
           <NavigationProperty Name="TypedeFinancements" Relationship="GestionOFModel.FK__Candidats__Typed__3F466844" FromRole="CandidatsFormations" ToRole="TypedeFinancements" />
           <NavigationProperty Name="Resultats" Relationship="GestionOFModel.FK__Resultats__Candi__3C69FB99" FromRole="CandidatsFormations" ToRole="Resultats" />
           <NavigationProperty Name="Sexes" Relationship="GestionOFModel.FK_CandidatsFormations_Sexes" FromRole="CandidatsFormations" ToRole="Sexes" />
+        </EntityType>
+        <EntityType Name="DescriptifUC">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Decimal" Nullable="false" Precision="18" Scale="0" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Libelle" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Resultat" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="ResultatMax" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="FormationsId" Type="Decimal" Precision="18" Scale="0" />
+          <NavigationProperty Name="Formations" Relationship="GestionOFModel.FK_DescriptifUC_Formations" FromRole="DescriptifUC" ToRole="Formations" />
+          <NavigationProperty Name="ResultatUc" Relationship="GestionOFModel.FK_ResultatUc_DescriptifUC" FromRole="DescriptifUC" ToRole="ResultatUc" />
         </EntityType>
         <EntityType Name="Formations">
           <Key>
@@ -857,15 +734,15 @@ avertissement 6002: La table/vue 'GestionOF.dbo.ResultatUc' n'a pas de clé prim
           <Property Name="OrganismeId" Type="Decimal" Precision="18" Scale="0" />
           <Property Name="LieuSiNonPorteuse" Type="Decimal" Precision="18" Scale="0" />
           <Property Name="NombreUC" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="FormationEnded" Type="Boolean" />
+          <Property Name="DescriptionSousTraite" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="CandidatsFormations" Relationship="GestionOFModel.FK__Candidats__Forma__403A8C7D" FromRole="Formations" ToRole="CandidatsFormations" />
+          <NavigationProperty Name="DescriptifUC" Relationship="GestionOFModel.FK_DescriptifUC_Formations" FromRole="Formations" ToRole="DescriptifUC" />
           <NavigationProperty Name="TypedeFormations" Relationship="GestionOFModel.FK__Formation__Typed__37A5467C" FromRole="Formations" ToRole="TypedeFormations" />
           <NavigationProperty Name="Habilitations" Relationship="GestionOFModel.FK_Formations_Habilitations" FromRole="Formations" ToRole="Habilitations" />
           <NavigationProperty Name="Lieux" Relationship="GestionOFModel.FK_Formations_Lieux" FromRole="Formations" ToRole="Lieux" />
           <NavigationProperty Name="Organismes" Relationship="GestionOFModel.FK_Formations_Organismes" FromRole="Formations" ToRole="Organismes" />
           <NavigationProperty Name="Personnel" Relationship="GestionOFModel.FK_Formations_Personnel" FromRole="Formations" ToRole="Personnel" />
-          <Property Name="FormationEnded" Type="Boolean" />
-          <NavigationProperty Name="DescriptifUC" Relationship="GestionOFModel.FK_DescriptifUC_Formations" FromRole="Formations" ToRole="DescriptifUC" />
-          <Property Name="DescriptionSousTraite" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="Habilitations">
           <Key>
@@ -927,14 +804,6 @@ avertissement 6002: La table/vue 'GestionOF.dbo.ResultatUc' n'a pas de clé prim
           <NavigationProperty Name="PresidentOrganisme" Relationship="GestionOFModel.FK_Organismes_PresidentOrganisme" FromRole="Organismes" ToRole="PresidentOrganisme" />
           <NavigationProperty Name="Responsable" Relationship="GestionOFModel.ResponsableOrganisme" FromRole="Organismes" ToRole="Responsable" />
         </EntityType>
-        <EntityType Name="Passages">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
-          <Property Name="Libelle" Type="String" Nullable="false" MaxLength="50" FixedLength="true" Unicode="false" />
-          <NavigationProperty Name="Resultats" Relationship="GestionOFModel.FK__Resultats__Passa__3B75D760" FromRole="Passages" ToRole="Resultats" />
-        </EntityType>
         <EntityType Name="Personnel">
           <Key>
             <PropertyRef Name="Id" />
@@ -960,19 +829,6 @@ avertissement 6002: La table/vue 'GestionOF.dbo.ResultatUc' n'a pas de clé prim
           <Property Name="Fonction" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="Organismes" Relationship="GestionOFModel.FK_Organismes_PresidentOrganisme" FromRole="PresidentOrganisme" ToRole="Organismes" />
         </EntityType>
-        <EntityType Name="Prestataires">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Decimal" Nullable="false" Precision="18" Scale="0" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Nom" Type="String" MaxLength="250" FixedLength="true" Unicode="false" />
-          <Property Name="MiseADispoInstallation" Type="Boolean" />
-          <Property Name="GestionPaieFormateurs" Type="Boolean" />
-          <Property Name="CoPortage" Type="Boolean" />
-          <Property Name="GestionAdministrative" Type="Boolean" />
-          <Property Name="Autre" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="LieuxId" Type="Decimal" Precision="18" Scale="0" />
-        </EntityType>
         <EntityType Name="Responsable">
           <Key>
             <PropertyRef Name="Id" />
@@ -996,12 +852,21 @@ avertissement 6002: La table/vue 'GestionOF.dbo.ResultatUc' n'a pas de clé prim
           <Property Name="NumeroDiplome" Type="String" MaxLength="60" FixedLength="false" Unicode="false" />
           <Property Name="EPEF" Type="Boolean" />
           <Property Name="EPMSP" Type="Boolean" />
-          <Property Name="PassagesId" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
           <Property Name="FormationTerminee" Type="Boolean" />
           <Property Name="Abandon" Type="Boolean" />
           <NavigationProperty Name="CandidatsFormations" Relationship="GestionOFModel.FK__Resultats__Candi__3C69FB99" FromRole="Resultats" ToRole="CandidatsFormations" />
-          <NavigationProperty Name="Passages" Relationship="GestionOFModel.FK__Resultats__Passa__3B75D760" FromRole="Resultats" ToRole="Passages" />
           <NavigationProperty Name="ResultatUc" Relationship="GestionOFModel.FK_ResultatUc_Resultats" FromRole="Resultats" ToRole="ResultatUc" />
+        </EntityType>
+        <EntityType Name="ResultatUc">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Decimal" Nullable="false" Precision="18" Scale="0" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Resultat" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="ResultatsId" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="DescriptifUCId" Type="Decimal" Precision="18" Scale="0" />
+          <NavigationProperty Name="DescriptifUC" Relationship="GestionOFModel.FK_ResultatUc_DescriptifUC" FromRole="ResultatUc" ToRole="DescriptifUC" />
+          <NavigationProperty Name="Resultats" Relationship="GestionOFModel.FK_ResultatUc_Resultats" FromRole="ResultatUc" ToRole="Resultats" />
         </EntityType>
         <EntityType Name="Sexes">
           <Key>
@@ -1010,18 +875,7 @@ avertissement 6002: La table/vue 'GestionOF.dbo.ResultatUc' n'a pas de clé prim
           <Property Name="Id" Type="Decimal" Nullable="false" Precision="18" Scale="0" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Code" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
           <Property Name="Libelle" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="Candidats" Relationship="GestionOFModel.FK__Candidats__Sexes__3A81B327" FromRole="Sexes" ToRole="Candidats" />
           <NavigationProperty Name="CandidatsFormations" Relationship="GestionOFModel.FK_CandidatsFormations_Sexes" FromRole="Sexes" ToRole="CandidatsFormations" />
-        </EntityType>
-        <EntityType Name="sysdiagrams">
-          <Key>
-            <PropertyRef Name="diagram_id" />
-          </Key>
-          <Property Name="name" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
-          <Property Name="principal_id" Type="Int32" Nullable="false" />
-          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="version" Type="Int32" />
-          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
         </EntityType>
         <EntityType Name="Tuteurs">
           <Key>
@@ -1050,30 +904,6 @@ avertissement 6002: La table/vue 'GestionOF.dbo.ResultatUc' n'a pas de clé prim
           <Property Name="Libelle" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="Formations" Relationship="GestionOFModel.FK__Formation__Typed__37A5467C" FromRole="TypedeFormations" ToRole="Formations" />
         </EntityType>
-        <Association Name="FK__Candidats__Candi__3D5E1FD2">
-          <End Type="GestionOFModel.Candidats" Role="Candidats" Multiplicity="0..1" />
-          <End Type="GestionOFModel.CandidatsFormations" Role="CandidatsFormations" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Candidats">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="CandidatsFormations">
-              <PropertyRef Name="CandidatsId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__Candidats__Sexes__3A81B327">
-          <End Type="GestionOFModel.Sexes" Role="Sexes" Multiplicity="0..1" />
-          <End Type="GestionOFModel.Candidats" Role="Candidats" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Sexes">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Candidats">
-              <PropertyRef Name="SexeId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK__Candidats__Forma__403A8C7D">
           <End Type="GestionOFModel.Formations" Role="Formations" Multiplicity="0..1" />
           <End Type="GestionOFModel.CandidatsFormations" Role="CandidatsFormations" Multiplicity="*" />
@@ -1131,6 +961,30 @@ avertissement 6002: La table/vue 'GestionOF.dbo.ResultatUc' n'a pas de clé prim
             </Principal>
             <Dependent Role="CandidatsFormations">
               <PropertyRef Name="SexeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DescriptifUC_Formations">
+          <End Type="GestionOFModel.Formations" Role="Formations" Multiplicity="0..1" />
+          <End Type="GestionOFModel.DescriptifUC" Role="DescriptifUC" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Formations">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="DescriptifUC">
+              <PropertyRef Name="FormationsId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ResultatUc_DescriptifUC">
+          <End Type="GestionOFModel.DescriptifUC" Role="DescriptifUC" Multiplicity="0..1" />
+          <End Type="GestionOFModel.ResultatUc" Role="ResultatUc" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DescriptifUC">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ResultatUc">
+              <PropertyRef Name="DescriptifUCId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1254,69 +1108,6 @@ avertissement 6002: La table/vue 'GestionOF.dbo.ResultatUc' n'a pas de clé prim
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Resultats__Passa__3B75D760">
-          <End Type="GestionOFModel.Passages" Role="Passages" Multiplicity="1" />
-          <End Type="GestionOFModel.Resultats" Role="Resultats" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Passages">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Resultats">
-              <PropertyRef Name="PassagesId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="ResponsableOrganisme">
-          <End Type="GestionOFModel.Organismes" Role="Organismes" Multiplicity="*" />
-          <End Type="GestionOFModel.Responsable" Role="Responsable" Multiplicity="*" />
-        </Association>
-        <EntityType Name="DescriptifUC">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Decimal" Nullable="false" Precision="18" Scale="0" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Libelle" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Resultat" Type="Decimal" Precision="18" Scale="0" />
-          <Property Name="ResultatMax" Type="Decimal" Precision="18" Scale="0" />
-          <Property Name="FormationsId" Type="Decimal" Precision="18" Scale="0" />
-          <NavigationProperty Name="Formations" Relationship="GestionOFModel.FK_DescriptifUC_Formations" FromRole="DescriptifUC" ToRole="Formations" />
-          <NavigationProperty Name="ResultatUc" Relationship="GestionOFModel.FK_ResultatUc_DescriptifUC" FromRole="DescriptifUC" ToRole="ResultatUc" />
-        </EntityType>
-        <EntityType Name="ResultatUc">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Decimal" Nullable="false" Precision="18" Scale="0" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Resultat" Type="Decimal" Precision="18" Scale="0" />
-          <Property Name="ResultatsId" Type="Decimal" Precision="18" Scale="0" />
-          <Property Name="DescriptifUCId" Type="Decimal" Precision="18" Scale="0" />
-          <NavigationProperty Name="DescriptifUC" Relationship="GestionOFModel.FK_ResultatUc_DescriptifUC" FromRole="ResultatUc" ToRole="DescriptifUC" />
-          <NavigationProperty Name="Resultats" Relationship="GestionOFModel.FK_ResultatUc_Resultats" FromRole="ResultatUc" ToRole="Resultats" />
-        </EntityType>
-        <Association Name="FK_DescriptifUC_Formations">
-          <End Type="GestionOFModel.Formations" Role="Formations" Multiplicity="0..1" />
-          <End Type="GestionOFModel.DescriptifUC" Role="DescriptifUC" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Formations">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="DescriptifUC">
-              <PropertyRef Name="FormationsId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_ResultatUc_DescriptifUC">
-          <End Type="GestionOFModel.DescriptifUC" Role="DescriptifUC" Multiplicity="0..1" />
-          <End Type="GestionOFModel.ResultatUc" Role="ResultatUc" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="DescriptifUC">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="ResultatUc">
-              <PropertyRef Name="DescriptifUCId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_ResultatUc_Resultats">
           <End Type="GestionOFModel.Resultats" Role="Resultats" Multiplicity="0..1" />
           <End Type="GestionOFModel.ResultatUc" Role="ResultatUc" Multiplicity="*" />
@@ -1328,6 +1119,10 @@ avertissement 6002: La table/vue 'GestionOF.dbo.ResultatUc' n'a pas de clé prim
               <PropertyRef Name="ResultatsId" />
             </Dependent>
           </ReferentialConstraint>
+        </Association>
+        <Association Name="ResponsableOrganisme">
+          <End Type="GestionOFModel.Organismes" Role="Organismes" Multiplicity="*" />
+          <End Type="GestionOFModel.Responsable" Role="Responsable" Multiplicity="*" />
         </Association>
         </Schema>
     </edmx:ConceptualModels>
@@ -1343,19 +1138,6 @@ avertissement 6002: La table/vue 'GestionOF.dbo.ResultatUc' n'a pas de clé prim
                 <ScalarProperty Name="Prenom" ColumnName="Prenom" />
                 <ScalarProperty Name="Nom" ColumnName="Nom" />
                 <ScalarProperty Name="id" ColumnName="id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Candidats">
-            <EntityTypeMapping TypeName="GestionOFModel.Candidats">
-              <MappingFragment StoreEntitySet="Candidats">
-                <ScalarProperty Name="SexeId" ColumnName="SexeId" />
-                <ScalarProperty Name="Email" ColumnName="Email" />
-                <ScalarProperty Name="Telephone" ColumnName="Telephone" />
-                <ScalarProperty Name="NumeroLicence" ColumnName="NumeroLicence" />
-                <ScalarProperty Name="Prenom" ColumnName="Prenom" />
-                <ScalarProperty Name="Nom" ColumnName="Nom" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1376,6 +1158,17 @@ avertissement 6002: La table/vue 'GestionOF.dbo.ResultatUc' n'a pas de clé prim
                 <ScalarProperty Name="StructureAccueil" ColumnName="StructureAccueil" />
                 <ScalarProperty Name="Grade" ColumnName="Grade" />
                 <ScalarProperty Name="FormationId" ColumnName="FormationId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DescriptifUC">
+            <EntityTypeMapping TypeName="GestionOFModel.DescriptifUC">
+              <MappingFragment StoreEntitySet="DescriptifUC">
+                <ScalarProperty Name="FormationsId" ColumnName="FormationsId" />
+                <ScalarProperty Name="ResultatMax" ColumnName="ResultatMax" />
+                <ScalarProperty Name="Resultat" ColumnName="Resultat" />
+                <ScalarProperty Name="Libelle" ColumnName="Libelle" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -1465,14 +1258,6 @@ avertissement 6002: La table/vue 'GestionOF.dbo.ResultatUc' n'a pas de clé prim
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Passages">
-            <EntityTypeMapping TypeName="GestionOFModel.Passages">
-              <MappingFragment StoreEntitySet="Passages">
-                <ScalarProperty Name="Libelle" ColumnName="Libelle" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="Personnel">
             <EntityTypeMapping TypeName="GestionOFModel.Personnel">
               <MappingFragment StoreEntitySet="Personnel">
@@ -1496,20 +1281,6 @@ avertissement 6002: La table/vue 'GestionOF.dbo.ResultatUc' n'a pas de clé prim
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Prestataires">
-            <EntityTypeMapping TypeName="GestionOFModel.Prestataires">
-              <MappingFragment StoreEntitySet="Prestataires">
-                <ScalarProperty Name="LieuxId" ColumnName="LieuxId" />
-                <ScalarProperty Name="Autre" ColumnName="Autre" />
-                <ScalarProperty Name="GestionAdministrative" ColumnName="GestionAdministrative" />
-                <ScalarProperty Name="CoPortage" ColumnName="CoPortage" />
-                <ScalarProperty Name="GestionPaieFormateurs" ColumnName="GestionPaieFormateurs" />
-                <ScalarProperty Name="MiseADispoInstallation" ColumnName="MiseADispoInstallation" />
-                <ScalarProperty Name="Nom" ColumnName="Nom" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="Responsable">
             <EntityTypeMapping TypeName="GestionOFModel.Responsable">
               <MappingFragment StoreEntitySet="Responsable">
@@ -1528,12 +1299,21 @@ avertissement 6002: La table/vue 'GestionOF.dbo.ResultatUc' n'a pas de clé prim
               <MappingFragment StoreEntitySet="Resultats">
                 <ScalarProperty Name="Abandon" ColumnName="Abandon" />
                 <ScalarProperty Name="FormationTerminee" ColumnName="FormationTerminee" />
-                <ScalarProperty Name="PassagesId" ColumnName="PassagesId" />
                 <ScalarProperty Name="EPMSP" ColumnName="EPMSP" />
                 <ScalarProperty Name="EPEF" ColumnName="EPEF" />
                 <ScalarProperty Name="NumeroDiplome" ColumnName="NumeroDiplome" />
                 <ScalarProperty Name="FormationValidee" ColumnName="FormationValidee" />
                 <ScalarProperty Name="CandidatFormationId" ColumnName="CandidatFormationId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ResultatUc">
+            <EntityTypeMapping TypeName="GestionOFModel.ResultatUc">
+              <MappingFragment StoreEntitySet="ResultatUc">
+                <ScalarProperty Name="DescriptifUCId" ColumnName="DescriptifUCId" />
+                <ScalarProperty Name="ResultatsId" ColumnName="ResultatsId" />
+                <ScalarProperty Name="Resultat" ColumnName="Resultat" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -1544,17 +1324,6 @@ avertissement 6002: La table/vue 'GestionOF.dbo.ResultatUc' n'a pas de clé prim
                 <ScalarProperty Name="Libelle" ColumnName="Libelle" />
                 <ScalarProperty Name="Code" ColumnName="Code" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="sysdiagrams">
-            <EntityTypeMapping TypeName="GestionOFModel.sysdiagrams">
-              <MappingFragment StoreEntitySet="sysdiagrams">
-                <ScalarProperty Name="definition" ColumnName="definition" />
-                <ScalarProperty Name="version" ColumnName="version" />
-                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
-                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
-                <ScalarProperty Name="name" ColumnName="name" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1593,27 +1362,6 @@ avertissement 6002: La table/vue 'GestionOF.dbo.ResultatUc' n'a pas de clé prim
               <ScalarProperty Name="Id" ColumnName="OrganismeId" />
             </EndProperty>
           </AssociationSetMapping>
-          <EntitySetMapping Name="DescriptifUC">
-            <EntityTypeMapping TypeName="GestionOFModel.DescriptifUC">
-              <MappingFragment StoreEntitySet="DescriptifUC">
-                <ScalarProperty Name="FormationsId" ColumnName="FormationsId" />
-                <ScalarProperty Name="ResultatMax" ColumnName="ResultatMax" />
-                <ScalarProperty Name="Resultat" ColumnName="Resultat" />
-                <ScalarProperty Name="Libelle" ColumnName="Libelle" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="ResultatUc">
-            <EntityTypeMapping TypeName="GestionOFModel.ResultatUc">
-              <MappingFragment StoreEntitySet="ResultatUc">
-                <ScalarProperty Name="DescriptifUCId" ColumnName="DescriptifUCId" />
-                <ScalarProperty Name="ResultatsId" ColumnName="ResultatsId" />
-                <ScalarProperty Name="Resultat" ColumnName="Resultat" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

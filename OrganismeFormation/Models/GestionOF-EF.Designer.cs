@@ -1,4 +1,4 @@
-﻿// La génération de code T4 est activée pour le modèle 'C:\Users\Max\Google Drive\Autoentrepreneur\Client\FFJDA\WebApp\Gestion-OF\OrganismeFormation\OrganismeFormation\Models\GestionOF-EF.edmx'. 
+﻿// La génération de code T4 est activée pour le modèle 'C:\Users\Max\Desktop\ffjda\OrganismeFormation\OrganismeFormation\Models\GestionOF-EF.edmx'. 
 // Pour activer la génération de code héritée, définissez la valeur de la propriété
 // du concepteur 'Stratégie de génération de code' sur 'ObjectContext hérité'. Cette propriété est disponible dans la fenêtre Propriétés lorsque le modèle
 //  est ouvert dans le concepteur.

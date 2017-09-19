@@ -26,12 +26,10 @@ namespace OrganismeFormation.Models
         public string NumeroDiplome { get; set; }
         public Nullable<bool> EPEF { get; set; }
         public Nullable<bool> EPMSP { get; set; }
-        public decimal PassagesId { get; set; }
         public Nullable<bool> FormationTerminee { get; set; }
         public Nullable<bool> Abandon { get; set; }
     
         public virtual CandidatsFormations CandidatsFormations { get; set; }
-        public virtual Passages Passages { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ResultatUc> ResultatUc { get; set; }
     }
