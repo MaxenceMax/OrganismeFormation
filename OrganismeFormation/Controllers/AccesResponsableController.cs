@@ -92,7 +92,7 @@ namespace OrganismeFormation.Controllers
             {
                 CandidatsFormations candidat = model.Candidat;
 
-                Tuteurs t = model.Tuteur;
+                Tuteurs t = db.Tuteurs.Find(model.Tuteur.Id);
                 candidat.FormationId = model.Formation.Id;
                 candidat.TypedeFinancements = db.TypedeFinancements.Where(td => td .Id ==model.FinancementId).FirstOrDefault();
                 candidat.Tuteurs = t;
@@ -100,9 +100,16 @@ namespace OrganismeFormation.Controllers
                 Passages p = new Passages();
                 try
                 {
-                    if(t!= null && db.Tuteurs.Where(tu => tu.Id == model.Tuteur.Id).Count() == 0)
+                    if(t == null)
                     {
+                        t = new Tuteurs();
+                        t.NumeroLicence = model.Tuteur.NumeroLicence;
+                        t.Nom = model.Tuteur.Nom;
+                        t.Prenom = model.Tuteur.Prenom;
+                        t.Email = model.Tuteur.Email;
                         db.Tuteurs.Add(t);
+                        db.SaveChanges();
+                        candidat.Tuteurs = t;
                     }
                     r.PassagesId = 0;
                     db.CandidatsFormations.Add(candidat);

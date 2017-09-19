@@ -198,10 +198,54 @@
 
         <div class="form-group-align">
             <div class="submit" id="form-moitie" style="margin-left:2.5px">
-                <a href='@Url.Action("ShowASAC", "Formations", new { id = Model.FormationId})' id="button-red">Retour</a>
+                <a href='@Url.Action("ShowASAC", "Formations", new { id = Model.FormationId})' id="button-blue" style="text-align:center">Retour</a>
                 <div class="ease"></div>
+            </div>
+            <div class="submit" id="form-moitie" style="margin-left:2.5px">
+                <a data-popup-open="popup-34545245245" id="button-red" href="#">Supprimer</a>
+                <div class="ease"></div>
+                <div class="popup" data-popup="popup-34545245245">
+                    <div class="popup-inner">
+                        <h2>Attention suppresion !</h2>
+                        <p>
+                            Êtes vous sur de vouloir supprimer le candidat ?
+                        </p>
+                        <div class="form-group-align">
+                            <div class="submit" id="form-moitie" style="margin-right:2.5px">
+                                <a href='@Url.Action("DeleteCandidat","CandidatsFormations",new { @id = Model.Id })' style="padding-left:10px;" id="button-red">Supprimer</a>
+                                <div class="ease"></div>
+                            </div>
+                            <div class="submit" id="form-moitie" style="margin-left:2.5px">
+                                <a data-popup-close="popup-34545245245" href="#" id="button-blue" style="text-align:center">Retour</a>
+                                <div class="ease"></div>
+                            </div>
+                        </div>
+                        <a class="popup-close" data-popup-close="popup-34545245245" href="#">x</a>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
 </div>
 
+
+
+<script>
+    $(function () {
+        //----- OPEN
+        $('[data-popup-open]').on('click', function (e) {
+            var targeted_popup_class = jQuery(this).attr('data-popup-open');
+            $('[data-popup="' + targeted_popup_class + '"]').fadeIn(350);
+
+            e.preventDefault();
+        });
+
+        //----- CLOSE
+        $('[data-popup-close]').on('click', function (e) {
+            var targeted_popup_class = jQuery(this).attr('data-popup-close');
+            $('[data-popup="' + targeted_popup_class + '"]').fadeOut(350);
+
+            e.preventDefault();
+        });
+    });
+</script>

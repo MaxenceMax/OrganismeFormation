@@ -21,6 +21,23 @@ namespace OrganismeFormation.Controllers
             return View(candidat);
         }
 
+        [Authorize(Roles = "Responsable")]
+        public ActionResult DeleteCandidat(decimal id)
+        {
+            CandidatsFormations cand = db.CandidatsFormations.Find(id);
+            var tmp = cand.FormationId;
+            try {
+                db.Resultats.Remove(cand.Resultats.FirstOrDefault());
+                db.CandidatsFormations.Remove(cand);
+                db.SaveChanges();
+            }catch (Exception e)
+            {
+
+            }
+
+            return RedirectToAction("ShowASAC", "Formations", new { id = tmp });
+        }
+
         public ActionResult EditCandidat(decimal id)
         {
             return View();

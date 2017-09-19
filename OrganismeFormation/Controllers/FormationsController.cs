@@ -49,6 +49,58 @@ namespace OrganismeFormation.Controllers
             return View(formation);
         }
 
+        [Authorize(Roles ="Responsable")]
+        public ActionResult DeleteFormation(decimal id)
+        {
+            Formations f = db.Formations.Find(id);
+            var orga = f.OrganismeId;
+            int typeFo = (int) f.TypedeFormationsId;
+            string method = "";
+    
+            db.DescriptifUC.RemoveRange(f.DescriptifUC);
+            db.CandidatsFormations.RemoveRange(f.CandidatsFormations);
+
+
+            
+
+            db.Formations.Remove(f);
+            switch (typeFo)
+            {
+                case 1:
+                    method = "EtatFormationAC";
+                    break;
+                case 2:
+                    method = "EtatFormationAS";
+                    break;
+                case 3:
+                    method = "EtatFormationCFEB";
+                    break;
+                case 4:
+                    method = "EtatFormationCQP";
+                    break;
+                case 5:
+                    method = "EtatFormationBPJEPS";
+                    break;
+                case 6:
+                    method = "EtatFormationDEJEPS";
+                    break;
+                default:
+                    method = "EtatFormationDESJEPS";
+                    break;
+
+            }
+            try
+            {
+                db.SaveChanges();
+            }catch(Exception e)
+            {
+
+            }
+
+            return RedirectToAction(method, "AccesResponsable", new { id = orga });
+        }
+
+
         [HttpPost]
         [Authorize(Roles = "Responsable")]
         public ActionResult AddSimpleFormation(Formations formation)
