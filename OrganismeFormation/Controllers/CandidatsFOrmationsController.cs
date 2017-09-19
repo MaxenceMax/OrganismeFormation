@@ -20,5 +20,10 @@ namespace OrganismeFormation.Controllers
 
             return View(candidat);
         }
+
+        public ActionResult EditCandidat(decimal id)
+        {
+            return View();
+        }
     }
 }

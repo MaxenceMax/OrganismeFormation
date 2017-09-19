@@ -239,6 +239,45 @@
             }
         </table>
     }
+        <div class="form-group-align">
+            <div class="submit" id="form-moitie" style="margin-left:2.5px">
+                @if (Model.TypedeFormationsId == 1)
+                {
+                    <a href='@Url.Action("EtatFormationAC", "AccesResponsable", new { id = Model.OrganismeId})' id="button-red">Retour</a>
+                    <div class="ease"></div>
+                }
+                else if (Model.TypedeFormationsId == 2)
+                {
+                    <a href='@Url.Action("EtatFormationAS", "AccesResponsable", new { id = Model.OrganismeId})' id="button-red">Retour</a>
+                    <div class="ease"></div>
+                }
+                else if (Model.TypedeFormationsId == 3)
+                {
+                    <a href='@Url.Action("EtatFormationCFEB", "AccesResponsable", new { id = Model.OrganismeId})' id="button-red">Retour</a>
+                    <div class="ease"></div>
+                }
+                else if (Model.TypedeFormationsId == 4)
+                {
+                    <a href='@Url.Action("EtatFormationCQP", "AccesResponsable", new { id = Model.OrganismeId})' id="button-red">Retour</a>
+                    <div class="ease"></div>
+                }
+                else if (Model.TypedeFormationsId == 5)
+                {
+                    <a href='@Url.Action("EtatFormationBPJEPS", "AccesResponsable", new { id = Model.OrganismeId})' id="button-red">Retour</a>
+                    <div class="ease"></div>
+                }
+                else if (Model.TypedeFormationsId == 6)
+                {
+                    <a href='@Url.Action("EtatFormationDEJEPS", "AccesResponsable", new { id = Model.OrganismeId})' id="button-red">Retour</a>
+                    <div class="ease"></div>
+                }
+                else
+                {
+                    <a href='@Url.Action("EtatFormationDESJEPS", "AccesResponsable", new { id = Model.OrganismeId})' id="button-red">Retour</a>
+                    <div class="ease"></div>
+                }
+            </div>
+        </div>
     </div>
     @{Html.RenderPartial("_Footer");}
 </div>
