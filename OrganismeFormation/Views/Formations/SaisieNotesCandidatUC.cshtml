@@ -14,7 +14,6 @@
         @Html.AntiForgeryToken()
         <div class="form-horizontal" id="mano-bootstrap">
             @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-            @Html.HiddenFor(model => model.Resultats.FirstOrDefault().Id)
             @Html.HiddenFor(model => model.FormationId)
             @Html.HiddenFor(model => model.Candidats)
             @Html.HiddenFor(model => model.CandidatsId)
@@ -35,7 +34,7 @@
             <h3> Détail des notes pour @Model.Nom @Model.Prenom </h3>
             <hr />
 
-            @foreach (ResultatUc res in Model.Resultats.FirstOrDefault().ResultatUc)
+            @*@foreach (ResultatUc res in Model.Resultats.FirstOrDefault().ResultatUc)
             {
                 <div class="form-group">
                     <div class="col-md-10">
@@ -43,7 +42,8 @@
                         @Html.ValidationMessageFor(model => res.Resultat, "", new { @class = "text-danger" })
                     </div>
                 </div>
-            }
+            }*@
+            @Html.EditorFor(x => x.Resultats)
             <hr/>
             <div class="form-group-align">
                 <div class="submit" id="form-moitie" style="margin-right:2.5px">

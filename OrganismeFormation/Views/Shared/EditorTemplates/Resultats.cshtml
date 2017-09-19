@@ -1,0 +1,15 @@
+﻿@using OrganismeFormation.Models;
+@model OrganismeFormation.Models.Resultats
+@{
+    ViewBag.Title = "Saisie des notes";
+}
+
+@Html.HiddenFor(x => x.PassagesId)
+@Html.HiddenFor(x => x.CandidatFormationId)
+@Html.HiddenFor(x => x.Id)
+
+@foreach (ResultatUc res in Model.ResultatUc)
+{
+    @Html.EditorFor(x => x.ResultatUc)
+
+}
