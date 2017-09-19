@@ -313,9 +313,10 @@ namespace OrganismeFormation.Controllers
                 ResultatUc existing = null;
                 foreach (ResultatUc resUc in cf.Resultats.FirstOrDefault().ResultatUc)
                 {
-                    if (resUc.DescriptifUC == uc)
+                    if (resUc.DescriptifUCId == uc.Id)
                     {
-                        existing = resUc;break;
+                        existing = resUc;
+                        break;
                     }
                 }
                 if (existing == null)
@@ -348,6 +349,10 @@ namespace OrganismeFormation.Controllers
                     if (uc.Id <= 0)
                     {
                         db.ResultatUc.Add(uc);
+                    }
+                    else
+                    {
+                        db.Entry(uc).State = System.Data.Entity.EntityState.Modified;
                     }
                 }
                 db.SaveChanges();
