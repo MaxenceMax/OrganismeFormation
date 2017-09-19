@@ -106,7 +106,7 @@ namespace OrganismeFormation.Controllers
                         t.NumeroLicence = model.Tuteur.NumeroLicence;
                         t.Nom = model.Tuteur.Nom;
                         t.Prenom = model.Tuteur.Prenom;
-                        t.Email = model.Tuteur.Email;
+                        t.Email = model.Tuteur.Email; 
                         db.Tuteurs.Add(t);
                         db.SaveChanges();
                         candidat.Tuteurs = t;

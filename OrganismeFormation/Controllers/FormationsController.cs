@@ -343,6 +343,13 @@ namespace OrganismeFormation.Controllers
             if (isValid)
             {
                 db.Entry(cf).State = System.Data.Entity.EntityState.Modified;
+                foreach(ResultatUc uc in cf.Resultats.FirstOrDefault().ResultatUc)
+                {
+                    if (uc.Id <= 0)
+                    {
+                        db.ResultatUc.Add(uc);
+                    }
+                }
                 db.SaveChanges();
                 return RedirectToAction("ShowASAC", "Formations", new { id = (decimal)cf.FormationId });
             }
