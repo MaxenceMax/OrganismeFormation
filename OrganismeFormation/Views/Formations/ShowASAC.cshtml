@@ -120,12 +120,37 @@
             <tr>
                 <th>Libellé</th>
                 <th>Note maximale</th>
+                <th>
+
+                </th>
             </tr>
             @foreach (DescriptifUC uc in Model.DescriptifUC)
                 {
                 <tr>
                     <td>@Html.DisplayFor(duc => uc.Libelle)</td>
                     <td>@Html.DisplayFor(duc => uc.ResultatMax)</td>
+                    <td>Afficher |
+                        <a data-popup-open="popup-@uc.Id" href="#">Supprimer</a>
+                        <div class="popup" data-popup="popup-@uc.Id">
+                            <div class="popup-inner">
+                                <h2>Attention suppresion !</h2>
+                                <p>
+                                    Êtes vous sur de vouloir retirer l'uc @uc.Libelle de la formation ?
+                                </p>
+                                <div class="form-group-align">
+                                    <div class="submit" id="form-moitie" style="margin-right:2.5px">
+                                        <a href='@Url.Action("DeleteCandidat","CandidatsFormations",new { @id = uc.Id })' style="padding-left:10px;" id="button-blue">Supprimer</a>
+                                        <div class="ease"></div>
+                                    </div>
+                                    <div class="submit" id="form-moitie" style="margin-left:2.5px">
+                                        <a data-popup-close="popup-@uc.Id" href="#" id="button-red">Retour</a>
+                                        <div class="ease"></div>
+                                    </div>
+                                </div>
+                                <a class="popup-close" data-popup-close="popup-@uc.Id" href="#">x</a>
+                            </div>
+                        </div>
+                    </td>
                 </tr>
             }
         </table>
@@ -166,7 +191,28 @@
                     <td>@Html.DisplayFor(duc => uc.Grade)</td>
                     <td>@Html.DisplayFor(duc => uc.Telephone)</td>
                     <td>@Html.DisplayFor(duc => uc.Email)</td>
-                    <td><a href='@Url.Action("Index", "CandidatsFormations",new { id = uc.Id })'>Afficher</a></td>
+                    <td><a href='@Url.Action("Index", "CandidatsFormations",new { id = uc.Id })'>Afficher</a> |
+                        <a data-uc-open="popup-@uc.Id" href="#">Supprimer</a>
+                        <div class="popup" data-uc="popup-@uc.Id">
+                            <div class="popup-inner">
+                                <h2>Attention suppresion !</h2>
+                                <p>
+                                    Êtes vous sur de vouloir retirer le candidat @uc.Prenom @uc.Nom de la formation ?
+                                </p>
+                                <div class="form-group-align">
+                                    <div class="submit" id="form-moitie" style="margin-right:2.5px">
+                                        <a href='@Url.Action("DeleteUC","CandidatsFormations",new { @id = uc.Id })' style="padding-left:10px;" id="button-blue">Supprimer</a>
+                                        <div class="ease"></div>
+                                    </div>
+                                    <div class="submit" id="form-moitie" style="margin-left:2.5px">
+                                        <a data-uc-close="popup-@uc.Id" href="#" id="button-red">Retour</a>
+                                        <div class="ease"></div>
+                                    </div>
+                                </div>
+                                <a class="popup-close" data-uc-close="popup-@uc.Id" href="#">x</a>
+                            </div>
+                        </div>
+                    </td>
                 </tr>
             }
         </table>
@@ -243,44 +289,107 @@
             <div class="submit" id="form-moitie" style="margin-left:2.5px">
                 @if (Model.TypedeFormationsId == 1)
                 {
-                    <a href='@Url.Action("EtatFormationAC", "AccesResponsable", new { id = Model.OrganismeId})' id="button-red">Retour</a>
+                    <a href='@Url.Action("EtatFormationAC", "AccesResponsable", new { id = Model.OrganismeId})' id="button-blue" style="text-align:center">Retour</a>
                     <div class="ease"></div>
                 }
                 else if (Model.TypedeFormationsId == 2)
                 {
-                    <a href='@Url.Action("EtatFormationAS", "AccesResponsable", new { id = Model.OrganismeId})' id="button-red">Retour</a>
+                    <a href='@Url.Action("EtatFormationAS", "AccesResponsable", new { id = Model.OrganismeId})' id="button-blue" style="text-align:center">Retour</a>
                     <div class="ease"></div>
                 }
                 else if (Model.TypedeFormationsId == 3)
                 {
-                    <a href='@Url.Action("EtatFormationCFEB", "AccesResponsable", new { id = Model.OrganismeId})' id="button-red">Retour</a>
+                    <a href='@Url.Action("EtatFormationCFEB", "AccesResponsable", new { id = Model.OrganismeId})' id="button-blue" style="text-align:center">Retour</a>
                     <div class="ease"></div>
                 }
                 else if (Model.TypedeFormationsId == 4)
                 {
-                    <a href='@Url.Action("EtatFormationCQP", "AccesResponsable", new { id = Model.OrganismeId})' id="button-red">Retour</a>
+                    <a href='@Url.Action("EtatFormationCQP", "AccesResponsable", new { id = Model.OrganismeId})' id="button-blue" style="text-align:center">Retour</a>
                     <div class="ease"></div>
                 }
                 else if (Model.TypedeFormationsId == 5)
                 {
-                    <a href='@Url.Action("EtatFormationBPJEPS", "AccesResponsable", new { id = Model.OrganismeId})' id="button-red">Retour</a>
+                    <a href='@Url.Action("EtatFormationBPJEPS", "AccesResponsable", new { id = Model.OrganismeId})' id="button-blue" style="text-align:center">Retour</a>
                     <div class="ease"></div>
                 }
                 else if (Model.TypedeFormationsId == 6)
                 {
-                    <a href='@Url.Action("EtatFormationDEJEPS", "AccesResponsable", new { id = Model.OrganismeId})' id="button-red">Retour</a>
+                    <a href='@Url.Action("EtatFormationDEJEPS", "AccesResponsable", new { id = Model.OrganismeId})' id="button-blue" style="text-align:center">Retour</a>
                     <div class="ease"></div>
                 }
                 else
                 {
-                    <a href='@Url.Action("EtatFormationDESJEPS", "AccesResponsable", new { id = Model.OrganismeId})' id="button-red">Retour</a>
+                    <a href='@Url.Action("EtatFormationDESJEPS", "AccesResponsable", new { id = Model.OrganismeId})' id="button-blue" style="text-align:center">Retour</a>
                     <div class="ease"></div>
                 }
+            </div>
+            <div class="submit" id="form-moitie" style="margin-left:2.5px">
+                <a data-popup-open="popup-34545245245" id="button-red" href="#">Supprimer</a>
+                <div class="ease"></div>
+                <div class="popup" data-popup="popup-34545245245">
+                    <div class="popup-inner">
+                        <h2>Attention suppresion !</h2>
+                        <p>
+                            Êtes vous sur de vouloir supprimer la formation ?
+                        </p>
+                        <div class="form-group-align">
+                            <div class="submit" id="form-moitie" style="margin-right:2.5px">
+                                <a href='@Url.Action("DeleteFormation","Formations",new { @id = Model.Id })' style="padding-left:10px;" id="button-blue">Supprimer</a>
+                                <div class="ease"></div>
+                            </div>
+                            <div class="submit" id="form-moitie" style="margin-left:2.5px">
+                                <a data-popup-close="popup-34545245245" href="#" id="button-red">Retour</a>
+                                <div class="ease"></div>
+                            </div>
+                        </div>
+                        <a class="popup-close" data-popup-close="popup-34545245245" href="#">x</a>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
     @{Html.RenderPartial("_Footer");}
 </div>
+
+<script>
+    $(function () {
+        //----- OPEN
+        $('[data-popup-open]').on('click', function (e) {
+            var targeted_popup_class = jQuery(this).attr('data-popup-open');
+            $('[data-popup="' + targeted_popup_class + '"]').fadeIn(350);
+
+            e.preventDefault();
+        });
+
+        //----- CLOSE
+        $('[data-popup-close]').on('click', function (e) {
+            var targeted_popup_class = jQuery(this).attr('data-popup-close');
+            $('[data-popup="' + targeted_popup_class + '"]').fadeOut(350);
+
+            e.preventDefault();
+        });
+    });
+</script>
+<script>
+    $(function () {
+        //----- OPEN
+        $('[data-uc-open]').on('click', function (e) {
+            var targeted_popup_class = jQuery(this).attr('data-uc-open');
+            $('[data-uc="' + targeted_popup_class + '"]').fadeIn(350);
+
+            e.preventDefault();
+        });
+
+        //----- CLOSE
+        $('[data-uc-close]').on('click', function (e) {
+            var targeted_popup_class = jQuery(this).attr('data-uc-close');
+            $('[data-uc="' + targeted_popup_class + '"]').fadeOut(350);
+
+            e.preventDefault();
+        });
+    });
+</script>
+
 
 @*Popup pour l'ajout
     <a data-popup-open="popup-@item.Id" href="#">Supprimer</a>
