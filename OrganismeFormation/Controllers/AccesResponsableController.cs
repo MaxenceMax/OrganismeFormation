@@ -111,11 +111,14 @@ namespace OrganismeFormation.Controllers
                         db.SaveChanges();
                         candidat.Tuteurs = t;
                     }
-                    r.PassagesId = 0;
+                    r.Passages = p;
+                    p.Libelle = "Passage";
+                    p.Resultats.Add(r);
+                    db.Passages.Add(p);
+                    db.Resultats.Add(r);
                     db.CandidatsFormations.Add(candidat);
                     db.SaveChanges();
                     r.CandidatsFormations = candidat;
-                    db.Resultats.Add(r);
                     db.SaveChanges();
                 }
                 catch(Exception e)

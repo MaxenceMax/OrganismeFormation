@@ -6,7 +6,7 @@
 
 <div class="content">
     <div class="title-content">
-        <div class="title-content-main">Editer une formation</div>
+        <div class="title-content-main">@ViewBag.Title</div>
         <div class="title-content-second">@ViewBag.Libelle</div>
     </div>
     @using (Html.BeginForm())
@@ -14,9 +14,22 @@
         @Html.AntiForgeryToken()
         <div class="form-horizontal" id="mano-bootstrap">
             @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-            @Html.HiddenFor(model => model.Resultats)
+            @Html.HiddenFor(model => model.Resultats.FirstOrDefault().Id)
             @Html.HiddenFor(model => model.FormationId)
+            @Html.HiddenFor(model => model.Candidats)
             @Html.HiddenFor(model => model.CandidatsId)
+            @Html.HiddenFor(model => model.Nom)
+            @Html.HiddenFor(model => model.Prenom)
+            @Html.HiddenFor(model => model.Grade)
+            @Html.HiddenFor(model => model.StructureAccueil)
+            @Html.HiddenFor(model => model.DetailsFinancement)
+            @Html.HiddenFor(model => model.TuteursId)
+            @Html.HiddenFor(model => model.CoutFormation)
+            @Html.HiddenFor(model => model.NumeroLicence)
+            @Html.HiddenFor(model => model.Telephone)
+            @Html.HiddenFor(model => model.Email)
+            @Html.HiddenFor(model => model.Prenom)
+            @Html.HiddenFor(model => model.SexeId)
 
             <hr />
             <h3> Détail des notes pour @Model.Nom @Model.Prenom </h3>

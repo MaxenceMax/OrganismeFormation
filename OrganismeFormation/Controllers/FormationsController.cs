@@ -302,7 +302,10 @@ namespace OrganismeFormation.Controllers
             CandidatsFormations cf = db.CandidatsFormations.Find(id);
             if (cf.Resultats == null || cf.Resultats.Count == 0)
             {
-                cf.Resultats.Add(new Resultats());
+                var res = new Resultats();
+                cf.Resultats.Add(res);
+                db.Entry(res).State = System.Data.Entity.EntityState.Added;
+               // db.SaveChanges();
             }
 
             foreach (DescriptifUC uc in cf.Formations.DescriptifUC)
@@ -323,6 +326,7 @@ namespace OrganismeFormation.Controllers
                 }
             }
 
+            db.Entry(cf).State = System.Data.Entity.EntityState.Modified;
             return View(cf);
         }
 
@@ -340,8 +344,9 @@ namespace OrganismeFormation.Controllers
             {
                 db.Entry(cf).State = System.Data.Entity.EntityState.Modified;
                 db.SaveChanges();
+                return RedirectToAction("ShowASAC", "Formations", new { id = (decimal)cf.FormationId });
             }
-            return RedirectToAction("ShowASAC", "Formations", new { id = (decimal)cf.FormationId });
+            return View(cf);
         }
 
     }
