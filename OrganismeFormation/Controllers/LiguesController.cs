@@ -144,6 +144,21 @@ namespace OrganismeFormation.Controllers
         public ActionResult DeleteConfirmed(decimal id)
         {
             Ligues ligues = db.Ligues.Find(id);
+            foreach(Organismes o in ligues.Organismes)
+            {
+                foreach(Formations f in o.Formations)
+                {
+                    foreach(CandidatsFormations c in f.CandidatsFormations)
+                    {
+                        db.Resultats.RemoveRange(c.Resultats);
+                    }
+                    db.CandidatsFormations.RemoveRange(f.CandidatsFormations);
+                    db.DescriptifUC.RemoveRange(f.DescriptifUC);
+                }
+                db.Responsable.RemoveRange(o.Responsable);
+
+            }
+            db.Organismes.RemoveRange(ligues.Organismes);
             db.Ligues.Remove(ligues);
             db.SaveChanges();
             return RedirectToAction("Index");

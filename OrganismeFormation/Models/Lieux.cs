@@ -38,6 +38,10 @@ namespace OrganismeFormation.Models
         [DisplayName("Téléphone")]
         [DataType(DataType.PhoneNumber)]
         public string Telephone { get; set; }
+        [Required]
+        [DisplayName("Adresse Email référente de l'OF")]
+        [DataType(DataType.EmailAddress)]
+        [EmailAddress]
         public string Email { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

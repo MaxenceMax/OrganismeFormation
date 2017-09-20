@@ -29,6 +29,7 @@
                 @Html.HiddenFor(model => model.Lieux.CodePostal, new { Value = Model.Lieux.CodePostal })
                 @Html.HiddenFor(model => model.Lieux.Ville, new { Value = Model.Lieux.Ville })
                 @Html.HiddenFor(model => model.Lieux.Telephone, new { Value = Model.Lieux.Telephone })
+                @Html.HiddenFor(model => model.Lieux.Email, new { Value = Model.Lieux.Email })
                 @Html.HiddenFor(model => model.PresidentId, new { Value = Model.PresidentOrganisme.Id })
                 @Html.HiddenFor(model => model.CoordinateurId, new { Value = Model.Personnel.Id })    
                 @Html.HiddenFor(model => model.DirecteurId, new { Value = Model.Personnel1.Id })

@@ -66,7 +66,7 @@ namespace OrganismeFormation.Controllers
             if (ModelState.IsValidField("Libelle") && ModelState.IsValidField("NumeroDeclaration") &&
                 ModelState.IsValidField("AnneeDeclaration") && ModelState.IsValidField("Lieux.Adresse") &&
                 ModelState.IsValidField("Lieux.CodePostal") && ModelState.IsValidField("Lieux.Ville") &&
-                ModelState.IsValidField("Lieux.Telephone")
+                ModelState.IsValidField("Lieux.Telephone") && ModelState.IsValidField("Lieux.Email")
                 )
             {
                 TempData["model"] = organismes;
@@ -83,13 +83,14 @@ namespace OrganismeFormation.Controllers
         {
 
             Organismes orga = TempData["model"] as Organismes;
-           
+            if (orga == null)
+                return RedirectToAction("Create");
+
             orga.PresidentOrganisme = new PresidentOrganisme();
             orga.Personnel = new Personnel();
             orga.Personnel1 = new Personnel();
            
-            if (orga == null)
-                return RedirectToAction("Create");
+            
          
             return View(orga);
         }
@@ -332,6 +333,7 @@ namespace OrganismeFormation.Controllers
                 tmp.CodePostal = organismes.Lieux.CodePostal;
                 tmp.Ville = organismes.Lieux.Ville;
                 tmp.Telephone = organismes.Lieux.Telephone;
+                tmp.Email = organismes.Lieux.Email;
 
                 var pres = db.PresidentOrganisme.Find(organismes.PresidentId);
                 db.PresidentOrganisme.Attach(pres);
