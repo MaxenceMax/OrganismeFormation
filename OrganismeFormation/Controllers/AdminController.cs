@@ -75,7 +75,7 @@ namespace OrganismeFormation.Controllers
             {
                 if (db.CandidatsFormations.Where(c => c.NumeroLicence == model.NumeroLicence).Count() > 0)
                 {
-                    RedirectToAction("CandidatsFormations", "Index", new { id = db.CandidatsFormations.Where(c => c.NumeroLicence == model.NumeroLicence).FirstOrDefault().Id });
+                    return RedirectToAction("Index", "CandidatsFormations", new { id = db.CandidatsFormations.Where(c => c.NumeroLicence == model.NumeroLicence).FirstOrDefault().Id });
                 }
                 else
                 {
