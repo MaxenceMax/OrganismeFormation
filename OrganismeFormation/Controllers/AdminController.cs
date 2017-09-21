@@ -61,6 +61,61 @@ namespace OrganismeFormation.Controllers
             return RedirectToAction("HomeAdmin", "Admin");
         }
 
+
+        [Authorize(Roles ="Admin")]
+        public ActionResult Export()
+        {
+            ExportViewModel m = new ExportViewModel();
+            m.ligues =db.Ligues.ToList();
+            return View(m);
+        }
+
+        [Authorize(Roles="Admin")]
+        [HttpPost]
+        public ActionResult Export(ExportViewModel export)
+        {
+            TempData["ViewModel"] = export;
+            return RedirectToAction("Export2");
+        }
+
+        [Authorize(Roles="Admin")]
+        public ActionResult Export2()
+        {
+            ExportViewModel model = TempData["ViewModel"] as ExportViewModel;
+            if(model == null)
+            {
+                return RedirectToAction("Export");
+            }
+            TempData["ViewModel"] = model;
+            model.ligues = db.Ligues.ToList();
+            model.organismes = new List<Organismes>(db.Ligues.Find((decimal)model.LigueId).Organismes);
+            return View(model);
+        }
+
+        [Authorize(Roles ="Admin")]
+        [HttpPost]
+        public ActionResult Export2(ExportViewModel model)
+        {
+            TempData["ViewModel"] = model;
+            return RedirectToAction("Export3");
+        }
+
+
+        [Authorize(Roles = "Admin")]
+        public ActionResult Export3()
+        {
+            ExportViewModel model = TempData["ViewModel"] as ExportViewModel;
+            if (model == null)
+            {
+                return RedirectToAction("Export");
+            }
+            TempData["ViewModel"] = model;
+            model.ligues = db.Ligues.ToList();
+            model.organismes = db.Organismes.ToList();
+            model.formations = new List<Formations>(db.Organismes.Find((decimal)model.OrganismesId).Formations);
+            return View(model);
+        }
+
         [Authorize(Roles ="Admin")]
         public ActionResult SearchCandidat()
         {

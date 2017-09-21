@@ -24,6 +24,14 @@ html{
     width: 100%;
 }
 
+.dropdown{
+    width: 150px;
+    height: 50px;
+    margin: 5px;
+    text-align: center;
+    color: #004A73;
+}
+
 /************* Liste formations card **/
 .content_lf_card{
     width:inherit;
@@ -426,6 +434,28 @@ html{
     text-decoration:none;
 }
 
+.button-blue{
+	float:left;
+	width: 100%;
+	border: #fbfbfb solid 1px;
+	cursor:pointer;
+	background-color: #004A73;
+	color:white;
+	font-size:18px;
+	padding-top:12px;
+	padding-bottom:12px;
+	-webkit-transition: all 0.3s;
+	-moz-transition: all 0.3s;
+	transition: all 0.3s;
+}
+
+.button-blue:hover{
+	background-color: rgba(0,0,0,0);
+	color: #004A73;
+    border: #004A73 solid 1px;
+    text-decoration:none;
+}
+
 #form-moitie
 {
     width:50%;
@@ -461,6 +491,18 @@ html{
 
 #parent:hover #icon-home{
 	background-image: url("../Images/Icons/icon-home-hover.png");
+}
+
+#icon-download{
+	background-image: url("../Images/Icons/icon-dowload.png");
+	background-size: 20px 20px;
+	background-position: 17px 8px;
+	background-repeat: no-repeat;
+    margin-bottom: 14px;
+}
+
+#parent:hover #icon-download{
+	background-image: url("../Images/Icons/icon-dowload-hover.png");
 }
 
 #icon-search{

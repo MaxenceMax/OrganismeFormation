@@ -1,0 +1,92 @@
+﻿@model OrganismeFormation.ViewModels.ExportViewModel
+
+@{
+    ViewBag.Title = "Exportation";
+}
+
+
+
+<div class="content">
+    <div class="title-content">
+        <div class="title-content-main">Gestion des organismes de formation</div>
+        <div class="title-content-second">Exportation des données</div>
+    </div>
+        <div class="form-horizontal" id="mano-bootstrap">
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+            <p> Vous pouvez exporter, une ligue, un organisme ou simplement une formation. Pour commencer choisissez une ligue puis vous pourrez affiner votre choix.<br />
+            Pour exporter une formation, cliquez dessus.
+
+            </p>
+            <hr />
+
+            <div class="form-group" style="display:inline-block">
+                <div style="display:inline-block">
+                    <h3> Ligue : </h3>
+                    <div>@Model.ligues.Where(l => l.Id == Model.LigueId).FirstOrDefault().Libelle</div>
+                </div>
+                <div style="display:inline-block;margin-left:100px;">
+                    <h3> Organisme : </h3>
+                    <div>@Model.organismes.Where(l => l.Id == Model.OrganismesId).FirstOrDefault().Libelle</div>
+                </div>
+            </div>
+            <div class="form-horizontal" id="mano-bootstrap">
+                <div>
+                    <h3> Formations : </h3>
+                    <table class="table">
+                        <tr>
+                            <th>
+                                Date début
+                            </th>
+                            <th>
+                                Date de fin
+                            </th>
+                            <th>
+                                Nombre de candidats
+                            </th>
+                            <th>
+                                Type de formations
+                            </th>
+                        </tr>
+                        @foreach (var item in Model.formations)
+                        {
+                            <tr class="tr_clickable" onclick="location.href='@Url.Action("GetCsvFormation", "Admin", new { id = item.Id })'">
+                                <td>
+                                    @String.Format("{0:d/MM/yyyy}", @item.DateDebut)
+                                </td>
+                                <td>
+                                    @String.Format("{0:d/MM/yyyy}", @item.DateFin)
+                                </td>
+                                <td>
+                                    @item.CandidatsFormations.Count()
+                                </td>
+                                <td>
+                                    @item.TypedeFormations.Libelle
+                                </td>
+                            </tr>
+                        }
+                    </table>
+                </div>
+                    <div class="form-group-align">
+                        <div class="submit" id="form-moitie" style="margin-right:2.5px">
+                            <a href='#' id="exporter" class="button-blue" style="text-align:center">Exporter</a>
+                            <div class="ease"></div>
+                        </div>
+                        <div class="submit" id="form-moitie" style="margin-left:2.5px">
+                            <a href='#' onclick="window.history.back()" id="button-red">Retour</a>
+                            <div class="ease"></div>
+                        </div>
+                    </div>
+                </div>
+                @{Html.RenderPartial("_Footer");}
+            </div>
+
+    <script>
+    $(function () {
+        //----- OPEN
+        $('#exporter').on('click', function (e) {
+            var id = $('#LigueId').val();
+            window.location ="/Admin/GetCsvOrganisme/"+id;
+        });
+    });
+    </script>

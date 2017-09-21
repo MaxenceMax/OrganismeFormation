@@ -302,6 +302,7 @@
     <Compile Include="Startup.cs" />
     <Compile Include="ViewModels\CandidatFormationViewModel.cs" />
     <Compile Include="ViewModels\CandidatTuteurViewModel.cs" />
+    <Compile Include="ViewModels\ExportViewModel.cs" />
     <Compile Include="ViewModels\PasswordViewModel.cs" />
     <Compile Include="ViewModels\ResponsableOrgaViewModel.cs" />
     <Compile Include="ViewModels\SearchCandidatViewModel.cs" />
@@ -316,6 +317,8 @@
     <Content Include="Content\CSS\Bootstrap\bootstrap.css" />
     <Content Include="Content\CSS\Bootstrap\bootstrap.min.css" />
     <Content Include="Content\CSS\CssExterne.css" />
+    <Content Include="Content\Images\Icons\icon-dowload-hover.png" />
+    <Content Include="Content\Images\Icons\icon-dowload.png" />
     <Content Include="Content\Images\Icons\icon-icon.png" />
     <Content Include="Content\Images\Icons\icon-money-hover.png" />
     <Content Include="Content\Images\Icons\icon-money.png" />
@@ -497,6 +500,9 @@
     <Content Include="Views\CandidatsFormations\EditCandidat.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\Resultats.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\ResultatUc.cshtml" />
+    <Content Include="Views\Admin\Export.cshtml" />
+    <Content Include="Views\Admin\Export2.cshtml" />
+    <Content Include="Views\Admin\Export3.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

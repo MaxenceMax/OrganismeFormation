@@ -38,7 +38,7 @@ namespace OrganismeFormation.Models
         [DisplayName("Téléphone")]
         [DataType(DataType.PhoneNumber)]
         public string Telephone { get; set; }
-        [Required]
+        //[Required]
         [DisplayName("Adresse Email référente de l'OF")]
         [DataType(DataType.EmailAddress)]
         [EmailAddress]

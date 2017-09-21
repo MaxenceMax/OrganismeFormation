@@ -122,6 +122,7 @@ namespace OrganismeFormation.Controllers
                 p.Telephone = formation.Personnel.Telephone;
 
                 Lieux l = new Lieux();
+                l.Email = formation.Lieux?.Email;
                 l.Adresse = formation.Lieux.Adresse;
                 l.CodePostal = formation.Lieux.CodePostal;
                 l.Ville = formation.Lieux.Ville;
@@ -138,7 +139,13 @@ namespace OrganismeFormation.Controllers
                 {
                     db.Habilitations.Add(formation.Habilitations);
                 }
-                db.SaveChanges();
+                try { db.SaveChanges(); }
+                catch (Exception e)
+                {
+
+                }
+
+                
                 return backToGoodFormation((decimal)formation.OrganismeId, (decimal)formation.TypedeFormationsId);
             }
             TypedeFormations type = db.TypedeFormations.Find(formation.TypedeFormationsId);
