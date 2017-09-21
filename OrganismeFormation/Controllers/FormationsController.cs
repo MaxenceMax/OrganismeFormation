@@ -13,7 +13,7 @@ namespace OrganismeFormation.Controllers
 {
     public class FormationsController : Controller
     {
-        private const string CSV_SEPARATOR = ";";
+        private const string CSV_SEPARATOR = ",";
         GestionOFEntities db = new GestionOFEntities();
 
         // GET: Formations
@@ -264,8 +264,8 @@ namespace OrganismeFormation.Controllers
 
         public ActionResult ExportCSV(decimal id)
         {
-
-            return Content(CSVExport(db.Formations.Find(id), null));
+            var form = db.Formations.Find(id);
+            return File(Encoding.ASCII.GetBytes(CSVExport(form, null, new List<object>())),"text/csv", "Formation" + id + ".csv") ;
         }
 
         [Authorize(Roles = "Responsable")]
@@ -338,7 +338,7 @@ namespace OrganismeFormation.Controllers
             return View(cf);
         }
 
-        private string CSVExport(object obj, Type parentType)
+        private string CSVExport(object obj, Type parentType, List<object> alreadySerialized)
         {
             StringBuilder sb = new StringBuilder();
             StringBuilder sbEnTete = new StringBuilder();
@@ -347,6 +347,7 @@ namespace OrganismeFormation.Controllers
             Type t = obj.GetType();
             PropertyInfo[] pi = t.GetProperties();
 
+            alreadySerialized.Add(obj);
 
             for (int index = 0; index < pi.Length; index++)
             {
@@ -359,32 +360,46 @@ namespace OrganismeFormation.Controllers
 
                     sbEnTete.Append(pi[index].Name);
 
-                    sb.Append(pi[index].GetValue(obj, null));
+                    if (!pi[index].PropertyType.IsAssignableFrom(typeof(bool)))
+                        sb.Append(pi[index].GetValue(obj, null));
+                    else
+                    {
+                        if (pi[index].GetValue(obj, null) != null && (bool)pi[index].GetValue(obj, null))
+                        {
+                            sb.Append("Oui");
+                        }
+                        else
+                        {
+                            sb.Append("Non");
+                        }
+                    }
                     if (index < pi.Length - 1)
                     {
                         sb.Append(CSV_SEPARATOR);
+                        sbEnTete.Append(CSV_SEPARATOR);
                     }
-                    else sb.Append("\n");
+                    else
+                    {
+                        sb.Append("\n");
+                        sbEnTete.Append("\n");
+                    }
                 }
-                else if (pi[index].PropertyType.Name.Contains("ICollection") && pi[index].GetValue(obj)!= null)
+                else if (pi[index].PropertyType.Name.Contains("ICollection") && pi[index].GetValue(obj) != null)
                 {
                     var objs = (pi[index].GetValue(obj) as IEnumerable);
                     foreach (object o in objs)
                     {
-                        sbSousObjets.Append(CSVExport(o, t));
+                        if (!alreadySerialized.Contains(o))
+                            sbSousObjets.AppendLine(CSVExport(o, t, alreadySerialized));
                     }
                 }
-                else if (pi[index].GetValue(obj) != null && t != parentType)
+                else if (pi[index].GetValue(obj) != null && pi[index].GetValue(obj).GetType() != parentType && !alreadySerialized.Contains(pi[index].GetValue(obj)))
                 {
-                    sbSousObjets.Append(CSVExport(pi[index].GetValue(obj),t));
+                    sbSousObjets.Append(CSVExport(pi[index].GetValue(obj), t, alreadySerialized));
                 }
-
-                //if (index < pi.Length - 1)
-                //{
-                //    sbEnTete.Append(CSV_SEPARATOR);
-                //}
             }
-            return sbEnTete.ToString() + "\n" + sb.ToString() + "\n" + sbSousObjets.ToString();
+
+            return obj.GetType().Name.Split('_')[0] + "\r\n" + "\r\n"+ sbEnTete.ToString() + "\n" + sb.ToString() + "\r\n" + "\r\n" + sbSousObjets.ToString();
         }
     }
 }
