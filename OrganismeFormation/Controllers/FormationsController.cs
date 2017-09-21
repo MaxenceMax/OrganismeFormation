@@ -1,5 +1,6 @@
 ﻿using OrganismeFormation.Models;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
@@ -12,7 +13,7 @@ namespace OrganismeFormation.Controllers
 {
     public class FormationsController : Controller
     {
-
+        private const string CSV_SEPARATOR = ",";
         GestionOFEntities db = new GestionOFEntities();
 
         // GET: Formations
@@ -49,19 +50,19 @@ namespace OrganismeFormation.Controllers
             return View(formation);
         }
 
-        [Authorize(Roles ="Responsable")]
+        [Authorize(Roles = "Responsable")]
         public ActionResult DeleteFormation(decimal id)
         {
             Formations f = db.Formations.Find(id);
             var orga = f.OrganismeId;
-            int typeFo = (int) f.TypedeFormationsId;
+            int typeFo = (int)f.TypedeFormationsId;
             string method = "";
-    
+
             db.DescriptifUC.RemoveRange(f.DescriptifUC);
             db.CandidatsFormations.RemoveRange(f.CandidatsFormations);
 
 
-            
+
 
             db.Formations.Remove(f);
             switch (typeFo)
@@ -92,7 +93,8 @@ namespace OrganismeFormation.Controllers
             try
             {
                 db.SaveChanges();
-            }catch(Exception e)
+            }
+            catch (Exception e)
             {
 
             }
@@ -269,35 +271,10 @@ namespace OrganismeFormation.Controllers
 
         public ActionResult ExportCSV(decimal id)
         {
-            Formations obj = db.Formations.Find(id);
-            StringBuilder sb = new StringBuilder();
-            StringBuilder sbP = new StringBuilder();
-            Type t = obj.GetType();
-            PropertyInfo[] pi = t.GetProperties();
-
-
-            for (int index = 0; index < pi.Length; index++)
-            {
-                if (pi[index].PropertyType.IsAssignableFrom(typeof(string)) ||
-                    pi[index].PropertyType.IsAssignableFrom(typeof(DateTime)) ||
-                    pi[index].PropertyType.IsAssignableFrom(typeof(int)) ||
-                    pi[index].PropertyType.IsAssignableFrom(typeof(decimal)) ||
-                    pi[index].PropertyType.IsAssignableFrom(typeof(bool)))
-                {
-
-                    sb.Append(pi[index].GetValue(obj, null));
-                    sbP.Append(pi[index].Name);
-
-                    if (index < pi.Length - 1)
-                    {
-                        sb.Append(";");
-                        sbP.Append(";");
-                    }
-                }
-            }
-            return Content((sbP.ToString() + Environment.NewLine + sb.ToString()));
+            var form = db.Formations.Find(id);
+            return File(Encoding.ASCII.GetBytes(CSVExport(form, null, new List<object>())),"text/csv", "Formation" + id + ".csv") ;
         }
-        
+
         [Authorize(Roles = "Responsable")]
         public ActionResult SaisieNotesCandidatUC(decimal id)
         {
@@ -312,7 +289,7 @@ namespace OrganismeFormation.Controllers
                 var res = new Resultats();
                 cf.Resultats.Add(res);
                 db.Entry(res).State = System.Data.Entity.EntityState.Added;
-               // db.SaveChanges();
+                // db.SaveChanges();
             }
 
             foreach (DescriptifUC uc in cf.Formations.DescriptifUC)
@@ -351,7 +328,7 @@ namespace OrganismeFormation.Controllers
             if (isValid)
             {
                 db.Entry(cf).State = System.Data.Entity.EntityState.Modified;
-                foreach(ResultatUc uc in cf.Resultats.FirstOrDefault().ResultatUc)
+                foreach (ResultatUc uc in cf.Resultats.FirstOrDefault().ResultatUc)
                 {
                     if (uc.Id <= 0)
                     {
@@ -368,5 +345,68 @@ namespace OrganismeFormation.Controllers
             return View(cf);
         }
 
+        private string CSVExport(object obj, Type parentType, List<object> alreadySerialized)
+        {
+            StringBuilder sb = new StringBuilder();
+            StringBuilder sbEnTete = new StringBuilder();
+            StringBuilder sbSousObjets = new StringBuilder();
+
+            Type t = obj.GetType();
+            PropertyInfo[] pi = t.GetProperties();
+
+            alreadySerialized.Add(obj);
+
+            for (int index = 0; index < pi.Length; index++)
+            {
+                if (pi[index].PropertyType.IsAssignableFrom(typeof(string)) ||
+                    pi[index].PropertyType.IsAssignableFrom(typeof(DateTime)) ||
+                    pi[index].PropertyType.IsAssignableFrom(typeof(int)) ||
+                    pi[index].PropertyType.IsAssignableFrom(typeof(decimal)) ||
+                    pi[index].PropertyType.IsAssignableFrom(typeof(bool)))
+                {
+
+                    sbEnTete.Append(pi[index].Name);
+
+                    if (!pi[index].PropertyType.IsAssignableFrom(typeof(bool)))
+                        sb.Append(pi[index].GetValue(obj, null));
+                    else
+                    {
+                        if (pi[index].GetValue(obj, null) != null && (bool)pi[index].GetValue(obj, null))
+                        {
+                            sb.Append("Oui");
+                        }
+                        else
+                        {
+                            sb.Append("Non");
+                        }
+                    }
+                    if (index < pi.Length - 1)
+                    {
+                        sb.Append(CSV_SEPARATOR);
+                        sbEnTete.Append(CSV_SEPARATOR);
+                    }
+                    else
+                    {
+                        sb.Append("\n");
+                        sbEnTete.Append("\n");
+                    }
+                }
+                else if (pi[index].PropertyType.Name.Contains("ICollection") && pi[index].GetValue(obj) != null)
+                {
+                    var objs = (pi[index].GetValue(obj) as IEnumerable);
+                    foreach (object o in objs)
+                    {
+                        if (!alreadySerialized.Contains(o))
+                            sbSousObjets.AppendLine(CSVExport(o, t, alreadySerialized));
+                    }
+                }
+                else if (pi[index].GetValue(obj) != null && pi[index].GetValue(obj).GetType() != parentType && !alreadySerialized.Contains(pi[index].GetValue(obj)))
+                {
+                    sbSousObjets.Append(CSVExport(pi[index].GetValue(obj), t, alreadySerialized));
+                }
+            }
+
+            return obj.GetType().Name.Split('_')[0] + "\r\n" + "\r\n"+ sbEnTete.ToString() + "\n" + sb.ToString() + "\r\n" + "\r\n" + sbSousObjets.ToString();
+        }
     }
 }
